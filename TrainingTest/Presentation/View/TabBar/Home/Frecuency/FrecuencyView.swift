@@ -15,6 +15,7 @@ struct FrequencyView: View {
                 .font(.system(size: 18))
                 .fontWeight(.bold)
             Image("graph")
+            SelectFrequencyView()
         }
         .padding(.top, 31)
     }

@@ -16,10 +16,10 @@ struct SplashScreenView: View {
             OnboardingView()
         } else {
             ZStack {
-                Color("violet-100", bundle: nil)
+                Color(.violet100)
                     .ignoresSafeArea()
                 ZStack {
-                    Image("Ellipse", bundle: nil)
+                    Image("Ellipse")
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 74, height: 74)
                         .offset(x: -30)

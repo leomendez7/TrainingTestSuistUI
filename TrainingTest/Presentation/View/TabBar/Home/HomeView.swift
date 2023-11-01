@@ -13,6 +13,7 @@ struct HomeView: View {
             MonthSwitcherView()
             BalanceView(balance: "9400", income: "5000", expense: "1200")
             FrequencyView()
+            
         }
     }
 }

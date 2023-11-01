@@ -31,6 +31,8 @@
 		D1DDBD792AF2D973006846D0 /* ExpensesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDBD782AF2D973006846D0 /* ExpensesView.swift */; };
 		D1DDBD7E2AF2DC0F006846D0 /* FrecuencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDBD7D2AF2DC0F006846D0 /* FrecuencyView.swift */; };
 		D1DDBD822AF2E775006846D0 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDBD812AF2E775006846D0 /* SplashScreenView.swift */; };
+		D1DDBD842AF2F6AF006846D0 /* SelectFrequencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDBD832AF2F6AF006846D0 /* SelectFrequencyView.swift */; };
+		D1DDBD872AF31022006846D0 /* RecentTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDBD862AF31022006846D0 /* RecentTransactionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +84,8 @@
 		D1DDBD782AF2D973006846D0 /* ExpensesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesView.swift; sourceTree = "<group>"; };
 		D1DDBD7D2AF2DC0F006846D0 /* FrecuencyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrecuencyView.swift; sourceTree = "<group>"; };
 		D1DDBD812AF2E775006846D0 /* SplashScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
+		D1DDBD832AF2F6AF006846D0 /* SelectFrequencyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFrequencyView.swift; sourceTree = "<group>"; };
+		D1DDBD862AF31022006846D0 /* RecentTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentTransactionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -280,6 +284,7 @@
 		D1DDBD262AF1F1A9006846D0 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				D1DDBD852AF30FFE006846D0 /* RecentTransaction */,
 				D1DDBD7B2AF2DB95006846D0 /* Frecuency */,
 				D1DDBD7A2AF2DA48006846D0 /* MonthSwitcher */,
 				D1DDBD752AF2D905006846D0 /* Balance */,
@@ -310,8 +315,17 @@
 			isa = PBXGroup;
 			children = (
 				D1DDBD7D2AF2DC0F006846D0 /* FrecuencyView.swift */,
+				D1DDBD832AF2F6AF006846D0 /* SelectFrequencyView.swift */,
 			);
 			path = Frecuency;
+			sourceTree = "<group>";
+		};
+		D1DDBD852AF30FFE006846D0 /* RecentTransaction */ = {
+			isa = PBXGroup;
+			children = (
+				D1DDBD862AF31022006846D0 /* RecentTransactionView.swift */,
+			);
+			path = RecentTransaction;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -462,12 +476,14 @@
 				D1DDBD0A2AF0AC65006846D0 /* OnboardingInfoView.swift in Sources */,
 				D1DDBD792AF2D973006846D0 /* ExpensesView.swift in Sources */,
 				D1DDBD2A2AF1F463006846D0 /* MonthSwitcherView.swift in Sources */,
+				D1DDBD842AF2F6AF006846D0 /* SelectFrequencyView.swift in Sources */,
 				D1DDBD1E2AF17DD6006846D0 /* CreateAccountView.swift in Sources */,
 				D1DDBD072AF0A333006846D0 /* OnboardingView.swift in Sources */,
 				D1DDBD822AF2E775006846D0 /* SplashScreenView.swift in Sources */,
 				D1DDBD222AF181CD006846D0 /* CustomDateTextField.swift in Sources */,
 				D1108BF32AF00910008E6D97 /* TrainingTestApp.swift in Sources */,
 				D1DDBD182AF162C6006846D0 /* LoginView.swift in Sources */,
+				D1DDBD872AF31022006846D0 /* RecentTransactionView.swift in Sources */,
 				D1DDBD202AF17EDD006846D0 /* CustomPasswordTextField.swift in Sources */,
 				D1DDBD2C2AF29A91006846D0 /* BalanceView.swift in Sources */,
 				D1DDBD1B2AF17446006846D0 /* CustomTextField.swift in Sources */,
