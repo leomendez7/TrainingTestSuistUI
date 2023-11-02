@@ -14,6 +14,7 @@
 		D1108C0E2AF00911008E6D97 /* TrainingTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1108C0D2AF00911008E6D97 /* TrainingTestUITests.swift */; };
 		D1108C102AF00911008E6D97 /* TrainingTestUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1108C0F2AF00911008E6D97 /* TrainingTestUITestsLaunchTests.swift */; };
 		D1108C2A2AF03C41008E6D97 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1108C292AF03C41008E6D97 /* Colors.xcassets */; };
+		D17A24732AF34BB500D43209 /* TransactionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17A24722AF34BB500D43209 /* TransactionCellView.swift */; };
 		D1DDBD072AF0A333006846D0 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDBD062AF0A333006846D0 /* OnboardingView.swift */; };
 		D1DDBD0A2AF0AC65006846D0 /* OnboardingInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDBD092AF0AC65006846D0 /* OnboardingInfoView.swift */; };
 		D1DDBD102AF0BFAA006846D0 /* OnboardingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDBD0F2AF0BFAA006846D0 /* OnboardingItem.swift */; };
@@ -67,6 +68,7 @@
 		D1108C222AF012D5008E6D97 /* Presentation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Presentation; sourceTree = "<group>"; };
 		D1108C242AF0138E008E6D97 /* Domain */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Domain; sourceTree = "<group>"; };
 		D1108C292AF03C41008E6D97 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		D17A24722AF34BB500D43209 /* TransactionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCellView.swift; sourceTree = "<group>"; };
 		D1DDBD062AF0A333006846D0 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		D1DDBD092AF0AC65006846D0 /* OnboardingInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingInfoView.swift; sourceTree = "<group>"; };
 		D1DDBD0F2AF0BFAA006846D0 /* OnboardingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingItem.swift; sourceTree = "<group>"; };
@@ -324,6 +326,7 @@
 			isa = PBXGroup;
 			children = (
 				D1DDBD862AF31022006846D0 /* RecentTransactionView.swift */,
+				D17A24722AF34BB500D43209 /* TransactionCellView.swift */,
 			);
 			path = RecentTransaction;
 			sourceTree = "<group>";
@@ -479,6 +482,7 @@
 				D1DDBD842AF2F6AF006846D0 /* SelectFrequencyView.swift in Sources */,
 				D1DDBD1E2AF17DD6006846D0 /* CreateAccountView.swift in Sources */,
 				D1DDBD072AF0A333006846D0 /* OnboardingView.swift in Sources */,
+				D17A24732AF34BB500D43209 /* TransactionCellView.swift in Sources */,
 				D1DDBD822AF2E775006846D0 /* SplashScreenView.swift in Sources */,
 				D1DDBD222AF181CD006846D0 /* CustomDateTextField.swift in Sources */,
 				D1108BF32AF00910008E6D97 /* TrainingTestApp.swift in Sources */,
