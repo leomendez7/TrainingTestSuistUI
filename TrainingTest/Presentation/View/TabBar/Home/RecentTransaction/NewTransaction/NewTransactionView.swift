@@ -10,21 +10,56 @@ import SwiftUI
 struct NewTransactionView: View {
     
     @State var isIncome = Bool()
+    @State var tittle: String = ""
+    @State var text: String = "0"
+    var backButton : some View {
+        Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+        }) {
+            HStack {
+                Image("arrow-left")
+            }
+        }
+    }
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
-        VStack {
-            if isIncome {
-                Color.green100
-                    .ignoresSafeArea()
-            } else {
-                Color.red100
-                    .ignoresSafeArea()
+        NavigationStack {
+            ZStack {
+                if isIncome {
+                    Color.green100
+                        .ignoresSafeArea()
+                } else {
+                    Color.red100
+                        .ignoresSafeArea()
+                }
+                VStack(alignment: .leading) {
+                    Spacer()
+                    ValueTransactionTextFieldView()
+                    TransactionOptionView()
+                }
+                Color.clear
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        hideKeyboard()
+                    }
             }
-            TransactionOptionView()
+            .onAppear{
+                tittle = isIncome ? "Income" : "Expenses"
+            }
+            .ignoresSafeArea()
+            .navigationBarItems(leading: backButton)
+            .navigationBarBackButtonHidden(true)
+            .navigationTitle(tittle)
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .navigationBarBackButtonHidden(true)
-        .ignoresSafeArea()
+    }
+    
+    private func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder),
+                                        to: nil,
+                                        from: nil,
+                                        for: nil)
     }
 }
 
