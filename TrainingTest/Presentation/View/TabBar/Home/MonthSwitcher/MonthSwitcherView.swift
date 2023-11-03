@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct MonthSwitcherView: View {
+    
     @State private var selectedMonthIndex = 0
+    @State private var isSheetPresented = false
+//    let months = DateFormatter().monthSymbols
+//    let currentMonth = Calendar.current.component(.month, from: Date()) - 1
     let months = ["January",
                   "February",
                   "March",
@@ -32,36 +36,47 @@ struct MonthSwitcherView: View {
                         .frame(width: 40, height: 40)
                 )
             Spacer()
-            HStack(spacing: 9) {
-                Image("arrow-down")
-                    .resizable()
-                    .frame(width: 24, height: 24)
-                    .padding(.leading, 12)
-                Text(months[selectedMonthIndex])
-                    .font(.system(size: 18))
-                    .padding(.trailing, 16)
-                    .padding(.top, 11)
-                    .padding(.bottom, 11)
-                
-            }
-            .frame(height: 56)
-            .background(.white)
-            .cornerRadius(40)
-            .overlay(
-                RoundedRectangle(cornerRadius: 40)
-                    .stroke(.light60, lineWidth: 1)
-            )
-            .onTapGesture {
-                selectedMonthIndex = (selectedMonthIndex + 1) % months.count
+            Menu {
+                ForEach(0..<months.count, id: \.self) { index in
+                    Button(action: {
+                        selectedMonthIndex = index
+                    }) {
+                        Text(months[index])
+                    }
+                }
+            } label: {
+                HStack {
+                    Image("arrow-down")
+                        .resizable()
+                        .frame(width: 24, height: 24)
+                        .padding(.leading, 12)
+                    Text(months[selectedMonthIndex])
+                        .font(.system(size: 18))
+                        .padding(.trailing, 16)
+                        .padding(.top, 11)
+                        .padding(.bottom, 11)
+                        .foregroundColor(.dark50)
+                }
+                .frame(height: 56)
+                .background(.white)
+                .cornerRadius(40)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 40)
+                        .stroke(.light60, lineWidth: 1)
+                )
             }
             Spacer()
             Button(action: {
-                
+                isSheetPresented.toggle()
             }) {
                 Image(systemName: "plus.circle.fill")
                     .resizable()
                     .frame(width: 35, height: 35)
                     .foregroundColor(.violet100)
+            }
+            .sheet(isPresented: $isSheetPresented) {
+                NewOptionTransactionView(isSheetPresented: isSheetPresented)
+                    .presentationDetents([.fraction(0.25)])
             }
         }
         .padding(.top, 12)

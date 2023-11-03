@@ -15,24 +15,26 @@ struct CreateAccountView: View {
     @State private var password: String = ""
     
     var body: some View {
-        VStack(spacing: 56) {
-            VStack(spacing: 64) {
-                VStack(spacing: 14) {
-                    CustomTextField(text: name, placeholder: "Name")
-                    CustomTextField(text: email, placeholder: "Email")
-                    CustomDateTextField(placeholder: "Birthday")
-                    CustomPasswordTextField(password: password, placeholder: "Password")
+        NavigationStack {
+            VStack(spacing: 56) {
+                VStack(spacing: 64) {
+                    VStack(spacing: 14) {
+                        CustomTextField(text: name, placeholder: "Name")
+                        CustomTextField(text: email, placeholder: "Email")
+                        CustomDateTextField(placeholder: "Birthday")
+                        CustomPasswordTextField(password: password, placeholder: "Password")
+                    }
+                    .padding(.leading, 16)
+                    .padding(.trailing, 16)
                 }
-                .padding(.leading, 16)
-                .padding(.trailing, 16)
+                .padding(.top, 64)
+                VStack(spacing: 16) {
+                    CustomButton(action: {
+                        
+                    }, text: "Sing up", color: .violet100, foregroundColor: .white)
+                }
+                Spacer()
             }
-            .padding(.top, 64)
-            VStack(spacing: 16) {
-                CustomButton(action: {
-                    
-                }, text: "Sing up", color: .violet100, foregroundColor: .white)
-            }
-            Spacer()
         }.navigationTitle("Create Account")
     }
 }

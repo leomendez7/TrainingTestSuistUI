@@ -13,16 +13,20 @@ struct CustomButton: View {
     @State var text: String
     @State var color: Color
     @State var foregroundColor: Color
+    @State var height: CGFloat?
+    @State var width: CGFloat?
+    @State var cornerRadius: CGFloat?
+    @State var fontSize: CGFloat?
     
     var body: some View {
         Button(text) {
             action()
         }
-        .font(.system(size: 18))
+        .font(.system(size: fontSize ?? 18))
         .fontWeight(.bold)
         .foregroundColor(foregroundColor)
-        .frame(width: 353, height: 56)
-        .background(color, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .frame(width: width ?? 353, height: height ?? 56)
+        .background(color, in: RoundedRectangle(cornerRadius: cornerRadius ?? 16, style: .continuous))
     }
 }
 

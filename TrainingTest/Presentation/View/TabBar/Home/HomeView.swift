@@ -8,12 +8,17 @@
 import SwiftUI
 
 struct HomeView: View {
+    
+    @StateObject var transactionViewModel = TransactionViewModel()
+    
     var body: some View {
         ScrollView {
             MonthSwitcherView()
-            BalanceView(balance: "9400", income: "5000", expense: "1200")
+            BalanceComponentView(balance: "9400", income: "5000", expense: "1200")
             FrequencyView()
+            RecentTransactionView(viewModel: transactionViewModel)
         }
+        //        .environmentObject(transactionViewModel)
     }
 }
 
