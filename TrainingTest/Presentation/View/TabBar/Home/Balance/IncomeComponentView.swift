@@ -1,5 +1,5 @@
 //
-//  IncomeView.swift
+//  IncomeComponentView.swift
 //  TrainingTest
 //
 //  Created by Leonardo Mendez on 1/11/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct IncomeView: View {
+struct IncomeComponentView: View {
     
     @State var income: String = ""
     
@@ -22,7 +22,6 @@ struct IncomeView: View {
                 Text("Income")
                     .foregroundColor(.white)
                     .font(.system(size: 14))
-                
                 Text("$\(income)")
                     .foregroundColor(.white)
                     .font(.system(size: 22))
@@ -36,5 +35,5 @@ struct IncomeView: View {
 }
 
 #Preview {
-    IncomeView(income: "5000")
+    IncomeComponentView(income: "5000")
 }

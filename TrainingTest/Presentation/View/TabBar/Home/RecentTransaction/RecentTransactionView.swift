@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct RecentTransactionView: View {
+    
+    @ObservedObject var viewModel: TransactionViewModel
+    
+    var transactions = [Transaction]()
+    
     var body: some View {
         VStack {
             HStack(spacing: 8) {
@@ -25,35 +30,28 @@ struct RecentTransactionView: View {
                              width: 78,
                              cornerRadius: 40,
                              fontSize: 14)
-               
+                
             }
             .padding(.top, 31)
             VStack(spacing: 8) {
-                TransactionCellView(name: "Shopping",
-                                    description: "Buy some grocery",
-                                    value: "120",
-                                    hour: "10:00 AM",
-                                    image: "shopping-bag",
-                                    background: .yellow20)
-                TransactionCellView(name: "Subscription",
-                                    description: "Disney+ Annual",
-                                    value: "80",
-                                    hour: "03:30 PM",
-                                    image: "recurring-bill",
-                                    background: .violet20)
-                TransactionCellView(name: "food",
-                                    description: "Buy a ramen",
-                                    value: "32",
-                                    hour: "07:00 PM",
-                                    image: "restaurant",
-                                    background: .red20)
+                ForEach(viewModel.transactions.indices, id: \.self) { index in
+                    TransactionCellView(name: viewModel.transactions[index].name,
+                                        description: viewModel.transactions[index].description,
+                                        value: viewModel.transactions[index].value,
+                                        hour: viewModel.transactions[index].hour,
+                                        image: viewModel.images[index],
+                                        background: viewModel.colors[index])
+                }
             }
-            
         }
         .padding(.horizontal, 16)
+        .task {
+            viewModel.fetchTransactions()
+        }
     }
+    
 }
 
 #Preview {
-    RecentTransactionView()
+    RecentTransactionView(viewModel: TransactionViewModel())
 }

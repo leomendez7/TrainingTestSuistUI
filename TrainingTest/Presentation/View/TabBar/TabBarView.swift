@@ -10,29 +10,43 @@ import SwiftUI
 struct TabBarView: View {
     
     @State private var selectedTab = 0
+    @State private var isNewTransaction = false
+    @State var isIncome = Bool()
+    
     var body: some View {
-        TabView(selection: $selectedTab) {
-            HomeView()
-                .tabItem {
-                    Image("home")
-                    Text("Home")
-                }
-                .tag(0)
-            Text("Pestaña 2")
-                .tabItem {
-                    Image("transaction")
-                    Text("Transaction")
-                }
-                .tag(1)
-            Text("Pestaña 3")
-                .tabItem {
-                    Image("settings")
-                    Text("Settings")
-                }
-                .tag(2)
+        NavigationStack {
+            TabView(selection: $selectedTab) {
+                HomeView()
+                    .onReceive(NotificationCenter.default.publisher(for: Notification.Name(rawValue: "income"))) { _ in
+                        isNewTransaction = true
+                        isIncome = true
+                    }
+                    .onReceive(NotificationCenter.default.publisher(for: Notification.Name(rawValue: "expenses"))) { _ in
+                        isNewTransaction = true
+                        isIncome = false
+                    }
+                    .tabItem {
+                        Image("home")
+                        Text("Home")
+                    }
+                    .tag(0)
+                Text("Transactions")
+                    .tabItem {
+                        Image("transaction")
+                        Text("Transaction")
+                    }
+                    .tag(1)
+                Text("Settings")
+                    .tabItem {
+                        Image("settings")
+                        Text("Settings")
+                    }
+                    .tag(2)
+            }
+            .accentColor(.violet100)
+            .navigationBarBackButtonHidden(true)
+            .navigationDestination(isPresented: $isNewTransaction, destination: { NewTransactionView(isIncome: isIncome) })
         }
-        .accentColor(.violet100)
-        .navigationBarBackButtonHidden(true)
     }
 }
 

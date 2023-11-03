@@ -31,6 +31,7 @@ struct TransactionCellView: View {
                     .foregroundColor(.light20)
                     .font(.system(size: 13))
                     .fontWeight(.semibold)
+                    .lineLimit(1)
             }
             Spacer()
             VStack(alignment: .trailing, spacing: 13) {

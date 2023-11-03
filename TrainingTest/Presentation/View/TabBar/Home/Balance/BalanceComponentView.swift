@@ -1,5 +1,5 @@
 //
-//  BalanceView.swift
+//  BalanceComponentView.swift
 //  TrainingTest
 //
 //  Created by Leonardo Mendez on 1/11/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BalanceView: View {
+struct BalanceComponentView: View {
     
     @State var balance: String = ""
     @State var income: String = ""
@@ -26,7 +26,7 @@ struct BalanceView: View {
             }
             .padding(.top, 9)
             HStack(spacing: 16) {
-                IncomeView(income: income)
+                IncomeComponentView(income: income)
                 ExpensesView(expense: expense)
             }
         }
@@ -36,5 +36,5 @@ struct BalanceView: View {
 }
 
 #Preview {
-    BalanceView(balance: "9400", income: "5000", expense: "1200")
+    BalanceComponentView(balance: "9400", income: "5000", expense: "1200")
 }
