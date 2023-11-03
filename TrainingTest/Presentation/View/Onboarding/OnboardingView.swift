@@ -14,9 +14,10 @@ struct OnboardingView: View {
     @State private var showNextAndSkipButton = true
     @State private var selectedTab = 0
     @State private var isLoggedIn = false
+    @EnvironmentObject var store: Store
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $store.onboarding) {
             VStack() {
                 if !manager.items.isEmpty {
                     TabView(selection: $selectedTab) {
@@ -35,7 +36,7 @@ struct OnboardingView: View {
                     }
                     if showLoginButton {
                         CustomButton(action: {
-                            isLoggedIn = true
+                            store.onboarding.append("login")
                         }, text: "Login", color: .violet100, foregroundColor: .white)
                         CustomButton(action: {}, text: "", color: .white, foregroundColor: .white)
                     }
@@ -48,8 +49,10 @@ struct OnboardingView: View {
                                     }
                                 }
                             }, text: "Next", color: .violet100, foregroundColor: .white)
+                            
+                            
                             CustomButton(action: {
-                                isLoggedIn = true
+                                store.onboarding.append("login")
                             }, text: "Skip", color: .violet20, foregroundColor: .violet100)
                         }
                     }
@@ -59,7 +62,18 @@ struct OnboardingView: View {
             .onAppear() {
                 manager.load()
             }
-            .navigationDestination(isPresented: $isLoggedIn, destination: { LoginView() })
+            .navigationDestination(for: String.self, destination: { route in
+                switch route {
+                case "login":
+                    LoginView()
+                case "CreateAccountView":
+                    CreateAccountView()
+                case "TabBarView":
+                    TabBarView()
+                default:
+                    EmptyView()
+                }
+            })
         }
     }
     

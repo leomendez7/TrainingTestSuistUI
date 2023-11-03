@@ -11,38 +11,33 @@ struct LoginView: View {
     
     @State private var email: String = ""
     @State private var password: String = ""
-    @State private var isCreateAccount = false
-    @State private var isTabBar = false
+    @EnvironmentObject var store: Store
     
     var body: some View {
-        NavigationStack {
-            VStack(spacing: 56) {
-                VStack(spacing: 64) {
-                    Text("Login")
-                        .fontWeight(.bold)
-                        .font(.system(size: 18))
-                    VStack(spacing: 14) {
-                        CustomTextField(text: email, placeholder: "Email")
-                        CustomPasswordTextField(password: password, placeholder: "Password")
-                    }
-                    .padding(.leading, 16)
-                    .padding(.trailing, 16)
+        VStack(spacing: 56) {
+            VStack(spacing: 64) {
+                Text("Login")
+                    .fontWeight(.bold)
+                    .font(.system(size: 18))
+                VStack(spacing: 14) {
+                    CustomTextField(text: email, placeholder: "Email")
+                    CustomPasswordTextField(password: password, placeholder: "Password")
                 }
-                .padding(.top, 16)
-                VStack(spacing: 16) {
-                    CustomButton(action: {
-                        isTabBar = true
-                    }, text: "Sing in", color: .violet100, foregroundColor: .white)
-                    CustomButton(action: {
-                        isCreateAccount = true
-                    }, text: "Create Account", color: .white, foregroundColor: .black)
-                }
-                Spacer()
+                .padding(.leading, 16)
+                .padding(.trailing, 16)
             }
-            .navigationDestination(isPresented: $isCreateAccount, destination: { CreateAccountView() })
-            .navigationDestination(isPresented: $isTabBar, destination: { TabBarView() })
-            .navigationBarBackButtonHidden(true)
+            .padding(.top, 16)
+            VStack(spacing: 16) {
+                CustomButton(action: {
+                    store.onboarding.append("TabBarView")
+                }, text: "Sing in", color: .violet100, foregroundColor: .white)
+                CustomButton(action: {
+                    store.onboarding.append("CreateAccountView")
+                }, text: "Create Account", color: .white, foregroundColor: .black)
+            }
+            Spacer()
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 

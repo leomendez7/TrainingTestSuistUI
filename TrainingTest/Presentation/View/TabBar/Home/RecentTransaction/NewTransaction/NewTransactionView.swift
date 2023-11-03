@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NewTransactionView: View {
     
-    @State var isIncome = Bool()
+    @Binding var isIncome: Bool
     @State var tittle: String = ""
     @State var text: String = "0"
     var backButton : some View {
@@ -18,41 +18,40 @@ struct NewTransactionView: View {
         }) {
             HStack {
                 Image("arrow-left")
+                    .foregroundColor(.light80)
             }
         }
     }
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
-        NavigationStack {
-            ZStack {
-                if isIncome {
-                    Color.green100
-                        .ignoresSafeArea()
-                } else {
-                    Color.red100
-                        .ignoresSafeArea()
-                }
-                VStack(alignment: .leading) {
-                    Spacer()
-                    ValueTransactionTextFieldView()
-                    TransactionOptionView()
-                }
-                Color.clear
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        hideKeyboard()
-                    }
+        ZStack {
+            if isIncome {
+                Color.green100
+                    .ignoresSafeArea()
+            } else {
+                Color.red100
+                    .ignoresSafeArea()
             }
-            .onAppear{
-                tittle = isIncome ? "Income" : "Expenses"
+            VStack(alignment: .leading) {
+                Spacer()
+                ValueTransactionTextFieldView()
+                TransactionOptionView()
             }
-            .ignoresSafeArea()
-            .navigationBarItems(leading: backButton)
-            .navigationBarBackButtonHidden(true)
-            .navigationTitle(tittle)
-            .navigationBarTitleDisplayMode(.inline)
+            Color.clear
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    hideKeyboard()
+                }
         }
+        .onAppear{
+            tittle = isIncome ? "Income" : "Expenses"
+        }
+        .ignoresSafeArea()
+        .navigationBarItems(leading: backButton)
+        .navigationBarBackButtonHidden(true)
+        .navigationTitle(tittle)
+        .navigationBarTitleDisplayMode(.inline)
     }
     
     private func hideKeyboard() {
@@ -64,5 +63,5 @@ struct NewTransactionView: View {
 }
 
 #Preview {
-    NewTransactionView(isIncome: false)
+    NewTransactionView(isIncome: .constant(Bool()))
 }

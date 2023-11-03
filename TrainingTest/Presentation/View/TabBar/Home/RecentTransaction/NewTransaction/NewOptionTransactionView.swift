@@ -11,6 +11,7 @@ struct NewOptionTransactionView: View {
     
     @State var isSheetPresented: Bool
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var store: Store
     
     var body: some View {
             VStack(spacing: 20) {
@@ -35,11 +36,13 @@ struct NewOptionTransactionView: View {
                     CustomButton(action: {
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "income"),
                                                         object: nil)
+                        store.onboarding.append("NewIncomeTransaction")
                         dismiss()
                     }, text: "Income", color: .green100, foregroundColor: .white)
                     CustomButton(action: {
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "expenses"),
                                                         object: nil)
+                        store.onboarding.append("NewExpensesTransaction")
                         dismiss()
                     }, text: "Expenses", color: .red100, foregroundColor: .white)
                 }

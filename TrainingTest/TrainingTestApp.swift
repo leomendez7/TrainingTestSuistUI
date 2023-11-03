@@ -10,9 +10,13 @@ import Presentation
 
 @main
 struct TrainingTestApp: App {
+
+    @State var store = Store()
+    
     var body: some Scene {
         WindowGroup {
             SplashScreenView()
-        }
+        }.environmentObject(store)
     }
+    
 }
