@@ -33,10 +33,9 @@ struct HomeView: View {
             .navigationDestination(for: String.self, destination: { route in
                 switch route {
                 case "NewIncomeTransaction":
-                    //isIncome = true
                     NewTransactionView(isIncome: $isIncome)
+                        .environmentObject(TransactionViewModel())
                 case "NewExpensesTransaction":
-                    //isIncome = false
                     NewTransactionView(isIncome: $isIncome)
                 default:
                     EmptyView()
@@ -48,4 +47,5 @@ struct HomeView: View {
 
 #Preview {
     HomeView()
+        .environmentObject(Store())
 }

@@ -43,6 +43,11 @@
 		D1DDBD822AF2E775006846D0 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDBD812AF2E775006846D0 /* SplashScreenView.swift */; };
 		D1DDBD842AF2F6AF006846D0 /* SelectFrequencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDBD832AF2F6AF006846D0 /* SelectFrequencyView.swift */; };
 		D1DDBD872AF31022006846D0 /* RecentTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DDBD862AF31022006846D0 /* RecentTransactionView.swift */; };
+		ECD56D522AF9683500BEFAD8 /* NewTransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD56D512AF9683500BEFAD8 /* NewTransactionViewModel.swift */; };
+		ECD56D542AF96BD000BEFAD8 /* Picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD56D532AF96BD000BEFAD8 /* Picker.swift */; };
+		ECD56D572AF9715200BEFAD8 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD56D562AF9715200BEFAD8 /* ImagePicker.swift */; };
+		ECD56D5A2AF978E200BEFAD8 /* Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD56D592AF978E200BEFAD8 /* Default.swift */; };
+		ECD56D5C2AF9794B00BEFAD8 /* SessionDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD56D5B2AF9794B00BEFAD8 /* SessionDefault.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +111,11 @@
 		D1DDBD812AF2E775006846D0 /* SplashScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		D1DDBD832AF2F6AF006846D0 /* SelectFrequencyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFrequencyView.swift; sourceTree = "<group>"; };
 		D1DDBD862AF31022006846D0 /* RecentTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentTransactionView.swift; sourceTree = "<group>"; };
+		ECD56D512AF9683500BEFAD8 /* NewTransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTransactionViewModel.swift; sourceTree = "<group>"; };
+		ECD56D532AF96BD000BEFAD8 /* Picker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Picker.swift; sourceTree = "<group>"; };
+		ECD56D562AF9715200BEFAD8 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		ECD56D592AF978E200BEFAD8 /* Default.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Default.swift; sourceTree = "<group>"; };
+		ECD56D5B2AF9794B00BEFAD8 /* SessionDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDefault.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +232,7 @@
 		D14B5FB42AF5867D004DD964 /* Store */ = {
 			isa = PBXGroup;
 			children = (
+				ECD56D582AF9787400BEFAD8 /* Default */,
 				D14B5FB52AF5868B004DD964 /* Store.swift */,
 			);
 			path = Store;
@@ -231,6 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				D17A24752AF3DA3B00D43209 /* Transaction.swift */,
+				ECD56D532AF96BD000BEFAD8 /* Picker.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -246,6 +258,7 @@
 		D17A247A2AF3F66000D43209 /* NewTransaction */ = {
 			isa = PBXGroup;
 			children = (
+				ECD56D502AF9681C00BEFAD8 /* ViewModel */,
 				D17A247B2AF3F68B00D43209 /* NewOptionTransactionView.swift */,
 				D14B5FA72AF44D4C004DD964 /* NewTransactionView.swift */,
 				D14B5FAF2AF4B504004DD964 /* TransactionOptionView.swift */,
@@ -286,6 +299,7 @@
 		D1DDBD112AF158B5006846D0 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				ECD56D552AF9714500BEFAD8 /* ImagePicker */,
 				D14B5FA92AF48EDB004DD964 /* Selector */,
 				D1DDBD192AF17436006846D0 /* TextField */,
 				D1DDBD122AF158BB006846D0 /* Button */,
@@ -396,6 +410,31 @@
 				D17A24722AF34BB500D43209 /* TransactionCellView.swift */,
 			);
 			path = RecentTransaction;
+			sourceTree = "<group>";
+		};
+		ECD56D502AF9681C00BEFAD8 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				ECD56D512AF9683500BEFAD8 /* NewTransactionViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		ECD56D552AF9714500BEFAD8 /* ImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				ECD56D562AF9715200BEFAD8 /* ImagePicker.swift */,
+			);
+			path = ImagePicker;
+			sourceTree = "<group>";
+		};
+		ECD56D582AF9787400BEFAD8 /* Default */ = {
+			isa = PBXGroup;
+			children = (
+				ECD56D592AF978E200BEFAD8 /* Default.swift */,
+				ECD56D5B2AF9794B00BEFAD8 /* SessionDefault.swift */,
+			);
+			path = Default;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -542,11 +581,13 @@
 				D1DDBD772AF2D91B006846D0 /* IncomeComponentView.swift in Sources */,
 				D14B5FA82AF44D4C004DD964 /* NewTransactionView.swift in Sources */,
 				D1DDBD142AF158CC006846D0 /* CustomButton.swift in Sources */,
+				ECD56D542AF96BD000BEFAD8 /* Picker.swift in Sources */,
 				D1DDBD282AF1F1BB006846D0 /* HomeView.swift in Sources */,
 				D1DDBD102AF0BFAA006846D0 /* OnboardingItem.swift in Sources */,
 				D14B5FAB2AF48F0A004DD964 /* CategorySelectorView.swift in Sources */,
 				D1DDBD252AF1E73C006846D0 /* TabBarView.swift in Sources */,
 				D1DDBD0A2AF0AC65006846D0 /* OnboardingInfoView.swift in Sources */,
+				ECD56D5A2AF978E200BEFAD8 /* Default.swift in Sources */,
 				D1DDBD792AF2D973006846D0 /* ExpensesView.swift in Sources */,
 				D1DDBD2A2AF1F463006846D0 /* MonthSwitcherView.swift in Sources */,
 				D1DDBD842AF2F6AF006846D0 /* SelectFrequencyView.swift in Sources */,
@@ -554,13 +595,16 @@
 				D14B5FAD2AF4B083004DD964 /* PayMethodSelectorView.swift in Sources */,
 				D14B5FB62AF5868B004DD964 /* Store.swift in Sources */,
 				D1DDBD1E2AF17DD6006846D0 /* CreateAccountView.swift in Sources */,
+				ECD56D572AF9715200BEFAD8 /* ImagePicker.swift in Sources */,
 				D1DDBD072AF0A333006846D0 /* OnboardingView.swift in Sources */,
 				D14B5FB02AF4B504004DD964 /* TransactionOptionView.swift in Sources */,
 				D17A24732AF34BB500D43209 /* TransactionCellView.swift in Sources */,
 				D1DDBD822AF2E775006846D0 /* SplashScreenView.swift in Sources */,
+				ECD56D5C2AF9794B00BEFAD8 /* SessionDefault.swift in Sources */,
 				D1DDBD222AF181CD006846D0 /* CustomDateTextField.swift in Sources */,
 				D1108BF32AF00910008E6D97 /* TrainingTestApp.swift in Sources */,
 				D17A24792AF3E38700D43209 /* TransactionViewModel.swift in Sources */,
+				ECD56D522AF9683500BEFAD8 /* NewTransactionViewModel.swift in Sources */,
 				D1DDBD182AF162C6006846D0 /* LoginView.swift in Sources */,
 				D1DDBD872AF31022006846D0 /* RecentTransactionView.swift in Sources */,
 				D1DDBD202AF17EDD006846D0 /* CustomPasswordTextField.swift in Sources */,
@@ -746,9 +790,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TrainingTest/Preview Content\"";
-				DEVELOPMENT_TEAM = NCKUL6BZ4Z;
+				DEVELOPMENT_TEAM = SHCLPJTU4V;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Would like to use the camera to take photos";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -776,9 +821,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TrainingTest/Preview Content\"";
-				DEVELOPMENT_TEAM = NCKUL6BZ4Z;
+				DEVELOPMENT_TEAM = SHCLPJTU4V;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Would like to use the camera to take photos";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

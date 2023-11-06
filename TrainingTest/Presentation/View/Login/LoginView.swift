@@ -30,6 +30,7 @@ struct LoginView: View {
             VStack(spacing: 16) {
                 CustomButton(action: {
                     store.onboarding.append("TabBarView")
+                    Default.save(session: true)
                 }, text: "Sing in", color: .violet100, foregroundColor: .white)
                 CustomButton(action: {
                     store.onboarding.append("CreateAccountView")

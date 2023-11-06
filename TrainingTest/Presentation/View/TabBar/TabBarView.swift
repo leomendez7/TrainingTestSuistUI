@@ -11,12 +11,12 @@ struct TabBarView: View {
     
     @State private var selectedTab = 0
     @State private var isNewTransaction = false
-    @State var isIncome = Bool()
     @EnvironmentObject var store: Store
     
     var body: some View {
         TabView(selection: $selectedTab) {
                 HomeView()
+                .environmentObject(store)
             .tabItem {
                 Image("home")
                 Text("Home")
@@ -42,4 +42,5 @@ struct TabBarView: View {
 
 #Preview {
     TabBarView()
+        .environmentObject(Store())
 }

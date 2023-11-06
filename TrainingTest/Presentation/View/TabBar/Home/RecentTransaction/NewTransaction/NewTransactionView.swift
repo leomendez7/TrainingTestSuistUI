@@ -12,6 +12,7 @@ struct NewTransactionView: View {
     @Binding var isIncome: Bool
     @State var tittle: String = ""
     @State var text: String = "0"
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var backButton : some View {
         Button(action: {
             self.presentationMode.wrappedValue.dismiss()
@@ -22,7 +23,6 @@ struct NewTransactionView: View {
             }
         }
     }
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         ZStack {
@@ -37,6 +37,7 @@ struct NewTransactionView: View {
                 Spacer()
                 ValueTransactionTextFieldView()
                 TransactionOptionView()
+                    .environmentObject(NewTransactionViewModel())
             }
             Color.clear
                 .contentShape(Rectangle())
@@ -64,4 +65,5 @@ struct NewTransactionView: View {
 
 #Preview {
     NewTransactionView(isIncome: .constant(Bool()))
+    
 }

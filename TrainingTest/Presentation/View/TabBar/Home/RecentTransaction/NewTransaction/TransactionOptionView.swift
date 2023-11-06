@@ -10,12 +10,26 @@ import SwiftUI
 struct TransactionOptionView: View {
     
     @State private var isSwitchOn = false
+    @EnvironmentObject var viewModel: NewTransactionViewModel
     
     var body: some View {
         VStack(spacing: 16) {
             CategorySelectorView()
             CustomTextField(text: "", placeholder: "Description")
             PayMethodSelectorView()
+            if let image = viewModel.image {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 112, height: 112)
+            } else {
+                Button(action:{
+                    viewModel.source = .camera
+                    viewModel.showPhotoPicker()
+                }) {
+                    Image("add-attachment")
+                }
+            }
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Reminder")
@@ -37,8 +51,13 @@ struct TransactionOptionView: View {
                 
             }, text: "Continue", color: .violet100, foregroundColor: .white)
             Spacer()
+                .sheet(isPresented: $viewModel.showPicker, content: {
+                    ImagePicker(sourceType: viewModel.source == .library 
+                                ? .photoLibrary : .camera, selectedImage: $viewModel.image)
+                        .ignoresSafeArea()
+                })
         }
-        .frame(height: UIScreen.main.bounds.size.height * 0.50)
+        .frame(height: UIScreen.main.bounds.size.height * 0.60)
         .padding(.horizontal, 16)
         .padding(.top, 24)
         .background(.white, in: RoundedRectangle(cornerRadius: 32, style: .continuous))
@@ -47,4 +66,5 @@ struct TransactionOptionView: View {
 
 #Preview {
     TransactionOptionView()
+        .environmentObject(NewTransactionViewModel())
 }

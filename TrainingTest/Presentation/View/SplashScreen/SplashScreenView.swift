@@ -13,7 +13,12 @@ struct SplashScreenView: View {
     
     var body: some View {
         if isActive {
-            OnboardingView()
+            let session = Default.session()
+            if session {
+                TabBarView()
+            } else {
+                OnboardingView()
+            }
         } else {
             ZStack {
                 Color(.violet100)

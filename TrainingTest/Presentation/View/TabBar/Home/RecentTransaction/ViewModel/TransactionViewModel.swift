@@ -15,6 +15,7 @@ public class TransactionViewModel: ObservableObject {
     @Published var images: [String] = []
     @Published var colors: [Color] = []
     
+    
     func generateRandomTransaction() -> Transaction {
         let names = ["Shopping", "Subscription", "Food", "Salary", "Transportation"]
         let randomName = names.randomElement() ?? "Unknown"

@@ -9,7 +9,6 @@ import SwiftUI
 
 struct CreateAccountView: View {
     
-    @EnvironmentObject var store: Store
     @State private var name: String = ""
     @State private var email: String = ""
     @State private var birthday: String = ""

@@ -49,8 +49,6 @@ struct OnboardingView: View {
                                     }
                                 }
                             }, text: "Next", color: .violet100, foregroundColor: .white)
-                            
-                            
                             CustomButton(action: {
                                 store.onboarding.append("login")
                             }, text: "Skip", color: .violet20, foregroundColor: .violet100)
@@ -66,6 +64,7 @@ struct OnboardingView: View {
                 switch route {
                 case "login":
                     LoginView()
+                    
                 case "CreateAccountView":
                     CreateAccountView()
                 case "TabBarView":
@@ -85,4 +84,5 @@ struct OnboardingView: View {
 
 #Preview {
     OnboardingView()
+        .environmentObject(Store())
 }
