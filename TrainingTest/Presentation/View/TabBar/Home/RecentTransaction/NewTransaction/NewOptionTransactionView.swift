@@ -14,42 +14,40 @@ struct NewOptionTransactionView: View {
     @EnvironmentObject var store: Store
     
     var body: some View {
-            VStack(spacing: 20) {
-                HStack {
-                    Spacer()
-                    Text("Create transaction")
-                        .font(.system(size: 18))
-                        .fontWeight(.bold)
-                    Spacer()
-                    VStack(alignment: .leading) {
-                        Button {
-                            dismiss()
-                        } label: {
-                            Image("close")
-                                .frame(width: 32, height: 32)
-                        }
+        VStack(spacing: 20) {
+            HStack {
+                Spacer()
+                Text("Create transaction")
+                    .font(.system(size: 18))
+                    .fontWeight(.bold)
+                Spacer()
+                VStack(alignment: .leading) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image("close")
+                            .frame(width: 32, height: 32)
                     }
                 }
-                .padding(.horizontal, 16)
-                .padding(.top, 16)
-                VStack(spacing: 16) {
-                    CustomButton(action: {
-                        NotificationCenter.default.post(name: Notification.Name(rawValue: "income"),
-                                                        object: nil)
-                        store.onboarding.append("NewIncomeTransaction")
-                        dismiss()
-                    }, text: "Income", color: .green100, foregroundColor: .white)
-                    CustomButton(action: {
-                        NotificationCenter.default.post(name: Notification.Name(rawValue: "expenses"),
-                                                        object: nil)
-                        store.onboarding.append("NewExpensesTransaction")
-                        dismiss()
-                    }, text: "Expenses", color: .red100, foregroundColor: .white)
-                }
             }
-            .background(Color.white)
-            .cornerRadius(16)
+            .padding(.horizontal, 16)
+            .padding(.top, 16)
+            VStack(spacing: 16) {
+                CustomButton(action: {
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "income"),
+                                                    object: nil)
+                    dismiss()
+                }, text: "Income", color: .green100, foregroundColor: .white)
+                CustomButton(action: {
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "expenses"),
+                                                    object: nil)
+                    dismiss()
+                }, text: "Expenses", color: .red100, foregroundColor: .white)
+            }
         }
+        .background(Color.white)
+        .cornerRadius(16)
+    }
 }
 
 #Preview {

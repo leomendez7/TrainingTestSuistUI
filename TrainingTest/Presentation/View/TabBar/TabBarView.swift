@@ -15,26 +15,55 @@ struct TabBarView: View {
     
     var body: some View {
         TabView(selection: $selectedTab) {
-            HomeView()
-                .environmentObject(store)
-                .tabItem {
-                    Image("home")
-                    Text("Home")
-                }
-                .tag(0)
+            NavigationStack(path: $store.transactions) {
+                HomeView()
+                    .navigationDestination(for: String.self, destination: { route in
+                        switch route {
+                        case "NewIncomeTransaction":
+                            NewTransactionView(isIncome: .constant(true))
+                                .environmentObject(TransactionViewModel())
+                        case "NewExpensesTransaction":
+                            NewTransactionView(isIncome: .constant(false))
+                                .environmentObject(TransactionViewModel())
+                        default:
+                            EmptyView()
+                        }
+                    })
+                    .environmentObject(store)
+            }
+            .tabItem {
+                Image("home")
+                Text("Home")
+            }
+            .tag(0)
             Text("Transactions")
                 .tabItem {
                     Image("transaction")
                     Text("Transaction")
                 }
                 .tag(1)
-            SettingsView()
-                .environmentObject(store)
-                .tabItem {
-                    Image("settings")
-                    Text("Settings")
-                }
-                .tag(2)
+            NavigationStack(path: $store.settings) {
+                SettingsView()
+                    .navigationDestination(for: String.self, destination: { route in
+                        switch route {
+                        case "Currency":
+                            CurrencyView()
+                                .environmentObject(CurrencyViewModel())
+                        case "Security":
+                            CreateAccountView()
+                        case "Logout":
+                            LoginView()
+                        default:
+                            EmptyView()
+                        }
+                    })
+            }
+            .environmentObject(store)
+            .tabItem {
+                Image("settings")
+                Text("Settings")
+            }
+            .tag(2)
         }
         .accentColor(.violet100)
         .navigationBarBackButtonHidden(true)

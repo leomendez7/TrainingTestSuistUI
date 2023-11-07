@@ -15,7 +15,15 @@ struct TrainingTestApp: App {
     
     var body: some Scene {
         WindowGroup {
-            SplashScreenView()
+            let session = Default.session()
+            let onboarding = Default.onboarding()
+            if session && onboarding {
+                TabBarView()
+            } else if !session && !onboarding {
+                OnboardingView()
+            } else {
+                LoginView()
+            }
         }.environmentObject(store)
     }
     

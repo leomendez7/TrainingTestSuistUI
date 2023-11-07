@@ -12,6 +12,7 @@ struct NewTransactionView: View {
     @Binding var isIncome: Bool
     @State var tittle: String = ""
     @State var text: String = "0"
+    @EnvironmentObject var store: Store
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var backButton : some View {
         Button(action: {

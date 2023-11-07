@@ -14,29 +14,41 @@ struct LoginView: View {
     @EnvironmentObject var store: Store
     
     var body: some View {
-        VStack(spacing: 56) {
-            VStack(spacing: 64) {
-                Text("Login")
-                    .fontWeight(.bold)
-                    .font(.system(size: 18))
-                VStack(spacing: 14) {
-                    CustomTextField(text: email, placeholder: "Email")
-                    CustomPasswordTextField(password: password, placeholder: "Password")
+        NavigationStack(path: $store.login) {
+            VStack(spacing: 56) {
+                VStack(spacing: 64) {
+                    Text("Login")
+                        .fontWeight(.bold)
+                        .font(.system(size: 18))
+                    VStack(spacing: 14) {
+                        CustomTextField(text: email, placeholder: "Email")
+                        CustomPasswordTextField(password: password, placeholder: "Password")
+                    }
+                    .padding(.leading, 16)
+                    .padding(.trailing, 16)
                 }
-                .padding(.leading, 16)
-                .padding(.trailing, 16)
+                .padding(.top, 16)
+                VStack(spacing: 16) {
+                    CustomButton(action: {
+                        store.onboarding.append("TabBarView")
+                        Default.save(session: true)
+                    }, text: "Sing in", color: .violet100, foregroundColor: .white)
+                    CustomButton(action: {
+                        store.onboarding.append("CreateAccountView")
+                    }, text: "Create Account", color: .white, foregroundColor: .black)
+                }
+                Spacer()
             }
-            .padding(.top, 16)
-            VStack(spacing: 16) {
-                CustomButton(action: {
-                    store.onboarding.append("TabBarView")
-                    Default.save(session: true)
-                }, text: "Sing in", color: .violet100, foregroundColor: .white)
-                CustomButton(action: {
-                    store.onboarding.append("CreateAccountView")
-                }, text: "Create Account", color: .white, foregroundColor: .black)
-            }
-            Spacer()
+            .navigationDestination(for: String.self, destination: { route in
+                switch route {
+                case "CreateAccountView":
+                    CreateAccountView()
+                case "TabBarView":
+                    TabBarView()
+                default:
+                    EmptyView()
+                }
+            })
         }
         .navigationBarBackButtonHidden(true)
     }
@@ -44,4 +56,5 @@ struct LoginView: View {
 
 #Preview {
     LoginView()
+        .environmentObject(Store())
 }

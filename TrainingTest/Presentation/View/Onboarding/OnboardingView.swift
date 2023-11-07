@@ -37,6 +37,7 @@ struct OnboardingView: View {
                     if showLoginButton {
                         CustomButton(action: {
                             store.onboarding.append("login")
+                            //Default.save(onboarding: true)
                         }, text: "Login", color: .violet100, foregroundColor: .white)
                         CustomButton(action: {}, text: "", color: .white, foregroundColor: .white)
                     }
@@ -51,6 +52,7 @@ struct OnboardingView: View {
                             }, text: "Next", color: .violet100, foregroundColor: .white)
                             CustomButton(action: {
                                 store.onboarding.append("login")
+                                //Default.save(onboarding: true)
                             }, text: "Skip", color: .violet20, foregroundColor: .violet100)
                         }
                     }
@@ -64,11 +66,7 @@ struct OnboardingView: View {
                 switch route {
                 case "login":
                     LoginView()
-                    
-                case "CreateAccountView":
-                    CreateAccountView()
-                case "TabBarView":
-                    TabBarView()
+                        .environmentObject(store)
                 default:
                     EmptyView()
                 }

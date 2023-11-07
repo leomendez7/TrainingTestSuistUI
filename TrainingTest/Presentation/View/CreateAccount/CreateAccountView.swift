@@ -13,7 +13,7 @@ struct CreateAccountView: View {
     @State private var email: String = ""
     @State private var birthday: String = ""
     @State private var password: String = ""
-    var backButton : some View {
+    var backButton: some View {
         Button(action: {
             self.presentationMode.wrappedValue.dismiss()
         }) {

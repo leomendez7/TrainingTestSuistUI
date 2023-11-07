@@ -23,9 +23,11 @@ struct CurrencyView: View {
             .navigationTitle("Currency")
             .navigationBarTitleDisplayMode(.inline)
         }
+        .padding(.horizontal, 16)
     }
 }
 
 #Preview {
     CurrencyView()
+        .environmentObject(CurrencyViewModel())
 }

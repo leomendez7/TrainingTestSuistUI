@@ -7,13 +7,24 @@
 
 import Foundation
 
-public struct Default {
+public class Default: ObservableObject {
     
     public enum Key: String {
         case onboarding
         case session
         case currency
         case security
+    }
+    
+    @Published var setOnboarding = Bool() {
+        didSet {
+            setOnboarding = Default.onboarding()
+        }
+    }
+    @Published var setSession = Bool() {
+        didSet {
+            setSession = Default.session()
+        }
     }
     
     public static func destroySession(){
