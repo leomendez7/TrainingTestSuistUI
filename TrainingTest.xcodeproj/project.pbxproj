@@ -48,6 +48,12 @@
 		ECD56D572AF9715200BEFAD8 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD56D562AF9715200BEFAD8 /* ImagePicker.swift */; };
 		ECD56D5A2AF978E200BEFAD8 /* Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD56D592AF978E200BEFAD8 /* Default.swift */; };
 		ECD56D5C2AF9794B00BEFAD8 /* SessionDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD56D5B2AF9794B00BEFAD8 /* SessionDefault.swift */; };
+		ECD56D5F2AF9CE4400BEFAD8 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD56D5E2AF9CE4400BEFAD8 /* SettingsView.swift */; };
+		ECD56D632AF9DB0D00BEFAD8 /* SettingsOptionsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD56D622AF9DB0D00BEFAD8 /* SettingsOptionsButton.swift */; };
+		ECD56D652AF9DDF700BEFAD8 /* SettingsDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD56D642AF9DDF700BEFAD8 /* SettingsDefault.swift */; };
+		ECD56D682AF9E3CE00BEFAD8 /* CurrencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD56D672AF9E3CE00BEFAD8 /* CurrencyView.swift */; };
+		ECD56D6A2AF9E46800BEFAD8 /* CurrencyOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD56D692AF9E46800BEFAD8 /* CurrencyOptionsView.swift */; };
+		ECD56D6C2AF9E7B900BEFAD8 /* CurrencyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD56D6B2AF9E7B900BEFAD8 /* CurrencyViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +122,12 @@
 		ECD56D562AF9715200BEFAD8 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		ECD56D592AF978E200BEFAD8 /* Default.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Default.swift; sourceTree = "<group>"; };
 		ECD56D5B2AF9794B00BEFAD8 /* SessionDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDefault.swift; sourceTree = "<group>"; };
+		ECD56D5E2AF9CE4400BEFAD8 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		ECD56D622AF9DB0D00BEFAD8 /* SettingsOptionsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsOptionsButton.swift; sourceTree = "<group>"; };
+		ECD56D642AF9DDF700BEFAD8 /* SettingsDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDefault.swift; sourceTree = "<group>"; };
+		ECD56D672AF9E3CE00BEFAD8 /* CurrencyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyView.swift; sourceTree = "<group>"; };
+		ECD56D692AF9E46800BEFAD8 /* CurrencyOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyOptionsView.swift; sourceTree = "<group>"; };
+		ECD56D6B2AF9E7B900BEFAD8 /* CurrencyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -356,6 +368,7 @@
 		D1DDBD232AF1E725006846D0 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
+				ECD56D5D2AF9CD0700BEFAD8 /* Profile */,
 				D1DDBD262AF1F1A9006846D0 /* Home */,
 				D1DDBD242AF1E73C006846D0 /* TabBarView.swift */,
 			);
@@ -433,8 +446,37 @@
 			children = (
 				ECD56D592AF978E200BEFAD8 /* Default.swift */,
 				ECD56D5B2AF9794B00BEFAD8 /* SessionDefault.swift */,
+				ECD56D642AF9DDF700BEFAD8 /* SettingsDefault.swift */,
 			);
 			path = Default;
+			sourceTree = "<group>";
+		};
+		ECD56D5D2AF9CD0700BEFAD8 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				ECD56D662AF9E3B400BEFAD8 /* Currency */,
+				ECD56D5E2AF9CE4400BEFAD8 /* SettingsView.swift */,
+				ECD56D622AF9DB0D00BEFAD8 /* SettingsOptionsButton.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		ECD56D662AF9E3B400BEFAD8 /* Currency */ = {
+			isa = PBXGroup;
+			children = (
+				ECD56D6D2AF9E7C200BEFAD8 /* ViewModel */,
+				ECD56D672AF9E3CE00BEFAD8 /* CurrencyView.swift */,
+				ECD56D692AF9E46800BEFAD8 /* CurrencyOptionsView.swift */,
+			);
+			path = Currency;
+			sourceTree = "<group>";
+		};
+		ECD56D6D2AF9E7C200BEFAD8 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				ECD56D6B2AF9E7B900BEFAD8 /* CurrencyViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -582,6 +624,7 @@
 				D14B5FA82AF44D4C004DD964 /* NewTransactionView.swift in Sources */,
 				D1DDBD142AF158CC006846D0 /* CustomButton.swift in Sources */,
 				ECD56D542AF96BD000BEFAD8 /* Picker.swift in Sources */,
+				ECD56D6A2AF9E46800BEFAD8 /* CurrencyOptionsView.swift in Sources */,
 				D1DDBD282AF1F1BB006846D0 /* HomeView.swift in Sources */,
 				D1DDBD102AF0BFAA006846D0 /* OnboardingItem.swift in Sources */,
 				D14B5FAB2AF48F0A004DD964 /* CategorySelectorView.swift in Sources */,
@@ -594,9 +637,12 @@
 				D14B5FB22AF55401004DD964 /* ValueTransactionTextFieldView.swift in Sources */,
 				D14B5FAD2AF4B083004DD964 /* PayMethodSelectorView.swift in Sources */,
 				D14B5FB62AF5868B004DD964 /* Store.swift in Sources */,
+				ECD56D6C2AF9E7B900BEFAD8 /* CurrencyViewModel.swift in Sources */,
 				D1DDBD1E2AF17DD6006846D0 /* CreateAccountView.swift in Sources */,
 				ECD56D572AF9715200BEFAD8 /* ImagePicker.swift in Sources */,
 				D1DDBD072AF0A333006846D0 /* OnboardingView.swift in Sources */,
+				ECD56D5F2AF9CE4400BEFAD8 /* SettingsView.swift in Sources */,
+				ECD56D652AF9DDF700BEFAD8 /* SettingsDefault.swift in Sources */,
 				D14B5FB02AF4B504004DD964 /* TransactionOptionView.swift in Sources */,
 				D17A24732AF34BB500D43209 /* TransactionCellView.swift in Sources */,
 				D1DDBD822AF2E775006846D0 /* SplashScreenView.swift in Sources */,
@@ -608,9 +654,11 @@
 				D1DDBD182AF162C6006846D0 /* LoginView.swift in Sources */,
 				D1DDBD872AF31022006846D0 /* RecentTransactionView.swift in Sources */,
 				D1DDBD202AF17EDD006846D0 /* CustomPasswordTextField.swift in Sources */,
+				ECD56D682AF9E3CE00BEFAD8 /* CurrencyView.swift in Sources */,
 				D1DDBD2C2AF29A91006846D0 /* BalanceComponentView.swift in Sources */,
 				D1DDBD1B2AF17446006846D0 /* CustomTextField.swift in Sources */,
 				D17A247C2AF3F68B00D43209 /* NewOptionTransactionView.swift in Sources */,
+				ECD56D632AF9DB0D00BEFAD8 /* SettingsOptionsButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

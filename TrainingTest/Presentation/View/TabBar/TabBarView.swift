@@ -15,20 +15,21 @@ struct TabBarView: View {
     
     var body: some View {
         TabView(selection: $selectedTab) {
-                HomeView()
+            HomeView()
                 .environmentObject(store)
-            .tabItem {
-                Image("home")
-                Text("Home")
-            }
-            .tag(0)
+                .tabItem {
+                    Image("home")
+                    Text("Home")
+                }
+                .tag(0)
             Text("Transactions")
                 .tabItem {
                     Image("transaction")
                     Text("Transaction")
                 }
                 .tag(1)
-            Text("Settings")
+            SettingsView()
+                .environmentObject(store)
                 .tabItem {
                     Image("settings")
                     Text("Settings")

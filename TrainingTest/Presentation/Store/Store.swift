@@ -11,5 +11,6 @@ public class Store: ObservableObject {
     
     @Published var onboarding = NavigationPath()
     @Published var transactions = NavigationPath()
+    @Published var settings = NavigationPath()
     
 }
