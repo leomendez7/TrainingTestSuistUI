@@ -15,6 +15,7 @@ struct TransactionCellView: View {
     @State var hour: String
     @State var image: String
     @State var background: Color
+    @State private var valueText = String()
     
     var body: some View {
         HStack(spacing: 10) {
@@ -35,10 +36,17 @@ struct TransactionCellView: View {
             }
             Spacer()
             VStack(alignment: .trailing, spacing: 13) {
-                Text("- $\(value)")
-                    .foregroundColor(.red100)
-                    .font(.system(size: 16))
-                    .fontWeight(.bold)
+                if name != "Salary" {
+                    Text("- $\(value)")
+                        .foregroundColor(.red100)
+                        .font(.system(size: 16))
+                        .fontWeight(.bold)
+                } else {
+                    Text("+ $\(value)")
+                        .foregroundColor(.green100)
+                        .font(.system(size: 16))
+                        .fontWeight(.bold)
+                }
                 Text(hour)
                     .foregroundColor(.light20)
                     .font(.system(size: 13))

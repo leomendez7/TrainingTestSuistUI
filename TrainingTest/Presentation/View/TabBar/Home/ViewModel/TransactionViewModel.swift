@@ -14,7 +14,20 @@ public class TransactionViewModel: ObservableObject {
     @Published var transactions: [Transaction] = []
     @Published var images: [String] = []
     @Published var colors: [Color] = []
+    @Published var months: [String] = []
+    @Published var currentMonth: Int = 0
     
+    func generateMonths() {
+        let dateFormatter = DateFormatter()
+        let months = dateFormatter.monthSymbols
+        self.months.removeAll()
+        for index in 0...((months?.count ?? 0) - 1) {
+            self.months.append(months?[index] ?? "")
+        }
+        if let currentMonth = Calendar.current.dateComponents([.month], from: Date()).month {
+            self.currentMonth = currentMonth - 1
+        }
+    }
     
     func generateRandomTransaction() -> Transaction {
         let names = ["Shopping", "Subscription", "Food", "Salary", "Transportation"]
@@ -27,7 +40,7 @@ public class TransactionViewModel: ObservableObject {
                            value: randomValue,
                            hour: randomHour)
     }
-
+    
     func generateRandomDescription() -> String {
         let alphabet = "abcdefghijklmnopqrstuvwxyz"
         let randomLength = Int.random(in: 1...10)
@@ -36,9 +49,9 @@ public class TransactionViewModel: ObservableObject {
         }
         return String(randomDescription)
     }
-
+    
     func generateRandomHour() -> String {
-        let hours = ["06:00 AM", "07:00 AM", "08:00 AM", "09:00 AM", 
+        let hours = ["06:00 AM", "07:00 AM", "08:00 AM", "09:00 AM",
                      "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM",
                      "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM",
                      "06:00 PM", "07:00 PM", "08:00 PM", "09:00 PM",

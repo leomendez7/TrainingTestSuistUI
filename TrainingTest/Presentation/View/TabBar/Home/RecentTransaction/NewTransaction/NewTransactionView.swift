@@ -12,11 +12,11 @@ struct NewTransactionView: View {
     @Binding var isIncome: Bool
     @State var tittle: String = ""
     @State var text: String = "0"
+    @EnvironmentObject var viewModel: TransactionViewModel
     @EnvironmentObject var store: Store
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var backButton : some View {
         Button(action: {
-            self.presentationMode.wrappedValue.dismiss()
+            store.transactions.removeLast()
         }) {
             HStack {
                 Image("arrow-left")
@@ -49,12 +49,20 @@ struct NewTransactionView: View {
         .onAppear{
             tittle = isIncome ? "Income" : "Expenses"
         }
+        .preferredColorScheme(.dark)
         .ignoresSafeArea()
         .navigationBarItems(leading: backButton)
         .navigationBarBackButtonHidden(true)
-        .navigationTitle(tittle)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.hidden, for: .tabBar)
+        .toolbar(content: {
+            ToolbarItem(placement: .principal) {
+                Text(tittle)
+                    .font(.system(size: 18))
+                    .fontWeight(.bold)
+                    .foregroundColor(.light100)
+            }
+        })
     }
     
     private func hideKeyboard() {
@@ -66,5 +74,7 @@ struct NewTransactionView: View {
 }
 
 #Preview {
-    NewTransactionView(isIncome: .constant(Bool()))
+    NavigationStack {
+        NewTransactionView(isIncome: .constant(Bool()))
+    }
 }

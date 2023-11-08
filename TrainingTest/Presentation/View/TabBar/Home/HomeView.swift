@@ -9,64 +9,74 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @StateObject var transactionViewModel = TransactionViewModel()
+    @EnvironmentObject var viewModel: TransactionViewModel
     @EnvironmentObject var store: Store
     @State var isIncome = Bool()
+    @State private var isSheetPresented = false
     
     var body: some View {
         NavigationStack(path: $store.transactions) {
             VStack {
-                MonthSwitcherView()
                 ScrollView {
                     BalanceComponentView(balance: "9400", income: "5000", expense: "1200")
                     FrequencyView()
-                    RecentTransactionView(viewModel: transactionViewModel)
+                    RecentTransactionView()
                 }
-                //        .environmentObject(transactionViewModel)
             }
+            //.preferredColorScheme(.light)
             .onReceive(NotificationCenter.default.publisher(for: Notification.Name(rawValue: "income"))) { _ in
                 isIncome = true
-                store.transactions.append("NewIncomeTransaction")
+                store.transactions.append("NewTransaction")
             }
             .onReceive(NotificationCenter.default.publisher(for: Notification.Name(rawValue: "expenses"))) { _ in
                 isIncome = false
-                store.transactions.append("NewExpensesTransaction")
+                store.transactions.append("NewTransaction")
             }
             .navigationDestination(for: String.self, destination: { route in
                 switch route {
-                case "NewIncomeTransaction":
+                case "NewTransaction":
                     NewTransactionView(isIncome: $isIncome)
-                        .environmentObject(TransactionViewModel())
-                case "NewExpensesTransaction":
-                    NewTransactionView(isIncome: $isIncome)
-                        .environmentObject(TransactionViewModel())
                 default:
                     EmptyView()
                 }
             })
-            //        .toolbar(content: {
-            //            ToolbarItem(placement: .topBarLeading) {
-            //                Text("izq")
-            //            }
-            //            ToolbarItem(placement: .topBarTrailing) {
-            //                Text("izq")
-            //            }
-            //            ToolbarItem(placement: .principal) {
-            //                Button(action: {
-            //                   // isSheetPresented.toggle()
-            //                }) {
-            //                    Image(systemName: "plus.circle.fill")
-            //                        .resizable()
-            //                        .frame(width: 35, height: 35)
-            //                        .foregroundColor(.violet100)
-            //                }
-            //            }
-            //        })
+            .toolbar(content: {
+                ToolbarItem(placement: .topBarLeading) {
+                    Circle()
+                        .frame(width: 35, height: 35)
+                        .foregroundColor(.white)
+                        .overlay(
+                            Image("avatar-2")
+                                .resizable()
+                                .frame(width: 37, height: 37)
+                        )
+                }
+                ToolbarItem(placement: .principal) {
+                    MonthSwitcherView()
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(action: {
+                         isSheetPresented.toggle()
+                    }) {
+                        Image(systemName: "plus.circle.fill")
+                            .resizable()
+                            .frame(width: 35, height: 35)
+                            .foregroundColor(.violet100)
+                    }
+                    .sheet(isPresented: $isSheetPresented) {
+                        NewOptionTransactionView(isSheetPresented: isSheetPresented)
+                            .presentationDetents([.fraction(0.25)])
+                    }
+                }
+            })
         }
     }
 }
 
 #Preview {
-    HomeView()
-        .environmentObject(Store())
+    NavigationStack {
+        HomeView()
+            .environmentObject(Store())
+            .environmentObject(TransactionViewModel())
+    }
 }

@@ -364,7 +364,7 @@
 		D1DDBD232AF1E725006846D0 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
-				ECD56D5D2AF9CD0700BEFAD8 /* Profile */,
+				ECD56D5D2AF9CD0700BEFAD8 /* Settings */,
 				D1DDBD262AF1F1A9006846D0 /* Home */,
 				D1DDBD242AF1E73C006846D0 /* TabBarView.swift */,
 			);
@@ -374,6 +374,7 @@
 		D1DDBD262AF1F1A9006846D0 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				D17A24772AF3E35F00D43209 /* ViewModel */,
 				D1DDBD852AF30FFE006846D0 /* RecentTransaction */,
 				D1DDBD7B2AF2DB95006846D0 /* Frecuency */,
 				D1DDBD7A2AF2DA48006846D0 /* MonthSwitcher */,
@@ -414,7 +415,6 @@
 			isa = PBXGroup;
 			children = (
 				D17A247A2AF3F66000D43209 /* NewTransaction */,
-				D17A24772AF3E35F00D43209 /* ViewModel */,
 				D1DDBD862AF31022006846D0 /* RecentTransactionView.swift */,
 				D17A24722AF34BB500D43209 /* TransactionCellView.swift */,
 			);
@@ -447,17 +447,16 @@
 			path = Default;
 			sourceTree = "<group>";
 		};
-		ECD56D5D2AF9CD0700BEFAD8 /* Profile */ = {
+		ECD56D5D2AF9CD0700BEFAD8 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				ECD56D752AFBD1DB00BEFAD8 /* EditProfile */,
 				ECD56D662AF9E3B400BEFAD8 /* Currency */,
 				ECD56D6E2AFA82C800BEFAD8 /* LogoutView.swift */,
 				ECD56D712AFA9A0D00BEFAD8 /* DataProfileView.swift */,
 				ECD56D622AF9DB0D00BEFAD8 /* SettingsOptionsButton.swift */,
 				ECD56D5E2AF9CE4400BEFAD8 /* SettingsView.swift */,
 			);
-			path = Profile;
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		ECD56D662AF9E3B400BEFAD8 /* Currency */ = {
@@ -476,13 +475,6 @@
 				ECD56D6B2AF9E7B900BEFAD8 /* CurrencyViewModel.swift */,
 			);
 			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		ECD56D752AFBD1DB00BEFAD8 /* EditProfile */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = EditProfile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

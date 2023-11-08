@@ -9,8 +9,7 @@ import SwiftUI
 
 struct RecentTransactionView: View {
     
-    @ObservedObject var viewModel: TransactionViewModel
-    
+    @EnvironmentObject var viewModel: TransactionViewModel
     var transactions = [Transaction]()
     
     var body: some View {
@@ -53,5 +52,6 @@ struct RecentTransactionView: View {
 }
 
 #Preview {
-    RecentTransactionView(viewModel: TransactionViewModel())
+    RecentTransactionView()
+        .environmentObject(TransactionViewModel())
 }
