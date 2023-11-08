@@ -13,9 +13,10 @@ struct CreateAccountView: View {
     @State private var email: String = ""
     @State private var birthday: String = ""
     @State private var password: String = ""
+    @EnvironmentObject var store: Store
     var backButton: some View {
         Button(action: {
-            self.presentationMode.wrappedValue.dismiss()
+            store.login.removeLast()
         }) {
             HStack {
                 Image("arrow-left")
@@ -23,7 +24,6 @@ struct CreateAccountView: View {
             }
         }
     }
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         VStack(spacing: 56) {
@@ -48,9 +48,13 @@ struct CreateAccountView: View {
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
         .navigationTitle("Create Account")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 #Preview {
-    CreateAccountView()
+    NavigationStack {
+        CreateAccountView()
+            .environmentObject(Store())
+    }
 }

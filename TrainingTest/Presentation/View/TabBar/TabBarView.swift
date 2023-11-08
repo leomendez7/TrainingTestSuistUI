@@ -15,22 +15,7 @@ struct TabBarView: View {
     
     var body: some View {
         TabView(selection: $selectedTab) {
-            NavigationStack(path: $store.transactions) {
                 HomeView()
-                    .navigationDestination(for: String.self, destination: { route in
-                        switch route {
-                        case "NewIncomeTransaction":
-                            NewTransactionView(isIncome: .constant(true))
-                                .environmentObject(TransactionViewModel())
-                        case "NewExpensesTransaction":
-                            NewTransactionView(isIncome: .constant(false))
-                                .environmentObject(TransactionViewModel())
-                        default:
-                            EmptyView()
-                        }
-                    })
-                    .environmentObject(store)
-            }
             .tabItem {
                 Image("home")
                 Text("Home")
@@ -46,19 +31,18 @@ struct TabBarView: View {
                 SettingsView()
                     .navigationDestination(for: String.self, destination: { route in
                         switch route {
-                        case "Currency":
+                        case "currency":
                             CurrencyView()
                                 .environmentObject(CurrencyViewModel())
-                        case "Security":
+                        case "security":
                             CreateAccountView()
-                        case "Logout":
+                        case "logout":
                             LoginView()
                         default:
                             EmptyView()
                         }
                     })
             }
-            .environmentObject(store)
             .tabItem {
                 Image("settings")
                 Text("Settings")

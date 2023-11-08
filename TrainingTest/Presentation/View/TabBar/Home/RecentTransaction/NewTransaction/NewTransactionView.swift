@@ -54,6 +54,7 @@ struct NewTransactionView: View {
         .navigationBarBackButtonHidden(true)
         .navigationTitle(tittle)
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar(.hidden, for: .tabBar)
     }
     
     private func hideKeyboard() {
@@ -66,5 +67,4 @@ struct NewTransactionView: View {
 
 #Preview {
     NewTransactionView(isIncome: .constant(Bool()))
-    
 }

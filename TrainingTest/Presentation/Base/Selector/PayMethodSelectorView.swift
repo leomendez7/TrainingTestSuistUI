@@ -10,7 +10,7 @@ import SwiftUI
 struct PayMethodSelectorView: View {
     
     @State private var selectedCategoryIndex = 0
-    let payMethods = ["Wallet", "PayPal"]
+    let payMethods = ["Wallet", "PayPal", "Chase"]
     
     var body: some View {
         Menu {

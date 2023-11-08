@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 public class Default: ObservableObject {
     
@@ -16,16 +17,8 @@ public class Default: ObservableObject {
         case security
     }
     
-    @Published var setOnboarding = Bool() {
-        didSet {
-            setOnboarding = Default.onboarding()
-        }
-    }
-    @Published var setSession = Bool() {
-        didSet {
-            setSession = Default.session()
-        }
-    }
+    @AppStorage("appStorageOnboarding") var onboarding: Bool = false
+    @AppStorage("appStorageSession") var session: Bool = false
     
     public static func destroySession(){
         let defaults = UserDefaults.standard

@@ -35,10 +35,10 @@ struct SettingsView: View {
             VStack(spacing: 47) {
                 VStack(spacing: 20) {
                     SettingsOptionsButton(action: {
-                        store.onboarding.append("Currency")
+                        store.onboarding.append("currency")
                     }, OptionName: "Currency", name: $currencyName)
                     SettingsOptionsButton(action: {
-                        store.onboarding.append("Security")
+                        store.onboarding.append("security")
                     }, OptionName: "Security", name: $securityName)
                 }
                 .onAppear {
@@ -65,7 +65,7 @@ struct SettingsView: View {
         .navigationTitle("Settings")
         .navigationBarTitleDisplayMode(.inline)
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name(rawValue: "logout"))) { _ in
-            store.settings.append("Logout")
+            store.settings.append("logout")
         }
     }
     

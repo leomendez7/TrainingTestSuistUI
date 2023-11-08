@@ -450,6 +450,7 @@
 		ECD56D5D2AF9CD0700BEFAD8 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				ECD56D752AFBD1DB00BEFAD8 /* EditProfile */,
 				ECD56D662AF9E3B400BEFAD8 /* Currency */,
 				ECD56D6E2AFA82C800BEFAD8 /* LogoutView.swift */,
 				ECD56D712AFA9A0D00BEFAD8 /* DataProfileView.swift */,
@@ -475,6 +476,13 @@
 				ECD56D6B2AF9E7B900BEFAD8 /* CurrencyViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		ECD56D752AFBD1DB00BEFAD8 /* EditProfile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = EditProfile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

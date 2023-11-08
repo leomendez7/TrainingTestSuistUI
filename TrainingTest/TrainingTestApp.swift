@@ -11,12 +11,13 @@ import Presentation
 @main
 struct TrainingTestApp: App {
 
-    @State var store = Store()
+    @ObservedObject var store = Store()
+    @ObservedObject var setDefault = Default()
     
     var body: some Scene {
         WindowGroup {
-            let session = Default.session()
-            let onboarding = Default.onboarding()
+            let session = setDefault.session
+            let onboarding = setDefault.onboarding
             if session && onboarding {
                 TabBarView()
             } else if !session && !onboarding {
@@ -24,7 +25,9 @@ struct TrainingTestApp: App {
             } else {
                 LoginView()
             }
-        }.environmentObject(store)
+        }
+        .environmentObject(store)
+        .environmentObject(setDefault)
     }
     
 }

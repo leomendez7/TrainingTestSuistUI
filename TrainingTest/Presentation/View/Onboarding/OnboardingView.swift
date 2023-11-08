@@ -15,6 +15,7 @@ struct OnboardingView: View {
     @State private var selectedTab = 0
     @State private var isLoggedIn = false
     @EnvironmentObject var store: Store
+    @EnvironmentObject var setDefault: Default
     
     var body: some View {
         NavigationStack(path: $store.onboarding) {
@@ -36,8 +37,7 @@ struct OnboardingView: View {
                     }
                     if showLoginButton {
                         CustomButton(action: {
-                            store.onboarding.append("login")
-                            //Default.save(onboarding: true)
+                            setDefault.onboarding = true
                         }, text: "Login", color: .violet100, foregroundColor: .white)
                         CustomButton(action: {}, text: "", color: .white, foregroundColor: .white)
                     }
@@ -51,8 +51,8 @@ struct OnboardingView: View {
                                 }
                             }, text: "Next", color: .violet100, foregroundColor: .white)
                             CustomButton(action: {
-                                store.onboarding.append("login")
-                                //Default.save(onboarding: true)
+//                                store.onboarding.append("login")
+                                setDefault.onboarding = true
                             }, text: "Skip", color: .violet20, foregroundColor: .violet100)
                         }
                     }
@@ -66,7 +66,6 @@ struct OnboardingView: View {
                 switch route {
                 case "login":
                     LoginView()
-                        .environmentObject(store)
                 default:
                     EmptyView()
                 }
