@@ -36,12 +36,14 @@ struct SettingsView: View {
                 }
                 VStack(spacing: 47) {
                     VStack(spacing: 20) {
-                        SettingsOptionsButton(action: {
-                            store.settings.append("currency")
-                        }, OptionName: "Currency", name: $currencyName)
-                        SettingsOptionsButton(action: {
-                            store.settings.append("security")
-                        }, OptionName: "Security", name: $securityName)
+                        SettingsOptionsButton(OptionName: "Currency", name: $currencyName)
+                            .onTapGesture {
+                                store.settings.append("currency")
+                            }
+                        SettingsOptionsButton(OptionName: "Security", name: $securityName)
+                            .onTapGesture {
+                                store.settings.append("security")
+                            }
                     }
                     .onAppear {
                         currencyName = Default.currency()

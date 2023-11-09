@@ -11,7 +11,8 @@ struct CurrencyView: View {
     
     @EnvironmentObject var viewModel: CurrencyViewModel
     @EnvironmentObject var store: Store
-    @State var isSelected = Bool()
+    @State var isCurrencySelected = Currency()
+    
     var backButton : some View {
         Button(action: {
             store.settings.removeLast()
@@ -24,11 +25,13 @@ struct CurrencyView: View {
     }
     
     var body: some View {
-        VStack(spacing: 9) {
+        VStack(spacing: 16) {
             ForEach(viewModel.currencies.indices, id: \.self) { index in
-                CurrencyOptionsView(optionName: viewModel.currencies[index], isSelected: isSelected)
+                CurrencyOptionsView(optionName: viewModel.currencies[index].name, 
+                                    isCurrencySelected: $isCurrencySelected)
                     .onTapGesture {
-                        isSelected = true
+                        isCurrencySelected = viewModel.currencies[index]
+                        Default.save(currency: viewModel.currencies[index].abbreviation)
                     }
             }
             Spacer()
@@ -40,6 +43,9 @@ struct CurrencyView: View {
         .navigationBarItems(leading: backButton)
         .navigationBarBackButtonHidden(true)
         .toolbar(.hidden, for: .tabBar)
+        .task {
+            viewModel.generateCurrencies()
+        }
     }
 }
 

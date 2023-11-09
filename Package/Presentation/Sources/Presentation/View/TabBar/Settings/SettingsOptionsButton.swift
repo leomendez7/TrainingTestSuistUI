@@ -9,7 +9,6 @@ import SwiftUI
 
 struct SettingsOptionsButton: View {
     
-    var action: () -> Void
     @State var OptionName = String()
     @Binding var name: String
     
@@ -25,12 +24,7 @@ struct SettingsOptionsButton: View {
                     .font(.system(size: 16))
                     .fontWeight(.regular)
                     .foregroundColor(Color("light-20", bundle: .module))
-                Button(action: {
-                    action()
-                }) {
-                    Image("arrow-right", bundle: .module)
-                }
-                .frame(width: 15)
+                Image("arrow-right", bundle: .module)
             }
         }
     }
@@ -38,5 +32,5 @@ struct SettingsOptionsButton: View {
 }
 
 #Preview {
-    SettingsOptionsButton(action: {}, name: .constant("USD"))
+    SettingsOptionsButton(OptionName: "Currency", name: .constant("USD"))
 }
