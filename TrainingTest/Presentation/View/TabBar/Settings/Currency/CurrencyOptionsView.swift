@@ -10,7 +10,8 @@ import SwiftUI
 struct CurrencyOptionsView: View {
     
     @State var optionName: String
-    @State var isSelected = Bool()
+    @Binding var isSelected: Bool
+    @EnvironmentObject var setDefault: Default
     
     var body: some View {
         HStack {
@@ -25,5 +26,5 @@ struct CurrencyOptionsView: View {
 }
 
 #Preview {
-    CurrencyOptionsView(optionName: "United States (USD)", isSelected: true)
+    CurrencyOptionsView(optionName: "United States (USD)", isSelected: .constant(true))
 }
