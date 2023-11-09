@@ -12,10 +12,10 @@ import SwiftUI
 public class CurrencyViewModel: ObservableObject {
     
     @Published var currencies: [String] = ["United States (USD)",
-                                           "Japan (JPY)",
-                                           "Euro (EUR)",
-                                           "Colombia (COP)",
-                                           "Use system preference"]
+                                                  "Japan (JPY)",
+                                                  "Euro (EUR)",
+                                                  "Colombia (COP)",
+                                                  "Use system preference"]
     
     
 }
