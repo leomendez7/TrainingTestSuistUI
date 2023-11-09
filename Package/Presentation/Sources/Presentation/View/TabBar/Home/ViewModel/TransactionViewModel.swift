@@ -66,19 +66,19 @@ public class TransactionViewModel: ObservableObject {
             switch randomTransaction.name {
             case "Shopping":
                 images.append("shopping-bag")
-                colors.append(Color("yellow-20"))
+                colors.append(Color("yellow-20", bundle: .module))
             case "Subscription":
                 images.append("recurring-bill")
-                colors.append(Color("violet-20"))
+                colors.append(Color("violet-20", bundle: .module))
             case "Food":
                 images.append("restaurant")
-                colors.append(Color("red-20"))
+                colors.append(Color("red-20", bundle: .module))
             case "Salary":
                 images.append("salary")
-                colors.append(Color("green-20"))
+                colors.append(Color("green-20", bundle: .module))
             default:
                 images.append("transportation")
-                colors.append(Color("blue-20"))
+                colors.append(Color("blue-20", bundle: .module))
             }
             transactions.append(randomTransaction)
         }

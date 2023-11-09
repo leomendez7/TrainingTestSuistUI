@@ -17,7 +17,7 @@ struct CurrencyOptionsView: View {
             Text(optionName)
             Spacer()
             if isSelected {
-                Image("success")
+                Image("success", bundle: .module)
             }
         }
     }

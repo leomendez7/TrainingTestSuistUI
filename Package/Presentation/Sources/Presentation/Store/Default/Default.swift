@@ -17,8 +17,8 @@ public class Default: ObservableObject {
         case security
     }
     
-    @AppStorage("appStorageOnboarding") public var onboarding: Bool = false
-    @AppStorage("appStorageSession") public var session: Bool = false
+    @AppStorage("appStorageOnboarding") public var onboarding = Bool()
+    @AppStorage("appStorageSession") public var session = Bool()
     
     public static func destroySession(){
         let defaults = UserDefaults.standard
@@ -27,10 +27,7 @@ public class Default: ObservableObject {
         defaults.removeObject(forKey: Key.security.rawValue)
     }
     
-    public init(onboarding: Bool, session: Bool) {
-        self.onboarding = onboarding
-        self.session = session
-    }
+    public init() { }
 
 }
 

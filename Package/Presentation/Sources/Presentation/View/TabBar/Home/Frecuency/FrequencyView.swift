@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct FrequencyView: View {
+   
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Spend Frequency")
-                .foregroundColor(Color("dark"))
+                .foregroundColor(Color("dark", bundle: .module))
                 .font(.system(size: 18))
                 .fontWeight(.bold)
-            Image("graph")
+            Image("graph", bundle: .module)
             SelectFrequencyView()
         }
         .padding(.top, 31)

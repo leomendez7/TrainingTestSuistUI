@@ -27,7 +27,7 @@ struct TransactionOptionView: View {
                     viewModel.source = .camera
                     viewModel.showPhotoPicker()
                 }) {
-                    Image("add-attachment")
+                    Image("add-attachment", bundle: .module)
                 }
             }
             HStack {
@@ -36,20 +36,20 @@ struct TransactionOptionView: View {
                         .multilineTextAlignment(TextAlignment.leading)
                         .font(.system(size: 16))
                         .fontWeight(.semibold)
-                        .foregroundColor(Color("dark-25"))
+                        .foregroundColor(Color("dark-25", bundle: .module))
                     Text("Set a transaction reminder")
                         .font(.system(size: 13))
                         .fontWeight(.semibold)
-                        .foregroundColor(Color("light-20"))
+                        .foregroundColor(Color("light-20", bundle: .module))
                 }
                 Spacer()
                 Toggle("", isOn: $isSwitchOn)
-                    .toggleStyle(SwitchToggleStyle(tint: Color("violet-100")))
+                    .toggleStyle(SwitchToggleStyle(tint: Color("violet-100", bundle: .module)))
             }
             Spacer()
             CustomButton(action: {
                 
-            }, text: "Continue", color: Color("violet-100"), foregroundColor: .white)
+            }, text: "Continue", color: Color("violet-100", bundle: .module), foregroundColor: .white)
             Spacer()
                 .sheet(isPresented: $viewModel.showPicker, content: {
                     ImagePicker(sourceType: viewModel.source == .library 

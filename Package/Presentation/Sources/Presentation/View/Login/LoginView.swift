@@ -14,6 +14,11 @@ public struct LoginView: View {
     @EnvironmentObject var store: Store
     @EnvironmentObject var setDefault: Default
     
+    public init() {
+        email = ""
+        password = ""
+    }
+    
     public var body: some View {
         NavigationStack(path: $store.login) {
             VStack(spacing: 56) {
@@ -29,7 +34,7 @@ public struct LoginView: View {
                 VStack(spacing: 16) {
                     CustomButton(action: {
                         setDefault.session = true
-                    }, text: "Sing in", color: Color("violet-100"), foregroundColor: .white)
+                    }, text: "Sing in", color: Color("violet-100", bundle: .module), foregroundColor: .white)
                     CustomButton(action: {
                         store.login.append("createAccountView")
                     }, text: "Create Account", color: .white, foregroundColor: .black)
@@ -55,5 +60,5 @@ public struct LoginView: View {
 #Preview {
     LoginView()
         .environmentObject(Store())
-        .environmentObject(Default(onboarding: true, session: true))
+        .environmentObject(Default())
 }

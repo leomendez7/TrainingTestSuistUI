@@ -14,6 +14,10 @@
 		D1108C0E2AF00911008E6D97 /* TrainingTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1108C0D2AF00911008E6D97 /* TrainingTestUITests.swift */; };
 		D1108C102AF00911008E6D97 /* TrainingTestUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1108C0F2AF00911008E6D97 /* TrainingTestUITestsLaunchTests.swift */; };
 		D1108C2A2AF03C41008E6D97 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1108C292AF03C41008E6D97 /* Colors.xcassets */; };
+		D19ED0F22AFD35CF004358FC /* Presentation in Frameworks */ = {isa = PBXBuildFile; productRef = D19ED0F12AFD35CF004358FC /* Presentation */; };
+		D19ED0F42AFD35DF004358FC /* Data in Frameworks */ = {isa = PBXBuildFile; productRef = D19ED0F32AFD35DF004358FC /* Data */; };
+		D19ED0F62AFD35DF004358FC /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = D19ED0F52AFD35DF004358FC /* Domain */; };
+		D19ED0F82AFD35DF004358FC /* Shared in Frameworks */ = {isa = PBXBuildFile; productRef = D19ED0F72AFD35DF004358FC /* Shared */; };
 		ECD56D742AFAC91B00BEFAD8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECD56D732AFAC91B00BEFAD8 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +61,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D19ED0F62AFD35DF004358FC /* Domain in Frameworks */,
+				D19ED0F82AFD35DF004358FC /* Shared in Frameworks */,
+				D19ED0F42AFD35DF004358FC /* Data in Frameworks */,
+				D19ED0F22AFD35CF004358FC /* Presentation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +93,7 @@
 				D1108C022AF00911008E6D97 /* TrainingTestTests */,
 				D1108C0C2AF00911008E6D97 /* TrainingTestUITests */,
 				D1108BF02AF00910008E6D97 /* Products */,
+				D19ED0F02AFD35CF004358FC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -154,6 +163,13 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		D19ED0F02AFD35CF004358FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -175,6 +191,10 @@
 			);
 			name = TrainingTest;
 			packageProductDependencies = (
+				D19ED0F12AFD35CF004358FC /* Presentation */,
+				D19ED0F32AFD35DF004358FC /* Data */,
+				D19ED0F52AFD35DF004358FC /* Domain */,
+				D19ED0F72AFD35DF004358FC /* Shared */,
 			);
 			productName = TrainingTest;
 			productReference = D1108BEF2AF00910008E6D97 /* TrainingTest.app */;
@@ -663,6 +683,22 @@
 		D1108C352AF04531008E6D97 /* Data */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Data;
+		};
+		D19ED0F12AFD35CF004358FC /* Presentation */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Presentation;
+		};
+		D19ED0F32AFD35DF004358FC /* Data */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Data;
+		};
+		D19ED0F52AFD35DF004358FC /* Domain */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Domain;
+		};
+		D19ED0F72AFD35DF004358FC /* Shared */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Shared;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

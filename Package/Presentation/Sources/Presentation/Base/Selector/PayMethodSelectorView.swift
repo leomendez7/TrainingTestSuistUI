@@ -25,17 +25,17 @@ struct PayMethodSelectorView: View {
             HStack {
                 Text(payMethods[selectedCategoryIndex])
                     .font(.system(size: 18))
-                    .foregroundColor(Color("light-20"))
+                    .foregroundColor(Color("light-20", bundle: .module))
                     .padding(.horizontal, 16)
                 Spacer()
-                Image("arrow-down-2")
+                Image("arrow-down-2", bundle: .module)
                     .padding(.horizontal, 16)
             }
             .frame(height: 56)
             .background(.white)
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
-                    .stroke(Color("light-60"), lineWidth: 1)
+                    .stroke(Color("light-60", bundle: .module), lineWidth: 1)
             )
         }
     }

@@ -11,8 +11,7 @@ import Presentation
 @main
 struct TrainingTestApp: App {
 
-    @ObservedObject var store = Store()
-    @ObservedObject var setDefault = Default(onboarding: false, session: false)
+    @ObservedObject var setDefault = Default()
     
     var body: some Scene {
         WindowGroup {
@@ -26,7 +25,7 @@ struct TrainingTestApp: App {
                 LoginView()
             }
         }
-        .environmentObject(store)
+        .environmentObject(Store())
         .environmentObject(setDefault)
     }
     

@@ -19,8 +19,8 @@ struct NewTransactionView: View {
             store.transactions.removeLast()
         }) {
             HStack {
-                Image("arrow-left")
-                    .foregroundColor(Color("light-80"))
+                Image("arrow-left", bundle: .module)
+                    .foregroundColor(Color("light-80", bundle: .module))
             }
         }
     }
@@ -28,10 +28,10 @@ struct NewTransactionView: View {
     var body: some View {
         ZStack {
             if isIncome {
-                Color("green-100")
+                Color("green-100", bundle: .module)
                     .ignoresSafeArea()
             } else {
-                Color("red100")
+                Color("red-100", bundle: .module)
                     .ignoresSafeArea()
             }
             VStack(alignment: .leading) {
@@ -60,7 +60,7 @@ struct NewTransactionView: View {
                 Text(tittle)
                     .font(.system(size: 18))
                     .fontWeight(.bold)
-                    .foregroundColor(Color("light-100"))
+                    .foregroundColor(Color("light-100", bundle: .module))
             }
         })
     }
@@ -75,6 +75,6 @@ struct NewTransactionView: View {
 
 #Preview {
     NavigationStack {
-        NewTransactionView(isIncome: .constant(Bool()))
+        NewTransactionView(isIncome: .constant(true))
     }
 }

@@ -19,17 +19,17 @@ struct TransactionCellView: View {
     
     var body: some View {
         HStack(spacing: 10) {
-            Image(image)
+            Image(image, bundle: .module)
                 .padding(15)
                 .frame(width: 60, height: 60)
                 .background(background)
                 .cornerRadius(16)
             VStack(alignment: .leading, spacing: 13) {
                 Text(name)
-                    .foregroundColor(Color("dark-25"))
+                    .foregroundColor(Color("dark-25", bundle: .module))
                     .font(.system(size: 14))
                 Text(description)
-                    .foregroundColor(Color("light-20"))
+                    .foregroundColor(Color("light-20", bundle: .module))
                     .font(.system(size: 13))
                     .fontWeight(.semibold)
                     .lineLimit(1)
@@ -38,24 +38,24 @@ struct TransactionCellView: View {
             VStack(alignment: .trailing, spacing: 13) {
                 if name != "Salary" {
                     Text("- $\(value)")
-                        .foregroundColor(Color("red-100"))
+                        .foregroundColor(Color("red-100", bundle: .module))
                         .font(.system(size: 16))
                         .fontWeight(.bold)
                 } else {
                     Text("+ $\(value)")
-                        .foregroundColor(Color("green-100"))
+                        .foregroundColor(Color("green-100", bundle: .module))
                         .font(.system(size: 16))
                         .fontWeight(.bold)
                 }
                 Text(hour)
-                    .foregroundColor(Color("light-20"))
+                    .foregroundColor(Color("light-20", bundle: .module))
                     .font(.system(size: 13))
                     .fontWeight(.semibold)
             }
         }
         .frame(height: 89)
         .padding(.horizontal, 16)
-        .background(Color("light-80"))
+        .background(Color("light-80", bundle: .module))
         .cornerRadius(24)
     }
 }
@@ -66,5 +66,5 @@ struct TransactionCellView: View {
                         value: "120",
                         hour: "10:00 AM",
                         image: "shopping-bag",
-                        background: Color("yellow-20"))
+                        background: Color("yellow-20", bundle: .module))
 }

@@ -18,17 +18,17 @@ struct SettingsOptionsButton: View {
             Text(OptionName)
                 .font(.system(size: 16))
                 .fontWeight(.regular)
-                .foregroundColor(Color("dark-75"))
+                .foregroundColor(Color("dark-75", bundle: .module))
             Spacer()
             HStack {
                 Text(name)
                     .font(.system(size: 16))
                     .fontWeight(.regular)
-                    .foregroundColor(Color("light-20"))
+                    .foregroundColor(Color("light-20", bundle: .module))
                 Button(action: {
                     action()
                 }) {
-                    Image("arrow-right")
+                    Image("arrow-right", bundle: .module)
                 }
                 .frame(width: 15)
             }
@@ -38,5 +38,5 @@ struct SettingsOptionsButton: View {
 }
 
 #Preview {
-    SettingsOptionsButton(action: {}, name: .constant(String()))
+    SettingsOptionsButton(action: {}, name: .constant("USD"))
 }

@@ -21,7 +21,7 @@ struct SettingsView: View {
         NavigationStack(path: $store.settings) {
             VStack {
                 HStack(spacing: 19) {
-                    Image("avatar-2")
+                    Image("avatar-2", bundle: .module)
                         .frame(width: 80, height: 80)
                     DataProfileView(email: $email, name: $name)
                         .onAppear {
@@ -31,7 +31,7 @@ struct SettingsView: View {
                     Spacer()
                     Button(action: {
                     }) {
-                        Image("edit-profile-button")
+                        Image("edit-profile-button", bundle: .module)
                     }
                 }
                 VStack(spacing: 47) {
@@ -51,7 +51,7 @@ struct SettingsView: View {
                         isSheetPresented.toggle()
                     }, label: {
                         Text("Log out")
-                            .foregroundColor(Color("dark-75"))
+                            .foregroundColor(Color("dark-75", bundle: .module))
                     })
                     .sheet(isPresented: $isSheetPresented) {
                         LogoutView(isSheetPresented: isSheetPresented)
@@ -87,5 +87,5 @@ struct SettingsView: View {
 #Preview {
     SettingsView()
         .environmentObject(Store())
-        .environmentObject(Default(onboarding: true, session: true))
+        .environmentObject(Default())
 }

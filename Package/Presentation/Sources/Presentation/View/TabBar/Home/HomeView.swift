@@ -46,7 +46,7 @@ struct HomeView: View {
                         .frame(width: 35, height: 35)
                         .foregroundColor(.white)
                         .overlay(
-                            Image("avatar-2")
+                            Image("avatar-2", bundle: .module)
                                 .resizable()
                                 .frame(width: 37, height: 37)
                         )
@@ -61,7 +61,7 @@ struct HomeView: View {
                         Image(systemName: "plus.circle.fill")
                             .resizable()
                             .frame(width: 35, height: 35)
-                            .foregroundColor(.violet100)
+                            .foregroundColor(Color("violet-100", bundle: .module))
                     }
                     .sheet(isPresented: $isSheetPresented) {
                         NewOptionTransactionView(isSheetPresented: isSheetPresented)

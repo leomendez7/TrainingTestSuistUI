@@ -13,7 +13,7 @@ struct ExpensesView: View {
     
     var body: some View {
         HStack(spacing: 10) {
-            Image("expenses")
+            Image("expenses", bundle: .module)
                 .padding(8)
                 .frame(width: 48, height: 48)
                 .background(.white)
@@ -29,7 +29,7 @@ struct ExpensesView: View {
             }
         }
         .frame(width: 164, height: 80)
-        .background(Color("red-100"))
+        .background(Color("red-100", bundle: .module))
         .cornerRadius(28)
     }
 }

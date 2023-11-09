@@ -25,7 +25,7 @@ struct NewOptionTransactionView: View {
                     Button {
                         dismiss()
                     } label: {
-                        Image("close")
+                        Image("close", bundle: .module)
                             .frame(width: 32, height: 32)
                     }
                 }
@@ -37,12 +37,12 @@ struct NewOptionTransactionView: View {
                     NotificationCenter.default.post(name: Notification.Name(rawValue: "income"),
                                                     object: nil)
                     dismiss()
-                }, text: "Income", color: Color("green-100"), foregroundColor: .white)
+                }, text: "Income", color: Color("green-100", bundle: .module), foregroundColor: .white)
                 CustomButton(action: {
                     NotificationCenter.default.post(name: Notification.Name(rawValue: "expenses"),
                                                     object: nil)
                     dismiss()
-                }, text: "Expenses", color: Color("red-100"), foregroundColor: .white)
+                }, text: "Expenses", color: Color("red-100", bundle: .module), foregroundColor: .white)
             }
         }
         .background(Color.white)

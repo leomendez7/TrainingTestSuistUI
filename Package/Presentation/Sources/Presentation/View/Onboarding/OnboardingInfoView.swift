@@ -13,18 +13,18 @@ struct OnboardingInfoView: View {
     
     var body: some View {
         VStack {
-            Image(item.image)
+            Image(item.image, bundle: .module)
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 312, height: 312)
             Text(item.title)
                 .font(.system(size: 32))
-                .foregroundColor(Color("dark-50"))
+                .foregroundColor(Color("dark-50", bundle: .module))
                 .fontWeight(.bold)
                 .padding(EdgeInsets(top: 0, leading: 47, bottom: 16, trailing: 47))
                 .multilineTextAlignment(.center)
             Text(item.content)
                 .font(.system(size: 16))
-                .foregroundColor(Color("light-20"))
+                .foregroundColor(Color("light-20", bundle: .module))
                 .fontWeight(.bold)
                 .padding(EdgeInsets(top: 0, leading: 47, bottom: 0, trailing: 47))
                 .multilineTextAlignment(.center)

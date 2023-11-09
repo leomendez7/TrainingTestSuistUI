@@ -16,7 +16,7 @@ struct CustomTextField: View {
         ZStack(alignment: .leading) {
             if text.isEmpty {
                 Text(placeholder)
-                    .foregroundColor(Color("light-20"))
+                    .foregroundColor(Color("light-20", bundle: .module))
                     .padding(.horizontal, 16)
             }
             TextField("", text: $text)
@@ -27,7 +27,7 @@ struct CustomTextField: View {
         .cornerRadius(16)
         .overlay(
             RoundedRectangle(cornerRadius: 16)
-                .stroke(Color("light-60"), lineWidth: 1)
+                .stroke(Color("light-60", bundle: .module), lineWidth: 1)
         )
     }
 }

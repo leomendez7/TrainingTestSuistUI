@@ -19,8 +19,8 @@ struct CreateAccountView: View {
             store.login.removeLast()
         }) {
             HStack {
-                Image("arrow-left")
-                    .foregroundColor(Color("dark-25"))
+                Image("arrow-left", bundle: .module)
+                    .foregroundColor(Color("dark-25", bundle: .module))
             }
         }
     }
@@ -41,7 +41,7 @@ struct CreateAccountView: View {
             VStack(spacing: 16) {
                 CustomButton(action: {
                     
-                }, text: "Sing up", color: Color("violet-100"), foregroundColor: .white)
+                }, text: "Sing up", color: Color("violet-100", bundle: .module), foregroundColor: .white)
             }
             Spacer()
         }

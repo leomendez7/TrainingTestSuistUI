@@ -17,8 +17,8 @@ struct CurrencyView: View {
             store.settings.removeLast()
         }) {
             HStack {
-                Image("arrow-left")
-                    .foregroundColor(Color("dark-25"))
+                Image("arrow-left", bundle: .module)
+                    .foregroundColor(Color("dark-25", bundle: .module))
             }
         }
     }

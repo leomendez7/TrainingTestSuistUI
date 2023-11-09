@@ -17,6 +17,13 @@ public struct OnboardingView: View {
     @EnvironmentObject var store: Store
     @EnvironmentObject var setDefault: Default
     
+    public init() {
+        showLoginButton = true
+        showNextAndSkipButton = true
+        selectedTab = 0
+        isLoggedIn = false
+    }
+    
     public var body: some View {
         NavigationStack(path: $store.onboarding) {
             VStack() {
@@ -38,7 +45,7 @@ public struct OnboardingView: View {
                     if showLoginButton {
                         CustomButton(action: {
                             setDefault.onboarding = true
-                        }, text: "Login", color: Color("violet-100"), foregroundColor: .white)
+                        }, text: "Login", color: Color("violet-100", bundle: .module), foregroundColor: .white)
                         CustomButton(action: {}, text: "", color: .white, foregroundColor: .white)
                     }
                     if showNextAndSkipButton {
@@ -49,11 +56,10 @@ public struct OnboardingView: View {
                                         selectedTab += 1
                                     }
                                 }
-                            }, text: "Next", color: Color("violet-100"), foregroundColor: .white)
+                            }, text: "Next", color: Color("violet-100", bundle: .module), foregroundColor: .white)
                             CustomButton(action: {
-//                                store.onboarding.append("login")
                                 setDefault.onboarding = true
-                            }, text: "Skip", color: Color("violet20"), foregroundColor: Color("violet-100"))
+                            }, text: "Skip", color: Color("violet-20", bundle: .module), foregroundColor: Color("violet-100", bundle: .module))
                         }
                     }
                     Spacer()
