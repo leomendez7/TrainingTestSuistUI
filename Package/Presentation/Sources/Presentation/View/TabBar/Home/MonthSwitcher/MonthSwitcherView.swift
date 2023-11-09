@@ -36,7 +36,7 @@ struct MonthSwitcherView: View {
                             .padding(.trailing, 16)
                             .padding(.top, 5)
                             .padding(.bottom, 5)
-                            .foregroundColor(.dark50)
+                            .foregroundColor(Color("dark-50"))
                     }
                 }
                 .frame(height: 35)
@@ -44,7 +44,7 @@ struct MonthSwitcherView: View {
                 .cornerRadius(40)
                 .overlay(
                     RoundedRectangle(cornerRadius: 40)
-                        .stroke(.light60, lineWidth: 1)
+                        .stroke(Color("light-60"), lineWidth: 1)
                 )
             }
             Spacer()

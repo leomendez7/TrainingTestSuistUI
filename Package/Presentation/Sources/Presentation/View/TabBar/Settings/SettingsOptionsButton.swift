@@ -18,13 +18,13 @@ struct SettingsOptionsButton: View {
             Text(OptionName)
                 .font(.system(size: 16))
                 .fontWeight(.regular)
-                .foregroundColor(.dark75)
+                .foregroundColor(Color("dark-75"))
             Spacer()
             HStack {
                 Text(name)
                     .font(.system(size: 16))
                     .fontWeight(.regular)
-                    .foregroundColor(.light20)
+                    .foregroundColor(Color("light-20"))
                 Button(action: {
                     action()
                 }) {

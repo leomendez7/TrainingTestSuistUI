@@ -18,7 +18,7 @@ struct CurrencyView: View {
         }) {
             HStack {
                 Image("arrow-left")
-                    .foregroundColor(.dark25)
+                    .foregroundColor(Color("dark-25"))
             }
         }
     }

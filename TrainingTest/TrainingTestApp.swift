@@ -12,7 +12,7 @@ import Presentation
 struct TrainingTestApp: App {
 
     @ObservedObject var store = Store()
-    @ObservedObject var setDefault = Default()
+    @ObservedObject var setDefault = Default(onboarding: false, session: false)
     
     var body: some Scene {
         WindowGroup {

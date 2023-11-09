@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct OnboardingView: View {
+public struct OnboardingView: View {
     
     @StateObject private var manager = OnboardingManager()
     @State private var showLoginButton = false
@@ -17,7 +17,7 @@ struct OnboardingView: View {
     @EnvironmentObject var store: Store
     @EnvironmentObject var setDefault: Default
     
-    var body: some View {
+    public var body: some View {
         NavigationStack(path: $store.onboarding) {
             VStack() {
                 if !manager.items.isEmpty {
@@ -38,7 +38,7 @@ struct OnboardingView: View {
                     if showLoginButton {
                         CustomButton(action: {
                             setDefault.onboarding = true
-                        }, text: "Login", color: .violet100, foregroundColor: .white)
+                        }, text: "Login", color: Color("violet-100"), foregroundColor: .white)
                         CustomButton(action: {}, text: "", color: .white, foregroundColor: .white)
                     }
                     if showNextAndSkipButton {
@@ -49,11 +49,11 @@ struct OnboardingView: View {
                                         selectedTab += 1
                                     }
                                 }
-                            }, text: "Next", color: .violet100, foregroundColor: .white)
+                            }, text: "Next", color: Color("violet-100"), foregroundColor: .white)
                             CustomButton(action: {
 //                                store.onboarding.append("login")
                                 setDefault.onboarding = true
-                            }, text: "Skip", color: .violet20, foregroundColor: .violet100)
+                            }, text: "Skip", color: Color("violet20"), foregroundColor: Color("violet-100"))
                         }
                     }
                     Spacer()
@@ -74,8 +74,8 @@ struct OnboardingView: View {
     }
     
     func setupAppearance() {
-        UIPageControl.appearance().currentPageIndicatorTintColor = .violet100
-        UIPageControl.appearance().pageIndicatorTintColor = .violet20
+        UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(named: "violet-100")
+        UIPageControl.appearance().pageIndicatorTintColor = UIColor(named: "violet-20")
     }
 }
 

@@ -51,7 +51,7 @@ struct SettingsView: View {
                         isSheetPresented.toggle()
                     }, label: {
                         Text("Log out")
-                            .foregroundColor(.dark75)
+                            .foregroundColor(Color("dark-75"))
                     })
                     .sheet(isPresented: $isSheetPresented) {
                         LogoutView(isSheetPresented: isSheetPresented)
@@ -87,5 +87,5 @@ struct SettingsView: View {
 #Preview {
     SettingsView()
         .environmentObject(Store())
-        .environmentObject(Default())
+        .environmentObject(Default(onboarding: true, session: true))
 }

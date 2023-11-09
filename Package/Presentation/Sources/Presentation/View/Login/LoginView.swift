@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct LoginView: View {
+public struct LoginView: View {
     
     @State private var email: String = ""
     @State private var password: String = ""
     @EnvironmentObject var store: Store
     @EnvironmentObject var setDefault: Default
     
-    var body: some View {
+    public var body: some View {
         NavigationStack(path: $store.login) {
             VStack(spacing: 56) {
                 VStack(spacing: 64) {
@@ -55,5 +55,5 @@ struct LoginView: View {
 #Preview {
     LoginView()
         .environmentObject(Store())
-        .environmentObject(Default())
+        .environmentObject(Default(onboarding: true, session: true))
 }

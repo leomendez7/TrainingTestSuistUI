@@ -17,11 +17,11 @@ struct DataProfileView: View {
             Text(email)
                 .font(.system(size: 14))
                 .fontWeight(.semibold)
-                .foregroundColor(.light20)
+                .foregroundColor(Color("light-20"))
             Text(name)
                 .font(.system(size: 24))
                 .fontWeight(.bold)
-                .foregroundColor(.dark75)
+                .foregroundColor(Color("dark-75"))
         }
     }
 }

@@ -9,10 +9,18 @@ import SwiftUI
 
 public class Store: ObservableObject {
     
-    @Published var onboarding = NavigationPath()
-    @Published var login = NavigationPath()
-    @Published var transactions = NavigationPath()
-    @Published var settings = NavigationPath()
+    @Published public var onboarding = NavigationPath()
+    @Published public var login = NavigationPath()
+    @Published public var transactions = NavigationPath()
+    @Published public var settings = NavigationPath()
     
-    
+    public init(onboarding: NavigationPath = NavigationPath(), 
+                login: NavigationPath = NavigationPath(),
+                transactions: NavigationPath = NavigationPath(),
+                settings: NavigationPath = NavigationPath()) {
+        self.onboarding = onboarding
+        self.login = login
+        self.transactions = transactions
+        self.settings = settings
+    }
 }

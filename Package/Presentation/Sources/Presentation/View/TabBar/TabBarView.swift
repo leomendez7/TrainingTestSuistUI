@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TabBarView: View {
+public struct TabBarView: View {
     
     @State private var selectedTab = 0
     @State private var isNewTransaction = false
@@ -15,7 +15,7 @@ struct TabBarView: View {
     @StateObject var transactionViewModel = TransactionViewModel()
     @StateObject var currencyViewModel = CurrencyViewModel()
     
-    var body: some View {
+    public var body: some View {
         TabView(selection: $selectedTab) {
             HomeView()
                 .environmentObject(transactionViewModel)
@@ -38,7 +38,7 @@ struct TabBarView: View {
                 }
                 .tag(2)
         }
-        .accentColor(.violet100)
+        .accentColor(Color("violet-100"))
         .navigationBarBackButtonHidden(true)
     }
 }
