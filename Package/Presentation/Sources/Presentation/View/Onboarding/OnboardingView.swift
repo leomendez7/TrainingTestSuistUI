@@ -45,7 +45,7 @@ public struct OnboardingView: View {
                     if showLoginButton {
                         CustomButton(action: {
                             setDefault.onboarding = true
-                        }, text: "Login", color: Color("violet-100", bundle: .module), foregroundColor: .white)
+                        }, text: "Login", color: Color(.violet100), foregroundColor: .white)
                         CustomButton(action: {}, text: "", color: .white, foregroundColor: .white)
                     }
                     if showNextAndSkipButton {
@@ -56,10 +56,10 @@ public struct OnboardingView: View {
                                         selectedTab += 1
                                     }
                                 }
-                            }, text: "Next", color: Color("violet-100", bundle: .module), foregroundColor: .white)
+                            }, text: "Next", color: Color(.violet100), foregroundColor: .white)
                             CustomButton(action: {
                                 setDefault.onboarding = true
-                            }, text: "Skip", color: Color("violet-20", bundle: .module), foregroundColor: Color("violet-100", bundle: .module))
+                            }, text: "Skip", color: Color(.violet20), foregroundColor: Color(.violet100))
                         }
                     }
                     Spacer()

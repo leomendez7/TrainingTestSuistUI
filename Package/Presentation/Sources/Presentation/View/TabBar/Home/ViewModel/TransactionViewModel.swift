@@ -12,7 +12,7 @@ import Domain
 
 public class TransactionViewModel: ObservableObject {
     
-    @Published var transactions: [Domain.Transaction] = []
+    @Published var transactions: [Trade] = []
     @Published var images: [String] = []
     @Published var colors: [Color] = []
     @Published var months: [String] = []
@@ -30,13 +30,13 @@ public class TransactionViewModel: ObservableObject {
         }
     }
     
-    func generateRandomTransaction() -> Domain.Transaction {
+    func generateRandomTransaction() -> Trade {
         let names = ["Shopping", "Subscription", "Food", "Salary", "Transportation"]
         let randomName = names.randomElement() ?? "Unknown"
         let randomDescription = generateRandomDescription()
         let randomHour = generateRandomHour()
         let randomValue = "\(Int.random(in: 1...500))"
-        var transaction = Domain.Transaction()
+        var transaction = Domain.Trade()
         transaction.name = randomName
         transaction.description = randomDescription
         transaction.value = randomValue
@@ -63,25 +63,25 @@ public class TransactionViewModel: ObservableObject {
     }
     
     func fetchTransactions() {
-        var transactions = [Domain.Transaction]()
+        var transactions = [Trade]()
         for _ in 0..<3 {
             let randomTransaction = generateRandomTransaction()
             switch randomTransaction.name {
             case "Shopping":
                 images.append("shopping-bag")
-                colors.append(Color("yellow-20", bundle: .module))
+                colors.append(Color(.yellow20))
             case "Subscription":
                 images.append("recurring-bill")
-                colors.append(Color("violet-20", bundle: .module))
+                colors.append(Color(.violet20))
             case "Food":
                 images.append("restaurant")
-                colors.append(Color("red-20", bundle: .module))
+                colors.append(Color(.red20))
             case "Salary":
                 images.append("salary")
-                colors.append(Color("green-20", bundle: .module))
+                colors.append(Color(.green20))
             default:
                 images.append("transportation")
-                colors.append(Color("blue-20", bundle: .module))
+                colors.append(Color(.blue20))
             }
             transactions.append(randomTransaction)
         }

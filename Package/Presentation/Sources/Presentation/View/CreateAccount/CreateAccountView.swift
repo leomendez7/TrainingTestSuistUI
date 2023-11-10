@@ -20,7 +20,7 @@ struct CreateAccountView: View {
         }) {
             HStack {
                 Image("arrow-left", bundle: .module)
-                    .foregroundColor(Color("dark-25", bundle: .module))
+                    .foregroundColor(Color(.dark25))
             }
         }
     }
@@ -41,7 +41,7 @@ struct CreateAccountView: View {
             VStack(spacing: 16) {
                 CustomButton(action: {
                     
-                }, text: "Sing up", color: Color("violet-100", bundle: .module), foregroundColor: .white)
+                }, text: "Sing up", color: Color(.violet100), foregroundColor: .white)
             }
             Spacer()
         }

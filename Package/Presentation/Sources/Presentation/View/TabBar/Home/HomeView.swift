@@ -42,7 +42,7 @@ struct HomeView: View {
                     EmptyView()
                 }
             })
-            .addToolbar(image: "avatar-2", isSheetPresented: $isSheetPresented, incomeSelected: $isIncomeSelected, expensesSelected: $isExpensesSelected)
+            .transactionToolbar(image: "avatar-2", isSheetPresented: $isSheetPresented, incomeSelected: $isIncomeSelected, expensesSelected: $isExpensesSelected)
         }
     }
     

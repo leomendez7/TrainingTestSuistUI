@@ -26,10 +26,10 @@ struct TransactionCellView: View {
                 .cornerRadius(16)
             VStack(alignment: .leading, spacing: 13) {
                 Text(name)
-                    .foregroundColor(Color("dark-25", bundle: .module))
+                    .foregroundColor(Color(.dark25))
                     .font(.system(size: 14))
                 Text(description)
-                    .foregroundColor(Color("light-20", bundle: .module))
+                    .foregroundColor(Color(.light20))
                     .font(.system(size: 13))
                     .fontWeight(.semibold)
                     .lineLimit(1)
@@ -38,24 +38,24 @@ struct TransactionCellView: View {
             VStack(alignment: .trailing, spacing: 13) {
                 if name != "Salary" {
                     Text("- $\(value)")
-                        .foregroundColor(Color("red-100", bundle: .module))
+                        .foregroundColor(Color(.red100))
                         .font(.system(size: 16))
                         .fontWeight(.bold)
                 } else {
                     Text("+ $\(value)")
-                        .foregroundColor(Color("green-100", bundle: .module))
+                        .foregroundColor(Color(.green100))
                         .font(.system(size: 16))
                         .fontWeight(.bold)
                 }
                 Text(hour)
-                    .foregroundColor(Color("light-20", bundle: .module))
+                    .foregroundColor(Color(.light20))
                     .font(.system(size: 13))
                     .fontWeight(.semibold)
             }
         }
         .frame(height: 89)
         .padding(.horizontal, 16)
-        .background(Color("light-80", bundle: .module))
+        .background(Color(.light80))
         .cornerRadius(24)
     }
 }
@@ -66,5 +66,5 @@ struct TransactionCellView: View {
                         value: "120",
                         hour: "10:00 AM",
                         image: "shopping-bag",
-                        background: Color("yellow-20", bundle: .module))
+                        background: Color(.yellow20))
 }

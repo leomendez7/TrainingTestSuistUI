@@ -22,12 +22,12 @@ public struct SelectFrequencyView: View {
                         .font(.system(size: 14))
                         .fontWeight(.semibold)
                         .frame(width: 90, height: 56)
-                        .foregroundColor(selectedTab == index ? Color("yellow-100", bundle: .module) : Color("light-20", bundle: .module))
+                        .foregroundColor(selectedTab == index ? Color(.yellow100) : Color(.light20))
                 }
-                .background(selectedTab == index ? Color("yellow-20", bundle: .module) : .white)
+                .background(selectedTab == index ? Color(.yellow20) : .white)
                 .overlay(
                     RoundedRectangle(cornerRadius: 16)
-                        .stroke(selectedTab == index ? Color("yellow-20", bundle: .module) : .white, lineWidth: 1)
+                        .stroke(selectedTab == index ? Color(.yellow20) : .white, lineWidth: 1)
                 )
             }
         }
@@ -36,7 +36,7 @@ public struct SelectFrequencyView: View {
         .clipShape(RoundedRectangle(cornerRadius: 16))
         .overlay(
             RoundedRectangle(cornerRadius: 16)
-                .stroke(Color("light-80", bundle: .module), lineWidth: 1)
+                .stroke(Color(.light80), lineWidth: 1)
         )
     }
 }

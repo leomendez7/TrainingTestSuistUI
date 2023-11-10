@@ -30,6 +30,7 @@ struct SettingsView: View {
                         }
                     Spacer()
                     Button(action: {
+                        store.settings.append("editProfile")
                     }) {
                         Image("edit-profile-button", bundle: .module)
                     }
@@ -55,7 +56,7 @@ struct SettingsView: View {
                         isSheetPresented.toggle()
                     }, label: {
                         Text("Log out")
-                            .foregroundColor(Color("dark-75", bundle: .module))
+                            .foregroundColor(Color(.dark75))
                     })
                     .sheet(isPresented: $isSheetPresented) {
                         LogoutView(isSheetPresented: isSheetPresented)
@@ -71,6 +72,8 @@ struct SettingsView: View {
                     CurrencyView()
                 case "security":
                     SecurityView()
+                case "editProfile":
+                    EditProfileView()
                 default:
                     EmptyView()
                 }

@@ -21,7 +21,7 @@ struct SecurityOptionsView: View {
                 Image(systemName: "checkmark.circle.fill")
                     .resizable()
                     .frame(width: 21,height: 21)
-                    .foregroundColor(Color("violet-100", bundle: .module))
+                    .foregroundColor(Color(.violet100))
             }
         }
         .onAppear {

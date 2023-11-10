@@ -17,13 +17,13 @@ struct SettingsOptionsButton: View {
             Text(OptionName)
                 .font(.system(size: 16))
                 .fontWeight(.regular)
-                .foregroundColor(Color("dark-75", bundle: .module))
+                .foregroundColor(Color(.dark75))
             Spacer()
             HStack {
                 Text(name)
                     .font(.system(size: 16))
                     .fontWeight(.regular)
-                    .foregroundColor(Color("light-20", bundle: .module))
+                    .foregroundColor(Color(.light20))
                 Image("arrow-right", bundle: .module)
             }
         }

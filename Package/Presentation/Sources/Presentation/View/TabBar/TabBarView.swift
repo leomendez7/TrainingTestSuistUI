@@ -42,7 +42,7 @@ public struct TabBarView: View {
                 }
                 .tag(2)
         }
-        .accentColor(Color("violet-100", bundle: .module))
+        .accentColor(Color(.violet100))
         .navigationBarBackButtonHidden(true)
     }
 }

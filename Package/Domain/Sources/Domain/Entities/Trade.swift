@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Transaction: Identifiable, Codable {
+public struct Trade: Identifiable, Codable {
     
     public var id = UUID()
     public var name: String = ""

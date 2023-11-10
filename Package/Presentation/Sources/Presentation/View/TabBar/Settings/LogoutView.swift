@@ -24,20 +24,20 @@ struct LogoutView: View {
                 Text("Are you sure you want to log out?")
                     .font(.system(size: 16))
                     .fontWeight(.regular)
-                    .foregroundColor(Color("light-20", bundle: .module))
+                    .foregroundColor(Color(.light20))
             }
             .padding(.horizontal, 16)
             .padding(.top, 16)
             HStack(spacing: 16) {
                 CustomButton(action: {
                     dismiss()
-                }, text: "No", color: Color("violet-20", bundle: .module), foregroundColor: Color("violet-100", bundle: .module), width: 164)
+                }, text: "No", color: Color(.violet20), foregroundColor: Color(.violet100), width: 164)
                 CustomButton(action: {
                     NotificationCenter.default.post(name: Notification.Name(rawValue: "logout"),
                                                     object: nil)
                     dismiss()
                     Default.destroySession()
-                }, text: "Yes", color: Color("violet-100", bundle: .module), foregroundColor: .white, width: 164)
+                }, text: "Yes", color: Color(.violet100), foregroundColor: .white, width: 164)
             }
         }
         .background(Color.white)

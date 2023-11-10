@@ -34,7 +34,7 @@ public struct LoginView: View {
                 VStack(spacing: 16) {
                     CustomButton(action: {
                         setDefault.session = true
-                    }, text: "Sing in", color: Color("violet-100", bundle: .module), foregroundColor: .white)
+                    }, text: "Sing in", color: Color(.violet100), foregroundColor: .white)
                     CustomButton(action: {
                         store.login.append("createAccountView")
                     }, text: "Create Account", color: .white, foregroundColor: .black)

@@ -37,11 +37,11 @@ struct NewOptionTransactionView: View {
                 CustomButton(action: {
                     isIncomeSelected.toggle()
                     dismiss()
-                }, text: "Income", color: Color("green-100", bundle: .module), foregroundColor: .white)
+                }, text: "Income", color: Color(.green100), foregroundColor: .white)
                 CustomButton(action: {
                     isExpensesSelected.toggle()
                     dismiss()
-                }, text: "Expenses", color: Color("red-100", bundle: .module), foregroundColor: .white)
+                }, text: "Expenses", color: Color(.red100), foregroundColor: .white)
             }
         }
         .background(Color.white)

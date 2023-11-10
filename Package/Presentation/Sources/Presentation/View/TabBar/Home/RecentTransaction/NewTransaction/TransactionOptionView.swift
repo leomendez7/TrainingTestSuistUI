@@ -36,20 +36,20 @@ struct TransactionOptionView: View {
                         .multilineTextAlignment(TextAlignment.leading)
                         .font(.system(size: 16))
                         .fontWeight(.semibold)
-                        .foregroundColor(Color("dark-25", bundle: .module))
+                        .foregroundColor(Color(.dark25))
                     Text("Set a transaction reminder")
                         .font(.system(size: 13))
                         .fontWeight(.semibold)
-                        .foregroundColor(Color("light-20", bundle: .module))
+                        .foregroundColor(Color(.light20))
                 }
                 Spacer()
                 Toggle("", isOn: $isSwitchOn)
-                    .toggleStyle(SwitchToggleStyle(tint: Color("violet-100", bundle: .module)))
+                    .toggleStyle(SwitchToggleStyle(tint: Color(.violet100)))
             }
             Spacer()
             CustomButton(action: {
                 
-            }, text: "Continue", color: Color("violet-100", bundle: .module), foregroundColor: .white)
+            }, text: "Continue", color: Color(.violet100), foregroundColor: .white)
             Spacer()
                 .sheet(isPresented: $viewModel.showPicker, content: {
                     ImagePicker(sourceType: viewModel.source == .library 

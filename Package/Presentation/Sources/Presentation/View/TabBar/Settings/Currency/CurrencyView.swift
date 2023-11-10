@@ -20,7 +20,7 @@ struct CurrencyView: View {
         }) {
             HStack {
                 Image("arrow-left", bundle: .module)
-                    .foregroundColor(Color("dark-25", bundle: .module))
+                    .foregroundColor(Color(.dark25))
             }
         }
     }

@@ -16,15 +16,15 @@ struct RecentTransactionView: View {
         VStack {
             HStack(spacing: 8) {
                 Text("Spend Frequency")
-                    .foregroundColor(Color("dark", bundle: .module))
+                    .foregroundColor(Color(.dark))
                     .font(.system(size: 18))
                     .fontWeight(.bold)
                 Spacer()
                 CustomButton(action: {
                     
                 }, text: "See All",
-                             color: Color("violet-20", bundle: .module),
-                             foregroundColor: Color("violet-100", bundle: .module),
+                             color: Color(.violet20),
+                             foregroundColor: Color(.violet100),
                              height: 32,
                              width: 78,
                              cornerRadius: 40,

@@ -29,7 +29,7 @@ struct ExpensesView: View {
             }
         }
         .frame(width: 164, height: 80)
-        .background(Color("red-100", bundle: .module))
+        .background(Color(.red100))
         .cornerRadius(28)
     }
 }

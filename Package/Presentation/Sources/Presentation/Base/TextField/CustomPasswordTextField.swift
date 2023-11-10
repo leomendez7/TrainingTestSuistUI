@@ -17,7 +17,7 @@ struct CustomPasswordTextField: View {
         ZStack(alignment: .leading) {
             if password.isEmpty {
                 Text(placeholder)
-                    .foregroundColor(Color("light-20", bundle: .module))
+                    .foregroundColor(Color(.light20))
                     .padding(.horizontal, 16)
             }
             HStack {
@@ -32,7 +32,7 @@ struct CustomPasswordTextField: View {
                     isSecure.toggle()
                 }) {
                     Image(systemName: isSecure ? "eye.slash" : "eye")
-                        .foregroundColor(Color("light-20", bundle: .module))
+                        .foregroundColor(Color(.light20))
                         .padding(8)
                 }
             }
@@ -43,7 +43,7 @@ struct CustomPasswordTextField: View {
         .cornerRadius(16)
         .overlay(
             RoundedRectangle(cornerRadius: 16)
-                .stroke(Color("light-60", bundle: .module), lineWidth: 1)
+                .stroke(Color(.light60), lineWidth: 1)
         )
     }
 }

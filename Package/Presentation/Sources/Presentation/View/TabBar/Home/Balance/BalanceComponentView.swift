@@ -18,10 +18,10 @@ struct BalanceComponentView: View {
             VStack(spacing: 9) {
                 Text("Account Balance")
                     .font(.system(size: 14))
-                    .foregroundColor(Color("light-20", bundle: .module))
+                    .foregroundColor(Color(.light20))
                 Text("$\(balance)")
                     .font(.system(size: 40))
-                    .foregroundColor(Color("dark-75", bundle: .module))
+                    .foregroundColor(Color(.dark75))
                     .fontWeight(.bold)
             }
             .padding(.top, 9)

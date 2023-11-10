@@ -12,7 +12,7 @@ struct FrequencyView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Spend Frequency")
-                .foregroundColor(Color("dark", bundle: .module))
+                .foregroundColor(Color(.dark))
                 .font(.system(size: 18))
                 .fontWeight(.bold)
             Image("graph", bundle: .module)

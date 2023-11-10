@@ -17,6 +17,7 @@
 		D19ED0F42AFD35DF004358FC /* Data in Frameworks */ = {isa = PBXBuildFile; productRef = D19ED0F32AFD35DF004358FC /* Data */; };
 		D19ED0F62AFD35DF004358FC /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = D19ED0F52AFD35DF004358FC /* Domain */; };
 		D19ED0F82AFD35DF004358FC /* Shared in Frameworks */ = {isa = PBXBuildFile; productRef = D19ED0F72AFD35DF004358FC /* Shared */; };
+		D1E11EA92AFE8E2C00420F04 /* CouchbaseLiteWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = D1E11EA82AFE8E2C00420F04 /* CouchbaseLiteWrapper */; };
 		ECD56D742AFAC91B00BEFAD8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECD56D732AFAC91B00BEFAD8 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +63,7 @@
 				D19ED0F62AFD35DF004358FC /* Domain in Frameworks */,
 				D19ED0F82AFD35DF004358FC /* Shared in Frameworks */,
 				D19ED0F42AFD35DF004358FC /* Data in Frameworks */,
+				D1E11EA92AFE8E2C00420F04 /* CouchbaseLiteWrapper in Frameworks */,
 				D19ED0F22AFD35CF004358FC /* Presentation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -192,6 +194,7 @@
 				D19ED0F32AFD35DF004358FC /* Data */,
 				D19ED0F52AFD35DF004358FC /* Domain */,
 				D19ED0F72AFD35DF004358FC /* Shared */,
+				D1E11EA82AFE8E2C00420F04 /* CouchbaseLiteWrapper */,
 			);
 			productName = TrainingTest;
 			productReference = D1108BEF2AF00910008E6D97 /* TrainingTest.app */;
@@ -266,6 +269,7 @@
 			);
 			mainGroup = D1108BE62AF00910008E6D97;
 			packageReferences = (
+				D1E11EA72AFE8E2C00420F04 /* XCRemoteSwiftPackageReference "couchbase-lite-wrapper-ios" */,
 			);
 			productRefGroup = D1108BF02AF00910008E6D97 /* Products */;
 			projectDirPath = "";
@@ -663,6 +667,17 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		D1E11EA72AFE8E2C00420F04 /* XCRemoteSwiftPackageReference "couchbase-lite-wrapper-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/koombea/couchbase-lite-wrapper-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		D1108C2F2AF044D4008E6D97 /* Domain */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -695,6 +710,11 @@
 		D19ED0F72AFD35DF004358FC /* Shared */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Shared;
+		};
+		D1E11EA82AFE8E2C00420F04 /* CouchbaseLiteWrapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D1E11EA72AFE8E2C00420F04 /* XCRemoteSwiftPackageReference "couchbase-lite-wrapper-ios" */;
+			productName = CouchbaseLiteWrapper;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

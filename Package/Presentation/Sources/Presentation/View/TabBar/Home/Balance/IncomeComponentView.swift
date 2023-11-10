@@ -29,7 +29,7 @@ struct IncomeComponentView: View {
             }
         }
         .frame(width: 164, height: 80)
-        .background(Color("green-100", bundle: .module))
+        .background(Color(.green100))
         .cornerRadius(28)
     }
 }

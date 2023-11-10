@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Shared
 
 struct CustomButton: View {
     
@@ -33,6 +34,6 @@ struct CustomButton: View {
 #Preview {
     CustomButton(action: {},
                  text: "Button",
-                 color: Color("violet-100", bundle: .module),
+                 color: Color(.violet100),
                  foregroundColor: .white)
 }

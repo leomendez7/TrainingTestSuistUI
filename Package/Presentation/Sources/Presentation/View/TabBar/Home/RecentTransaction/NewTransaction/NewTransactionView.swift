@@ -21,7 +21,7 @@ struct NewTransactionView: View {
         }) {
             HStack {
                 Image("arrow-left", bundle: .module)
-                    .foregroundColor(Color("light-80", bundle: .module))
+                    .foregroundColor(Color(.light80))
             }
         }
     }
@@ -29,10 +29,10 @@ struct NewTransactionView: View {
     var body: some View {
         ZStack {
             if isIncome {
-                Color("green-100", bundle: .module)
+                Color(.green100)
                     .ignoresSafeArea()
             } else {
-                Color("red-100", bundle: .module)
+                Color(.red100)
                     .ignoresSafeArea()
             }
             VStack(alignment: .leading) {
@@ -61,7 +61,7 @@ struct NewTransactionView: View {
                 Text(tittle)
                     .font(.system(size: 18))
                     .fontWeight(.bold)
-                    .foregroundColor(Color("light-100", bundle: .module))
+                    .foregroundColor(Color(.light100))
             }
         })
     }

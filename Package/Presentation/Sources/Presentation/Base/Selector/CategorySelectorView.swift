@@ -25,7 +25,7 @@ struct CategorySelectorView: View {
             HStack {
                 Text(categories[selectedCategoryIndex])
                     .font(.system(size: 18))
-                    .foregroundColor(Color("light-20", bundle: .module))
+                    .foregroundColor(Color(.light20))
                     .padding(.horizontal, 16)
                 Spacer()
                 Image("arrow-down-2", bundle: .module)
@@ -36,7 +36,7 @@ struct CategorySelectorView: View {
             .cornerRadius(16)
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
-                    .stroke(Color("light-60", bundle: .module), lineWidth: 1)
+                    .stroke(Color(.light60), lineWidth: 1)
             )
         }
     }
