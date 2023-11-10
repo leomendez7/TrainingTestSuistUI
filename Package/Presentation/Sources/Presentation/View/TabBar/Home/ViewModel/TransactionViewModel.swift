@@ -8,10 +8,11 @@
 import Foundation
 import Combine
 import SwiftUI
+import Domain
 
 public class TransactionViewModel: ObservableObject {
     
-    @Published var transactions: [Transaction] = []
+    @Published var transactions: [Domain.Transaction] = []
     @Published var images: [String] = []
     @Published var colors: [Color] = []
     @Published var months: [String] = []
@@ -29,13 +30,13 @@ public class TransactionViewModel: ObservableObject {
         }
     }
     
-    func generateRandomTransaction() -> Transaction {
+    func generateRandomTransaction() -> Domain.Transaction {
         let names = ["Shopping", "Subscription", "Food", "Salary", "Transportation"]
         let randomName = names.randomElement() ?? "Unknown"
         let randomDescription = generateRandomDescription()
         let randomHour = generateRandomHour()
         let randomValue = "\(Int.random(in: 1...500))"
-        var transaction = Transaction()
+        var transaction = Domain.Transaction()
         transaction.name = randomName
         transaction.description = randomDescription
         transaction.value = randomValue
@@ -62,7 +63,7 @@ public class TransactionViewModel: ObservableObject {
     }
     
     func fetchTransactions() {
-        var transactions = [Transaction]()
+        var transactions = [Domain.Transaction]()
         for _ in 0..<3 {
             let randomTransaction = generateRandomTransaction()
             switch randomTransaction.name {

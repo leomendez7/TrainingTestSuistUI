@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import SwiftUI
+import Domain
 
 public class SecurityViewModel: ObservableObject {
     

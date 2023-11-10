@@ -13,7 +13,6 @@
 		D1108C042AF00911008E6D97 /* TrainingTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1108C032AF00911008E6D97 /* TrainingTestTests.swift */; };
 		D1108C0E2AF00911008E6D97 /* TrainingTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1108C0D2AF00911008E6D97 /* TrainingTestUITests.swift */; };
 		D1108C102AF00911008E6D97 /* TrainingTestUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1108C0F2AF00911008E6D97 /* TrainingTestUITestsLaunchTests.swift */; };
-		D1108C2A2AF03C41008E6D97 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1108C292AF03C41008E6D97 /* Colors.xcassets */; };
 		D19ED0F22AFD35CF004358FC /* Presentation in Frameworks */ = {isa = PBXBuildFile; productRef = D19ED0F12AFD35CF004358FC /* Presentation */; };
 		D19ED0F42AFD35DF004358FC /* Data in Frameworks */ = {isa = PBXBuildFile; productRef = D19ED0F32AFD35DF004358FC /* Data */; };
 		D19ED0F62AFD35DF004358FC /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = D19ED0F52AFD35DF004358FC /* Domain */; };
@@ -52,7 +51,6 @@
 		D1108C212AF01263008E6D97 /* Shared */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Shared; sourceTree = "<group>"; };
 		D1108C222AF012D5008E6D97 /* Presentation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Presentation; sourceTree = "<group>"; };
 		D1108C242AF0138E008E6D97 /* Domain */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Domain; sourceTree = "<group>"; };
-		D1108C292AF03C41008E6D97 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		ECD56D732AFAC91B00BEFAD8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -158,7 +156,6 @@
 			isa = PBXGroup;
 			children = (
 				D1108BF62AF00911008E6D97 /* Assets.xcassets */,
-				D1108C292AF03C41008E6D97 /* Colors.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -286,7 +283,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D1108C2A2AF03C41008E6D97 /* Colors.xcassets in Resources */,
 				ECD56D742AFAC91B00BEFAD8 /* LaunchScreen.storyboard in Resources */,
 				D1108BFA2AF00911008E6D97 /* Preview Assets.xcassets in Resources */,
 				D1108BF72AF00911008E6D97 /* Assets.xcassets in Resources */,
