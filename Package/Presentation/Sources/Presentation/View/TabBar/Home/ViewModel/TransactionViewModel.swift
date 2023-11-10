@@ -35,10 +35,12 @@ public class TransactionViewModel: ObservableObject {
         let randomDescription = generateRandomDescription()
         let randomHour = generateRandomHour()
         let randomValue = "\(Int.random(in: 1...500))"
-        return Transaction(id: UUID(), name: randomName,
-                           description: randomDescription,
-                           value: randomValue,
-                           hour: randomHour)
+        var transaction = Transaction()
+        transaction.name = randomName
+        transaction.description = randomDescription
+        transaction.value = randomValue
+        transaction.hour = randomHour
+        return transaction
     }
     
     func generateRandomDescription() -> String {

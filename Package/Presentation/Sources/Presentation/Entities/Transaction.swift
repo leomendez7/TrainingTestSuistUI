@@ -7,14 +7,15 @@
 
 import Foundation
 
-public struct Transaction: Identifiable {
+public struct Transaction: Identifiable, Codable {
     
-    public var id: UUID
-    public var name: String
-    public var description: String
-    public var value: String
-    public var hour: String
+    public var id = UUID()
+    public var name: String = ""
+    public var description: String = ""
+    public var value: String = ""
+    public var hour: String = ""
     
+    public init() { }
     
     enum CodingKeys: String, CodingKey {
         case name
