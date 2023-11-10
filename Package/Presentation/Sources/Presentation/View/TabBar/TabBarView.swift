@@ -12,8 +12,6 @@ public struct TabBarView: View {
     @State private var selectedTab = 0
     @State private var isNewTransaction = false
     @EnvironmentObject var store: Store
-    @StateObject var transactionViewModel = TransactionViewModel()
-    @StateObject var currencyViewModel = CurrencyViewModel()
     
     public init() {
         self.selectedTab = 0
@@ -23,7 +21,7 @@ public struct TabBarView: View {
     public var body: some View {
         TabView(selection: $selectedTab) {
             HomeView()
-                .environmentObject(transactionViewModel)
+                .environmentObject(TransactionViewModel())
                 .tabItem {
                     Image("home", bundle: .module)
                     Text("Home")
@@ -36,7 +34,8 @@ public struct TabBarView: View {
                 }
                 .tag(1)
             SettingsView()
-                .environmentObject(currencyViewModel)
+                .environmentObject(CurrencyViewModel())
+                .environmentObject(SecurityViewModel())
                 .tabItem {
                     Image("settings", bundle: .module)
                     Text("Settings")

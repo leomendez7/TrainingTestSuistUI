@@ -14,6 +14,7 @@ struct NewTransactionView: View {
     @State var text: String = "0"
     @EnvironmentObject var viewModel: TransactionViewModel
     @EnvironmentObject var store: Store
+    
     var backButton : some View {
         Button(action: {
             store.transactions.removeLast()

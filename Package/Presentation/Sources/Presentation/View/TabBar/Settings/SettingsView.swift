@@ -46,8 +46,10 @@ struct SettingsView: View {
                             }
                     }
                     .onAppear {
-                        currencyName = Default.currency()
-                        securityName = Default.security()
+                        let abbreviation = Default.currency().abbreviation.isEmpty
+                        let securityName = Default.security().name.isEmpty
+                        currencyName = abbreviation ? "USD" : Default.currency().abbreviation
+                        self.securityName = securityName ? "PIN" : Default.security().name
                     }
                     Button(action: {
                         isSheetPresented.toggle()
@@ -68,7 +70,7 @@ struct SettingsView: View {
                 case "currency":
                     CurrencyView()
                 case "security":
-                    CreateAccountView()
+                    SecurityView()
                 default:
                     EmptyView()
                 }

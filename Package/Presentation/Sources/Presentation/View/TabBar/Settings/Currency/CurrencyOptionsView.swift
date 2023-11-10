@@ -17,8 +17,20 @@ struct CurrencyOptionsView: View {
             Text(optionName)
             Spacer()
             if isCurrencySelected.name == optionName {
-                Image("success", bundle: .module)
-                    .frame(width: 24,height: 24)
+                Image(systemName: "checkmark.circle.fill")
+                    .resizable()
+                    .frame(width: 21,height: 21)
+                    .foregroundColor(Color("violet-100", bundle: .module))
+            }
+        }
+        .onAppear {
+            if Default.currency().name.isEmpty {
+                var currency = Currency()
+                currency.name = "United States (USD)"
+                currency.abbreviation = "USD"
+                isCurrencySelected = currency
+            } else {
+                isCurrencySelected = Default.currency()
             }
         }
     }

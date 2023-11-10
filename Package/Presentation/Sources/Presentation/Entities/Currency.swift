@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Currency: Identifiable {
+public struct Currency: Identifiable, Codable {
     
     public var id = UUID()
     public var name: String = ""
@@ -16,7 +16,7 @@ public struct Currency: Identifiable {
     public init() { }
     
     enum CodingKeys: String, CodingKey {
-        case name = "name"
+        case name
         case abbreviation = "abbreviation"
     }
     
@@ -27,6 +27,6 @@ public enum AbbreviationCurrency: String {
     case jpy = "JPY"
     case eur = "EUR"
     case cop = "COP"
-    case pre = "preference"
+    case pre = "Preference"
 
 }

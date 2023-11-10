@@ -23,7 +23,7 @@ public class CurrencyViewModel: ObservableObject {
                                        "JPY",
                                        "EUR",
                                        "COP",
-                                       "preference"]
+                                       "Preference"]
         currencies.removeAll()
         for index in 0...currenciesNames.count - 1 {
             var currency = Currency()
@@ -32,6 +32,5 @@ public class CurrencyViewModel: ObservableObject {
             self.currencies.append(currency)
         }
     }
-    
     
 }

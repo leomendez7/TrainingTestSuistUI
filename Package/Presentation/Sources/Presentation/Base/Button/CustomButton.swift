@@ -32,7 +32,7 @@ struct CustomButton: View {
 
 #Preview {
     CustomButton(action: {},
-                 text: "",
+                 text: "Button",
                  color: Color("violet-100", bundle: .module),
                  foregroundColor: .white)
 }

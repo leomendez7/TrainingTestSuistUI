@@ -11,7 +11,7 @@ import Presentation
 @main
 struct TrainingTestApp: App {
 
-    @ObservedObject var setDefault = Default()
+    @StateObject var setDefault = Default()
     
     var body: some Scene {
         WindowGroup {

@@ -87,17 +87,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "54331229-1853-4656-855E-9A8F8AB93E87"
-            shouldBeEnabled = "Yes"
+            uuid = "12DA5E85-B7FA-4CE4-8C56-64796C5B4D16"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Package/Presentation/Sources/Presentation/Store/Default/Default.swift"
+            filePath = "Package/Presentation/Sources/Presentation/View/TabBar/Home/RecentTransaction/NewTransaction/NewOptionTransactionView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "destroySession()"
-            landmarkType = "7">
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "body"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

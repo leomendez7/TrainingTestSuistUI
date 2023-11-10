@@ -9,9 +9,10 @@ import SwiftUI
 
 struct NewOptionTransactionView: View {
     
-    @State var isSheetPresented: Bool
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var store: Store
+    @Binding var isIncomeSelected: Bool
+    @Binding var isExpensesSelected: Bool
     
     var body: some View {
         VStack(spacing: 20) {
@@ -34,13 +35,11 @@ struct NewOptionTransactionView: View {
             .padding(.top, 16)
             VStack(spacing: 16) {
                 CustomButton(action: {
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "income"),
-                                                    object: nil)
+                    isIncomeSelected.toggle()
                     dismiss()
                 }, text: "Income", color: Color("green-100", bundle: .module), foregroundColor: .white)
                 CustomButton(action: {
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "expenses"),
-                                                    object: nil)
+                    isExpensesSelected.toggle()
                     dismiss()
                 }, text: "Expenses", color: Color("red-100", bundle: .module), foregroundColor: .white)
             }
@@ -51,5 +50,5 @@ struct NewOptionTransactionView: View {
 }
 
 #Preview {
-    NewOptionTransactionView(isSheetPresented: true)
+    NewOptionTransactionView(isIncomeSelected: .constant(true), isExpensesSelected: .constant(true))
 }

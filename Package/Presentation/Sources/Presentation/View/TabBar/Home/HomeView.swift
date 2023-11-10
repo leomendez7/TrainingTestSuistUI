@@ -13,6 +13,8 @@ struct HomeView: View {
     @EnvironmentObject var store: Store
     @State var isIncome = Bool()
     @State private var isSheetPresented = false
+    @State var isIncomeSelected = false
+    @State var isExpensesSelected = false
     
     var body: some View {
         NavigationStack(path: $store.transactions) {
@@ -23,12 +25,12 @@ struct HomeView: View {
                     RecentTransactionView()
                 }
             }
-            //.preferredColorScheme(.light)
-            .onReceive(NotificationCenter.default.publisher(for: Notification.Name(rawValue: "income"))) { _ in
+            .preferredColorScheme(.light)
+            .onChange(of: isIncomeSelected) { _ in
                 isIncome = true
                 store.transactions.append("NewTransaction")
             }
-            .onReceive(NotificationCenter.default.publisher(for: Notification.Name(rawValue: "expenses"))) { _ in
+            .onChange(of: isExpensesSelected) { _ in
                 isIncome = false
                 store.transactions.append("NewTransaction")
             }
@@ -40,35 +42,7 @@ struct HomeView: View {
                     EmptyView()
                 }
             })
-            .toolbar(content: {
-                ToolbarItem(placement: .topBarLeading) {
-                    Circle()
-                        .frame(width: 35, height: 35)
-                        .foregroundColor(.white)
-                        .overlay(
-                            Image("avatar-2", bundle: .module)
-                                .resizable()
-                                .frame(width: 37, height: 37)
-                        )
-                }
-                ToolbarItem(placement: .principal) {
-                    MonthSwitcherView()
-                }
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button(action: {
-                         isSheetPresented.toggle()
-                    }) {
-                        Image(systemName: "plus.circle.fill")
-                            .resizable()
-                            .frame(width: 35, height: 35)
-                            .foregroundColor(Color("violet-100", bundle: .module))
-                    }
-                    .sheet(isPresented: $isSheetPresented) {
-                        NewOptionTransactionView(isSheetPresented: isSheetPresented)
-                            .presentationDetents([.fraction(0.25)])
-                    }
-                }
-            })
+            .addToolbar(image: "avatar-2", isSheetPresented: $isSheetPresented, incomeSelected: $isIncomeSelected, expensesSelected: $isExpensesSelected)
         }
     }
     

@@ -25,13 +25,13 @@ struct CurrencyView: View {
     }
     
     var body: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 24) {
             ForEach(viewModel.currencies.indices, id: \.self) { index in
                 CurrencyOptionsView(optionName: viewModel.currencies[index].name, 
                                     isCurrencySelected: $isCurrencySelected)
                     .onTapGesture {
                         isCurrencySelected = viewModel.currencies[index]
-                        Default.save(currency: viewModel.currencies[index].abbreviation)
+                        Default.save(currency: viewModel.currencies[index])
                     }
             }
             Spacer()

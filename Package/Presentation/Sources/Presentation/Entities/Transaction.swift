@@ -17,9 +17,9 @@ public struct Transaction: Identifiable {
     
     
     enum CodingKeys: String, CodingKey {
-        case name = "name"
-        case description = "description"
-        case value = "value"
+        case name
+        case description
+        case value
         case hour = "date"
     }
     
