@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Domain
 
 struct CreateAccountView: View {
     
@@ -14,6 +15,8 @@ struct CreateAccountView: View {
     @State private var birthday: String = ""
     @State private var password: String = ""
     @EnvironmentObject var store: Store
+    @EnvironmentObject var viewModel: UserViewModel
+    
     var backButton: some View {
         Button(action: {
             store.login.removeLast()
@@ -40,7 +43,12 @@ struct CreateAccountView: View {
             .padding(.top, 64)
             VStack(spacing: 16) {
                 CustomButton(action: {
-                    
+//                    viewModel.user?.name = name
+//                    viewModel.user?.id = UUID()
+//                    viewModel.user?.email = email
+//                    Task {
+//                        await viewModel.createUser(user: viewModel.user ?? User())
+//                    }
                 }, text: "Sing up", color: Color(.violet100), foregroundColor: .white)
             }
             Spacer()

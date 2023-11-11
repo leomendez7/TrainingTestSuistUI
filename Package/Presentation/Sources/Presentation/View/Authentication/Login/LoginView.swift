@@ -13,6 +13,7 @@ public struct LoginView: View {
     @State private var password: String = ""
     @EnvironmentObject var store: Store
     @EnvironmentObject var setDefault: Default
+    @EnvironmentObject var viewModel: UserViewModel
     
     public init() {
         email = ""
