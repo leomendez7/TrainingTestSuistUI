@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ToolbarModifier: ViewModifier {
+struct HomeToolbarModifier: ViewModifier {
     
     var image: String
     @Binding var isSheetPresented: Bool
@@ -60,8 +60,8 @@ struct ToolbarModifier: ViewModifier {
 
 extension View {
     
-    func transactionToolbar(image: String, isSheetPresented: Binding<Bool>, incomeSelected: Binding<Bool>, expensesSelected: Binding<Bool>)  -> some View {
-        return modifier(ToolbarModifier(image: image,
+    func homeTransactionToolbar(image: String, isSheetPresented: Binding<Bool>, incomeSelected: Binding<Bool>, expensesSelected: Binding<Bool>)  -> some View {
+        return modifier(HomeToolbarModifier(image: image,
                                         isSheetPresented: isSheetPresented,
                                         incomeSelected: incomeSelected,
                                         expensesSelected: expensesSelected))
