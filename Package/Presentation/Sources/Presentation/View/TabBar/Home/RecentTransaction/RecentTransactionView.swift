@@ -10,7 +10,6 @@ import SwiftUI
 struct RecentTransactionView: View {
     
     @EnvironmentObject var viewModel: TransactionViewModel
-    var transactions = [Transaction]()
     
     var body: some View {
         VStack {

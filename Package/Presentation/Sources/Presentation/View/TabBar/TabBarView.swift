@@ -26,7 +26,8 @@ public struct TabBarView: View {
                     Text("Home")
                 }
                 .tag(0)
-            Text("Transactions")
+            TransactionsView()
+                .environmentObject(TransactionViewModel())
                 .tabItem {
                     Image("transaction", bundle: .module)
                     Text("Transaction")
