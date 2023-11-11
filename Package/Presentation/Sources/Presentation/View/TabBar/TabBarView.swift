@@ -11,7 +11,6 @@ public struct TabBarView: View {
     
     @State private var selectedTab = 0
     @State private var isNewTransaction = false
-    @EnvironmentObject var store: Store
     
     public init() {
         self.selectedTab = 0
@@ -49,5 +48,4 @@ public struct TabBarView: View {
 
 #Preview {
     TabBarView()
-        .environmentObject(Store())
 }

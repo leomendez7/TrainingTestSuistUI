@@ -30,29 +30,24 @@ struct CreateAccountView: View {
     
     var body: some View {
         VStack(spacing: 56) {
-            VStack(spacing: 64) {
-                VStack(spacing: 14) {
-                    CustomTextField(text: name, placeholder: "Name")
-                    CustomTextField(text: email, placeholder: "Email")
-                    CustomDateTextField(placeholder: "Birthday")
-                    CustomPasswordTextField(password: password, placeholder: "Password")
-                }
-                .padding(.leading, 16)
-                .padding(.trailing, 16)
+            VStack(spacing: 14) {
+                CustomTextField(text: name, placeholder: "Name")
+                CustomTextField(text: email, placeholder: "Email")
+                CustomDateTextField(placeholder: "Birthday")
+                CustomPasswordTextField(password: password, placeholder: "Password")
             }
-            .padding(.top, 64)
-            VStack(spacing: 16) {
-                CustomButton(action: {
-//                    viewModel.user?.name = name
-//                    viewModel.user?.id = UUID()
-//                    viewModel.user?.email = email
-//                    Task {
-//                        await viewModel.createUser(user: viewModel.user ?? User())
-//                    }
-                }, text: "Sing up", color: Color(.violet100), foregroundColor: .white)
-            }
+            CustomButton(action: {
+                //                    viewModel.user?.name = name
+                //                    viewModel.user?.id = UUID()
+                //                    viewModel.user?.email = email
+                //                    Task {
+                //                        await viewModel.createUser(user: viewModel.user ?? User())
+                //                    }
+            }, text: "Sing up", color: Color(.violet100), foregroundColor: .white)
             Spacer()
         }
+        .padding(.horizontal, 16)
+        .padding(.top, 64)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
         .navigationTitle("Create Account")
