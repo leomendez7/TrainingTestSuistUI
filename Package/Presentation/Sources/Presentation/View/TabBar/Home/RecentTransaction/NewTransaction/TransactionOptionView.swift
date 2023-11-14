@@ -10,12 +10,13 @@ import SwiftUI
 struct TransactionOptionView: View {
     
     @State private var isSwitchOn = false
+    @State var description = String()
     @EnvironmentObject var viewModel: NewTransactionViewModel
     
     var body: some View {
         VStack(spacing: 16) {
             CategorySelectorView()
-            CustomTextField(text: "", placeholder: "Description")
+            CustomTextField(text: $description, placeholder: "Description")
             PayMethodSelectorView()
             if let image = viewModel.image {
                 Image(uiImage: image)

@@ -10,12 +10,12 @@ import Domain
 
 struct CreateAccountView: View {
     
-    @State private var name: String = ""
-    @State private var email: String = ""
+    @State private var name = String()
+    @State private var email = String()
     @State private var birthday: String = ""
     @State private var password: String = ""
     @EnvironmentObject var store: Store
-    @EnvironmentObject var viewModel: UserViewModel
+    @EnvironmentObject var viewModel: CreateUserViewModel
     
     var backButton: some View {
         Button(action: {
@@ -31,18 +31,21 @@ struct CreateAccountView: View {
     var body: some View {
         VStack(spacing: 56) {
             VStack(spacing: 14) {
-                CustomTextField(text: name, placeholder: "Name")
-                CustomTextField(text: email, placeholder: "Email")
+                CustomTextField(text: $name, placeholder: "Name")
+                CustomTextField(text: $email, placeholder: "Email")
                 CustomDateTextField(placeholder: "Birthday")
                 CustomPasswordTextField(password: password, placeholder: "Password")
             }
             CustomButton(action: {
-                //                    viewModel.user?.name = name
-                //                    viewModel.user?.id = UUID()
-                //                    viewModel.user?.email = email
-                //                    Task {
-                //                        await viewModel.createUser(user: viewModel.user ?? User())
-                //                    }
+                if name.isEmpty {
+                    print("yes is empty")
+                }
+                print("\(name) \(email)")
+                viewModel.user.name = name
+                viewModel.user.email = email
+                Task {
+                    await viewModel.createUser(user: viewModel.user)
+                }
             }, text: "Sing up", color: Color(.violet100), foregroundColor: .white)
             Spacer()
         }

@@ -28,8 +28,8 @@ struct EditProfileView: View {
     var body: some View {
         VStack(spacing: 56) {
             VStack(spacing: 14) {
-                CustomTextField(text: name, placeholder: "Name")
-                CustomTextField(text: email, placeholder: "Email")
+                CustomTextField(text: $name, placeholder: "Name")
+                CustomTextField(text: $email, placeholder: "Email")
                 CustomDateTextField(placeholder: "Birthday")
                 Button(action:{
                     

@@ -13,7 +13,7 @@ public struct LoginView: View {
     @State private var password: String = ""
     @EnvironmentObject var store: Store
     @EnvironmentObject var setDefault: Default
-    @EnvironmentObject var viewModel: UserViewModel
+    @EnvironmentObject var viewModel: LoginViewModel
     
     public init() {
         email = ""
@@ -25,7 +25,7 @@ public struct LoginView: View {
             VStack(spacing: 56) {
                 VStack(spacing: 64) {
                     VStack(spacing: 14) {
-                        CustomTextField(text: email, placeholder: "Email")
+                        CustomTextField(text: $email, placeholder: "Email")
                         CustomPasswordTextField(password: password, placeholder: "Password")
                     }
                     .padding(.leading, 16)
@@ -53,6 +53,9 @@ public struct LoginView: View {
             .navigationTitle("Login")
             .navigationBarBackButtonHidden(true)
             .navigationBarTitleDisplayMode(.inline)
+            .task {
+                await viewModel.fetchUser(email: "")
+            }
         }
     }
     

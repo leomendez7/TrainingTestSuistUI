@@ -7,27 +7,49 @@
 
 import Foundation
 import Domain
-import CouchbaseLiteWrapper
+import Shared
+import CouchbaseLiteSwift
 
 public class UserRepositoryDataSource {
     
-    let couchBaseDatabase = CouchbaseDatabase(databaseName: "User")
+    let database = try! Database(name: "Training")
+    
+    public init() { }
     
     public func createUser(user: User) async throws -> Bool {
-        let attributes = ["name": user.name, 
-                          "last_name": user.lastName,
-                          "email": user.email,
-                          "birthday": user.birthday] as [String: Any]
-        let document = CouchbaseDocument(id: "\(user.id)", attributes: attributes)
-        couchBaseDatabase.save(document)
-        return true
+        do {
+            let jsonData = user.convertToJSON()
+            let document = MutableDocument()
+            document.setData(jsonData)
+            try database.saveDocument(document)
+            print("Document save successfully.")
+            return true
+        } catch {
+            print("Document hasn't been save: \(error.localizedDescription)")
+            return false
+        }
     }
     
     public func fetchUser(email: String) async throws -> User {
-//        let expression = Expresion
-//        let documents = couchbaseDatabase.fetchAll(whereExpression: expression)
-        let user = User()
-        return user
+        let query = QueryBuilder
+            .select(SelectResult.all())
+            .from(DataSource.database(database))
+            .where(Expression.property("email").equalTo(Expression.string(email)))
+        do {
+            for result in try query.execute() {
+                if let document = result.dictionary(at: 0)?.toMutable() {
+                    if let jsonData = try? JSONSerialization.data(withJSONObject: document.toDictionary(), options: []), 
+                        let user = try? JSONDecoder().decode(User.self, from: jsonData) {
+                        print("Recovered user: \(user)")
+                        return user
+                    }
+                }
+            }
+        } catch {
+            print("Error to query: \(error.localizedDescription)")
+            throw error
+        }
+        return User()
     }
     
 }
