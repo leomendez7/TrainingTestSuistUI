@@ -13,6 +13,7 @@
 		D1108C042AF00911008E6D97 /* TrainingTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1108C032AF00911008E6D97 /* TrainingTestTests.swift */; };
 		D1108C0E2AF00911008E6D97 /* TrainingTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1108C0D2AF00911008E6D97 /* TrainingTestUITests.swift */; };
 		D1108C102AF00911008E6D97 /* TrainingTestUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1108C0F2AF00911008E6D97 /* TrainingTestUITestsLaunchTests.swift */; };
+<<<<<<< HEAD
 		D1108C2A2AF03C41008E6D97 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1108C292AF03C41008E6D97 /* Colors.xcassets */; };
 		D135405F2AFD264E00185A3B /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = D135405E2AFD264E00185A3B /* Currency.swift */; };
 		D14B5FA82AF44D4C004DD964 /* NewTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14B5FA72AF44D4C004DD964 /* NewTransactionView.swift */; };
@@ -56,6 +57,13 @@
 		ECD56D6C2AF9E7B900BEFAD8 /* CurrencyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD56D6B2AF9E7B900BEFAD8 /* CurrencyViewModel.swift */; };
 		ECD56D6F2AFA82C800BEFAD8 /* LogoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD56D6E2AFA82C800BEFAD8 /* LogoutView.swift */; };
 		ECD56D722AFA9A0D00BEFAD8 /* DataProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD56D712AFA9A0D00BEFAD8 /* DataProfileView.swift */; };
+=======
+		D19ED0F22AFD35CF004358FC /* Presentation in Frameworks */ = {isa = PBXBuildFile; productRef = D19ED0F12AFD35CF004358FC /* Presentation */; };
+		D19ED0F42AFD35DF004358FC /* Data in Frameworks */ = {isa = PBXBuildFile; productRef = D19ED0F32AFD35DF004358FC /* Data */; };
+		D19ED0F62AFD35DF004358FC /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = D19ED0F52AFD35DF004358FC /* Domain */; };
+		D19ED0F82AFD35DF004358FC /* Shared in Frameworks */ = {isa = PBXBuildFile; productRef = D19ED0F72AFD35DF004358FC /* Shared */; };
+		D1E11EA92AFE8E2C00420F04 /* CouchbaseLiteWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = D1E11EA82AFE8E2C00420F04 /* CouchbaseLiteWrapper */; };
+>>>>>>> presentation
 		ECD56D742AFAC91B00BEFAD8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECD56D732AFAC91B00BEFAD8 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +98,7 @@
 		D1108C212AF01263008E6D97 /* Shared */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Shared; sourceTree = "<group>"; };
 		D1108C222AF012D5008E6D97 /* Presentation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Presentation; sourceTree = "<group>"; };
 		D1108C242AF0138E008E6D97 /* Domain */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Domain; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		D1108C292AF03C41008E6D97 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		D135405E2AFD264E00185A3B /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		D14B5FA72AF44D4C004DD964 /* NewTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTransactionView.swift; sourceTree = "<group>"; };
@@ -133,6 +142,8 @@
 		ECD56D6B2AF9E7B900BEFAD8 /* CurrencyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyViewModel.swift; sourceTree = "<group>"; };
 		ECD56D6E2AFA82C800BEFAD8 /* LogoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutView.swift; sourceTree = "<group>"; };
 		ECD56D712AFA9A0D00BEFAD8 /* DataProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProfileView.swift; sourceTree = "<group>"; };
+=======
+>>>>>>> presentation
 		ECD56D732AFAC91B00BEFAD8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -141,6 +152,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D19ED0F62AFD35DF004358FC /* Domain in Frameworks */,
+				D19ED0F82AFD35DF004358FC /* Shared in Frameworks */,
+				D19ED0F42AFD35DF004358FC /* Data in Frameworks */,
+				D1E11EA92AFE8E2C00420F04 /* CouchbaseLiteWrapper in Frameworks */,
+				D19ED0F22AFD35CF004358FC /* Presentation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,6 +185,7 @@
 				D1108C022AF00911008E6D97 /* TrainingTestTests */,
 				D1108C0C2AF00911008E6D97 /* TrainingTestUITests */,
 				D1108BF02AF00910008E6D97 /* Products */,
+				D19ED0F02AFD35CF004358FC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -185,7 +202,6 @@
 		D1108BF12AF00910008E6D97 /* TrainingTest */ = {
 			isa = PBXGroup;
 			children = (
-				D1DDBD012AF04F26006846D0 /* Presentation */,
 				D1108BF22AF00910008E6D97 /* TrainingTestApp.swift */,
 				ECD56D732AFAC91B00BEFAD8 /* LaunchScreen.storyboard */,
 				D1108C282AF03C04008E6D97 /* Resources */,
@@ -234,17 +250,15 @@
 			isa = PBXGroup;
 			children = (
 				D1108BF62AF00911008E6D97 /* Assets.xcassets */,
-				D1108C292AF03C41008E6D97 /* Colors.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		D14B5FA92AF48EDB004DD964 /* Selector */ = {
+		D19ED0F02AFD35CF004358FC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D14B5FAA2AF48F0A004DD964 /* CategorySelectorView.swift */,
-				D14B5FAC2AF4B083004DD964 /* PayMethodSelectorView.swift */,
 			);
+<<<<<<< HEAD
 			path = Selector;
 			sourceTree = "<group>";
 		};
@@ -478,6 +492,9 @@
 				ECD56D6B2AF9E7B900BEFAD8 /* CurrencyViewModel.swift */,
 			);
 			path = ViewModel;
+=======
+			name = Frameworks;
+>>>>>>> presentation
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -501,6 +518,11 @@
 			);
 			name = TrainingTest;
 			packageProductDependencies = (
+				D19ED0F12AFD35CF004358FC /* Presentation */,
+				D19ED0F32AFD35DF004358FC /* Data */,
+				D19ED0F52AFD35DF004358FC /* Domain */,
+				D19ED0F72AFD35DF004358FC /* Shared */,
+				D1E11EA82AFE8E2C00420F04 /* CouchbaseLiteWrapper */,
 			);
 			productName = TrainingTest;
 			productReference = D1108BEF2AF00910008E6D97 /* TrainingTest.app */;
@@ -575,6 +597,7 @@
 			);
 			mainGroup = D1108BE62AF00910008E6D97;
 			packageReferences = (
+				D1E11EA72AFE8E2C00420F04 /* XCRemoteSwiftPackageReference "couchbase-lite-wrapper-ios" */,
 			);
 			productRefGroup = D1108BF02AF00910008E6D97 /* Products */;
 			projectDirPath = "";
@@ -592,7 +615,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D1108C2A2AF03C41008E6D97 /* Colors.xcassets in Resources */,
 				ECD56D742AFAC91B00BEFAD8 /* LaunchScreen.storyboard in Resources */,
 				D1108BFA2AF00911008E6D97 /* Preview Assets.xcassets in Resources */,
 				D1108BF72AF00911008E6D97 /* Assets.xcassets in Resources */,
@@ -620,6 +642,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+<<<<<<< HEAD
 				D17A24762AF3DA3B00D43209 /* Transaction.swift in Sources */,
 				D1DDBD7E2AF2DC0F006846D0 /* FrequencyView.swift in Sources */,
 				ECD56D722AFA9A0D00BEFAD8 /* DataProfileView.swift in Sources */,
@@ -651,18 +674,9 @@
 				D17A24732AF34BB500D43209 /* TransactionCellView.swift in Sources */,
 				ECD56D5C2AF9794B00BEFAD8 /* SessionDefault.swift in Sources */,
 				D1DDBD222AF181CD006846D0 /* CustomDateTextField.swift in Sources */,
+=======
+>>>>>>> presentation
 				D1108BF32AF00910008E6D97 /* TrainingTestApp.swift in Sources */,
-				D17A24792AF3E38700D43209 /* TransactionViewModel.swift in Sources */,
-				ECD56D522AF9683500BEFAD8 /* NewTransactionViewModel.swift in Sources */,
-				D1DDBD182AF162C6006846D0 /* LoginView.swift in Sources */,
-				D1DDBD872AF31022006846D0 /* RecentTransactionView.swift in Sources */,
-				D1DDBD202AF17EDD006846D0 /* CustomPasswordTextField.swift in Sources */,
-				ECD56D682AF9E3CE00BEFAD8 /* CurrencyView.swift in Sources */,
-				D1DDBD2C2AF29A91006846D0 /* BalanceComponentView.swift in Sources */,
-				D1DDBD1B2AF17446006846D0 /* CustomTextField.swift in Sources */,
-				D17A247C2AF3F68B00D43209 /* NewOptionTransactionView.swift in Sources */,
-				ECD56D6F2AFA82C800BEFAD8 /* LogoutView.swift in Sources */,
-				ECD56D632AF9DB0D00BEFAD8 /* SettingsOptionsButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1015,6 +1029,17 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		D1E11EA72AFE8E2C00420F04 /* XCRemoteSwiftPackageReference "couchbase-lite-wrapper-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/koombea/couchbase-lite-wrapper-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		D1108C2F2AF044D4008E6D97 /* Domain */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1031,6 +1056,27 @@
 		D1108C352AF04531008E6D97 /* Data */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Data;
+		};
+		D19ED0F12AFD35CF004358FC /* Presentation */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Presentation;
+		};
+		D19ED0F32AFD35DF004358FC /* Data */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Data;
+		};
+		D19ED0F52AFD35DF004358FC /* Domain */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Domain;
+		};
+		D19ED0F72AFD35DF004358FC /* Shared */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Shared;
+		};
+		D1E11EA82AFE8E2C00420F04 /* CouchbaseLiteWrapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D1E11EA72AFE8E2C00420F04 /* XCRemoteSwiftPackageReference "couchbase-lite-wrapper-ios" */;
+			productName = CouchbaseLiteWrapper;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

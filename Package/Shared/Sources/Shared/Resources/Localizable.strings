@@ -1,0 +1,19 @@
+/* 
+  Localizable.strings
+  
+
+  Created by Leonardo Mendez on 14/11/23.
+  
+*/
+
+//CreateUser
+"CreateUser.alertTitleEmptyField" = "Alert!";
+"CreateUser.alertTextEmptyField" = "All fields must be filled.";
+
+//Email
+"Email.alertTitleValidateEmail" = "Error!";
+"Email.alertTextValidateEmail" = "This is not a email.";
+
+//Login
+"Login.alertTitleValidateUser" = "Error!";
+"Login.alertTextValidateUser" = "This user is not found.";
