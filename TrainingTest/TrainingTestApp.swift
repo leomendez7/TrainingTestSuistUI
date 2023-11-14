@@ -16,6 +16,7 @@ struct TrainingTestApp: App {
     @StateObject var setDefault = Default()
     @StateObject var createUserViewModel =  generateCreateUserModule()
     @StateObject var loginViewModel = generateFetchUserModule()
+    @StateObject var editProfileViewModel = generateUpdateUserModule()
     
     var body: some Scene {
         WindowGroup {
@@ -23,6 +24,7 @@ struct TrainingTestApp: App {
             let onboarding = setDefault.onboarding
             if session && onboarding {
                 TabBarView()
+                    .environmentObject(editProfileViewModel)
             } else if !session && !onboarding {
                 OnboardingView()
             } else {
@@ -47,6 +49,13 @@ struct TrainingTestApp: App {
         let useCase = FetchUserUseCase(repository: repository)
         let loginViewModel = LoginViewModel(useCase: useCase)
         return loginViewModel
+    }
+    
+    private static func generateUpdateUserModule() -> EditProfileViewModel {
+        let repository = UserRepository(datasource: UserRepositoryDataSource())
+        let useCase = UpdateUserUseCase(repository: repository)
+        let editProfileViewModel = EditProfileViewModel(useCase: useCase)
+        return editProfileViewModel
     }
     
 }

@@ -11,7 +11,7 @@ struct CustomDateTextField: View {
     
     @State private var isDatePickerVisible = false
     @State private var selectedDate = Date()
-    @State var text: String = ""
+    @Binding var text: String
     
     var placeholder: String
     
@@ -56,5 +56,5 @@ struct CustomDateTextField: View {
 }
 
 #Preview {
-    CustomDateTextField(placeholder: "test")
+    CustomDateTextField(text: .constant(""), placeholder: "test")
 }

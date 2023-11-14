@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Domain
 
 struct SettingsView: View {
     
@@ -24,10 +25,6 @@ struct SettingsView: View {
                     Image("avatar-2", bundle: .module)
                         .frame(width: 80, height: 80)
                     DataProfileView(email: $email, name: $name)
-                        .onAppear {
-                            email = "irina@mail.com"
-                            name = "Irina Saliha"
-                        }
                     Spacer()
                     Button(action: {
                         store.settings.append("editProfile")
@@ -78,6 +75,10 @@ struct SettingsView: View {
                     EmptyView()
                 }
             })
+            .onAppear {
+                email = Default.user().email
+                name = Default.user().name
+            }
             .padding(.horizontal, 16)
             .padding(.top, 14)
             .navigationBarBackButtonHidden(true)

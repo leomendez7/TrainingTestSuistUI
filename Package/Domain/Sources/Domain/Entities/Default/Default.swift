@@ -11,8 +11,7 @@ import SwiftUI
 public class Default: ObservableObject {
     
     public enum Key: String {
-        case onboarding
-        case session
+        case user
         case currency
         case security
     }
@@ -22,7 +21,7 @@ public class Default: ObservableObject {
     
     public static func destroySession(){
         let defaults = UserDefaults.standard
-        defaults.removeObject(forKey: Key.session.rawValue)
+        defaults.removeObject(forKey: Key.user.rawValue)
         defaults.removeObject(forKey: Key.currency.rawValue)
         defaults.removeObject(forKey: Key.security.rawValue)
     }

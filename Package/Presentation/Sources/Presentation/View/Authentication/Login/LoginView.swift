@@ -6,14 +6,19 @@
 //
 
 import SwiftUI
+import Domain
+import Combine
+import Shared
 
 public struct LoginView: View {
     
     @State private var email: String = ""
     @State private var password: String = ""
+    @State private var showAlert = false
     @EnvironmentObject var store: Store
     @EnvironmentObject var setDefault: Default
     @EnvironmentObject var viewModel: LoginViewModel
+    @State private var cancellables: Set<AnyCancellable> = []
     
     public init() {
         email = ""
@@ -25,8 +30,8 @@ public struct LoginView: View {
             VStack(spacing: 56) {
                 VStack(spacing: 64) {
                     VStack(spacing: 14) {
-                        CustomTextField(text: $email, placeholder: "Email")
-                        CustomPasswordTextField(password: password, placeholder: "Password")
+                        CustomTextField(text: $email, isEmail: true, placeholder: "Email")
+                        CustomPasswordTextField(password: $password, placeholder: "Password")
                     }
                     .padding(.leading, 16)
                     .padding(.trailing, 16)
@@ -34,7 +39,7 @@ public struct LoginView: View {
                 .padding(.top, 16)
                 VStack(spacing: 16) {
                     CustomButton(action: {
-                        setDefault.session = true
+                        signIn(email: email)
                     }, text: "Sing in", color: Color(.violet100), foregroundColor: .white)
                     CustomButton(action: {
                         store.login.append("createAccountView")
@@ -53,9 +58,32 @@ public struct LoginView: View {
             .navigationTitle("Login")
             .navigationBarBackButtonHidden(true)
             .navigationBarTitleDisplayMode(.inline)
-            .task {
-                await viewModel.fetchUser(email: "")
+            .onAppear {
+                viewModel.$success.sink { response in
+                    if response {
+                        setDefault.session = true
+                    }
+                }.store(in: &cancellables)
+                viewModel.$alert.sink { response in
+                    if response {
+                        showAlert.toggle()
+                    }
+                }.store(in: &cancellables)
             }
+            .alert(isPresented: $showAlert) {
+                Alert(
+                    title: Text(Localizable.Login.alertTitleValidateUser),
+                    message: Text(Localizable.Login.alertTextValidateUser),
+                    dismissButton: .default(Text("OK"))
+                )
+            }
+        }
+    }
+    
+    func signIn(email: String) {
+        Task {
+            let credentials = ["email": email, "password": password]
+            await viewModel.fetchUser(credentials: credentials)
         }
     }
     

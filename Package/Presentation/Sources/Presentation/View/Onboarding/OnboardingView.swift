@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Domain
 
 public struct OnboardingView: View {
     

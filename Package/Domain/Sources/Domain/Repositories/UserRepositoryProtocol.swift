@@ -9,7 +9,8 @@ import Foundation
 
 public protocol UserRepositoryProtocol {
     
-    func fetchUser(email: String) async throws -> User
+    func fetchUser(credentials: [String: String]) async throws -> User
     func createUser(user: User) async throws -> Bool
+    func updateUser(user: User) async throws -> User
     
 }

@@ -10,6 +10,7 @@ import SwiftUI
 struct CustomTextField: View {
     
     @Binding var text: String
+    @State var isEmail: Bool = false
     var placeholder: String
 
     var body: some View {
@@ -19,8 +20,15 @@ struct CustomTextField: View {
                     .foregroundColor(Color(.light20))
                     .padding(.horizontal, 16)
             }
-            TextField("", text: $text)
-                .padding(.horizontal, 16)
+            if isEmail {
+                TextField("", text: $text)
+                    .padding(.horizontal, 16)
+                    .autocapitalization(.none)
+                    .keyboardType(.emailAddress)
+            } else {
+                TextField("", text: $text)
+                    .padding(.horizontal, 16)
+            }
         }
         .frame(height: 56)
         .background(.white)

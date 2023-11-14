@@ -12,7 +12,7 @@ import Domain
 
 public class CreateUserViewModel: BaseViewModel<CreateUserUseCase>, ObservableObject {
     
-    @Published var user = User()
+    var user = User()
     @Published var success: Bool = false
     
     func createUser(user: User) async {
@@ -20,9 +20,7 @@ public class CreateUserViewModel: BaseViewModel<CreateUserUseCase>, ObservableOb
             let response = try await useCase.execute(requestValue: user)
             DispatchQueue.main.async {
                 self.success = response
-                print(self.success)
             }
-           
         } catch {
             debugPrint(error.localizedDescription)
         }

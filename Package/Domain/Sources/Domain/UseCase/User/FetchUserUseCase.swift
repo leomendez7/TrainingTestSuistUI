@@ -15,8 +15,8 @@ public class FetchUserUseCase: UseCaseProtocol {
         self.repository = repository
     }
     
-    public func execute(requestValue: String) async throws -> User {
-        return try await repository.fetchUser(email: requestValue)
+    public func execute(requestValue: [String: String]) async throws -> User {
+        return try await repository.fetchUser(credentials: requestValue)
     }
     
 }

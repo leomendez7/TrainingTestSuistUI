@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CustomPasswordTextField: View {
     
-    @State var password: String
+    @Binding var password: String
     @State var isSecure: Bool = true
     var placeholder: String
 
@@ -49,5 +49,5 @@ struct CustomPasswordTextField: View {
 }
 
 #Preview {
-    CustomPasswordTextField(password: "", placeholder: "password")
+    CustomPasswordTextField(password: .constant(""), placeholder: "password")
 }
