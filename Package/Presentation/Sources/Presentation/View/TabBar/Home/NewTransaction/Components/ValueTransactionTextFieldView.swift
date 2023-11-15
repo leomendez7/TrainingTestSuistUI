@@ -10,6 +10,7 @@ import SwiftUI
 struct ValueTransactionTextFieldView: View {
     
     @Binding var text: String
+    var placeholder: String
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -25,17 +26,25 @@ struct ValueTransactionTextFieldView: View {
                     .font(.system(size: 64))
                     .fontWeight(.bold)
                     .padding(.leading, 16)
-                TextField("0", text: $text)
-                    .foregroundColor(Color(.light80))
-                    .font(.system(size: 64))
-                    .fontWeight(.bold)
-                    .padding(.trailing, 16)
-                    .keyboardType(.numberPad)
+                ZStack(alignment: .leading) {
+                    if text.isEmpty {
+                        Text(placeholder)
+                            .foregroundColor(Color(.light80))
+                            .font(.system(size: 64))
+                            .fontWeight(.bold)
+                    }
+                    TextField("", text: $text)
+                        .foregroundColor(Color(.light80))
+                        .font(.system(size: 64))
+                        .fontWeight(.bold)
+                        .padding(.trailing, 16)
+                        .keyboardType(.decimalPad)
+                }
             }
         }
     }
 }
 
 #Preview {
-    ValueTransactionTextFieldView(text: .constant("0"))
+    ValueTransactionTextFieldView(text: .constant("0"), placeholder: "0")
 }

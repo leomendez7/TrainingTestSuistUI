@@ -9,28 +9,31 @@ import Foundation
 
 extension Default {
     
-    public static func user() -> User {
-        let defaults = UserDefaults.standard
-        guard let data = defaults.data(forKey: Default.Key.user.rawValue) else { return User() }
-        do {
-            let decoder = JSONDecoder()
-            let model = try decoder.decode(User.self, from: data)
-            return model
-        } catch {
-            print("Error decoding Currency: \(error.localizedDescription)")
-            return User()
-        }
+    public static func user() -> User? {
+        return User.current
     }
     
     public static func save(user: User) {
-        let defaults = UserDefaults.standard
-        do {
-            let encoder = JSONEncoder()
-            let data = try encoder.encode(user)
-            defaults.set(data, forKey: Default.Key.user.rawValue)
-        } catch {
-            print("Error encoding Currency: \(error.localizedDescription)")
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(user) {
+            let defaults = UserDefaults.standard
+            defaults.set(encoded, forKey: Default.Key.user.rawValue)
         }
+    }
+    
+}
+
+extension User {
+    
+    public static var current: User? {
+        let defaults = UserDefaults.standard
+        if let savedUser = defaults.object(forKey: Default.Key.user.rawValue) as? Data {
+            let decoder = JSONDecoder()
+            if let loadedJob = try? decoder.decode(User.self, from: savedUser) {
+                return loadedJob
+            }
+        }
+        return nil
     }
     
 }

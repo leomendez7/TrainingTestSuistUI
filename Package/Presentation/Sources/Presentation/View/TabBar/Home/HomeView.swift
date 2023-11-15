@@ -15,6 +15,7 @@ struct HomeView: View {
     @State private var isSheetPresented = false
     @State var isIncomeSelected = false
     @State var isExpensesSelected = false
+    @State var seeAll = false
     
     var body: some View {
         NavigationStack(path: $store.transactions) {
@@ -22,7 +23,7 @@ struct HomeView: View {
                 ScrollView {
                     BalanceComponentView(balance: "9400", income: "5000", expense: "1200")
                     FrequencyView()
-                    RecentTransactionView()
+                    RecentTransactionView(seeAll: $seeAll)
                 }
             }
             .preferredColorScheme(.light)
@@ -42,6 +43,10 @@ struct HomeView: View {
                     EmptyView()
                 }
             })
+            .onChange(of: seeAll) { _ in
+                viewModel.seeAll = seeAll
+                viewModel.fetchTransactions()
+            }
             .homeTransactionToolbar(image: "avatar-2", isSheetPresented: $isSheetPresented, incomeSelected: $isIncomeSelected, expensesSelected: $isExpensesSelected)
         }
     }

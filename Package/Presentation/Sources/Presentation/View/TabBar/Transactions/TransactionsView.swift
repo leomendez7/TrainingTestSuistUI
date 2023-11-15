@@ -26,12 +26,9 @@ struct TransactionsView: View {
                     .padding(.top, 31)
                     VStack(spacing: 8) {
                         ForEach(viewModel.transactions.indices, id: \.self) { index in
-                            TransactionCellView(name: viewModel.transactions[index].name,
-                                                description: viewModel.transactions[index].description,
-                                                value: viewModel.transactions[index].value,
-                                                hour: "06:00 AM",
-                                                image: viewModel.images[index],
-                                                background: viewModel.colors[index])
+                            TransactionCellView(image: viewModel.images[index],
+                                                background: viewModel.colors[index],
+                                                trade: viewModel.transactions[index])
                         }
                     }
                     HStack(spacing: 8) {
@@ -44,12 +41,9 @@ struct TransactionsView: View {
                     .padding(.top, 31)
                     VStack(spacing: 8) {
                         ForEach(viewModel.transactions.indices, id: \.self) { index in
-                            TransactionCellView(name: viewModel.transactions[index].name,
-                                                description: viewModel.transactions[index].description,
-                                                value: viewModel.transactions[index].value,
-                                                hour: "06:00 AM",
-                                                image: viewModel.images[index],
-                                                background: viewModel.colors[index])
+                            TransactionCellView(image: viewModel.images[index],
+                                                background: viewModel.colors[index],
+                                                trade: viewModel.transactions[index])
                         }
                     }
                 }

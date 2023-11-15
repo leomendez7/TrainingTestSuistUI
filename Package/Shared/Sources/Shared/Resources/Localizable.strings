@@ -17,3 +17,7 @@
 //Login
 "Login.alertTitleValidateUser" = "Error!";
 "Login.alertTextValidateUser" = "This user is not found.";
+
+//NewTransaction
+"NewTransaction.alertTitleNewTrade" = "Alert!";
+"NewTransaction.alertTextNewTrade" = "The value should not be 0.";

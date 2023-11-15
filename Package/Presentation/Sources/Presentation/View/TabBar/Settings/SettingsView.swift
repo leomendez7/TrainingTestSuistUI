@@ -76,8 +76,8 @@ struct SettingsView: View {
                 }
             })
             .onAppear {
-                email = Default.user().email
-                name = Default.user().name
+                email = Default.user()?.email ?? ""
+                name = Default.user()?.name ?? ""
             }
             .padding(.horizontal, 16)
             .padding(.top, 14)

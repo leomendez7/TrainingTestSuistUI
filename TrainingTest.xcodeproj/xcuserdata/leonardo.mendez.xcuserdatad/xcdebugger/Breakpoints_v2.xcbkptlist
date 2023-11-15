@@ -116,5 +116,85 @@
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "46155EEC-BD6E-440D-8E49-03CFC165BE7D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Package/Presentation/Sources/Presentation/View/TabBar/Home/RecentTransaction/NewTransaction/TransactionOptionView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "createTransaction()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "46155EEC-BD6E-440D-8E49-03CFC165BE7D - 39e7141b68c67891"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Presentation.TransactionOptionView.createTransaction() -&gt; ()"
+                  moduleName = "TrainingTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/leonardo.mendez/Project/TrainingTestSwiftUI/Package/Presentation/Sources/Presentation/View/TabBar/Home/RecentTransaction/NewTransaction/TransactionOptionView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "84">
+               </Location>
+               <Location
+                  uuid = "46155EEC-BD6E-440D-8E49-03CFC165BE7D - 39e7141b68c67891"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Presentation.TransactionOptionView.createTransaction() -&gt; ()"
+                  moduleName = "TrainingTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/leonardo.mendez/Project/TrainingTestSwiftUI/Package/Presentation/Sources/Presentation/View/TabBar/Home/RecentTransaction/NewTransaction/TransactionOptionView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "96">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D68106E8-CA9A-4EBE-B1F4-C4D5B0F9B11C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Package/Domain/Sources/Domain/Entities/Default/UserDefault.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "current"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FCF5F238-E7A1-4C49-830F-E94C1B49A177"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Package/Presentation/Sources/Presentation/Base/Selector/CategorySelectorView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

@@ -6,13 +6,20 @@
 //
 
 import SwiftUI
+import Domain
+import Shared
+import Combine
 
 struct TransactionOptionView: View {
     
     @State private var isSwitchOn = false
+    @State var isIncome: Bool
     @State var description = String()
-    @State var selectedCategory = "Category"
+    @State var selectedCategory = "Shopping"
     @State var selectedPayment = "Wallet"
+    @State private var showAlert = false
+    @State private var titleAlert: String = ""
+    @State private var textAlert: String = ""
     @Binding var value: String
     @EnvironmentObject var viewModel: NewTransactionViewModel
     
@@ -52,7 +59,13 @@ struct TransactionOptionView: View {
             }
             Spacer()
             CustomButton(action: {
-                
+                if value != "0" && !value.isEmpty {
+                    createTransaction()
+                } else {
+                    titleAlert = Localizable.NewTransaction.alertTitleNewTrade
+                    textAlert = Localizable.NewTransaction.alertTextNewTrade
+                    showAlert.toggle()
+                }
             }, text: "Continue", color: Color(.violet100), foregroundColor: .white)
             Spacer()
                 .sheet(isPresented: $viewModel.showPicker, content: {
@@ -61,17 +74,34 @@ struct TransactionOptionView: View {
                         .ignoresSafeArea()
                 })
         }
-        .frame(height: UIScreen.main.bounds.size.height * 0.60)
+        .onAppear {
+            
+        }
+        .alert(isPresented: $showAlert) {
+            Alert(
+                title: Text(titleAlert),
+                message: Text(textAlert),
+                dismissButton: .default(Text("OK"))
+            )
+        }
         .padding(.horizontal, 16)
         .padding(.top, 24)
-        .background(.white, in: RoundedRectangle(cornerRadius: 32, style: .continuous))
+        .topRoundedCorners(cornerRadius: 32, backgroundColor: .white)
     }
     
     func createTransaction() {
-        
+        viewModel.transaction.email = Default.user()?.email ?? ""
+        viewModel.transaction.category = selectedCategory
+        viewModel.transaction.description = description
+        viewModel.transaction.payment = selectedPayment
+        viewModel.transaction.value = value
+        viewModel.transaction.isIncome = isIncome
+        Task {
+            await viewModel.createTransaction(trade: viewModel.transaction)
+        }
     }
 }
 
 #Preview {
-    TransactionOptionView(value: .constant("0"))
+    TransactionOptionView(isIncome: true, value: .constant("0"))
 }

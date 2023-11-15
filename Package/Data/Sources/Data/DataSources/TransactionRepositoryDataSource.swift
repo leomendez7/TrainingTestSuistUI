@@ -17,17 +17,39 @@ public class TransactionRepositoryDataSource {
     public init() { }
     
     public func createTransaction(trade: Trade) async throws -> Bool {
+        let email = Default.user()?.email ?? ""
+        let query = QueryBuilder
+            .select(SelectResult.all())
+            .from(DataSource.database(database))
+            .where(Expression.property("email").equalTo(Expression.string(email)))
         do {
-            let jsonData = trade.convertToJSON()
-            let document = MutableDocument()
-            document.setData(jsonData)
-            try database.saveDocument(document)
-            print("Document save successfully.")
-            return true
+            for result in try query.execute() {
+                guard let dictionary = result.dictionary(at: 0)?.toMutable() else {
+                    print("Error: No user dictionary found.")
+                    return false
+                }
+                do {
+                    var user = try JSONDecoder().decode(User.self, from: JSONSerialization.data(withJSONObject: dictionary.toDictionary() , options: []))
+                    Default.user()?.trades.forEach { trade in
+                        user.trades.append(trade)
+                    }
+                    user.trades.append(trade)
+                    Default.save(user: user)
+                    let updatedDocument = MutableDocument(id: dictionary.string(forKey: "_id"))
+                    updatedDocument.setData(user.convertToJSON())
+                    try database.saveDocument(updatedDocument)
+                    print("Trade added to user successfully.")
+                    return true
+                } catch {
+                    print("Error decoding user: \(error.localizedDescription)")
+                    return false
+                }
+            }
         } catch {
             print("Document hasn't been save: \(error.localizedDescription)")
             return false
         }
+        return false
     }
     
 }

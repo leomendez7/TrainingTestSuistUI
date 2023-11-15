@@ -6,16 +6,14 @@
 //
 
 import SwiftUI
+import Domain
 
 struct TransactionCellView: View {
     
-    @State var name: String
-    @State var description: String
-    @State var value: String
-    @State var hour: String
     @State var image: String
     @State var background: Color
-    @State private var valueText = String()
+    @State var trade: Trade
+    @State private var hourText = String()
     
     var body: some View {
         HStack(spacing: 10) {
@@ -25,10 +23,10 @@ struct TransactionCellView: View {
                 .background(background)
                 .cornerRadius(16)
             VStack(alignment: .leading, spacing: 13) {
-                Text(name)
+                Text(trade.category)
                     .foregroundColor(Color(.dark25))
                     .font(.system(size: 14))
-                Text(description)
+                Text(trade.description)
                     .foregroundColor(Color(.light20))
                     .font(.system(size: 13))
                     .fontWeight(.semibold)
@@ -36,18 +34,18 @@ struct TransactionCellView: View {
             }
             Spacer()
             VStack(alignment: .trailing, spacing: 13) {
-                if name != "Salary" {
-                    Text("- $\(value)")
+                if !trade.isIncome {
+                    Text("- $\(trade.value)")
                         .foregroundColor(Color(.red100))
                         .font(.system(size: 16))
                         .fontWeight(.bold)
                 } else {
-                    Text("+ $\(value)")
+                    Text("+ $\(trade.value)")
                         .foregroundColor(Color(.green100))
                         .font(.system(size: 16))
                         .fontWeight(.bold)
                 }
-                Text(hour)
+                Text(hourText)
                     .foregroundColor(Color(.light20))
                     .font(.system(size: 13))
                     .fontWeight(.semibold)
@@ -57,14 +55,16 @@ struct TransactionCellView: View {
         .padding(.horizontal, 16)
         .background(Color(.light80))
         .cornerRadius(24)
+        .onAppear {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "h:mm a"
+            hourText = formatter.string(from: trade.date)
+        }
     }
 }
 
 #Preview {
-    TransactionCellView(name: "Shopping",
-                        description: "Buy some grocery",
-                        value: "120",
-                        hour: "10:00 AM",
-                        image: "shopping-bag",
-                        background: Color(.yellow20))
+    TransactionCellView(image: "shopping-bag",
+                        background: Color(.yellow20),
+                        trade: Trade())
 }

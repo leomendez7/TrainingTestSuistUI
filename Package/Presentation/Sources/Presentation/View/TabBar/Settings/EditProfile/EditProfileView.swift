@@ -50,9 +50,9 @@ struct EditProfileView: View {
             Spacer()
         }
         .onAppear {
-            email = Default.user().email
-            name = Default.user().name
-            birthday = Default.user().birthday
+            email = Default.user()?.email ?? ""
+            name = Default.user()?.name ?? ""
+            birthday = Default.user()?.birthday ?? ""
 //            viewModel.$success.sink { response in
 //                if response {
 //
@@ -76,7 +76,7 @@ struct EditProfileView: View {
     }
     
     func updateUser() {
-        viewModel.user = Default.user()
+        viewModel.user = Default.user() ?? User()
         viewModel.user.name = name
         viewModel.user.email = email
         viewModel.user.birthday = birthday

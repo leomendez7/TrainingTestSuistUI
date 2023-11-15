@@ -83,7 +83,7 @@ public struct LoginView: View {
     func signIn(email: String) {
         Task {
             let credentials = ["email": email, "password": password]
-            await viewModel.fetchUser(credentials: credentials)
+            await viewModel.Login(credentials: credentials)
         }
     }
     

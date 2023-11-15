@@ -11,9 +11,9 @@ struct NewTransactionView: View {
     
     @Binding var isIncome: Bool
     @State var tittle: String = ""
-    @State var value: String = "0"
-    @EnvironmentObject var viewModel: NewTransactionViewModel
+    @State var value: String = ""
     @EnvironmentObject var store: Store
+    @State private var backgroundColor: Color = Color(.green100)
     var backButton : some View {
         Button(action: {
             store.transactions.removeLast()
@@ -26,7 +26,7 @@ struct NewTransactionView: View {
     }
     
     var body: some View {
-        ZStack {
+        VStack() {
             if isIncome {
                 Color(.green100)
                     .ignoresSafeArea()
@@ -36,17 +36,17 @@ struct NewTransactionView: View {
             }
             VStack(alignment: .leading) {
                 Spacer()
-                ValueTransactionTextFieldView(text: $value)
-                TransactionOptionView(value: $value)
-            }
-            Color.clear
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    hideKeyboard()
-                }
+                ValueTransactionTextFieldView(text: $value, placeholder: "0")
+                TransactionOptionView(isIncome: isIncome, value: $value)
+                    .frame(height: UIScreen.main.bounds.size.height * 0.60)
+            }.background(backgroundColor)
+        }
+        .onTapGesture {
+            hideKeyboard()
         }
         .onAppear{
             tittle = isIncome ? "Income" : "Expenses"
+            backgroundColor = isIncome ? Color(.green100) : Color(.red100)
         }
         .preferredColorScheme(.dark)
         .ignoresSafeArea()
@@ -75,5 +75,6 @@ struct NewTransactionView: View {
 #Preview {
     NavigationStack {
         NewTransactionView(isIncome: .constant(true))
+            .environmentObject(Store())
     }
 }

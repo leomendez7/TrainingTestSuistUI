@@ -10,6 +10,8 @@ import SwiftUI
 struct RecentTransactionView: View {
     
     @EnvironmentObject var viewModel: TransactionViewModel
+    @Binding var seeAll: Bool
+    @State var image = ""
     
     var body: some View {
         VStack {
@@ -20,7 +22,7 @@ struct RecentTransactionView: View {
                     .fontWeight(.bold)
                 Spacer()
                 CustomButton(action: {
-                    
+                    seeAll.toggle()
                 }, text: "See All",
                              color: Color(.violet20),
                              foregroundColor: Color(.violet100),
@@ -28,22 +30,19 @@ struct RecentTransactionView: View {
                              width: 78,
                              cornerRadius: 40,
                              fontSize: 14)
-                
             }
             .padding(.top, 31)
             VStack(spacing: 8) {
                 ForEach(viewModel.transactions.indices, id: \.self) { index in
-                    TransactionCellView(name: viewModel.transactions[index].name,
-                                        description: viewModel.transactions[index].description,
-                                        value: viewModel.transactions[index].value,
-                                        hour: "06:00 AM",
-                                        image: viewModel.images[index],
-                                        background: viewModel.colors[index])
+                    
+                    TransactionCellView(image: viewModel.images[index],
+                                        background: viewModel.colors[index],
+                                        trade: viewModel.transactions[index])
                 }
             }
         }
         .padding(.horizontal, 16)
-        .task {
+        .onAppear {
             viewModel.fetchTransactions()
         }
     }
@@ -51,6 +50,6 @@ struct RecentTransactionView: View {
 }
 
 #Preview {
-    RecentTransactionView()
+    RecentTransactionView(seeAll: .constant(Bool()))
         .environmentObject(TransactionViewModel())
 }

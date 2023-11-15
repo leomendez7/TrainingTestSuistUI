@@ -14,6 +14,7 @@ public struct User: Identifiable, Codable {
     public var email: String = ""
     public var birthday: String = ""
     public var password: String = ""
+    public var trades = [Trade]()
     
     public init() { }
     
@@ -22,6 +23,7 @@ public struct User: Identifiable, Codable {
         case email
         case birthday
         case password
+        case trades
     }
     
 }
