@@ -11,13 +11,16 @@ struct TransactionOptionView: View {
     
     @State private var isSwitchOn = false
     @State var description = String()
+    @State var selectedCategory = "Category"
+    @State var selectedPayment = "Wallet"
+    @Binding var value: String
     @EnvironmentObject var viewModel: NewTransactionViewModel
     
     var body: some View {
         VStack(spacing: 16) {
-            CategorySelectorView()
+            CategorySelectorView(selectedCategory: $selectedCategory)
             CustomTextField(text: $description, placeholder: "Description")
-            PayMethodSelectorView()
+            PayMethodSelectorView(selectedPayment: $selectedPayment)
             if let image = viewModel.image {
                 Image(uiImage: image)
                     .resizable()
@@ -63,9 +66,12 @@ struct TransactionOptionView: View {
         .padding(.top, 24)
         .background(.white, in: RoundedRectangle(cornerRadius: 32, style: .continuous))
     }
+    
+    func createTransaction() {
+        
+    }
 }
 
 #Preview {
-    TransactionOptionView()
-        .environmentObject(NewTransactionViewModel())
+    TransactionOptionView(value: .constant("0"))
 }

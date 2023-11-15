@@ -40,7 +40,7 @@ public class TransactionViewModel: ObservableObject {
         transaction.name = randomName
         transaction.description = randomDescription
         transaction.value = randomValue
-        transaction.hour = randomHour
+        //transaction.date = randomHour
         return transaction
     }
     

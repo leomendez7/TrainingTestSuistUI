@@ -9,21 +9,22 @@ import SwiftUI
 
 struct PayMethodSelectorView: View {
     
-    @State private var selectedCategoryIndex = 0
+    @State private var selectedPaymentIndex = 0
+    @Binding var selectedPayment: String
     let payMethods = ["Wallet", "PayPal", "Chase"]
     
     var body: some View {
         Menu {
             ForEach(0..<payMethods.count, id: \.self) { index in
                 Button(action: {
-                    selectedCategoryIndex = index
+                    selectedPaymentIndex = index
                 }) {
                     Text(payMethods[index])
                 }
             }
         } label: {
             HStack {
-                Text(payMethods[selectedCategoryIndex])
+                Text(payMethods[selectedPaymentIndex])
                     .font(.system(size: 18))
                     .foregroundColor(Color(.light20))
                     .padding(.horizontal, 16)
@@ -37,10 +38,13 @@ struct PayMethodSelectorView: View {
                 RoundedRectangle(cornerRadius: 16)
                     .stroke(Color(.light60), lineWidth: 1)
             )
+            .onChange(of: selectedPaymentIndex) { _ in
+                selectedPayment = payMethods[selectedPaymentIndex]
+            }
         }
     }
 }
 
 #Preview {
-    PayMethodSelectorView()
+    PayMethodSelectorView(selectedPayment: .constant("Wallet"))
 }

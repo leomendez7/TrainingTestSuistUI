@@ -11,10 +11,9 @@ struct NewTransactionView: View {
     
     @Binding var isIncome: Bool
     @State var tittle: String = ""
-    @State var text: String = "0"
-    @EnvironmentObject var viewModel: TransactionViewModel
+    @State var value: String = "0"
+    @EnvironmentObject var viewModel: NewTransactionViewModel
     @EnvironmentObject var store: Store
-    
     var backButton : some View {
         Button(action: {
             store.transactions.removeLast()
@@ -37,9 +36,8 @@ struct NewTransactionView: View {
             }
             VStack(alignment: .leading) {
                 Spacer()
-                ValueTransactionTextFieldView()
-                TransactionOptionView()
-                    .environmentObject(NewTransactionViewModel())
+                ValueTransactionTextFieldView(text: $value)
+                TransactionOptionView(value: $value)
             }
             Color.clear
                 .contentShape(Rectangle())

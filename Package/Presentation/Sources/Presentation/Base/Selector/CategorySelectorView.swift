@@ -10,6 +10,7 @@ import SwiftUI
 struct CategorySelectorView: View {
     
     @State private var selectedCategoryIndex = 0
+    @Binding var selectedCategory: String
     let categories = ["Shopping", "Subscription", "Food", "Salary", "Transportation"]
     
     var body: some View {
@@ -23,7 +24,7 @@ struct CategorySelectorView: View {
             }
         } label: {
             HStack {
-                Text(categories[selectedCategoryIndex])
+                Text(selectedCategory)
                     .font(.system(size: 18))
                     .foregroundColor(Color(.light20))
                     .padding(.horizontal, 16)
@@ -38,10 +39,13 @@ struct CategorySelectorView: View {
                 RoundedRectangle(cornerRadius: 16)
                     .stroke(Color(.light60), lineWidth: 1)
             )
+            .onChange(of: selectedCategoryIndex) { _ in
+                selectedCategory = categories[selectedCategoryIndex]
+            }
         }
     }
 }
 
 #Preview {
-    CategorySelectorView()
+    CategorySelectorView(selectedCategory: .constant("Shopping"))
 }

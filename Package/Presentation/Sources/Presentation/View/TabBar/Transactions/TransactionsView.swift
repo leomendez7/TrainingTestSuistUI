@@ -29,7 +29,7 @@ struct TransactionsView: View {
                             TransactionCellView(name: viewModel.transactions[index].name,
                                                 description: viewModel.transactions[index].description,
                                                 value: viewModel.transactions[index].value,
-                                                hour: viewModel.transactions[index].hour,
+                                                hour: "06:00 AM",
                                                 image: viewModel.images[index],
                                                 background: viewModel.colors[index])
                         }
@@ -47,7 +47,7 @@ struct TransactionsView: View {
                             TransactionCellView(name: viewModel.transactions[index].name,
                                                 description: viewModel.transactions[index].description,
                                                 value: viewModel.transactions[index].value,
-                                                hour: viewModel.transactions[index].hour,
+                                                hour: "06:00 AM",
                                                 image: viewModel.images[index],
                                                 background: viewModel.colors[index])
                         }

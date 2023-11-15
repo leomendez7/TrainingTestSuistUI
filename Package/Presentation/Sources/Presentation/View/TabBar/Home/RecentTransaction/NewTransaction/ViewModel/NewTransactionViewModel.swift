@@ -8,9 +8,12 @@
 import Foundation
 import Combine
 import SwiftUI
+import Domain
 
-public class NewTransactionViewModel: ObservableObject {
+public class NewTransactionViewModel: BaseViewModel<CreateTransactionUseCase>, ObservableObject {
  
+    var transaction = Trade()
+    @State var success: Bool = false
     @Published var image: UIImage?
     @Published var showPicker = false
     @Published var source: Picker.Source = .library
@@ -23,6 +26,17 @@ public class NewTransactionViewModel: ObservableObject {
             }
         }
         showPicker = true
+    }
+    
+    func createTransaction(trade: Trade) async {
+        do {
+            let response = try await useCase.execute(requestValue: trade)
+            DispatchQueue.main.async {
+                self.success = response
+            }
+        } catch {
+            debugPrint(error.localizedDescription)
+        }
     }
     
 }

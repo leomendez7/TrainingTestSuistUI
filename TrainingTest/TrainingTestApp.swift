@@ -17,6 +17,7 @@ struct TrainingTestApp: App {
     @StateObject var createUserViewModel =  generateCreateUserModule()
     @StateObject var loginViewModel = generateFetchUserModule()
     @StateObject var editProfileViewModel = generateUpdateUserModule()
+    @StateObject var newTransactionViewModel = generateCreateTransactionModule()
     
     var body: some Scene {
         WindowGroup {
@@ -25,6 +26,7 @@ struct TrainingTestApp: App {
             if session && onboarding {
                 TabBarView()
                     .environmentObject(editProfileViewModel)
+                    .environmentObject(newTransactionViewModel)
             } else if !session && !onboarding {
                 OnboardingView()
             } else {
@@ -56,6 +58,13 @@ struct TrainingTestApp: App {
         let useCase = UpdateUserUseCase(repository: repository)
         let editProfileViewModel = EditProfileViewModel(useCase: useCase)
         return editProfileViewModel
+    }
+    
+    private static func generateCreateTransactionModule() -> NewTransactionViewModel {
+        let repository = TransactionRepository(datasource: TransactionRepositoryDataSource())
+        let useCase = CreateTransactionUseCase(repository: repository)
+        let newTransactionViewModel = NewTransactionViewModel(useCase: useCase)
+        return newTransactionViewModel
     }
     
 }

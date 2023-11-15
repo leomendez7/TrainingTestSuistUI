@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ValueTransactionTextFieldView: View {
     
-    @State var text: String = "0"
+    @Binding var text: String
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -37,5 +37,5 @@ struct ValueTransactionTextFieldView: View {
 }
 
 #Preview {
-    ValueTransactionTextFieldView()
+    ValueTransactionTextFieldView(text: .constant("0"))
 }

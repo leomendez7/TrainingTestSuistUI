@@ -13,7 +13,10 @@ public struct Trade: Identifiable, Codable {
     public var name: String = ""
     public var description: String = ""
     public var value: String = ""
-    public var hour: String = ""
+    public var isIncome: Bool = false
+    public var pay: String = ""
+    public var reminder: Bool = false
+    public var date = Date()
     
     public init() { }
     
@@ -21,7 +24,10 @@ public struct Trade: Identifiable, Codable {
         case name
         case description
         case value
-        case hour = "date"
+        case isIncome
+        case pay
+        case reminder
+        case date
     }
     
 }
