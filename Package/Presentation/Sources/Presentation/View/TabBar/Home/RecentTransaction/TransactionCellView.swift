@@ -58,7 +58,7 @@ struct TransactionCellView: View {
         .onAppear {
             let formatter = DateFormatter()
             formatter.dateFormat = "h:mm a"
-            hourText = formatter.string(from: trade.date)
+            hourText = formatter.string(from: trade.createDate)
         }
     }
 }

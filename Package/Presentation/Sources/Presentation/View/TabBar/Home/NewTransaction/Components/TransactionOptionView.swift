@@ -20,6 +20,7 @@ struct TransactionOptionView: View {
     @State private var showAlert = false
     @State private var titleAlert: String = ""
     @State private var textAlert: String = ""
+    @State private var cancellables: Set<AnyCancellable> = []
     @Binding var value: String
     @EnvironmentObject var viewModel: NewTransactionViewModel
     
@@ -75,7 +76,11 @@ struct TransactionOptionView: View {
                 })
         }
         .onAppear {
-            
+            viewModel.$success.sink { response in
+                if response {
+                    
+                }
+            }.store(in: &cancellables)
         }
         .alert(isPresented: $showAlert) {
             Alert(

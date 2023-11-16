@@ -17,6 +17,7 @@ struct SettingsView: View {
     @State var securityName = String()
     @State var name = String()
     @State var email = String()
+    @State var isLogout: Bool = false
     
     var body: some View {
         NavigationStack(path: $store.settings) {
@@ -56,7 +57,7 @@ struct SettingsView: View {
                             .foregroundColor(Color(.dark75))
                     })
                     .sheet(isPresented: $isSheetPresented) {
-                        LogoutView(isSheetPresented: isSheetPresented)
+                        LogoutView(isSheetPresented: isSheetPresented, isLogout: $isLogout)
                             .presentationDetents([.fraction(0.25)])
                     }
                 }
@@ -79,14 +80,14 @@ struct SettingsView: View {
                 email = Default.user()?.email ?? ""
                 name = Default.user()?.name ?? ""
             }
+            .onChange(of: isLogout) { _ in
+                setDefault.session = false
+            }
             .padding(.horizontal, 16)
             .padding(.top, 14)
             .navigationBarBackButtonHidden(true)
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
-            .onReceive(NotificationCenter.default.publisher(for: Notification.Name(rawValue: "logout"))) { _ in
-                setDefault.session = false
-            }
         }
     }
     

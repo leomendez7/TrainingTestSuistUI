@@ -17,7 +17,7 @@ public struct Trade: Identifiable, Codable {
     public var isIncome: Bool = false
     public var payment: String = ""
     public var reminder: Bool = false
-    public var date = Date()
+    public var createDate = Date()
     
     public init() { }
     
@@ -29,7 +29,7 @@ public struct Trade: Identifiable, Codable {
         case isIncome
         case payment
         case reminder
-        case date
+        case createDate
     }
     
 }

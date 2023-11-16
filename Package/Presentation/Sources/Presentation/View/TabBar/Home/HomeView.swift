@@ -16,12 +16,14 @@ struct HomeView: View {
     @State var isIncomeSelected = false
     @State var isExpensesSelected = false
     @State var seeAll = false
+    @State var incomeValue = ""
+    @State var expensesValue = ""
     
     var body: some View {
         NavigationStack(path: $store.transactions) {
             VStack {
                 ScrollView {
-                    BalanceComponentView(balance: "9400", income: "5000", expense: "1200")
+                    BalanceComponentView(balance: "9400", income: $incomeValue, expense: $expensesValue)
                     FrequencyView()
                     RecentTransactionView(seeAll: $seeAll)
                 }
@@ -35,6 +37,14 @@ struct HomeView: View {
                 isIncome = false
                 store.transactions.append("NewTransaction")
             }
+            .onChange(of: seeAll) { _ in
+                viewModel.seeAll = seeAll
+                viewModel.fetchTransactions()
+            }
+            .onAppear {
+                incomeValue = viewModel.calculateValues().0
+                expensesValue = viewModel.calculateValues().1
+            }
             .navigationDestination(for: String.self, destination: { route in
                 switch route {
                 case "NewTransaction":
@@ -43,10 +53,6 @@ struct HomeView: View {
                     EmptyView()
                 }
             })
-            .onChange(of: seeAll) { _ in
-                viewModel.seeAll = seeAll
-                viewModel.fetchTransactions()
-            }
             .homeTransactionToolbar(image: "avatar-2", isSheetPresented: $isSheetPresented, incomeSelected: $isIncomeSelected, expensesSelected: $isExpensesSelected)
         }
     }

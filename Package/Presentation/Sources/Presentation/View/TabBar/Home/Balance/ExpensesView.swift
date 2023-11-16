@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ExpensesView: View {
     
-    @State var expense: String = ""
+    @Binding var expense: String
     
     var body: some View {
         HStack(spacing: 10) {
@@ -35,5 +35,5 @@ struct ExpensesView: View {
 }
 
 #Preview {
-    ExpensesView(expense: "1200")
+    ExpensesView(expense: .constant("1200"))
 }

@@ -49,7 +49,11 @@ struct MonthSwitcherView: View {
             }
             Spacer()
         }
-        .task {
+        .onChange(of: selectedMonthIndex) { _ in
+            viewModel.selectedMont = viewModel.months[selectedMonthIndex]
+            viewModel.fetchTransactions()
+        }
+        .onAppear {
             viewModel.generateMonths()
             selectedMonthIndex = viewModel.currentMonth
         }

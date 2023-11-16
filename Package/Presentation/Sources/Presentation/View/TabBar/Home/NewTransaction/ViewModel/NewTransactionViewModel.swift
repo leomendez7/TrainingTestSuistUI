@@ -13,7 +13,7 @@ import Domain
 public class NewTransactionViewModel: BaseViewModel<CreateTransactionUseCase>, ObservableObject {
  
     var transaction = Trade()
-    @State var success: Bool = false
+    @Published var success: Bool = false
     @Published var image: UIImage?
     @Published var showPicker = false
     @Published var source: Picker.Source = .library

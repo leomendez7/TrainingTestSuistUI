@@ -11,6 +11,7 @@ import Domain
 struct LogoutView: View {
     
     @State var isSheetPresented: Bool
+    @Binding var isLogout: Bool
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var store: Store
     
@@ -34,8 +35,7 @@ struct LogoutView: View {
                     dismiss()
                 }, text: "No", color: Color(.violet20), foregroundColor: Color(.violet100), width: 164)
                 CustomButton(action: {
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "logout"),
-                                                    object: nil)
+                    isLogout.toggle()
                     dismiss()
                     Default.destroySession()
                 }, text: "Yes", color: Color(.violet100), foregroundColor: .white, width: 164)
@@ -47,5 +47,5 @@ struct LogoutView: View {
 }
 
 #Preview {
-    LogoutView(isSheetPresented: true)
+    LogoutView(isSheetPresented: true, isLogout: .constant(true))
 }
