@@ -16,7 +16,7 @@ public struct LoginView: View {
     @State var password: String = ""
     @State var showAlert = false
     @EnvironmentObject var store: Store
-    @EnvironmentObject var setDefault: Default
+    @EnvironmentObject var setDefault: DefaultSession
     @StateObject var viewModel: LoginViewModel
     
     public init(viewModel: LoginViewModel) {

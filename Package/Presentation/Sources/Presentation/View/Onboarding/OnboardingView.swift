@@ -16,7 +16,7 @@ public struct OnboardingView: View {
     @State private var selectedTab = 0
     @State private var isLoggedIn = false
     @EnvironmentObject var store: Store
-    @EnvironmentObject var setDefault: Default
+    @EnvironmentObject var setDefault: DefaultSession
     
     public init() {
         showLoginButton = true

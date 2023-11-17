@@ -11,7 +11,7 @@ import Domain
 struct SettingsView: View {
     
     @EnvironmentObject var store: Store
-    @EnvironmentObject var setDefault: Default
+    @EnvironmentObject var setDefault: DefaultSession
     @State private var isSheetPresented = false
     @State var currencyName = String()
     @State var securityName = String()

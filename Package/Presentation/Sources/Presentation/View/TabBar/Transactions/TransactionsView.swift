@@ -6,50 +6,25 @@
 //
 
 import SwiftUI
+import Domain
 
 struct TransactionsView: View {
     
-    @StateObject var viewModel: HomeViewModel
+    @StateObject var viewModel: TransactionsViewModel
     @State private var isSheetPresented = false
+    @EnvironmentObject var store: Store
     
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack {
-                    HStack(spacing: 8) {
-                        Text("Today")
-                            .foregroundColor(Color(.dark))
-                            .font(.system(size: 18))
-                            .fontWeight(.bold)
-                        Spacer()
-                    }
-                    .padding(.top, 31)
-                    VStack(spacing: 8) {
-                        ForEach(viewModel.transactions.indices, id: \.self) { index in
-                            TransactionCellView(image: viewModel.images[index],
-                                                background: viewModel.colors[index],
-                                                trade: viewModel.transactions[index])
-                        }
-                    }
-                    HStack(spacing: 8) {
-                        Text("Yesterday")
-                            .foregroundColor(Color(.dark))
-                            .font(.system(size: 18))
-                            .fontWeight(.bold)
-                        Spacer()
-                    }
-                    .padding(.top, 31)
-                    VStack(spacing: 8) {
-                        ForEach(viewModel.transactions.indices, id: \.self) { index in
-                            TransactionCellView(image: viewModel.images[index],
-                                                background: viewModel.colors[index],
-                                                trade: viewModel.transactions[index])
-                        }
+                VStack(spacing: 16) {
+                    ForEach(viewModel.groupedTransactions.keys.sorted(by: >), id: \.self) { date in
+                        TransactionSectionDayView(date: date, transactions: viewModel.groupedTransactions[date]!, viewModel: viewModel)
                     }
                 }
             }
             .transactionToolbar(isSheetPresented: $isSheetPresented)
-            .environmentObject(viewModel)
+            .environmentObject(Constants.homeViewModel)
         }
         .padding(.horizontal, 16)
         .onAppear {
@@ -64,5 +39,7 @@ struct TransactionsView: View {
 #Preview {
     VStack {
         TransactionsView(viewModel: Constants.transactionViewModel)
+            .environmentObject(Store())
     }
 }
+

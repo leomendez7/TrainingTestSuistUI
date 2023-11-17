@@ -34,9 +34,7 @@ struct RecentTransactionView: View {
             .padding(.top, 31)
             VStack(spacing: 8) {
                 ForEach(viewModel.transactions.indices, id: \.self) { index in
-                    TransactionCellView(image: viewModel.images[index],
-                                        background: viewModel.colors[index],
-                                        trade: viewModel.transactions[index])
+                    TransactionCellView(trade: viewModel.transactions[index])
                 }
             }
         }

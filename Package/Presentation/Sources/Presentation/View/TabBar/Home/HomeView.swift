@@ -76,7 +76,7 @@ struct HomeView: View {
 
 #Preview {
     NavigationStack {
-        HomeView(viewModel: Constants.transactionViewModel)
+        HomeView(viewModel: Constants.homeViewModel)
             .environmentObject(Store())
     }
 }

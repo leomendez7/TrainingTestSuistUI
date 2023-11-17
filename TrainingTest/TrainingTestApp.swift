@@ -12,7 +12,7 @@ import Domain
 @main
 struct TrainingTestApp: App {
    
-    @StateObject var setDefault = Default()
+    @StateObject var setDefault = DefaultSession()
     
     var body: some Scene {
         WindowGroup {

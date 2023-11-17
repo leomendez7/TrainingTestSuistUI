@@ -39,8 +39,10 @@ public class HomeViewModel: BaseViewModel<FetchTransactionUseCase>, ObservableOb
     }
     
     func fetchTransactions() async {
-        do{
-            let transactions = try await useCase.execute(requestValue: Default.user()?.email ?? "")
+        do {
+            var response = try await useCase.execute(requestValue: Default.user()?.email ?? "")
+            response = response.reversed()
+            let transactions = response
             DispatchQueue.main.async {
                 var filterTransaction = [Trade]()
                 self.transactions.removeAll()
@@ -62,23 +64,6 @@ public class HomeViewModel: BaseViewModel<FetchTransactionUseCase>, ObservableOb
                         count = self.seeAll ? filterTransaction.count - 1 : 2
                     }
                     for index in 0...count {
-                        switch filterTransaction[index].category {
-                        case "Shopping":
-                            self.images.append("shopping-bag")
-                            self.colors.append(Color(.yellow20))
-                        case "Subscription":
-                            self.images.append("recurring-bill")
-                            self.colors.append(Color(.violet20))
-                        case "Food":
-                            self.images.append("restaurant")
-                            self.colors.append(Color(.red20))
-                        case "Salary":
-                            self.images.append("salary")
-                            self.colors.append(Color(.green20))
-                        default:
-                            self.images.append("transportation")
-                            self.colors.append(Color(.blue20))
-                        }
                         self.transactions.append(filterTransaction[index])
                     }
                 }

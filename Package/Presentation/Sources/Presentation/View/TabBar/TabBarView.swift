@@ -19,7 +19,7 @@ public struct TabBarView: View {
     
     public var body: some View {
         TabView(selection: $selectedTab) {
-            HomeView(viewModel: Constants.transactionViewModel)
+            HomeView(viewModel: Constants.homeViewModel)
                 .tabItem {
                     Image("home", bundle: .module)
                     Text("Home")
