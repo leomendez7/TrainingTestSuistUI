@@ -14,9 +14,11 @@ public struct User: Identifiable, Codable {
     public var email: String = ""
     public var birthday: String = ""
     public var password: String = ""
-    public var trades = [Trade]()
+    public var trades: [Trade]
     
-    public init() { }
+    public init() {
+        trades = [Trade]()
+    }
     
     enum CodingKeys: String, CodingKey {
         case name

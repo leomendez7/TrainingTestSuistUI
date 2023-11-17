@@ -18,13 +18,11 @@ struct CreateAccountView: View {
     @State private var showAlert = false
     @State private var titleAlert: String = ""
     @State private var textAlert: String = ""
-    @EnvironmentObject var store: Store
-    @EnvironmentObject var viewModel: CreateUserViewModel
-    
+    @StateObject var viewModel: CreateUserViewModel
     
     var backButton: some View {
         Button(action: {
-            store.login.removeLast()
+            viewModel.store.login.removeLast()
         }) {
             HStack {
                 Image("arrow-left", bundle: .module)
@@ -87,7 +85,6 @@ struct CreateAccountView: View {
 
 #Preview {
     NavigationStack {
-        CreateAccountView()
-            .environmentObject(Store())
+        CreateAccountView(viewModel: Constants.createUserViewModel)
     }
 }

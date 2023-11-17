@@ -17,7 +17,7 @@ struct EditProfileView: View {
     @State private var email: String = ""
     @State private var birthday: String = ""
     @State private var showAlert = false
-    @EnvironmentObject var viewModel: EditProfileViewModel
+    @StateObject var viewModel: EditProfileViewModel
     @State private var cancellables: Set<AnyCancellable> = []
     var backButton : some View {
         Button(action: {
@@ -49,15 +49,15 @@ struct EditProfileView: View {
             }
             Spacer()
         }
+        .onReceive(viewModel.$success) { newValue in
+            if newValue {
+                showAlert.toggle()
+            }
+        }
         .onAppear {
             email = Default.user()?.email ?? ""
             name = Default.user()?.name ?? ""
             birthday = Default.user()?.birthday ?? ""
-//            viewModel.$success.sink { response in
-//                if response {
-//
-//                }
-//            }.store(in: &cancellables)
         }
         .padding(.horizontal, 16)
         .padding(.top, 64)
@@ -67,11 +67,11 @@ struct EditProfileView: View {
         .navigationBarBackButtonHidden(true)
         .toolbar(.hidden, for: .tabBar)
         .alert(isPresented: $showAlert) {
-            Alert(
-                title: Text(Localizable.Login.alertTitleValidateUser),
-                message: Text(Localizable.Login.alertTextValidateUser),
-                dismissButton: .default(Text("OK"))
-            )
+            Alert(title: Text(Localizable.EditUser.alertTitleUpdateUser), 
+                  message: Text(Localizable.EditUser.alertTextUpdateUser),
+                  primaryButton: .default(Text("Ok"), action: {
+                store.settings.removeLast()
+            }), secondaryButton: .cancel())
         }
     }
     
@@ -88,6 +88,6 @@ struct EditProfileView: View {
 
 #Preview {
     NavigationStack {
-        EditProfileView()
+        EditProfileView(viewModel: Constants.editProfileViewModel)
     }
 }

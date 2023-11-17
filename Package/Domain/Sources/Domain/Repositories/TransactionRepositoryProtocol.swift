@@ -9,7 +9,7 @@ import Foundation
 
 public protocol TransactionRepositoryProtocol {
     
-    //func fetchTransaction(credentials: [String: String]) async throws -> Trade
+    func fetchTransaction(email: String) async throws -> [Trade]
     func createTransaction(trade: Trade) async throws -> Bool
     
 }

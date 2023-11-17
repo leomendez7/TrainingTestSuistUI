@@ -19,4 +19,8 @@ public class CreateTransactionUseCase: UseCaseProtocol {
         return try await repository.createTransaction(trade: requestValue)
     }
     
+    public func fetchTrades(email: String) async throws -> [Trade] {
+        return try await repository.fetchTransaction(email: email)
+    }
+    
 }

@@ -34,7 +34,6 @@ struct RecentTransactionView: View {
             .padding(.top, 31)
             VStack(spacing: 8) {
                 ForEach(viewModel.transactions.indices, id: \.self) { index in
-                    
                     TransactionCellView(image: viewModel.images[index],
                                         background: viewModel.colors[index],
                                         trade: viewModel.transactions[index])
@@ -42,14 +41,10 @@ struct RecentTransactionView: View {
             }
         }
         .padding(.horizontal, 16)
-        .onAppear {
-            viewModel.fetchTransactions()
-        }
     }
     
 }
 
 #Preview {
     RecentTransactionView(seeAll: .constant(Bool()))
-        .environmentObject(TransactionViewModel())
 }

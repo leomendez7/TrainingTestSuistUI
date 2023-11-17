@@ -14,6 +14,7 @@ public class LoginViewModel: BaseViewModel<FetchUserUseCase>, ObservableObject {
     
     @Published var success: Bool = false
     @Published var alert: Bool = false
+    @State private var cancellables: Set<AnyCancellable> = []
     
     func Login(credentials: [String: String]) async {
         do {

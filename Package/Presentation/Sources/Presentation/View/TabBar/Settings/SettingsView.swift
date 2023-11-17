@@ -71,7 +71,7 @@ struct SettingsView: View {
                 case "security":
                     SecurityView()
                 case "editProfile":
-                    EditProfileView()
+                    EditProfileView(viewModel: Constants.editProfileViewModel)
                 default:
                     EmptyView()
                 }

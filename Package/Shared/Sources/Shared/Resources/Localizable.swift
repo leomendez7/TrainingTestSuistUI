@@ -29,4 +29,9 @@ public struct Localizable {
         public static let alertTextNewTrade = "NewTransaction.alertTextNewTrade".localized()
     }
     
+    public struct EditUser {
+        public static let alertTitleUpdateUser = "Edit.alertTitleUpdateUser".localized()
+        public static let alertTextUpdateUser = "Edit.alertTextUpdateUser".localized()
+    }
+    
 }

@@ -72,7 +72,7 @@ public struct OnboardingView: View {
             .navigationDestination(for: String.self, destination: { route in
                 switch route {
                 case "login":
-                    LoginView()
+                    LoginView(viewModel: Constants.loginViewModel)
                 default:
                     EmptyView()
                 }

@@ -17,6 +17,14 @@ public class NewTransactionViewModel: BaseViewModel<CreateTransactionUseCase>, O
     @Published var image: UIImage?
     @Published var showPicker = false
     @Published var source: Picker.Source = .library
+    private var store: Store
+    private var cancellables: Set<AnyCancellable> = []
+    
+    public init(useCase: CreateTransactionUseCase, store: Store) {
+        self.store = store
+        super.init(useCase: useCase)
+        self.subscribe()
+    }
     
     func showPhotoPicker() {
         if source == .camera {
@@ -37,6 +45,23 @@ public class NewTransactionViewModel: BaseViewModel<CreateTransactionUseCase>, O
         } catch {
             debugPrint(error.localizedDescription)
         }
+    }
+    
+    func fetchTrade() async {
+        do {
+            let response = try await useCase.fetchTrades(email: Default.user()?.email ?? "")
+            print(response)
+        } catch {
+            debugPrint(error.localizedDescription)
+        }
+    }
+    
+    func subscribe() {
+        $success.sink { response in
+            if response {
+                self.store.transactions.removeLast()
+            }
+        }.store(in: &cancellables)
     }
     
 }

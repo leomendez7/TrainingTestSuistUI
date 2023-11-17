@@ -19,15 +19,13 @@ public struct TabBarView: View {
     
     public var body: some View {
         TabView(selection: $selectedTab) {
-            HomeView()
-                .environmentObject(TransactionViewModel())
+            HomeView(viewModel: Constants.transactionViewModel)
                 .tabItem {
                     Image("home", bundle: .module)
                     Text("Home")
                 }
                 .tag(0)
             TransactionsView()
-                .environmentObject(TransactionViewModel())
                 .tabItem {
                     Image("transaction", bundle: .module)
                     Text("Transaction")

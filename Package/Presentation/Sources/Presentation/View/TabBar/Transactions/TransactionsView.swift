@@ -51,8 +51,10 @@ struct TransactionsView: View {
             .transactionToolbar(isSheetPresented: $isSheetPresented)
         }
         .padding(.horizontal, 16)
-        .task {
-            viewModel.fetchTransactions()
+        .onAppear {
+            Task {
+                await viewModel.fetchTransactions()
+            }
         }
     }
     
@@ -61,6 +63,5 @@ struct TransactionsView: View {
 #Preview {
     VStack {
         TransactionsView()
-            .environmentObject(TransactionViewModel())
     }
 }

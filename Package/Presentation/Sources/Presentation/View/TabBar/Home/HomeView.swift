@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @EnvironmentObject var viewModel: TransactionViewModel
+    @StateObject var viewModel: TransactionViewModel
     @EnvironmentObject var store: Store
     @State var isIncome = Bool()
     @State private var isSheetPresented = false
@@ -39,11 +39,16 @@ struct HomeView: View {
             }
             .onChange(of: seeAll) { _ in
                 viewModel.seeAll = seeAll
-                viewModel.fetchTransactions()
+                Task {
+                    await viewModel.fetchTransactions()
+                }
             }
             .onAppear {
-                incomeValue = viewModel.calculateValues().0
-                expensesValue = viewModel.calculateValues().1
+                Task {
+                    await viewModel.fetchTransactions()
+                    incomeValue = viewModel.incomeValue
+                    expensesValue = viewModel.expensesValue
+                }
             }
             .navigationDestination(for: String.self, destination: { route in
                 switch route {
@@ -54,15 +59,16 @@ struct HomeView: View {
                 }
             })
             .homeTransactionToolbar(image: "avatar-2", isSheetPresented: $isSheetPresented, incomeSelected: $isIncomeSelected, expensesSelected: $isExpensesSelected)
+            .environmentObject(viewModel)
         }
+        .toolbarColorScheme(.light, for: .navigationBar)
     }
     
 }
 
 #Preview {
     NavigationStack {
-        HomeView()
+        HomeView(viewModel: Constants.transactionViewModel)
             .environmentObject(Store())
-            .environmentObject(TransactionViewModel())
     }
 }

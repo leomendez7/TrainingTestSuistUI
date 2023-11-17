@@ -26,7 +26,7 @@ struct NewTransactionView: View {
     }
     
     var body: some View {
-        VStack() {
+        ZStack(alignment: .bottom) {
             if isIncome {
                 Color(.green100)
                     .ignoresSafeArea()
@@ -35,9 +35,8 @@ struct NewTransactionView: View {
                     .ignoresSafeArea()
             }
             VStack(alignment: .leading) {
-                Spacer()
                 ValueTransactionTextFieldView(text: $value, placeholder: "0")
-                TransactionOptionView(isIncome: isIncome, value: $value)
+                TransactionOptionView(isIncome: isIncome, value: $value, viewModel: Constants.newTransactionViewModel)
                     .frame(height: UIScreen.main.bounds.size.height * 0.60)
             }.background(backgroundColor)
         }

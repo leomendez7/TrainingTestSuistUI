@@ -20,9 +20,8 @@ struct TransactionOptionView: View {
     @State private var showAlert = false
     @State private var titleAlert: String = ""
     @State private var textAlert: String = ""
-    @State private var cancellables: Set<AnyCancellable> = []
     @Binding var value: String
-    @EnvironmentObject var viewModel: NewTransactionViewModel
+    @StateObject var viewModel: NewTransactionViewModel
     
     var body: some View {
         VStack(spacing: 16) {
@@ -76,11 +75,9 @@ struct TransactionOptionView: View {
                 })
         }
         .onAppear {
-            viewModel.$success.sink { response in
-                if response {
-                    
-                }
-            }.store(in: &cancellables)
+            Task {
+                await viewModel.fetchTrade()
+            }
         }
         .alert(isPresented: $showAlert) {
             Alert(
@@ -108,5 +105,5 @@ struct TransactionOptionView: View {
 }
 
 #Preview {
-    TransactionOptionView(isIncome: true, value: .constant("0"))
+    TransactionOptionView(isIncome: true, value: .constant("0"), viewModel: Constants.newTransactionViewModel)
 }

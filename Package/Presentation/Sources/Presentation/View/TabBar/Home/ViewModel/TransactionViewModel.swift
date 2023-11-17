@@ -10,15 +10,18 @@ import Combine
 import SwiftUI
 import Domain
 
-public class TransactionViewModel: ObservableObject {
+public class TransactionViewModel: BaseViewModel<FetchTransactionUseCase>, ObservableObject {
     
     var transactions: [Trade] = []
     var seeAll: Bool = false
     var selectedMont: String = ""
+    @Published var success: Bool = false
     @Published var images: [String] = []
     @Published var colors: [Color] = []
     @Published var months: [String] = []
     @Published var currentMonth: Int = 0
+    @Published var incomeValue = ""
+    @Published var expensesValue = ""
     
     func generateMonths() {
         let dateFormatter = DateFormatter()
@@ -34,52 +37,59 @@ public class TransactionViewModel: ObservableObject {
         }
     }
     
-    func fetchTransactions() {
-        guard let transactions = Default.user()?.trades else { return }
-        var filterTransaction = [Trade]()
-        self.transactions.removeAll()
-        images.removeAll()
-        colors.removeAll()
-        transactions.forEach { trade in
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MMMM"
-            let monthName = dateFormatter.string(from: trade.createDate)
-            if monthName == selectedMont {
-                filterTransaction.append(trade)
-            }
-        }
-        if filterTransaction.count > 0 {
-            var count = 0
-            if filterTransaction.count < 3 {
-                count = filterTransaction.count - 1
-            } else {
-                count = seeAll ? filterTransaction.count - 1 : 2
-            }
-            for index in 0...count {
-                switch filterTransaction[index].category {
-                case "Shopping":
-                    images.append("shopping-bag")
-                    colors.append(Color(.yellow20))
-                case "Subscription":
-                    images.append("recurring-bill")
-                    colors.append(Color(.violet20))
-                case "Food":
-                    images.append("restaurant")
-                    colors.append(Color(.red20))
-                case "Salary":
-                    images.append("salary")
-                    colors.append(Color(.green20))
-                default:
-                    images.append("transportation")
-                    colors.append(Color(.blue20))
+    func fetchTransactions() async {
+        do{
+            let transactions = try await useCase.execute(requestValue: Default.user()?.email ?? "")
+            DispatchQueue.main.async {
+                var filterTransaction = [Trade]()
+                self.transactions.removeAll()
+                self.images.removeAll()
+                self.colors.removeAll()
+                transactions.forEach { trade in
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "MMMM"
+                    let monthName = dateFormatter.string(from: trade.createDate)
+                    if monthName == self.selectedMont {
+                        filterTransaction.append(trade)
+                    }
                 }
-                self.transactions.append(filterTransaction[index])
+                if filterTransaction.count > 0 {
+                    var count = 0
+                    if filterTransaction.count < 3 {
+                        count = filterTransaction.count - 1
+                    } else {
+                        count = self.seeAll ? filterTransaction.count - 1 : 2
+                    }
+                    for index in 0...count {
+                        switch filterTransaction[index].category {
+                        case "Shopping":
+                            self.images.append("shopping-bag")
+                            self.colors.append(Color(.yellow20))
+                        case "Subscription":
+                            self.images.append("recurring-bill")
+                            self.colors.append(Color(.violet20))
+                        case "Food":
+                            self.images.append("restaurant")
+                            self.colors.append(Color(.red20))
+                        case "Salary":
+                            self.images.append("salary")
+                            self.colors.append(Color(.green20))
+                        default:
+                            self.images.append("transportation")
+                            self.colors.append(Color(.blue20))
+                        }
+                        self.transactions.append(filterTransaction[index])
+                    }
+                }
+                self.calculateValues(transactions: filterTransaction)
+                self.success = true
             }
+        } catch {
+            print(error.localizedDescription)
         }
     }
     
-    func calculateValues() -> (String, String) {
-        guard let transactions = Default.user()?.trades else { return ("0", "0") }
+    func calculateValues(transactions: [Trade]) {
         var incomes = [Trade]()
         var expenses = [Trade]()
         var incomeValue = 0
@@ -92,7 +102,8 @@ public class TransactionViewModel: ObservableObject {
         expenses.forEach { trade in
             expensesValue = expensesValue + (Int(trade.value) ?? 0)
         }
-        return ("\(incomeValue)", "\(expensesValue)")
+        self.incomeValue = "\(incomeValue)"
+        self.expensesValue = "\(expensesValue)"
     }
     
 }

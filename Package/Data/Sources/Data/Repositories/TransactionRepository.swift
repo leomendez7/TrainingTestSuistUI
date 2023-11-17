@@ -20,5 +20,7 @@ public class TransactionRepository: TransactionRepositoryProtocol {
         return try await self.datasource.createTransaction(trade: trade)
     }
     
-    
+    public func fetchTransaction(email: String) async throws -> [Trade] {
+        return try await self.datasource.fetchTransactions(email: email)
+    }
 }

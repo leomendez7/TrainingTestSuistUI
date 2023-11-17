@@ -50,8 +50,11 @@ struct MonthSwitcherView: View {
             Spacer()
         }
         .onChange(of: selectedMonthIndex) { _ in
+            print(selectedMonthIndex)
             viewModel.selectedMont = viewModel.months[selectedMonthIndex]
-            viewModel.fetchTransactions()
+            Task {
+                await viewModel.fetchTransactions()
+            }
         }
         .onAppear {
             viewModel.generateMonths()
@@ -62,5 +65,4 @@ struct MonthSwitcherView: View {
 
 #Preview {
     MonthSwitcherView()
-        .environmentObject(TransactionViewModel())
 }

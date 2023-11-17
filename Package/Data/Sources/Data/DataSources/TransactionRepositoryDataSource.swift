@@ -17,39 +17,39 @@ public class TransactionRepositoryDataSource {
     public init() { }
     
     public func createTransaction(trade: Trade) async throws -> Bool {
-        let email = Default.user()?.email ?? ""
+        do {
+            let jsonData = trade.convertToJSON()
+            let document = MutableDocument()
+            document.setData(jsonData)
+            try database.saveDocument(document)
+            print("Trade save successfully.")
+            return true
+        } catch {
+            print("Document hasn't been save: \(error.localizedDescription)")
+            return false
+        }
+    }
+    
+    public func fetchTransactions(email: String) async throws -> [Trade] {
+        var trades: [Trade] = []
         let query = QueryBuilder
             .select(SelectResult.all())
             .from(DataSource.database(database))
             .where(Expression.property("email").equalTo(Expression.string(email)))
         do {
             for result in try query.execute() {
-                guard let dictionary = result.dictionary(at: 0)?.toMutable() else {
-                    print("Error: No user dictionary found.")
-                    return false
-                }
-                do {
-                    var user = try JSONDecoder().decode(User.self, from: JSONSerialization.data(withJSONObject: dictionary.toDictionary() , options: []))
-                    Default.user()?.trades.forEach { trade in
-                        user.trades.append(trade)
-                    }
-                    user.trades.append(trade)
-                    Default.save(user: user)
-                    let updatedDocument = MutableDocument(id: dictionary.string(forKey: "_id"))
-                    updatedDocument.setData(user.convertToJSON())
-                    try database.saveDocument(updatedDocument)
-                    print("Trade added to user successfully.")
-                    return true
-                } catch {
-                    print("Error decoding user: \(error.localizedDescription)")
-                    return false
+                if let document = result.dictionary(at: 0)?.toMutable(),
+                   let jsonData = try? JSONSerialization.data(withJSONObject: document.toDictionary(), options: []),
+                   let trade = try? JSONDecoder().decode(Trade.self, from: jsonData) {
+                    print("Recovered trade: \(trade)")
+                    trades.append(trade)
                 }
             }
         } catch {
-            print("Document hasn't been save: \(error.localizedDescription)")
-            return false
+            print("Error querying trades: \(error.localizedDescription)")
+            throw error
         }
-        return false
+        return trades
     }
     
 }
