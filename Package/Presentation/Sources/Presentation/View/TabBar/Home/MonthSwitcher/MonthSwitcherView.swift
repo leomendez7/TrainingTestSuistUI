@@ -11,7 +11,7 @@ struct MonthSwitcherView: View {
     
     @State private var selectedMonthIndex = 0
     @State private var isSheetPresented = false
-    @EnvironmentObject var viewModel: TransactionViewModel
+    @EnvironmentObject var viewModel: HomeViewModel
     
     var body: some View {
         HStack() {

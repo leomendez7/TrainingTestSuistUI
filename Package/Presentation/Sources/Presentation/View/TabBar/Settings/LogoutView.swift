@@ -37,7 +37,6 @@ struct LogoutView: View {
                 CustomButton(action: {
                     isLogout.toggle()
                     dismiss()
-                    Default.destroySession()
                 }, text: "Yes", color: Color(.violet100), foregroundColor: .white, width: 164)
             }
         }

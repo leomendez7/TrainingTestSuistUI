@@ -28,7 +28,7 @@ public extension String {
     }
     
     func localized() -> String {
-        return NSLocalizedString(self, tableName: "Localizable", comment: "")
+        return NSLocalizedString(self, tableName: "Localizable", value: "", comment: "")
     }
     
 }

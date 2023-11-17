@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RecentTransactionView: View {
     
-    @EnvironmentObject var viewModel: TransactionViewModel
+    @EnvironmentObject var viewModel: HomeViewModel
     @Binding var seeAll: Bool
     @State var image = ""
     

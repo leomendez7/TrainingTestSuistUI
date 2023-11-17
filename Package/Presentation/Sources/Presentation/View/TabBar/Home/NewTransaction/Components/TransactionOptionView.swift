@@ -20,6 +20,7 @@ struct TransactionOptionView: View {
     @State private var showAlert = false
     @State private var titleAlert: String = ""
     @State private var textAlert: String = ""
+    @State var balance: String
     @Binding var value: String
     @StateObject var viewModel: NewTransactionViewModel
     
@@ -59,11 +60,15 @@ struct TransactionOptionView: View {
             }
             Spacer()
             CustomButton(action: {
-                if value != "0" && !value.isEmpty {
+                if (!isIncome && ((Int(value) ?? 0) >= Int(balance) ?? 0)) {
+                    titleAlert = "Alert!"
+                    textAlert = "The value cannot be greater than the balance."
+                    showAlert.toggle()
+                } else if self.value != "0" && !self.value.isEmpty {
                     createTransaction()
                 } else {
-                    titleAlert = Localizable.NewTransaction.alertTitleNewTrade
-                    textAlert = Localizable.NewTransaction.alertTextNewTrade
+                    titleAlert = "Alert!"
+                    textAlert = "The value should not be 0."
                     showAlert.toggle()
                 }
             }, text: "Continue", color: Color(.violet100), foregroundColor: .white)
@@ -105,5 +110,5 @@ struct TransactionOptionView: View {
 }
 
 #Preview {
-    TransactionOptionView(isIncome: true, value: .constant("0"), viewModel: Constants.newTransactionViewModel)
+    TransactionOptionView(isIncome: true, balance: "", value: .constant("0"), viewModel: Constants.newTransactionViewModel)
 }

@@ -10,7 +10,7 @@ import Combine
 import SwiftUI
 import Domain
 
-public class TransactionViewModel: BaseViewModel<FetchTransactionUseCase>, ObservableObject {
+public class HomeViewModel: BaseViewModel<FetchTransactionUseCase>, ObservableObject {
     
     var transactions: [Trade] = []
     var seeAll: Bool = false
@@ -20,8 +20,9 @@ public class TransactionViewModel: BaseViewModel<FetchTransactionUseCase>, Obser
     @Published var colors: [Color] = []
     @Published var months: [String] = []
     @Published var currentMonth: Int = 0
-    @Published var incomeValue = ""
-    @Published var expensesValue = ""
+    @Published var incomeValue: String = ""
+    @Published var expensesValue: String = ""
+    @Published var balance: String = ""
     
     func generateMonths() {
         let dateFormatter = DateFormatter()
@@ -81,6 +82,7 @@ public class TransactionViewModel: BaseViewModel<FetchTransactionUseCase>, Obser
                         self.transactions.append(filterTransaction[index])
                     }
                 }
+                self.calculateBalance(transactions: transactions)
                 self.calculateValues(transactions: filterTransaction)
                 self.success = true
             }
@@ -104,6 +106,18 @@ public class TransactionViewModel: BaseViewModel<FetchTransactionUseCase>, Obser
         }
         self.incomeValue = "\(incomeValue)"
         self.expensesValue = "\(expensesValue)"
+    }
+    
+    func calculateBalance(transactions: [Trade]) {
+        var balance = 0
+        transactions.forEach { trade in
+            if trade.isIncome {
+                balance = balance + (Int(trade.value) ?? 0)
+            } else {
+                balance = balance - (Int(trade.value) ?? 0)
+            }
+        }
+        self.balance = "\(balance)"
     }
     
 }

@@ -25,7 +25,7 @@ public struct TabBarView: View {
                     Text("Home")
                 }
                 .tag(0)
-            TransactionsView()
+            TransactionsView(viewModel: Constants.transactionViewModel)
                 .tabItem {
                     Image("transaction", bundle: .module)
                     Text("Transaction")

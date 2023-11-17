@@ -58,8 +58,8 @@ public struct LoginView: View {
             .navigationBarTitleDisplayMode(.inline)
             .alert(isPresented: $showAlert) {
                 Alert(
-                    title: Text(Localizable.Login.alertTitleValidateUser),
-                    message: Text(Localizable.Login.alertTextValidateUser),
+                    title: Text("Error!"),
+                    message: Text("This user is not found."),
                     dismissButton: .default(Text("OK"))
                 )
             }

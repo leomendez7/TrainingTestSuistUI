@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BalanceComponentView: View {
     
-    @State var balance: String = ""
+    @Binding var balance: String
     @Binding var income: String
     @Binding var expense: String
     
@@ -36,5 +36,5 @@ struct BalanceComponentView: View {
 }
 
 #Preview {
-    BalanceComponentView(balance: "9400", income: .constant("5000"), expense: .constant("1200"))
+    BalanceComponentView(balance: .constant("9400"), income: .constant("5000"), expense: .constant("1200"))
 }

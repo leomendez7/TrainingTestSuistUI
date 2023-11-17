@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TransactionsView: View {
     
-    @EnvironmentObject var viewModel: TransactionViewModel
+    @StateObject var viewModel: HomeViewModel
     @State private var isSheetPresented = false
     
     var body: some View {
@@ -49,6 +49,7 @@ struct TransactionsView: View {
                 }
             }
             .transactionToolbar(isSheetPresented: $isSheetPresented)
+            .environmentObject(viewModel)
         }
         .padding(.horizontal, 16)
         .onAppear {
@@ -62,6 +63,6 @@ struct TransactionsView: View {
 
 #Preview {
     VStack {
-        TransactionsView()
+        TransactionsView(viewModel: Constants.transactionViewModel)
     }
 }

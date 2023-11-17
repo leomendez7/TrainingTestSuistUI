@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @StateObject var viewModel: TransactionViewModel
+    @StateObject var viewModel: HomeViewModel
     @EnvironmentObject var store: Store
     @State var isIncome = Bool()
     @State private var isSheetPresented = false
@@ -18,12 +18,13 @@ struct HomeView: View {
     @State var seeAll = false
     @State var incomeValue = ""
     @State var expensesValue = ""
+    @State var balance = ""
     
     var body: some View {
         NavigationStack(path: $store.transactions) {
             VStack {
                 ScrollView {
-                    BalanceComponentView(balance: "9400", income: $incomeValue, expense: $expensesValue)
+                    BalanceComponentView(balance: $balance, income: $incomeValue, expense: $expensesValue)
                     FrequencyView()
                     RecentTransactionView(seeAll: $seeAll)
                 }
@@ -46,14 +47,21 @@ struct HomeView: View {
             .onAppear {
                 Task {
                     await viewModel.fetchTransactions()
-                    incomeValue = viewModel.incomeValue
-                    expensesValue = viewModel.expensesValue
                 }
+            }
+            .onReceive(viewModel.$incomeValue) { newValue in
+                incomeValue = newValue
+            }
+            .onReceive(viewModel.$expensesValue) { newValue in
+                expensesValue = newValue
+            }
+            .onReceive(viewModel.$balance) { newValue in
+                balance = newValue
             }
             .navigationDestination(for: String.self, destination: { route in
                 switch route {
                 case "NewTransaction":
-                    NewTransactionView(isIncome: $isIncome)
+                    NewTransactionView(isIncome: $isIncome, balance: balance)
                 default:
                     EmptyView()
                 }

@@ -67,8 +67,8 @@ struct EditProfileView: View {
         .navigationBarBackButtonHidden(true)
         .toolbar(.hidden, for: .tabBar)
         .alert(isPresented: $showAlert) {
-            Alert(title: Text(Localizable.EditUser.alertTitleUpdateUser), 
-                  message: Text(Localizable.EditUser.alertTextUpdateUser),
+            Alert(title: Text("Success!"), 
+                  message: Text("User has been updated."),
                   primaryButton: .default(Text("Ok"), action: {
                 store.settings.removeLast()
             }), secondaryButton: .cancel())

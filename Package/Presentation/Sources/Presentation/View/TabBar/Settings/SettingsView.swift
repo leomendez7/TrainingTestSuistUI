@@ -82,6 +82,7 @@ struct SettingsView: View {
             }
             .onChange(of: isLogout) { _ in
                 setDefault.session = false
+                Default.destroySession()
             }
             .padding(.horizontal, 16)
             .padding(.top, 14)

@@ -24,14 +24,26 @@ struct CategorySelectorView: View {
             }
         } label: {
             HStack {
-                Text(selectedCategory)
-                    .font(.system(size: 18))
-                    .foregroundColor(Color(.light20))
-                    .padding(.horizontal, 16)
+                HStack {
+                    Circle()
+                        .fill(Color(.green100))
+                        .frame(width: 14, height: 14)
+                    Text(selectedCategory)
+                        .font(.system(size: 18))
+                        .foregroundColor(Color(.dark))
+                }
+                .padding(.horizontal, 8)
+                .frame(height: 33)
+                .background(Color(.light80))
+                .cornerRadius(32)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 32)
+                        .stroke(Color(.light60), lineWidth: 1)
+                )
                 Spacer()
                 Image("arrow-down-2", bundle: .module)
-                    .padding(.horizontal, 16)
             }
+            .padding(.horizontal, 16)
             .frame(height: 56)
             .background(.white)
             .cornerRadius(16)

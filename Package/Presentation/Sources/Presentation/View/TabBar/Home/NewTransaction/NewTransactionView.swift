@@ -12,6 +12,7 @@ struct NewTransactionView: View {
     @Binding var isIncome: Bool
     @State var tittle: String = ""
     @State var value: String = ""
+    @State var balance: String
     @EnvironmentObject var store: Store
     @State private var backgroundColor: Color = Color(.green100)
     var backButton : some View {
@@ -36,7 +37,7 @@ struct NewTransactionView: View {
             }
             VStack(alignment: .leading) {
                 ValueTransactionTextFieldView(text: $value, placeholder: "0")
-                TransactionOptionView(isIncome: isIncome, value: $value, viewModel: Constants.newTransactionViewModel)
+                TransactionOptionView(isIncome: isIncome, balance: balance, value: $value, viewModel: Constants.newTransactionViewModel)
                     .frame(height: UIScreen.main.bounds.size.height * 0.60)
             }.background(backgroundColor)
         }
@@ -73,7 +74,7 @@ struct NewTransactionView: View {
 
 #Preview {
     NavigationStack {
-        NewTransactionView(isIncome: .constant(true))
+        NewTransactionView(isIncome: .constant(true), balance: "900")
             .environmentObject(Store())
     }
 }

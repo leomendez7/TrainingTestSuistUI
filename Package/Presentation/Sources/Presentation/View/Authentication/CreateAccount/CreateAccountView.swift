@@ -44,13 +44,13 @@ struct CreateAccountView: View {
                     if !name.isEmpty && !email.isEmpty && !password.isEmpty && !birthday.isEmpty {
                         createUser()
                     } else {
-                        titleAlert = Localizable.CreateUser.alertTitleEmptyField
-                        textAlert = Localizable.CreateUser.alertTextEmptyField
+                        titleAlert = "Alert!"
+                        textAlert = "All fields must be filled."
                         showAlert.toggle()
                     }
                 } else {
-                    titleAlert = Localizable.Email.alertTitleValidateEmail
-                    textAlert = Localizable.Email.alertTextValidateEmail
+                    titleAlert = "Error!"
+                    textAlert = "This is not a email."
                     showAlert.toggle()
                 }
             }, text: "Sing up", color: Color(.violet100), foregroundColor: .white)

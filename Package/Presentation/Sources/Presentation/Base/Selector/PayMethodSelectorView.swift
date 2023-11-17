@@ -26,7 +26,7 @@ struct PayMethodSelectorView: View {
             HStack {
                 Text(payMethods[selectedPaymentIndex])
                     .font(.system(size: 18))
-                    .foregroundColor(Color(.light20))
+                    .foregroundColor(Color(.dark))
                     .padding(.horizontal, 16)
                 Spacer()
                 Image("arrow-down-2", bundle: .module)

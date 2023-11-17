@@ -19,7 +19,6 @@ struct TransactionToolbarModifier: ViewModifier {
                 ToolbarItem(placement: .topBarLeading) {
                     MonthSwitcherView()
                 }
-                
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(action: {
                         isSheetPresented.toggle()
