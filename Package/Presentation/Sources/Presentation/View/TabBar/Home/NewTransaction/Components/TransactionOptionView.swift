@@ -79,11 +79,6 @@ struct TransactionOptionView: View {
                         .ignoresSafeArea()
                 })
         }
-        .onAppear {
-            Task {
-                await viewModel.fetchTrade()
-            }
-        }
         .alert(isPresented: $showAlert) {
             Alert(
                 title: Text(titleAlert),

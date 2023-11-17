@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Domain
 
 struct HomeView: View {
     
@@ -19,6 +20,7 @@ struct HomeView: View {
     @State var incomeValue = ""
     @State var expensesValue = ""
     @State var balance = ""
+    @State var selectedTrade = Trade()
     
     var body: some View {
         NavigationStack(path: $store.transactions) {
@@ -26,7 +28,7 @@ struct HomeView: View {
                 ScrollView {
                     BalanceComponentView(balance: $balance, income: $incomeValue, expense: $expensesValue)
                     FrequencyView()
-                    RecentTransactionView(seeAll: $seeAll)
+                    RecentTransactionView(seeAll: $seeAll, selectedTrade: $selectedTrade)
                 }
             }
             .preferredColorScheme(.light)
@@ -62,6 +64,8 @@ struct HomeView: View {
                 switch route {
                 case "NewTransaction":
                     NewTransactionView(isIncome: $isIncome, balance: balance)
+                case "TransactionDetails":
+                    TransactionDetailsView(viewModel: Constants.transactionDetailsViewModel)
                 default:
                     EmptyView()
                 }

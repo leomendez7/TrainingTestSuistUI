@@ -65,4 +65,5 @@ struct MonthSwitcherView: View {
 
 #Preview {
     MonthSwitcherView()
+        .environmentObject(Constants.homeViewModel)
 }

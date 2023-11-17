@@ -52,4 +52,17 @@ public class TransactionRepositoryDataSource {
         return trades
     }
     
+    public func removeTransaction(trade: Trade) async throws -> Bool {
+        do {
+            let documentId = trade.id.uuidString
+            let document = MutableDocument(id: documentId)
+            try database.deleteDocument(document)
+            print("Trade deleted successfully.")
+            return true
+        } catch {
+            print("Trade not found for deletion.")
+            return false
+        }
+    }
+    
 }

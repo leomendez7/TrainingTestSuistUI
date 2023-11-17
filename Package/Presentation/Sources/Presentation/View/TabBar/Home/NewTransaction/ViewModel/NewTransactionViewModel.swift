@@ -47,15 +47,6 @@ public class NewTransactionViewModel: BaseViewModel<CreateTransactionUseCase>, O
         }
     }
     
-    func fetchTrade() async {
-        do {
-            let response = try await useCase.fetchTrades(email: Default.user()?.email ?? "")
-            print(response)
-        } catch {
-            debugPrint(error.localizedDescription)
-        }
-    }
-    
     func subscribe() {
         $success.sink { response in
             if response {

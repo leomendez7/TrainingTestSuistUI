@@ -167,54 +167,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "82321115-B6C1-4D95-B14C-946DEA81202C"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Package/Data/Sources/Data/DataSources/TransactionRepositoryDataSource.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
-            landmarkName = "fetchTransactions(email:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "82321115-B6C1-4D95-B14C-946DEA81202C - 208917a86d95d1d3"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for Data.TransactionRepositoryDataSource.createTransaction(trade: Domain.Trade) async throws -&gt; Swift.Bool"
-                  moduleName = "TrainingTest"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/leonardo.mendez/Project/TrainingTestSwiftUI/Package/Data/Sources/Data/DataSources/TransactionRepositoryDataSource.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "54"
-                  endingLineNumber = "54"
-                  offsetFromSymbolStart = "188">
-               </Location>
-               <Location
-                  uuid = "82321115-B6C1-4D95-B14C-946DEA81202C - 1ae7f187ff2cd4cc"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for Data.TransactionRepositoryDataSource.fetchTransactions(email: Swift.String) async throws -&gt; Swift.Array&lt;Domain.Trade&gt;"
-                  moduleName = "TrainingTest"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/leonardo.mendez/Project/TrainingTestSwiftUI/Package/Data/Sources/Data/DataSources/TransactionRepositoryDataSource.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "34"
-                  endingLineNumber = "34"
-                  offsetFromSymbolStart = "340">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "E2CDA105-EF75-4EC6-AB66-98AB0F3AF196"
             shouldBeEnabled = "No"
             ignoreCount = "0"

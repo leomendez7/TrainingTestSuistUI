@@ -25,6 +25,14 @@ struct TransactionsView: View {
             }
             .transactionToolbar(isSheetPresented: $isSheetPresented)
             .environmentObject(Constants.homeViewModel)
+            .navigationDestination(for: String.self, destination: { route in
+                switch route {
+                case "TransactionDetails":
+                    TransactionDetailsView(viewModel: Constants.transactionDetailsViewModel)
+                default:
+                    EmptyView()
+                }
+            })
         }
         .padding(.horizontal, 16)
         .onAppear {
