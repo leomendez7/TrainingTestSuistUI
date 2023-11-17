@@ -6,18 +6,29 @@
 //
 
 import SwiftUI
+import Domain
+import Shared
+import Combine
 
 struct TransactionOptionView: View {
     
     @State private var isSwitchOn = false
+    @State var isIncome: Bool
     @State var description = String()
-    @EnvironmentObject var viewModel: NewTransactionViewModel
+    @State var selectedCategory = "Shopping"
+    @State var selectedPayment = "Wallet"
+    @State private var showAlert = false
+    @State private var titleAlert: String = ""
+    @State private var textAlert: String = ""
+    @State var balance: String
+    @Binding var value: String
+    @StateObject var viewModel: NewTransactionViewModel
     
     var body: some View {
         VStack(spacing: 16) {
-            CategorySelectorView()
+            CategorySelectorView(selectedCategory: $selectedCategory)
             CustomTextField(text: $description, placeholder: "Description")
-            PayMethodSelectorView()
+            PayMethodSelectorView(selectedPayment: $selectedPayment)
             if let image = viewModel.image {
                 Image(uiImage: image)
                     .resizable()
@@ -49,7 +60,17 @@ struct TransactionOptionView: View {
             }
             Spacer()
             CustomButton(action: {
-                
+                if (!isIncome && ((Int(value) ?? 0) >= Int(balance) ?? 0)) {
+                    titleAlert = "Alert!"
+                    textAlert = "The value cannot be greater than the balance."
+                    showAlert.toggle()
+                } else if self.value != "0" && !self.value.isEmpty {
+                    createTransaction()
+                } else {
+                    titleAlert = "Alert!"
+                    textAlert = "The value should not be 0."
+                    showAlert.toggle()
+                }
             }, text: "Continue", color: Color(.violet100), foregroundColor: .white)
             Spacer()
                 .sheet(isPresented: $viewModel.showPicker, content: {
@@ -58,14 +79,36 @@ struct TransactionOptionView: View {
                         .ignoresSafeArea()
                 })
         }
-        .frame(height: UIScreen.main.bounds.size.height * 0.60)
+        .onAppear {
+            Task {
+                await viewModel.fetchTrade()
+            }
+        }
+        .alert(isPresented: $showAlert) {
+            Alert(
+                title: Text(titleAlert),
+                message: Text(textAlert),
+                dismissButton: .default(Text("OK"))
+            )
+        }
         .padding(.horizontal, 16)
         .padding(.top, 24)
-        .background(.white, in: RoundedRectangle(cornerRadius: 32, style: .continuous))
+        .topRoundedCorners(cornerRadius: 32, backgroundColor: .white)
+    }
+    
+    func createTransaction() {
+        viewModel.transaction.email = Default.user()?.email ?? ""
+        viewModel.transaction.category = selectedCategory
+        viewModel.transaction.description = description
+        viewModel.transaction.payment = selectedPayment
+        viewModel.transaction.value = value
+        viewModel.transaction.isIncome = isIncome
+        Task {
+            await viewModel.createTransaction(trade: viewModel.transaction)
+        }
     }
 }
 
 #Preview {
-    TransactionOptionView()
-        .environmentObject(NewTransactionViewModel())
+    TransactionOptionView(isIncome: true, balance: "", value: .constant("0"), viewModel: Constants.newTransactionViewModel)
 }

@@ -11,7 +11,7 @@ struct MonthSwitcherView: View {
     
     @State private var selectedMonthIndex = 0
     @State private var isSheetPresented = false
-    @EnvironmentObject var viewModel: TransactionViewModel
+    @EnvironmentObject var viewModel: HomeViewModel
     
     var body: some View {
         HStack() {
@@ -49,7 +49,14 @@ struct MonthSwitcherView: View {
             }
             Spacer()
         }
-        .task {
+        .onChange(of: selectedMonthIndex) { _ in
+            print(selectedMonthIndex)
+            viewModel.selectedMont = viewModel.months[selectedMonthIndex]
+            Task {
+                await viewModel.fetchTransactions()
+            }
+        }
+        .onAppear {
             viewModel.generateMonths()
             selectedMonthIndex = viewModel.currentMonth
         }
@@ -58,5 +65,4 @@ struct MonthSwitcherView: View {
 
 #Preview {
     MonthSwitcherView()
-        .environmentObject(TransactionViewModel())
 }

@@ -9,20 +9,24 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @EnvironmentObject var viewModel: TransactionViewModel
+    @StateObject var viewModel: HomeViewModel
     @EnvironmentObject var store: Store
     @State var isIncome = Bool()
     @State private var isSheetPresented = false
     @State var isIncomeSelected = false
     @State var isExpensesSelected = false
+    @State var seeAll = false
+    @State var incomeValue = ""
+    @State var expensesValue = ""
+    @State var balance = ""
     
     var body: some View {
         NavigationStack(path: $store.transactions) {
             VStack {
                 ScrollView {
-                    BalanceComponentView(balance: "9400", income: "5000", expense: "1200")
+                    BalanceComponentView(balance: $balance, income: $incomeValue, expense: $expensesValue)
                     FrequencyView()
-                    RecentTransactionView()
+                    RecentTransactionView(seeAll: $seeAll)
                 }
             }
             .preferredColorScheme(.light)
@@ -34,24 +38,45 @@ struct HomeView: View {
                 isIncome = false
                 store.transactions.append("NewTransaction")
             }
+            .onChange(of: seeAll) { _ in
+                viewModel.seeAll = seeAll
+                Task {
+                    await viewModel.fetchTransactions()
+                }
+            }
+            .onAppear {
+                Task {
+                    await viewModel.fetchTransactions()
+                }
+            }
+            .onReceive(viewModel.$incomeValue) { newValue in
+                incomeValue = newValue
+            }
+            .onReceive(viewModel.$expensesValue) { newValue in
+                expensesValue = newValue
+            }
+            .onReceive(viewModel.$balance) { newValue in
+                balance = newValue
+            }
             .navigationDestination(for: String.self, destination: { route in
                 switch route {
                 case "NewTransaction":
-                    NewTransactionView(isIncome: $isIncome)
+                    NewTransactionView(isIncome: $isIncome, balance: balance)
                 default:
                     EmptyView()
                 }
             })
             .homeTransactionToolbar(image: "avatar-2", isSheetPresented: $isSheetPresented, incomeSelected: $isIncomeSelected, expensesSelected: $isExpensesSelected)
+            .environmentObject(viewModel)
         }
+        .toolbarColorScheme(.light, for: .navigationBar)
     }
     
 }
 
 #Preview {
     NavigationStack {
-        HomeView()
+        HomeView(viewModel: Constants.homeViewModel)
             .environmentObject(Store())
-            .environmentObject(TransactionViewModel())
     }
 }

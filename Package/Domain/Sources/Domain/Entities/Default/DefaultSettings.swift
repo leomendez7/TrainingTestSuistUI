@@ -1,5 +1,5 @@
 //
-//  SettingsDefault.swift
+//  DefaultSettings.swift
 //  TrainingTest
 //
 //  Created by Leonardo Mendez on 6/11/23.

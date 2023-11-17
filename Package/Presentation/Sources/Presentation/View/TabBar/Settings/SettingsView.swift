@@ -11,12 +11,13 @@ import Domain
 struct SettingsView: View {
     
     @EnvironmentObject var store: Store
-    @EnvironmentObject var setDefault: Default
+    @EnvironmentObject var setDefault: DefaultSession
     @State private var isSheetPresented = false
     @State var currencyName = String()
     @State var securityName = String()
     @State var name = String()
     @State var email = String()
+    @State var isLogout: Bool = false
     
     var body: some View {
         NavigationStack(path: $store.settings) {
@@ -56,7 +57,7 @@ struct SettingsView: View {
                             .foregroundColor(Color(.dark75))
                     })
                     .sheet(isPresented: $isSheetPresented) {
-                        LogoutView(isSheetPresented: isSheetPresented)
+                        LogoutView(isSheetPresented: isSheetPresented, isLogout: $isLogout)
                             .presentationDetents([.fraction(0.25)])
                     }
                 }
@@ -70,23 +71,24 @@ struct SettingsView: View {
                 case "security":
                     SecurityView()
                 case "editProfile":
-                    EditProfileView()
+                    EditProfileView(viewModel: Constants.editProfileViewModel)
                 default:
                     EmptyView()
                 }
             })
             .onAppear {
-                email = Default.user().email
-                name = Default.user().name
+                email = Default.user()?.email ?? ""
+                name = Default.user()?.name ?? ""
+            }
+            .onChange(of: isLogout) { _ in
+                setDefault.session = false
+                Default.destroySession()
             }
             .padding(.horizontal, 16)
             .padding(.top, 14)
             .navigationBarBackButtonHidden(true)
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
-            .onReceive(NotificationCenter.default.publisher(for: Notification.Name(rawValue: "logout"))) { _ in
-                setDefault.session = false
-            }
         }
     }
     

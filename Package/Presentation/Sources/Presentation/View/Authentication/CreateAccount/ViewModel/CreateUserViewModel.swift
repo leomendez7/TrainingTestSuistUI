@@ -14,6 +14,14 @@ public class CreateUserViewModel: BaseViewModel<CreateUserUseCase>, ObservableOb
     
     var user = User()
     @Published var success: Bool = false
+    var store: Store
+    private var cancellables: Set<AnyCancellable> = []
+    
+    public init(useCase: CreateUserUseCase, store: Store) {
+        self.store = store
+        super.init(useCase: useCase)
+        self.subscribe()
+    }
     
     func createUser(user: User) async {
         do {
@@ -24,6 +32,14 @@ public class CreateUserViewModel: BaseViewModel<CreateUserUseCase>, ObservableOb
         } catch {
             debugPrint(error.localizedDescription)
         }
+    }
+    
+    func subscribe() {
+        $success.sink { response in
+            if response {
+                self.store.login.removeLast()
+            }
+        }.store(in: &cancellables)
     }
     
 }

@@ -16,7 +16,7 @@ public struct OnboardingView: View {
     @State private var selectedTab = 0
     @State private var isLoggedIn = false
     @EnvironmentObject var store: Store
-    @EnvironmentObject var setDefault: Default
+    @EnvironmentObject var setDefault: DefaultSession
     
     public init() {
         showLoginButton = true
@@ -72,7 +72,7 @@ public struct OnboardingView: View {
             .navigationDestination(for: String.self, destination: { route in
                 switch route {
                 case "login":
-                    LoginView()
+                    LoginView(viewModel: Constants.loginViewModel)
                 default:
                     EmptyView()
                 }

@@ -14,8 +14,9 @@ public class LoginViewModel: BaseViewModel<FetchUserUseCase>, ObservableObject {
     
     @Published var success: Bool = false
     @Published var alert: Bool = false
+    @State private var cancellables: Set<AnyCancellable> = []
     
-    func fetchUser(credentials: [String: String]) async {
+    func Login(credentials: [String: String]) async {
         do {
             let user = try await useCase.execute(requestValue: credentials)
             DispatchQueue.main.async {

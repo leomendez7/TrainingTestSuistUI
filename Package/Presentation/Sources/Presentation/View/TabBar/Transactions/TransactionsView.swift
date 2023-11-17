@@ -6,59 +6,31 @@
 //
 
 import SwiftUI
+import Domain
 
 struct TransactionsView: View {
     
-    @EnvironmentObject var viewModel: TransactionViewModel
+    @StateObject var viewModel: TransactionsViewModel
     @State private var isSheetPresented = false
+    @EnvironmentObject var store: Store
     
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack {
-                    HStack(spacing: 8) {
-                        Text("Today")
-                            .foregroundColor(Color(.dark))
-                            .font(.system(size: 18))
-                            .fontWeight(.bold)
-                        Spacer()
-                    }
-                    .padding(.top, 31)
-                    VStack(spacing: 8) {
-                        ForEach(viewModel.transactions.indices, id: \.self) { index in
-                            TransactionCellView(name: viewModel.transactions[index].name,
-                                                description: viewModel.transactions[index].description,
-                                                value: viewModel.transactions[index].value,
-                                                hour: viewModel.transactions[index].hour,
-                                                image: viewModel.images[index],
-                                                background: viewModel.colors[index])
-                        }
-                    }
-                    HStack(spacing: 8) {
-                        Text("Yesterday")
-                            .foregroundColor(Color(.dark))
-                            .font(.system(size: 18))
-                            .fontWeight(.bold)
-                        Spacer()
-                    }
-                    .padding(.top, 31)
-                    VStack(spacing: 8) {
-                        ForEach(viewModel.transactions.indices, id: \.self) { index in
-                            TransactionCellView(name: viewModel.transactions[index].name,
-                                                description: viewModel.transactions[index].description,
-                                                value: viewModel.transactions[index].value,
-                                                hour: viewModel.transactions[index].hour,
-                                                image: viewModel.images[index],
-                                                background: viewModel.colors[index])
-                        }
+                VStack(spacing: 16) {
+                    ForEach(viewModel.groupedTransactions.keys.sorted(by: >), id: \.self) { date in
+                        TransactionSectionDayView(date: date, transactions: viewModel.groupedTransactions[date]!, viewModel: viewModel)
                     }
                 }
             }
             .transactionToolbar(isSheetPresented: $isSheetPresented)
+            .environmentObject(Constants.homeViewModel)
         }
         .padding(.horizontal, 16)
-        .task {
-            viewModel.fetchTransactions()
+        .onAppear {
+            Task {
+                await viewModel.fetchTransactions()
+            }
         }
     }
     
@@ -66,7 +38,8 @@ struct TransactionsView: View {
 
 #Preview {
     VStack {
-        TransactionsView()
-            .environmentObject(TransactionViewModel())
+        TransactionsView(viewModel: Constants.transactionViewModel)
+            .environmentObject(Store())
     }
 }
+

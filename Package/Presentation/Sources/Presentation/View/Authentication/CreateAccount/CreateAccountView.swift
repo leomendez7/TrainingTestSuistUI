@@ -18,13 +18,11 @@ struct CreateAccountView: View {
     @State private var showAlert = false
     @State private var titleAlert: String = ""
     @State private var textAlert: String = ""
-    @EnvironmentObject var store: Store
-    @EnvironmentObject var viewModel: CreateUserViewModel
-    
+    @StateObject var viewModel: CreateUserViewModel
     
     var backButton: some View {
         Button(action: {
-            store.login.removeLast()
+            viewModel.store.login.removeLast()
         }) {
             HStack {
                 Image("arrow-left", bundle: .module)
@@ -46,13 +44,13 @@ struct CreateAccountView: View {
                     if !name.isEmpty && !email.isEmpty && !password.isEmpty && !birthday.isEmpty {
                         createUser()
                     } else {
-                        titleAlert = Localizable.CreateUser.alertTitleEmptyField
-                        textAlert = Localizable.CreateUser.alertTextEmptyField
+                        titleAlert = "Alert!"
+                        textAlert = "All fields must be filled."
                         showAlert.toggle()
                     }
                 } else {
-                    titleAlert = Localizable.Email.alertTitleValidateEmail
-                    textAlert = Localizable.Email.alertTextValidateEmail
+                    titleAlert = "Error!"
+                    textAlert = "This is not a email."
                     showAlert.toggle()
                 }
             }, text: "Sing up", color: Color(.violet100), foregroundColor: .white)
@@ -87,7 +85,6 @@ struct CreateAccountView: View {
 
 #Preview {
     NavigationStack {
-        CreateAccountView()
-            .environmentObject(Store())
+        CreateAccountView(viewModel: Constants.createUserViewModel)
     }
 }

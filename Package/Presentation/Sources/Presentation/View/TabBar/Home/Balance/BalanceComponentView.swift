@@ -9,9 +9,9 @@ import SwiftUI
 
 struct BalanceComponentView: View {
     
-    @State var balance: String = ""
-    @State var income: String = ""
-    @State var expense: String = ""
+    @Binding var balance: String
+    @Binding var income: String
+    @Binding var expense: String
     
     var body: some View {
         VStack {
@@ -26,8 +26,8 @@ struct BalanceComponentView: View {
             }
             .padding(.top, 9)
             HStack(spacing: 16) {
-                IncomeComponentView(income: income)
-                ExpensesView(expense: expense)
+                IncomeComponentView(income: $income)
+                ExpensesView(expense: $expense)
             }
         }
         .padding(.leading, 16)
@@ -36,5 +36,5 @@ struct BalanceComponentView: View {
 }
 
 #Preview {
-    BalanceComponentView(balance: "9400", income: "5000", expense: "1200")
+    BalanceComponentView(balance: .constant("9400"), income: .constant("5000"), expense: .constant("1200"))
 }

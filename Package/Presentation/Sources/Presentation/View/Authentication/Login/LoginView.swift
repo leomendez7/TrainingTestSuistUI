@@ -12,17 +12,15 @@ import Shared
 
 public struct LoginView: View {
     
-    @State private var email: String = ""
-    @State private var password: String = ""
-    @State private var showAlert = false
+    @State var email: String = ""
+    @State var password: String = ""
+    @State var showAlert = false
     @EnvironmentObject var store: Store
-    @EnvironmentObject var setDefault: Default
-    @EnvironmentObject var viewModel: LoginViewModel
-    @State private var cancellables: Set<AnyCancellable> = []
+    @EnvironmentObject var setDefault: DefaultSession
+    @StateObject var viewModel: LoginViewModel
     
-    public init() {
-        email = ""
-        password = ""
+    public init(viewModel: LoginViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
     
     public var body: some View {
@@ -39,7 +37,7 @@ public struct LoginView: View {
                 .padding(.top, 16)
                 VStack(spacing: 16) {
                     CustomButton(action: {
-                        signIn(email: email)
+                        signIn(email: email, password: password)
                     }, text: "Sing in", color: Color(.violet100), foregroundColor: .white)
                     CustomButton(action: {
                         store.login.append("createAccountView")
@@ -50,7 +48,7 @@ public struct LoginView: View {
             .navigationDestination(for: String.self, destination: { route in
                 switch route {
                 case "createAccountView":
-                    CreateAccountView()
+                    CreateAccountView(viewModel: Constants.createUserViewModel)
                 default:
                     EmptyView()
                 }
@@ -58,39 +56,37 @@ public struct LoginView: View {
             .navigationTitle("Login")
             .navigationBarBackButtonHidden(true)
             .navigationBarTitleDisplayMode(.inline)
-            .onAppear {
-                viewModel.$success.sink { response in
-                    if response {
-                        setDefault.session = true
-                    }
-                }.store(in: &cancellables)
-                viewModel.$alert.sink { response in
-                    if response {
-                        showAlert.toggle()
-                    }
-                }.store(in: &cancellables)
-            }
             .alert(isPresented: $showAlert) {
                 Alert(
-                    title: Text(Localizable.Login.alertTitleValidateUser),
-                    message: Text(Localizable.Login.alertTextValidateUser),
+                    title: Text("Error!"),
+                    message: Text("This user is not found."),
                     dismissButton: .default(Text("OK"))
                 )
             }
         }
+        .onReceive(viewModel.$success) { newValue in
+            if newValue {
+                setDefault.session = true
+            }
+        }
+        .onReceive(viewModel.$alert) { newValue in
+            if newValue {
+                showAlert.toggle()
+            }
+        }
     }
     
-    func signIn(email: String) {
+    func signIn(email: String, password: String) {
         Task {
             let credentials = ["email": email, "password": password]
-            await viewModel.fetchUser(credentials: credentials)
+            await viewModel.Login(credentials: credentials)
         }
     }
     
 }
 
 #Preview {
-    LoginView()
+    LoginView(viewModel: Constants.loginViewModel)
         .environmentObject(Store())
         .environmentObject(Default())
 }

@@ -9,7 +9,9 @@ import SwiftUI
 
 struct RecentTransactionView: View {
     
-    @EnvironmentObject var viewModel: TransactionViewModel
+    @EnvironmentObject var viewModel: HomeViewModel
+    @Binding var seeAll: Bool
+    @State var image = ""
     
     var body: some View {
         VStack {
@@ -20,7 +22,7 @@ struct RecentTransactionView: View {
                     .fontWeight(.bold)
                 Spacer()
                 CustomButton(action: {
-                    
+                    seeAll.toggle()
                 }, text: "See All",
                              color: Color(.violet20),
                              foregroundColor: Color(.violet100),
@@ -28,29 +30,19 @@ struct RecentTransactionView: View {
                              width: 78,
                              cornerRadius: 40,
                              fontSize: 14)
-                
             }
             .padding(.top, 31)
             VStack(spacing: 8) {
                 ForEach(viewModel.transactions.indices, id: \.self) { index in
-                    TransactionCellView(name: viewModel.transactions[index].name,
-                                        description: viewModel.transactions[index].description,
-                                        value: viewModel.transactions[index].value,
-                                        hour: viewModel.transactions[index].hour,
-                                        image: viewModel.images[index],
-                                        background: viewModel.colors[index])
+                    TransactionCellView(trade: viewModel.transactions[index])
                 }
             }
         }
         .padding(.horizontal, 16)
-        .task {
-            viewModel.fetchTransactions()
-        }
     }
     
 }
 
 #Preview {
-    RecentTransactionView()
-        .environmentObject(TransactionViewModel())
+    RecentTransactionView(seeAll: .constant(Bool()))
 }
