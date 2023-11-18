@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Shared
 
 struct NewTransactionView: View {
     
@@ -15,16 +16,6 @@ struct NewTransactionView: View {
     @State var balance: String
     @EnvironmentObject var store: Store
     @State private var backgroundColor: Color = Color(.green100)
-    var backButton : some View {
-        Button(action: {
-            store.transactions.removeLast()
-        }) {
-            HStack {
-                Image("arrow-left", bundle: .module)
-                    .foregroundColor(Color(.light80))
-            }
-        }
-    }
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -37,7 +28,10 @@ struct NewTransactionView: View {
             }
             VStack(alignment: .leading) {
                 ValueTransactionTextFieldView(text: $value, placeholder: "0")
-                TransactionOptionView(isIncome: isIncome, balance: balance, value: $value, viewModel: Constants.newTransactionViewModel)
+                TransactionOptionView(isIncome: isIncome, 
+                                      balance: balance,
+                                      value: $value,
+                                      viewModel: Constants.newTransactionViewModel)
                     .frame(height: UIScreen.main.bounds.size.height * 0.60)
             }.background(backgroundColor)
         }
@@ -50,10 +44,12 @@ struct NewTransactionView: View {
         }
         .preferredColorScheme(.dark)
         .ignoresSafeArea()
-        .navigationBarItems(leading: backButton)
         .navigationBarBackButtonHidden(true)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.hidden, for: .tabBar)
+        .navigationBarItems(leading: BackNavigationButton(action: {
+            store.transactions.removeLast()
+        }, image: "arrow-left", color: Color(.light80)))
         .toolbar(content: {
             ToolbarItem(placement: .principal) {
                 Text(tittle)
@@ -64,12 +60,6 @@ struct NewTransactionView: View {
         })
     }
     
-    private func hideKeyboard() {
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder),
-                                        to: nil,
-                                        from: nil,
-                                        for: nil)
-    }
 }
 
 #Preview {

@@ -57,7 +57,10 @@ struct SettingsView: View {
                             .foregroundColor(Color(.dark75))
                     })
                     .sheet(isPresented: $isSheetPresented) {
-                        LogoutView(isSheetPresented: isSheetPresented, isLogout: $isLogout)
+                        ConfirmationView(isSheetPresented: isSheetPresented,
+                                             title: "Log out",
+                                             bodyText: "Are you sure you want to log out?",
+                                             activeAction: $isLogout)
                             .presentationDetents([.fraction(0.25)])
                     }
                 }

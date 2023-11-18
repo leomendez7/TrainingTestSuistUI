@@ -20,17 +20,6 @@ struct CreateAccountView: View {
     @State private var textAlert: String = ""
     @StateObject var viewModel: CreateUserViewModel
     
-    var backButton: some View {
-        Button(action: {
-            viewModel.store.login.removeLast()
-        }) {
-            HStack {
-                Image("arrow-left", bundle: .module)
-                    .foregroundColor(Color(.dark25))
-            }
-        }
-    }
-    
     var body: some View {
         VStack(spacing: 56) {
             VStack(spacing: 14) {
@@ -59,9 +48,11 @@ struct CreateAccountView: View {
         .padding(.horizontal, 16)
         .padding(.top, 64)
         .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: backButton)
         .navigationTitle("Create Account")
         .navigationBarTitleDisplayMode(.inline)
+        .navigationBarItems(leading: BackNavigationButton(action: {
+            viewModel.store.login.removeLast()
+        }, image: "arrow-left", color: Color(.dark25)))
         .alert(isPresented: $showAlert) {
             Alert(
                 title: Text(titleAlert),

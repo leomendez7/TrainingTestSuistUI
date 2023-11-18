@@ -37,7 +37,7 @@ struct RecentTransactionView: View {
             .padding(.top, 31)
             VStack(spacing: 8) {
                 ForEach(viewModel.transactions.indices, id: \.self) { index in
-                    TransactionCellView(trade: viewModel.transactions[index])
+                    TransactionCellView(trade: $viewModel.transactions[index])
                         .onTapGesture {
                             selectedTrade = viewModel.transactions[index]
                             store.transactions.append("TransactionDetails")

@@ -8,10 +8,12 @@
 import SwiftUI
 import Domain
 
-struct LogoutView: View {
+struct ConfirmationView: View {
     
     @State var isSheetPresented: Bool
-    @Binding var isLogout: Bool
+    @State var title: String
+    @State var bodyText: String
+    @Binding var activeAction: Bool
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var store: Store
     
@@ -20,13 +22,15 @@ struct LogoutView: View {
             Image("line", bundle: .module)
                 .padding(.top, 16)
             VStack(spacing: 16) {
-                Text("Log out")
+                Text(title)
                     .font(.system(size: 18))
                     .fontWeight(.bold)
-                Text("Are you sure you want to log out?")
+                Text(bodyText)
                     .font(.system(size: 16))
                     .fontWeight(.regular)
                     .foregroundColor(Color(.light20))
+                    .lineLimit(0)
+                    .fixedSize(horizontal: false, vertical: true)
             }
             .padding(.horizontal, 16)
             .padding(.top, 16)
@@ -35,7 +39,7 @@ struct LogoutView: View {
                     dismiss()
                 }, text: "No", color: Color(.violet20), foregroundColor: Color(.violet100), width: 164)
                 CustomButton(action: {
-                    isLogout.toggle()
+                    activeAction.toggle()
                     dismiss()
                 }, text: "Yes", color: Color(.violet100), foregroundColor: .white, width: 164)
             }
@@ -46,5 +50,8 @@ struct LogoutView: View {
 }
 
 #Preview {
-    LogoutView(isSheetPresented: true, isLogout: .constant(true))
+    ConfirmationView(isSheetPresented: true,
+               title: "Log out",
+               bodyText: "Are you sure you want to log out?",
+               activeAction: .constant(true))
 }

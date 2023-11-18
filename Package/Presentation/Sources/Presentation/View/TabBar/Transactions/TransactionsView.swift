@@ -12,14 +12,18 @@ struct TransactionsView: View {
     
     @StateObject var viewModel: TransactionsViewModel
     @State private var isSheetPresented = false
+    @State var selectedTrade = Trade()
     @EnvironmentObject var store: Store
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $store.transactions) {
             ScrollView {
                 VStack(spacing: 16) {
                     ForEach(viewModel.groupedTransactions.keys.sorted(by: >), id: \.self) { date in
-                        TransactionSectionDayView(date: date, transactions: viewModel.groupedTransactions[date]!, viewModel: viewModel)
+                        TransactionSectionDayView(date: date, 
+                                                  transactions: viewModel.groupedTransactions[date]!,
+                                                  selectedTrade: $selectedTrade,
+                                                  viewModel: viewModel)
                     }
                 }
             }

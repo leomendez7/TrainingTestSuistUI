@@ -11,7 +11,9 @@ import Domain
 struct TransactionSectionDayView: View {
     
     var date: Date
-    var transactions: [Trade]
+    @State var transactions: [Trade]
+    @Binding var selectedTrade: Trade
+    @EnvironmentObject var store: Store
     @StateObject var viewModel: TransactionsViewModel
     
     var body: some View {
@@ -21,8 +23,12 @@ struct TransactionSectionDayView: View {
                 .font(.system(size: 18))
                 .fontWeight(.bold)
                 .padding(.top, 31)
-            ForEach(transactions) { transaction in
+            ForEach($transactions) { transaction in
                 TransactionCellView(trade: transaction)
+                    .onTapGesture {
+                        //selectedTrade = transaction
+                        store.transactions.append("TransactionDetails")
+                    }
             }
         }
     }
@@ -43,5 +49,8 @@ struct TransactionSectionDayView: View {
 }
 
 #Preview {
-    TransactionSectionDayView(date: Date(), transactions: [Trade](), viewModel: Constants.transactionViewModel)
+    TransactionSectionDayView(date: Date(), 
+                              transactions: [Trade](),
+                              selectedTrade: .constant(Trade()), 
+                              viewModel: Constants.transactionViewModel)
 }

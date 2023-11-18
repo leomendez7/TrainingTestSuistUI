@@ -12,7 +12,7 @@ import Domain
 
 public class HomeViewModel: BaseViewModel<FetchTransactionUseCase>, ObservableObject {
     
-    var transactions: [Trade] = []
+    @Published var transactions: [Trade] = []
     var seeAll: Bool = false
     var selectedMont: String = ""
     @Published var success: Bool = false

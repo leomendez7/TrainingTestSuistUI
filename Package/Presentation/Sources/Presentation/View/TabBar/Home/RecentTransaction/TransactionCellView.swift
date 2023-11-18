@@ -12,7 +12,7 @@ struct TransactionCellView: View {
     
     @State private var image: String = ""
     @State private var background: Color = .white
-    @State var trade: Trade
+    @Binding var trade: Trade
     @State private var hourText = String()
     
     var body: some View {
@@ -87,5 +87,5 @@ struct TransactionCellView: View {
 }
 
 #Preview {
-    TransactionCellView(trade: Trade())
+    TransactionCellView(trade: .constant(Trade()))
 }

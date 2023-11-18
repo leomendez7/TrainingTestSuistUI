@@ -14,17 +14,6 @@ struct CurrencyView: View {
     @EnvironmentObject var store: Store
     @State var isCurrencySelected = Currency()
     
-    var backButton : some View {
-        Button(action: {
-            store.settings.removeLast()
-        }) {
-            HStack {
-                Image("arrow-left", bundle: .module)
-                    .foregroundColor(Color(.dark25))
-            }
-        }
-    }
-    
     var body: some View {
         VStack(spacing: 24) {
             ForEach(viewModel.currencies.indices, id: \.self) { index in
@@ -41,13 +30,16 @@ struct CurrencyView: View {
         .padding(.top, 16)
         .navigationTitle("Currency")
         .navigationBarTitleDisplayMode(.inline)
-        .navigationBarItems(leading: backButton)
         .navigationBarBackButtonHidden(true)
         .toolbar(.hidden, for: .tabBar)
+        .navigationBarItems(leading: BackNavigationButton(action: {
+            store.settings.removeLast()
+        }, image: "arrow-left", color: Color(.dark25)))
         .task {
             viewModel.generateCurrencies()
         }
     }
+    
 }
 
 #Preview {

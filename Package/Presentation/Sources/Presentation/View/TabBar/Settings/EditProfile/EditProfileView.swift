@@ -19,16 +19,6 @@ struct EditProfileView: View {
     @State private var showAlert = false
     @StateObject var viewModel: EditProfileViewModel
     @State private var cancellables: Set<AnyCancellable> = []
-    var backButton : some View {
-        Button(action: {
-            store.settings.removeLast()
-        }) {
-            HStack {
-                Image("arrow-left", bundle: .module)
-                    .foregroundColor(Color(.dark25))
-            }
-        }
-    }
     
     var body: some View {
         VStack(spacing: 56) {
@@ -63,9 +53,11 @@ struct EditProfileView: View {
         .padding(.top, 64)
         .navigationTitle("Edit profile")
         .navigationBarTitleDisplayMode(.inline)
-        .navigationBarItems(leading: backButton)
         .navigationBarBackButtonHidden(true)
         .toolbar(.hidden, for: .tabBar)
+        .navigationBarItems(leading: BackNavigationButton(action: {
+            store.settings.removeLast()
+        }, image: "arrow-left", color: Color(.dark25)))
         .alert(isPresented: $showAlert) {
             Alert(title: Text("Success!"), 
                   message: Text("User has been updated."),
