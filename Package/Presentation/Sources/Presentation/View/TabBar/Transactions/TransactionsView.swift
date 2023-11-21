@@ -13,6 +13,7 @@ struct TransactionsView: View {
     @StateObject var viewModel: TransactionsViewModel
     @State private var isSheetPresented = false
     @State var selectedTrade = Trade()
+    @State var transactions = [Trade]()
     @EnvironmentObject var store: Store
     
     var body: some View {
@@ -20,10 +21,12 @@ struct TransactionsView: View {
             ScrollView {
                 VStack(spacing: 16) {
                     ForEach(viewModel.groupedTransactions.keys.sorted(by: >), id: \.self) { date in
-                        TransactionSectionDayView(date: date, 
-                                                  transactions: viewModel.groupedTransactions[date]!,
-                                                  selectedTrade: $selectedTrade,
-                                                  viewModel: viewModel)
+                        if let dateTransactions = viewModel.groupedTransactions[date] {
+                            TransactionSectionDayView(date: date,
+                                                      transactions: dateTransactions,
+                                                      selectedTrade: $selectedTrade,
+                                                      viewModel: viewModel)
+                        }
                     }
                 }
             }
@@ -32,18 +35,21 @@ struct TransactionsView: View {
             .navigationDestination(for: String.self, destination: { route in
                 switch route {
                 case "TransactionDetails":
-                    TransactionDetailsView(viewModel: Constants.transactionDetailsViewModel)
+                    TransactionDetailsView(selectedTrade: $selectedTrade, viewModel: Constants.transactionDetailsViewModel)
                 default:
                     EmptyView()
                 }
             })
         }
-        .padding(.horizontal, 16)
         .onAppear {
             Task {
                 await viewModel.fetchTransactions()
             }
         }
+    }
+    
+    func addTransactions(trades: [Trade]) {
+        
     }
     
 }

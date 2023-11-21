@@ -65,7 +65,7 @@ struct HomeView: View {
                 case "NewTransaction":
                     NewTransactionView(isIncome: $isIncome, balance: balance)
                 case "TransactionDetails":
-                    TransactionDetailsView(viewModel: Constants.transactionDetailsViewModel)
+                    TransactionDetailsView(selectedTrade: $selectedTrade, viewModel: Constants.transactionDetailsViewModel)
                 default:
                     EmptyView()
                 }

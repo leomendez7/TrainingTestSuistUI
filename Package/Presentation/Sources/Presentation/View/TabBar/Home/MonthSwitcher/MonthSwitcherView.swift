@@ -10,6 +10,7 @@ import SwiftUI
 struct MonthSwitcherView: View {
     
     @State private var selectedMonthIndex = 0
+    @State private var changeMonth: Bool = false
     @State private var isSheetPresented = false
     @EnvironmentObject var viewModel: HomeViewModel
     
@@ -20,6 +21,7 @@ struct MonthSwitcherView: View {
                 ForEach(0..<viewModel.months.count, id: \.self) { index in
                     Button(action: {
                         selectedMonthIndex = index
+                        changeMonth.toggle()
                     }) {
                         Text(viewModel.months[index])
                     }
@@ -49,7 +51,7 @@ struct MonthSwitcherView: View {
             }
             Spacer()
         }
-        .onChange(of: selectedMonthIndex) { _ in
+        .onChange(of: changeMonth) { _ in
             print(selectedMonthIndex)
             viewModel.selectedMont = viewModel.months[selectedMonthIndex]
             Task {

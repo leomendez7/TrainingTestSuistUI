@@ -10,7 +10,7 @@ import SwiftUI
 struct TransactionDetailsToolbarModifier: ViewModifier {
     
     @Binding var isSheetPresented: Bool
-    @State var isRemove: Bool
+    @Binding var isRemove: Bool
     
     func body(content: Content) -> some View {
         content
@@ -47,7 +47,7 @@ struct TransactionDetailsToolbarModifier: ViewModifier {
 
 extension View {
     
-    func transactionDetailsToolbar(isSheetPresented: Binding<Bool>, isRemove: Bool)  -> some View {
+    func transactionDetailsToolbar(isSheetPresented: Binding<Bool>, isRemove: Binding<Bool>)  -> some View {
         return modifier(TransactionDetailsToolbarModifier(isSheetPresented: isSheetPresented, isRemove: isRemove))
     }
     

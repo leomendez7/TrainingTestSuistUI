@@ -7,209 +7,49 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "32765810-809C-4C11-AB40-7CF5459D8368"
+            uuid = "6CF5AD3A-AD09-43A4-B835-919ACD987B20"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TrainingTest/Presentation/Base/Selector/SelectorView.swift"
+            filePath = "Package/Presentation/Sources/Presentation/View/TabBar/Transactions/TransactionSectionDayView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
-            landmarkName = "body"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "539C5EB8-8221-417D-ABA3-CC2A7CEAD950"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TrainingTest/Presentation/View/TabBar/Transactions/ViewModel/TransactionViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "generateMoths()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "0BA4FDE0-E8B2-4561-AE43-0C6E81896C2F"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TrainingTest/Presentation/View/TabBar/Transactions/MonthSwitcher/MonthSwitcherView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
                <Location
-                  uuid = "0BA4FDE0-E8B2-4561-AE43-0C6E81896C2F - 190930bf661ff657"
+                  uuid = "6CF5AD3A-AD09-43A4-B835-919ACD987B20 - ba2b2d701f98c0ca"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, SwiftUI.Button&lt;SwiftUI.Text&gt;&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Spacer, SwiftUI.Menu&lt;&lt;&lt;opaque return type of SwiftUI.View.overlay&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(_: &#x3c4;_1_0, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0, SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, SwiftUI.Button&lt;SwiftUI.Text&gt;&gt;&gt;, SwiftUI.Spacer)&gt; in TrainingTest.MonthSwitcherView.body.getter : some"
+                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0&gt;)&gt; in Presentation.TransactionSectionDayView.body.getter : some"
                   moduleName = "TrainingTest"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/leonardo.mendez/Project/TrainingTestSwiftUI/TrainingTest/Presentation/View/TabBar/Transactions/MonthSwitcher/MonthSwitcherView.swift"
+                  urlString = "file:///Users/leonardo.mendez/Project/TrainingTestSwiftUI/Package/Presentation/Sources/Presentation/View/TabBar/Transactions/TransactionSectionDayView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "33"
-                  endingLineNumber = "33"
-                  offsetFromSymbolStart = "212">
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "1620">
                </Location>
                <Location
-                  uuid = "0BA4FDE0-E8B2-4561-AE43-0C6E81896C2F - d0c06a1a930818a3"
+                  uuid = "6CF5AD3A-AD09-43A4-B835-919ACD987B20 - d693de9d5564a08a"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Int) -&gt; SwiftUI.Button&lt;SwiftUI.Text&gt; in closure #1 () -&gt; SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, SwiftUI.Button&lt;SwiftUI.Text&gt;&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Spacer, SwiftUI.Menu&lt;&lt;&lt;opaque return type of SwiftUI.View.overlay&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(_: &#x3c4;_1_0, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0, SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, SwiftUI.Button&lt;SwiftUI.Text&gt;&gt;&gt;, SwiftUI.Spacer)&gt; in TrainingTest.MonthSwitcherView.body.getter : some"
+                  symbolName = "closure #1 (Swift.Int) -&gt; &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0&gt;)&gt; in Presentation.TransactionSectionDayView.body.getter : some"
                   moduleName = "TrainingTest"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/leonardo.mendez/Project/TrainingTestSwiftUI/TrainingTest/Presentation/View/TabBar/Transactions/MonthSwitcher/MonthSwitcherView.swift"
+                  urlString = "file:///Users/leonardo.mendez/Project/TrainingTestSwiftUI/Package/Presentation/Sources/Presentation/View/TabBar/Transactions/TransactionSectionDayView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "33"
-                  endingLineNumber = "33"
-                  offsetFromSymbolStart = "380">
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "348">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "7C6BBFFF-A26E-4B47-B52F-87FC19C2830D"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Package/Presentation/Sources/Presentation/Base/TextField/CustomDateTextField.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
-            landmarkName = "body"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "46155EEC-BD6E-440D-8E49-03CFC165BE7D"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Package/Presentation/Sources/Presentation/View/TabBar/Home/RecentTransaction/NewTransaction/TransactionOptionView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
-            landmarkName = "createTransaction()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "46155EEC-BD6E-440D-8E49-03CFC165BE7D - 39e7141b68c67891"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Presentation.TransactionOptionView.createTransaction() -&gt; ()"
-                  moduleName = "TrainingTest"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/leonardo.mendez/Project/TrainingTestSwiftUI/Package/Presentation/Sources/Presentation/View/TabBar/Home/RecentTransaction/NewTransaction/TransactionOptionView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "72"
-                  endingLineNumber = "72"
-                  offsetFromSymbolStart = "84">
-               </Location>
-               <Location
-                  uuid = "46155EEC-BD6E-440D-8E49-03CFC165BE7D - 39e7141b68c67891"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Presentation.TransactionOptionView.createTransaction() -&gt; ()"
-                  moduleName = "TrainingTest"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/leonardo.mendez/Project/TrainingTestSwiftUI/Package/Presentation/Sources/Presentation/View/TabBar/Home/RecentTransaction/NewTransaction/TransactionOptionView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "72"
-                  endingLineNumber = "72"
-                  offsetFromSymbolStart = "96">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "D68106E8-CA9A-4EBE-B1F4-C4D5B0F9B11C"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Package/Domain/Sources/Domain/Entities/Default/UserDefault.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
-            landmarkName = "current"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "E2CDA105-EF75-4EC6-AB66-98AB0F3AF196"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Package/Shared/Sources/Shared/Extensions/String.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
-            landmarkName = "localized()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "DB98D904-8C79-42BD-BB29-A7CDEC66311D"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Package/Presentation/Sources/Presentation/View/TabBar/Home/Balance/BalanceComponentView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
-            landmarkName = "body"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B1DFAA49-E5FE-4C85-B1D9-C317FB60CE52"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Package/Presentation/Sources/Presentation/View/TabBar/Home/ViewModel/HomeViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "fetchTransactions()"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

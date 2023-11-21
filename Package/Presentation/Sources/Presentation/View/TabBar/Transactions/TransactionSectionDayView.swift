@@ -1,5 +1,5 @@
 //
-//  SwiftUIView.swift
+//  TransactionSectionDayView.swift
 //  
 //
 //  Created by Leonardo Mendez on 17/11/23.
@@ -23,14 +23,16 @@ struct TransactionSectionDayView: View {
                 .font(.system(size: 18))
                 .fontWeight(.bold)
                 .padding(.top, 31)
-            ForEach($transactions) { transaction in
-                TransactionCellView(trade: transaction)
+                .padding(.horizontal, 8)
+            ForEach(transactions.indices, id: \.self) { index in
+                TransactionCellView(trade: $transactions[index])
                     .onTapGesture {
-                        //selectedTrade = transaction
+                        selectedTrade = transactions[index]
                         store.transactions.append("TransactionDetails")
                     }
             }
         }
+        
     }
     
     private func sectionTitle(for date: Date) -> String {
@@ -51,6 +53,6 @@ struct TransactionSectionDayView: View {
 #Preview {
     TransactionSectionDayView(date: Date(), 
                               transactions: [Trade](),
-                              selectedTrade: .constant(Trade()), 
+                              selectedTrade: .constant(Trade()),
                               viewModel: Constants.transactionViewModel)
 }

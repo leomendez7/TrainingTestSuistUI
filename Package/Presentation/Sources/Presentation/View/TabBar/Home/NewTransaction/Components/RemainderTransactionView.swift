@@ -1,5 +1,5 @@
 //
-//  SwiftUIView.swift
+//  RemainderTransactionView.swift
 //  
 //
 //  Created by Leonardo Mendez on 16/11/23.

@@ -9,7 +9,7 @@ import Foundation
 
 public struct Trade: Identifiable, Codable {
     
-    public var id = UUID()
+    public var id = UUID().uuidString
     public var email: String = ""
     public var category: String = ""
     public var description: String = ""
@@ -22,6 +22,7 @@ public struct Trade: Identifiable, Codable {
     public init() { }
     
     enum CodingKeys: String, CodingKey {
+        case id
         case email
         case category
         case description

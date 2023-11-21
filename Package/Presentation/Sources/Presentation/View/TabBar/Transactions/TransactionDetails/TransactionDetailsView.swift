@@ -1,6 +1,6 @@
 //
-//  SwiftUIView.swift
-//  
+//  TransactionDetailsView.swift
+//
 //
 //  Created by Leonardo Mendez on 17/11/23.
 //
@@ -12,28 +12,39 @@ struct TransactionDetailsView: View {
     
     @State private var isSheetPresented = false
     @State var isRemove: Bool = false
-//    @Binding var isIncome: Bool
+    @State var isIncome: Bool = false
+    @Binding var selectedTrade: Trade
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var store: Store
     @StateObject var viewModel: TransactionDetailsViewModel
+    @State private var backgroundColor: Color = Color(.green100)
     
     var body: some View {
-        VStack {
-//            if isIncome {
-                Color(.green100)
-                    .ignoresSafeArea()
-//            } else {
-//                Color(.red100)
-//                    .ignoresSafeArea()
-//            }
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack() {
+            TransactionDetailsTypeView(isIncome: $selectedTrade.isIncome,
+                                       category: $selectedTrade.category,
+                                       wallet: $selectedTrade.payment)
+            VStack {
+                TransactionDetailsHeaderView(transaction: $selectedTrade)
+                    .frame(height: UIScreen.main.bounds.size.height * 0.35)
+                TransactionDetailsDescriptionView(description: $selectedTrade.description)
+                Spacer()
+            }
+            
         }
-        .transactionDetailsToolbar(isSheetPresented: $isSheetPresented, isRemove: isRemove)
+        .ignoresSafeArea()
+        .transactionDetailsToolbar(isSheetPresented: $isSheetPresented, isRemove: $isRemove)
         .navigationBarItems(leading: BackNavigationButton(action: {
             store.transactions.removeLast()
         }, image: "arrow-left", color: Color(.light80)))
+        .onAppear {
+            isIncome = selectedTrade.isIncome
+            backgroundColor = isIncome ? Color(.green100) : Color(.red100)
+        }
         .onChange(of: isRemove) { _ in
-            
+            Task {
+                await viewModel.removeTransactions(trade: selectedTrade)
+            }
         }
     }
     
@@ -44,6 +55,6 @@ struct TransactionDetailsView: View {
 }
 
 #Preview {
-    TransactionDetailsView(viewModel: Constants.transactionDetailsViewModel)
+    TransactionDetailsView(selectedTrade: .constant(Trade()), viewModel: Constants.transactionDetailsViewModel)
         .environmentObject(Store())
 }

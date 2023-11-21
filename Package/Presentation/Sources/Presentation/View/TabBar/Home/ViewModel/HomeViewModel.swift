@@ -79,27 +79,27 @@ public class HomeViewModel: BaseViewModel<FetchTransactionUseCase>, ObservableOb
     func calculateValues(transactions: [Trade]) {
         var incomes = [Trade]()
         var expenses = [Trade]()
-        var incomeValue = 0
-        var expensesValue = 0
+        var incomeValue = 0.0
+        var expensesValue = 0.0
         incomes = transactions.filter { $0.isIncome == true }
         expenses = transactions.filter { $0.isIncome == false }
         incomes.forEach { trade in
-            incomeValue = incomeValue + (Int(trade.value) ?? 0)
+            incomeValue = incomeValue + (Double(trade.value) ?? 0.0)
         }
         expenses.forEach { trade in
-            expensesValue = expensesValue + (Int(trade.value) ?? 0)
+            expensesValue = expensesValue + (Double(trade.value) ?? 0.0)
         }
         self.incomeValue = "\(incomeValue)"
         self.expensesValue = "\(expensesValue)"
     }
     
     func calculateBalance(transactions: [Trade]) {
-        var balance = 0
+        var balance = 0.0
         transactions.forEach { trade in
             if trade.isIncome {
-                balance = balance + (Int(trade.value) ?? 0)
+                balance = balance + (Double(trade.value) ?? 0.0)
             } else {
-                balance = balance - (Int(trade.value) ?? 0)
+                balance = balance - (Double(trade.value) ?? 0.0)
             }
         }
         self.balance = "\(balance)"

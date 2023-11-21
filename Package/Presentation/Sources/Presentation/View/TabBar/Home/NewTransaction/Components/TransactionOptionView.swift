@@ -102,6 +102,7 @@ struct TransactionOptionView: View {
             await viewModel.createTransaction(trade: viewModel.transaction)
         }
     }
+    
 }
 
 #Preview {

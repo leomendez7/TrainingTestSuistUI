@@ -64,7 +64,7 @@ public class Constants {
     private static func generateTransactionDetailsModule() -> TransactionDetailsViewModel {
         let repository = TransactionRepository(datasource: TransactionRepositoryDataSource())
         let useCase = RemoveTransactionUseCase(repository: repository)
-        let transactionDetailsViewModel = TransactionDetailsViewModel(useCase: useCase)
+        let transactionDetailsViewModel = TransactionDetailsViewModel(useCase: useCase, store: Store.storeDefault)
         return transactionDetailsViewModel
     }
     
