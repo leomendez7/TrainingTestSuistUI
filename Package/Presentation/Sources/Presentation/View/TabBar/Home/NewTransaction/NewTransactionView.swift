@@ -28,13 +28,14 @@ struct NewTransactionView: View {
             }
             VStack(alignment: .leading) {
                 ValueTransactionTextFieldView(text: $value, placeholder: "0")
-                TransactionOptionView(isIncome: isIncome, 
+                TransactionOptionView(isIncome: isIncome,
                                       balance: balance,
                                       value: $value,
                                       viewModel: Constants.newTransactionViewModel)
-                    .frame(height: UIScreen.main.bounds.size.height * 0.60)
+                .frame(height: UIScreen.main.bounds.size.height * 0.60)
             }.background(backgroundColor)
         }
+        
         .onTapGesture {
             hideKeyboard()
         }

@@ -89,8 +89,10 @@ public class HomeViewModel: BaseViewModel<FetchTransactionUseCase>, ObservableOb
         expenses.forEach { trade in
             expensesValue = expensesValue + (Double(trade.value) ?? 0.0)
         }
-        self.incomeValue = "\(incomeValue)"
-        self.expensesValue = "\(expensesValue)"
+        let incomeDecimal = incomeValue.truncatingRemainder(dividingBy: 1)
+        let expensesDecimal = expensesValue.truncatingRemainder(dividingBy: 1)
+        self.incomeValue = incomeDecimal == 0 ? "\(Int(incomeValue))" : "\(incomeValue)"
+        self.expensesValue = expensesDecimal == 0 ? "\(Int(expensesValue))" : "\(expensesValue)"
     }
     
     func calculateBalance(transactions: [Trade]) {
@@ -102,7 +104,8 @@ public class HomeViewModel: BaseViewModel<FetchTransactionUseCase>, ObservableOb
                 balance = balance - (Double(trade.value) ?? 0.0)
             }
         }
-        self.balance = "\(balance)"
+        let balanceDecimal = balance.truncatingRemainder(dividingBy: 1)
+        self.balance = balanceDecimal == 0 ? "\(Int(balance))" : "\(balance)"
     }
     
 }

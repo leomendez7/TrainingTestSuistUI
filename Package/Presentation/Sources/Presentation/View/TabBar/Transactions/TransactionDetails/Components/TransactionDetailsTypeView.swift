@@ -15,7 +15,7 @@ struct TransactionDetailsTypeView: View {
     @State private var typeString: String = ""
     
     var body: some View {
-        HStack(spacing: 37) {
+        HStack() {
             VStack(spacing: 8) {
                 Text("Type")
                     .foregroundColor(Color(.light20))
@@ -23,6 +23,7 @@ struct TransactionDetailsTypeView: View {
                 Text(typeString)
                     .font(.system(size: 16))
             }
+            Spacer()
             VStack(spacing: 8) {
                 Text("Category")
                     .foregroundColor(Color(.light20))
@@ -30,6 +31,7 @@ struct TransactionDetailsTypeView: View {
                 Text(category)
                     .font(.system(size: 16))
             }
+            Spacer()
             VStack(spacing: 8) {
                 Text("Wallet")
                     .foregroundColor(Color(.light20))
@@ -39,6 +41,8 @@ struct TransactionDetailsTypeView: View {
             }
         }
         .padding(16)
+        .background(Color(.white))
+        .cornerRadius(16)
         .overlay(
             RoundedRectangle(cornerRadius: 16)
                 .stroke(Color(.light60), lineWidth: 1)

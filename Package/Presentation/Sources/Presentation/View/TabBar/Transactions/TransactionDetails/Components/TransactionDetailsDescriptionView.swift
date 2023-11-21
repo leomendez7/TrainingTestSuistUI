@@ -23,7 +23,6 @@ struct TransactionDetailsDescriptionView: View {
                 .foregroundColor(Color(.dark))
             Spacer()
         }
-        .padding(.top, 57)
     }
     
 }

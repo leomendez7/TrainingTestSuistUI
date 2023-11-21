@@ -20,17 +20,24 @@ struct TransactionDetailsView: View {
     @State private var backgroundColor: Color = Color(.green100)
     
     var body: some View {
-        ZStack() {
-            TransactionDetailsTypeView(isIncome: $selectedTrade.isIncome,
-                                       category: $selectedTrade.category,
-                                       wallet: $selectedTrade.payment)
-            VStack {
-                TransactionDetailsHeaderView(transaction: $selectedTrade)
-                    .frame(height: UIScreen.main.bounds.size.height * 0.35)
-                TransactionDetailsDescriptionView(description: $selectedTrade.description)
-                Spacer()
+        VStack {
+            GeometryReader { reader in
+                ZStack {
+                    VStack {
+                        TransactionDetailsHeaderView(transaction: $selectedTrade)
+                            .frame(height: reader.size.height * 0.35)
+                        TransactionDetailsTypeView(
+                            isIncome: $selectedTrade.isIncome,
+                            category: $selectedTrade.category,
+                            wallet: $selectedTrade.payment
+                        ).offset(y: -40)
+                            .padding(.horizontal, 16)
+                        TransactionDetailsDescriptionView(description: $selectedTrade.description)
+                            .offset(y: -20)
+                        Spacer()
+                    }
+                }
             }
-            
         }
         .ignoresSafeArea()
         .transactionDetailsToolbar(isSheetPresented: $isSheetPresented, isRemove: $isRemove)

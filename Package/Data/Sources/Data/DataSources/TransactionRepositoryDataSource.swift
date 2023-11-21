@@ -53,24 +53,17 @@ public class TransactionRepositoryDataSource {
     }
     
     public func removeTransaction(trade: Trade) async throws -> Bool {
-        let query = QueryBuilder
-            .select(SelectResult.all())
-            .from(DataSource.database(database))
-            .where(Expression.property("id").equalTo(Expression.string(trade.id)))
         do {
-            for result in try query.execute() {
-                if let document = result.dictionary(at: 0)?.toMutable(),
-                   let documentId = document.string(forKey: "id"),
-                   let existingDocument = database.document(withID: documentId) {
-                    try database.deleteDocument(existingDocument)
-                    print("Trade deleted successfully.")
-                    return true
-                }
+            let documentId = trade.id
+            guard let document = database.document(withID: documentId) else { 
+                print("Trade not found for deletion")
+                return false
             }
-            print("Trade not found for deletion.")
-            return false
+            try database.deleteDocument(document)
+            print("Trade deleted successfully.")
+            return true
         } catch {
-            print("Trade not found for deletion.")
+            print("Trade not found for deletion: \(error.localizedDescription)")
             return false
         }
     }
