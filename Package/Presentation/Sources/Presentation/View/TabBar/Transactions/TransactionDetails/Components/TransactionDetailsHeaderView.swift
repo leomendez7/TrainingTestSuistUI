@@ -1,5 +1,5 @@
 //
-//  SwiftUIView.swift
+//  TransactionDetailsHeaderView.swift
 //
 //
 //  Created by Leonardo Mendez on 20/11/23.

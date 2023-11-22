@@ -60,7 +60,7 @@ struct HomeToolbarModifier: ViewModifier {
 
 extension View {
     
-    func homeTransactionToolbar(image: String, isSheetPresented: Binding<Bool>, incomeSelected: Binding<Bool>, expensesSelected: Binding<Bool>)  -> some View {
+    func homeTransactionToolbar(image: String, isSheetPresented: Binding<Bool>, incomeSelected: Binding<Bool>, expensesSelected: Binding<Bool>) -> some View {
         return modifier(HomeToolbarModifier(image: image,
                                         isSheetPresented: isSheetPresented,
                                         incomeSelected: incomeSelected,

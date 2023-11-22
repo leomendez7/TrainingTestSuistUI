@@ -32,7 +32,7 @@ struct NewTransactionView: View {
                                       balance: balance,
                                       value: $value,
                                       viewModel: Constants.newTransactionViewModel)
-                .frame(height: UIScreen.main.bounds.size.height * 0.60)
+                .frame(height: (UIScreen.main.bounds.size.height * 0.60) + 15)
             }.background(backgroundColor)
         }
         

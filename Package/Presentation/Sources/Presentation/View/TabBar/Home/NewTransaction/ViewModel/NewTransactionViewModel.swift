@@ -9,6 +9,7 @@ import Foundation
 import Combine
 import SwiftUI
 import Domain
+import Shared
 
 public class NewTransactionViewModel: BaseViewModel<CreateTransactionUseCase>, ObservableObject {
  
@@ -36,9 +37,22 @@ public class NewTransactionViewModel: BaseViewModel<CreateTransactionUseCase>, O
         showPicker = true
     }
     
-    func createTransaction(trade: Trade) async {
+    func createTransaction(email: String, 
+                           category: String,
+                           description: String,
+                           payment: String,
+                           value: String,
+                           isIncome: Bool,
+                           image: String) async {
+       transaction.email = email
+       transaction.category = category
+       transaction.description = description
+       transaction.payment = payment
+       transaction.value = value
+       transaction.isIncome = isIncome
+       transaction.image = image
         do {
-            let response = try await useCase.execute(requestValue: trade)
+            let response = try await useCase.execute(requestValue: transaction)
             DispatchQueue.main.async {
                 self.success = response
             }

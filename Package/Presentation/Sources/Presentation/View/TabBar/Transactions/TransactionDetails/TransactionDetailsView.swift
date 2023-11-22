@@ -32,7 +32,8 @@ struct TransactionDetailsView: View {
                             wallet: $selectedTrade.payment
                         ).offset(y: -40)
                             .padding(.horizontal, 16)
-                        TransactionDetailsDescriptionView(description: $selectedTrade.description)
+                        TransactionDetailsDescriptionView(description: $selectedTrade.description, image: $selectedTrade.image)
+                            .padding(.horizontal, 16)
                             .offset(y: -20)
                         Spacer()
                     }

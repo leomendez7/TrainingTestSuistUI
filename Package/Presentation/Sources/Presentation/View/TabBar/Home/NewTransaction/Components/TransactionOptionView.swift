@@ -25,18 +25,19 @@ struct TransactionOptionView: View {
     @StateObject var viewModel: NewTransactionViewModel
     
     var body: some View {
-        VStack(spacing: 16) {
+        VStack(alignment: .leading, spacing: 16) {
             CategorySelectorView(selectedCategory: $selectedCategory)
             CustomTextField(text: $description, placeholder: "Description")
             PayMethodSelectorView(selectedPayment: $selectedPayment)
             if let image = viewModel.image {
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 112, height: 112)
+                ZStack {
+                    CustomImageView(action: {
+                        viewModel.image = nil
+                    }, image: image)
+                }
             } else {
                 Button(action:{
-                    viewModel.source = .camera
+                    viewModel.source = .library
                     viewModel.showPhotoPicker()
                 }) {
                     Image("add-attachment", bundle: .module)
@@ -45,14 +46,9 @@ struct TransactionOptionView: View {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Reminder")
-                        .multilineTextAlignment(TextAlignment.leading)
-                        .font(.system(size: 16))
-                        .fontWeight(.semibold)
-                        .foregroundColor(Color(.dark25))
+                        .textModifierStyle(size: 16, color: Color(.dark25), weight: .semibold)
                     Text("Set a transaction reminder")
-                        .font(.system(size: 13))
-                        .fontWeight(.semibold)
-                        .foregroundColor(Color(.light20))
+                        .textModifierStyle(size: 13, color: Color(.light20), weight: .semibold)
                 }
                 Spacer()
                 Toggle("", isOn: $isSwitchOn)
@@ -60,7 +56,8 @@ struct TransactionOptionView: View {
             }
             Spacer()
             CustomButton(action: {
-                if (!isIncome && ((Int(value) ?? 0) >= Int(balance) ?? 0)) {
+                print("value: \(value) balance: \(balance)")
+                if (!isIncome && ((Double(value) ?? 0) > Double(balance) ?? 0)) {
                     titleAlert = "Alert!"
                     textAlert = "The value cannot be greater than the balance."
                     showAlert.toggle()
@@ -74,9 +71,9 @@ struct TransactionOptionView: View {
             }, text: "Continue", color: Color(.violet100), foregroundColor: .white)
             Spacer()
                 .sheet(isPresented: $viewModel.showPicker, content: {
-                    ImagePicker(sourceType: viewModel.source == .library 
+                    ImagePicker(sourceType: viewModel.source == .library
                                 ? .photoLibrary : .camera, selectedImage: $viewModel.image)
-                        .ignoresSafeArea()
+                    .ignoresSafeArea()
                 })
         }
         .alert(isPresented: $showAlert) {
@@ -86,20 +83,28 @@ struct TransactionOptionView: View {
                 dismissButton: .default(Text("OK"))
             )
         }
+        .onChange(of: viewModel.image) { _ in
+            print("change image")
+        }
+        .onAppear {
+            viewModel.image = nil
+        }
         .padding(.horizontal, 16)
         .padding(.top, 24)
         .topRoundedCorners(cornerRadius: 32, backgroundColor: .white)
     }
     
     func createTransaction() {
-        viewModel.transaction.email = Default.user()?.email ?? ""
-        viewModel.transaction.category = selectedCategory
-        viewModel.transaction.description = description
-        viewModel.transaction.payment = selectedPayment
-        viewModel.transaction.value = value
-        viewModel.transaction.isIncome = isIncome
+        let email = Default.user()?.email ?? ""
+        let image = viewModel.image?.toBase64() ?? ""
         Task {
-            await viewModel.createTransaction(trade: viewModel.transaction)
+            await viewModel.createTransaction(email: email, 
+                                              category: selectedCategory,
+                                              description: description,
+                                              payment: selectedPayment,
+                                              value: value,
+                                              isIncome: isIncome,
+                                              image: image)
         }
     }
     

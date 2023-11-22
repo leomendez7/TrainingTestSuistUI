@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 public struct Trade: Identifiable, Codable {
     
@@ -18,6 +19,7 @@ public struct Trade: Identifiable, Codable {
     public var payment: String = ""
     public var reminder: Bool = false
     public var createDate = Date()
+    public var image: String = ""
     
     public init() { }
     
@@ -31,6 +33,7 @@ public struct Trade: Identifiable, Codable {
         case payment
         case reminder
         case createDate
+        case image
     }
     
 }
