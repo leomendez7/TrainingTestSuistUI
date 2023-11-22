@@ -12,9 +12,9 @@ import Domain
 
 public class HomeViewModel: BaseViewModel<FetchTransactionUseCase>, ObservableObject {
     
-    @Published var transactions: [Trade] = []
     var seeAll: Bool = false
     var selectedMont: String = ""
+    @Published var transactions: [Trade] = []
     @Published var success: Bool = false
     @Published var images: [String] = []
     @Published var colors: [Color] = []
@@ -23,6 +23,7 @@ public class HomeViewModel: BaseViewModel<FetchTransactionUseCase>, ObservableOb
     @Published var incomeValue: String = ""
     @Published var expensesValue: String = ""
     @Published var balance: String = ""
+    @Published var loading = true
     
     func generateMonths() {
         let dateFormatter = DateFormatter()
@@ -44,6 +45,7 @@ public class HomeViewModel: BaseViewModel<FetchTransactionUseCase>, ObservableOb
             response = response.reversed()
             let transactions = response
             DispatchQueue.main.async {
+                self.success = false
                 var filterTransaction = [Trade]()
                 self.transactions.removeAll()
                 self.images.removeAll()

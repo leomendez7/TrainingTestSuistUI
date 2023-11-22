@@ -13,7 +13,6 @@ struct HomeView: View {
     @StateObject var viewModel: HomeViewModel
     @EnvironmentObject var store: Store
     @State var isIncome = Bool()
-    @State private var isSheetPresented = false
     @State var isIncomeSelected = false
     @State var isExpensesSelected = false
     @State var seeAll = false
@@ -21,6 +20,8 @@ struct HomeView: View {
     @State var expensesValue = ""
     @State var balance = ""
     @State var selectedTrade = Trade()
+    @State private var isSheetPresented = false
+    @State private var isLoading = false
     
     var body: some View {
         NavigationStack(path: $store.transactions) {
@@ -51,6 +52,20 @@ struct HomeView: View {
                     await viewModel.fetchTransactions()
                 }
             }
+            .overlay(
+                isLoading ?
+                ZStack {
+                    Color.white.edgesIgnoringSafeArea(.all)
+                    VStack {
+                        Spacer()
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: Color(.violet100)))
+                            .padding(20)
+                        Spacer()
+                    }
+                }
+                : nil
+            )
             .onReceive(viewModel.$incomeValue) { newValue in
                 incomeValue = newValue
             }
@@ -59,6 +74,9 @@ struct HomeView: View {
             }
             .onReceive(viewModel.$balance) { newValue in
                 balance = newValue
+            }
+            .onReceive(viewModel.$success) { newValue in
+                isLoading = !newValue
             }
             .navigationDestination(for: String.self, destination: { route in
                 switch route {

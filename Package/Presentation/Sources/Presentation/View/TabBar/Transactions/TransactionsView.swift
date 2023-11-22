@@ -14,6 +14,7 @@ struct TransactionsView: View {
     @State private var isSheetPresented = false
     @State var selectedTrade = Trade()
     @State var transactions = [Trade]()
+    @State private var isLoading = false
     @EnvironmentObject var store: Store
     
     var body: some View {
@@ -29,6 +30,23 @@ struct TransactionsView: View {
                         }
                     }
                 }
+            }
+            .overlay(
+                isLoading ?
+                ZStack {
+                    Color.white.edgesIgnoringSafeArea(.all)
+                    VStack {
+                        Spacer()
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: Color(.violet100)))
+                            .padding(20)
+                        Spacer()
+                    }
+                }
+                : nil
+            )
+            .onReceive(viewModel.$success) { newValue in
+                isLoading = !newValue
             }
             .transactionToolbar(isSheetPresented: $isSheetPresented)
             .environmentObject(Constants.homeViewModel)

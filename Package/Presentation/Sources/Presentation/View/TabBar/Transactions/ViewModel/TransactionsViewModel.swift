@@ -11,6 +11,7 @@ import Domain
 public class TransactionsViewModel: BaseViewModel<FetchTransactionUseCase>, ObservableObject {
     
     @Published var transactions: [Trade] = []
+    @Published var success: Bool = false
 
     var groupedTransactions: [Date: [Trade]] {
         var groupedDict: [Date: [Trade]] = [:]
@@ -32,10 +33,12 @@ public class TransactionsViewModel: BaseViewModel<FetchTransactionUseCase>, Obse
             response = response.reversed()
             let transactions = response
             DispatchQueue.main.async {
+                self.success = false
                 self.transactions.removeAll()
                 transactions.forEach { trade in
                     self.transactions.append(trade)
                 }
+                self.success = true
             }
         } catch {
             print(error.localizedDescription)

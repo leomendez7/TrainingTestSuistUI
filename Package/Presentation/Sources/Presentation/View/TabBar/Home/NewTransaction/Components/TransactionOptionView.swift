@@ -12,15 +12,16 @@ import Combine
 
 struct TransactionOptionView: View {
     
-    @State private var isSwitchOn = false
     @State var isIncome: Bool
     @State var description = String()
     @State var selectedCategory = "Shopping"
     @State var selectedPayment = "Wallet"
+    @State var balance: String
     @State private var showAlert = false
     @State private var titleAlert: String = ""
     @State private var textAlert: String = ""
-    @State var balance: String
+    @State private var isSwitchOn = false
+
     @Binding var value: String
     @StateObject var viewModel: NewTransactionViewModel
     
