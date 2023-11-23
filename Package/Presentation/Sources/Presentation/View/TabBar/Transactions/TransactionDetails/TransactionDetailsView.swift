@@ -30,8 +30,9 @@ struct TransactionDetailsView: View {
                             isIncome: $selectedTrade.isIncome,
                             category: $selectedTrade.category,
                             wallet: $selectedTrade.payment
-                        ).offset(y: -40)
-                            .padding(.horizontal, 16)
+                        )
+                        .offset(y: -40)
+                        .padding(.horizontal, 16)
                         TransactionDetailsDescriptionView(description: $selectedTrade.description, image: $selectedTrade.image)
                             .padding(.horizontal, 16)
                             .offset(y: -20)
@@ -54,10 +55,6 @@ struct TransactionDetailsView: View {
                 await viewModel.removeTransactions(trade: selectedTrade)
             }
         }
-    }
-    
-    func configureView() {
-        
     }
     
 }

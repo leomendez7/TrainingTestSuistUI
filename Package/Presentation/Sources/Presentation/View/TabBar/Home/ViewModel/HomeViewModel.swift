@@ -14,6 +14,7 @@ public class HomeViewModel: BaseViewModel<FetchTransactionUseCase>, ObservableOb
     
     var seeAll: Bool = false
     var selectedMont: String = ""
+    var loading = true
     @Published var transactions: [Trade] = []
     @Published var success: Bool = false
     @Published var images: [String] = []
@@ -23,15 +24,13 @@ public class HomeViewModel: BaseViewModel<FetchTransactionUseCase>, ObservableOb
     @Published var incomeValue: String = ""
     @Published var expensesValue: String = ""
     @Published var balance: String = ""
-    @Published var loading = true
+    
     
     func generateMonths() {
         let dateFormatter = DateFormatter()
         let months = dateFormatter.monthSymbols
         self.months.removeAll()
-        for index in 0...((months?.count ?? 0) - 1) {
-            self.months.append(months?[index] ?? "")
-        }
+        self.months = months ?? [String]()
         if let currentMonth = Calendar.current.dateComponents([.month], from: Date()).month {
             self.currentMonth = currentMonth - 1
             dateFormatter.dateFormat = "MMMM"
@@ -40,6 +39,7 @@ public class HomeViewModel: BaseViewModel<FetchTransactionUseCase>, ObservableOb
     }
     
     func fetchTransactions() async {
+        loading = true
         do {
             var response = try await useCase.execute(requestValue: Default.user()?.email ?? "")
             response = response.reversed()
@@ -72,6 +72,7 @@ public class HomeViewModel: BaseViewModel<FetchTransactionUseCase>, ObservableOb
                 self.calculateBalance(transactions: transactions)
                 self.calculateValues(transactions: filterTransaction)
                 self.success = true
+                self.loading = false
             }
         } catch {
             print(error.localizedDescription)

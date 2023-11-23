@@ -10,12 +10,13 @@ import Shared
 
 struct NewTransactionView: View {
     
+    var balance: String
     @Binding var isIncome: Bool
     @State var tittle: String = ""
     @State var value: String = ""
-    @State var balance: String
-    @EnvironmentObject var store: Store
+    @State private var showCustomAlert = false
     @State private var backgroundColor: Color = Color(.green100)
+    @EnvironmentObject var store: Store
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -28,14 +29,14 @@ struct NewTransactionView: View {
             }
             VStack(alignment: .leading) {
                 ValueTransactionTextFieldView(text: $value, placeholder: "0")
-                TransactionOptionView(isIncome: isIncome,
-                                      balance: balance,
+                TransactionOptionView(balance: balance, 
+                                      isIncome: isIncome,
                                       value: $value,
+                                      showCustomAlert: $showCustomAlert,
                                       viewModel: Constants.newTransactionViewModel)
                 .frame(height: (UIScreen.main.bounds.size.height * 0.60) + 15)
             }.background(backgroundColor)
         }
-        
         .onTapGesture {
             hideKeyboard()
         }
@@ -59,13 +60,19 @@ struct NewTransactionView: View {
                     .foregroundColor(Color(.light100))
             }
         })
+        .overlay(
+            CustomAlertView(isPresented: $showCustomAlert, action: {
+                store.transactions.removeLast()
+            })
+            .opacity(showCustomAlert ? 1 : 0)
+        )
     }
     
 }
 
 #Preview {
     NavigationStack {
-        NewTransactionView(isIncome: .constant(true), balance: "900")
+        NewTransactionView(balance: "900", isIncome: .constant(true))
             .environmentObject(Store())
     }
 }

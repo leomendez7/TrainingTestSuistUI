@@ -12,17 +12,17 @@ import Combine
 
 struct TransactionOptionView: View {
     
+    var balance: String
     @State var isIncome: Bool
     @State var description = String()
     @State var selectedCategory = "Shopping"
     @State var selectedPayment = "Wallet"
-    @State var balance: String
     @State private var showAlert = false
     @State private var titleAlert: String = ""
     @State private var textAlert: String = ""
     @State private var isSwitchOn = false
-
     @Binding var value: String
+    @Binding var showCustomAlert: Bool
     @StateObject var viewModel: NewTransactionViewModel
     
     var body: some View {
@@ -43,6 +43,7 @@ struct TransactionOptionView: View {
                 }) {
                     Image("add-attachment", bundle: .module)
                 }
+                .frame(maxWidth: .infinity)
             }
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
@@ -58,14 +59,13 @@ struct TransactionOptionView: View {
             Spacer()
             CustomButton(action: {
                 print("value: \(value) balance: \(balance)")
+                titleAlert = "Alert!"
                 if (!isIncome && ((Double(value) ?? 0) > Double(balance) ?? 0)) {
-                    titleAlert = "Alert!"
                     textAlert = "The value cannot be greater than the balance."
                     showAlert.toggle()
                 } else if self.value != "0" && !self.value.isEmpty {
                     createTransaction()
                 } else {
-                    titleAlert = "Alert!"
                     textAlert = "The value should not be 0."
                     showAlert.toggle()
                 }
@@ -86,6 +86,9 @@ struct TransactionOptionView: View {
         }
         .onChange(of: viewModel.image) { _ in
             print("change image")
+        }
+        .onChange(of: viewModel.success) { _ in
+            showCustomAlert.toggle()
         }
         .onAppear {
             viewModel.image = nil
@@ -112,5 +115,9 @@ struct TransactionOptionView: View {
 }
 
 #Preview {
-    TransactionOptionView(isIncome: true, balance: "", value: .constant("0"), viewModel: Constants.newTransactionViewModel)
+    TransactionOptionView(balance: "", 
+                          isIncome: true,
+                          value: .constant("0"),
+                          showCustomAlert: .constant(true), 
+                          viewModel: Constants.newTransactionViewModel)
 }

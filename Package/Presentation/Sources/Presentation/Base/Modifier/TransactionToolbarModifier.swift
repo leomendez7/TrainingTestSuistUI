@@ -10,14 +10,20 @@ import SwiftUI
 struct TransactionToolbarModifier: ViewModifier {
     
     @Binding var isSheetPresented: Bool
-    @State var isIncomeSelected = false
-    @State var isExpensesSelected = false
+    @Binding var months: [String]
+    @Binding var selectedMont: String
+    @Binding var currentMonth: Int
+    @Binding var changeMonth: Bool
+    @State var isChangeMonth = false
     
     func body(content: Content) -> some View {
         content
             .toolbar(content: {
                 ToolbarItem(placement: .topBarLeading) {
-                    MonthSwitcherView()
+                    MonthSwitcherView(currentMonth: $currentMonth,
+                                      months: $months,
+                                      selectedMont: $selectedMont,
+                                      isChangeMonth: $isChangeMonth)
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(action: {
@@ -28,26 +34,31 @@ struct TransactionToolbarModifier: ViewModifier {
                             .frame(width: 35, height: 35)
                     }
                     .sheet(isPresented: $isSheetPresented) {
-                        NewOptionTransactionView(isIncomeSelected: $isIncomeSelected,
-                                                 isExpensesSelected: $isExpensesSelected)
+                        EmptyView()
                         .presentationDetents([.fraction(0.25)])
                     }
                 }
             })
-            .onChange(of: isIncomeSelected) { _ in
-                
+            .onChange(of: isChangeMonth) { _ in
+                changeMonth.toggle()
             }
-            .onChange(of: isExpensesSelected) { _ in
-                
-            }
+           
     }
     
 }
 
 extension View {
     
-    func transactionToolbar(isSheetPresented: Binding<Bool>)  -> some View {
-        return modifier(TransactionToolbarModifier(isSheetPresented: isSheetPresented))
+    func transactionToolbar(isSheetPresented: Binding<Bool>,
+                            months: Binding<[String]>,
+                            currentMonth: Binding<Int>,
+                            selectedMont: Binding<String>,
+                            changeMonth: Binding<Bool>)  -> some View {
+        return modifier(TransactionToolbarModifier(isSheetPresented: isSheetPresented,
+                                                   months: months,
+                                                   selectedMont: selectedMont,
+                                                   currentMonth: currentMonth, 
+                                                   changeMonth: changeMonth))
     }
     
 }

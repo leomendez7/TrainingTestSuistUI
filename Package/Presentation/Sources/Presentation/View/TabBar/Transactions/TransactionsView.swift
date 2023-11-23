@@ -10,11 +10,12 @@ import Domain
 
 struct TransactionsView: View {
     
-    @StateObject var viewModel: TransactionsViewModel
+    @ObservedObject var viewModel: TransactionsViewModel
     @State private var isSheetPresented = false
     @State var selectedTrade = Trade()
     @State var transactions = [Trade]()
     @State private var isLoading = false
+    @State var isChangeMonth = false
     @EnvironmentObject var store: Store
     
     var body: some View {
@@ -31,6 +32,20 @@ struct TransactionsView: View {
                     }
                 }
             }
+            .onAppear {
+                viewModel.generateMonths()
+                Task {
+                    await viewModel.fetchTransactions()
+                }
+            }
+            .onReceive(viewModel.$success) { newValue in
+                isLoading = !newValue
+            }
+            .onChange(of: isChangeMonth) { _ in
+                Task {
+                    await viewModel.fetchTransactions()
+                }
+            }
             .overlay(
                 isLoading ?
                 ZStack {
@@ -45,10 +60,11 @@ struct TransactionsView: View {
                 }
                 : nil
             )
-            .onReceive(viewModel.$success) { newValue in
-                isLoading = !newValue
-            }
-            .transactionToolbar(isSheetPresented: $isSheetPresented)
+            .transactionToolbar(isSheetPresented: $isSheetPresented,
+                                months: $viewModel.months,
+                                currentMonth: $viewModel.currentMonth,
+                                selectedMont: $viewModel.selectedMont,
+                                changeMonth: $isChangeMonth)
             .environmentObject(Constants.homeViewModel)
             .navigationDestination(for: String.self, destination: { route in
                 switch route {
@@ -59,15 +75,6 @@ struct TransactionsView: View {
                 }
             })
         }
-        .onAppear {
-            Task {
-                await viewModel.fetchTransactions()
-            }
-        }
-    }
-    
-    func addTransactions(trades: [Trade]) {
-        
     }
     
 }

@@ -62,11 +62,11 @@ public class NewTransactionViewModel: BaseViewModel<CreateTransactionUseCase>, O
     }
     
     func subscribe() {
-        $success.sink { response in
-            if response {
-                self.store.transactions.removeLast()
-            }
-        }.store(in: &cancellables)
+//        $success.sink { response in
+//            if response {
+//                self.store.transactions.removeLast()
+//            }
+//        }.store(in: &cancellables)
     }
     
 }

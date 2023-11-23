@@ -10,20 +10,23 @@ import SwiftUI
 struct MonthSwitcherView: View {
     
     @State private var selectedMonthIndex = 0
-    @State private var changeMonth: Bool = false
+    @State var changeMonth: Bool = false
     @State private var isSheetPresented = false
-    @EnvironmentObject var viewModel: HomeViewModel
+    @Binding var currentMonth: Int
+    @Binding var months: [String]
+    @Binding var selectedMont: String
+    @Binding var isChangeMonth: Bool
     
     var body: some View {
         HStack() {
             Spacer()
             Menu {
-                ForEach(0..<viewModel.months.count, id: \.self) { index in
+                ForEach(0..<months.count, id: \.self) { index in
                     Button(action: {
                         selectedMonthIndex = index
                         changeMonth.toggle()
                     }) {
-                        Text(viewModel.months[index])
+                        Text(months[index])
                     }
                 }
             } label: {
@@ -32,8 +35,8 @@ struct MonthSwitcherView: View {
                         .resizable()
                         .frame(width: 24, height: 24)
                         .padding(.leading, 12)
-                    if !viewModel.months.isEmpty {
-                        Text(viewModel.months[selectedMonthIndex])
+                    if !months.isEmpty {
+                        Text(months[selectedMonthIndex])
                             .font(.system(size: 18))
                             .padding(.trailing, 16)
                             .padding(.top, 5)
@@ -53,19 +56,18 @@ struct MonthSwitcherView: View {
         }
         .onChange(of: changeMonth) { _ in
             print(selectedMonthIndex)
-            viewModel.selectedMont = viewModel.months[selectedMonthIndex]
-            Task {
-                await viewModel.fetchTransactions()
-            }
+            selectedMont = months[selectedMonthIndex]
+            isChangeMonth.toggle()
         }
         .onAppear {
-            viewModel.generateMonths()
-            selectedMonthIndex = viewModel.currentMonth
+            selectedMonthIndex = currentMonth
         }
     }
 }
 
 #Preview {
-    MonthSwitcherView()
-        .environmentObject(Constants.homeViewModel)
+    MonthSwitcherView(currentMonth: .constant(0), 
+                      months: .constant([String]()),
+                      selectedMont: .constant(String()),
+                      isChangeMonth: .constant(Bool()))
 }

@@ -10,10 +10,18 @@ import Domain
 
 public class TransactionsViewModel: BaseViewModel<FetchTransactionUseCase>, ObservableObject {
     
-    @Published var transactions: [Trade] = []
+    var selectedMont: String = ""
+    @Published var groupedTransactions: [Date: [Trade]] = [:]
     @Published var success: Bool = false
-
-    var groupedTransactions: [Date: [Trade]] {
+    @Published var currentMonth: Int = 0
+    @Published var months: [String] = []
+    var transactions: [Trade] = [] {
+        didSet {
+            updateGroupedTransactions()
+        }
+    }
+    
+    private func updateGroupedTransactions() {
         var groupedDict: [Date: [Trade]] = [:]
         for transaction in transactions {
             let key = Calendar.current.startOfDay(for: transaction.createDate)
@@ -24,20 +32,39 @@ public class TransactionsViewModel: BaseViewModel<FetchTransactionUseCase>, Obse
                 groupedDict[key] = [transaction]
             }
         }
-        return groupedDict
+        groupedTransactions = groupedDict
+    }
+    
+    func generateMonths() {
+        let dateFormatter = DateFormatter()
+        let months = dateFormatter.monthSymbols
+        self.months.removeAll()
+        self.months = months ?? [String]()
+        if let currentMonth = Calendar.current.dateComponents([.month], from: Date()).month {
+            self.currentMonth = currentMonth - 1
+            dateFormatter.dateFormat = "MMMM"
+            selectedMont = dateFormatter.string(from: Date())
+        }
     }
 
     func fetchTransactions() async {
         do {
             var response = try await useCase.execute(requestValue: Default.user()?.email ?? "")
             response = response.reversed()
-            let transactions = response
+            let sortTransaction =  response
             DispatchQueue.main.async {
                 self.success = false
                 self.transactions.removeAll()
-                transactions.forEach { trade in
-                    self.transactions.append(trade)
+                var transactions = [Trade]()
+                sortTransaction.forEach { trade in
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "MMMM"
+                    let monthName = dateFormatter.string(from: trade.createDate)
+                    if monthName == self.selectedMont {
+                        transactions.append(trade)
+                    }
                 }
+                self.transactions = transactions
                 self.success = true
             }
         } catch {

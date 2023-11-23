@@ -10,15 +10,13 @@ import Domain
 
 struct HomeView: View {
     
-    @StateObject var viewModel: HomeViewModel
+    @ObservedObject var viewModel: HomeViewModel
     @EnvironmentObject var store: Store
     @State var isIncome = Bool()
     @State var isIncomeSelected = false
     @State var isExpensesSelected = false
+    @State var isChangeMonth = false
     @State var seeAll = false
-    @State var incomeValue = ""
-    @State var expensesValue = ""
-    @State var balance = ""
     @State var selectedTrade = Trade()
     @State private var isSheetPresented = false
     @State private var isLoading = false
@@ -27,12 +25,18 @@ struct HomeView: View {
         NavigationStack(path: $store.transactions) {
             VStack {
                 ScrollView {
-                    BalanceComponentView(balance: $balance, income: $incomeValue, expense: $expensesValue)
+                    BalanceComponentView(balance: viewModel.balance, income: viewModel.incomeValue, expense: viewModel.expensesValue)
                     FrequencyView()
                     RecentTransactionView(seeAll: $seeAll, selectedTrade: $selectedTrade)
                 }
             }
             .preferredColorScheme(.light)
+            .onAppear {
+                viewModel.generateMonths()
+                Task {
+                    await viewModel.fetchTransactions()
+                }
+            }
             .onChange(of: isIncomeSelected) { _ in
                 isIncome = true
                 store.transactions.append("NewTransaction")
@@ -47,10 +51,16 @@ struct HomeView: View {
                     await viewModel.fetchTransactions()
                 }
             }
-            .onAppear {
+            .onChange(of: isChangeMonth) { _ in
                 Task {
                     await viewModel.fetchTransactions()
                 }
+            }
+            .onReceive(viewModel.$success) { newValue in
+                isLoading = !newValue
+            }
+            .onChange(of: viewModel.loading) { newValue in
+                isLoading = newValue
             }
             .overlay(
                 isLoading ?
@@ -66,29 +76,26 @@ struct HomeView: View {
                 }
                 : nil
             )
-            .onReceive(viewModel.$incomeValue) { newValue in
-                incomeValue = newValue
-            }
-            .onReceive(viewModel.$expensesValue) { newValue in
-                expensesValue = newValue
-            }
-            .onReceive(viewModel.$balance) { newValue in
-                balance = newValue
-            }
-            .onReceive(viewModel.$success) { newValue in
-                isLoading = !newValue
-            }
             .navigationDestination(for: String.self, destination: { route in
                 switch route {
                 case "NewTransaction":
-                    NewTransactionView(isIncome: $isIncome, balance: balance)
+                    NewTransactionView(balance: viewModel.balance, isIncome: $isIncome)
                 case "TransactionDetails":
                     TransactionDetailsView(selectedTrade: $selectedTrade, viewModel: Constants.transactionDetailsViewModel)
                 default:
                     EmptyView()
                 }
             })
-            .homeTransactionToolbar(image: "avatar-2", isSheetPresented: $isSheetPresented, incomeSelected: $isIncomeSelected, expensesSelected: $isExpensesSelected)
+            .homeTransactionToolbar(image: "avatar-2",
+                                    isSheetPresented: $isSheetPresented,
+                                    incomeSelected: $isIncomeSelected,
+                                    expensesSelected: $isExpensesSelected,
+                                    months: $viewModel.months,
+                                    currentMonth: $viewModel.currentMonth,
+                                    selectedMont: $viewModel.selectedMont, 
+                                    changeMonth: $isChangeMonth)
+            .navigationTitle("")
+            .navigationBarTitleDisplayMode(.inline)
             .environmentObject(viewModel)
         }
         .toolbarColorScheme(.light, for: .navigationBar)
