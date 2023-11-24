@@ -27,13 +27,12 @@ struct EditProfileView: View {
                 CustomTextField(text: $email, placeholder: "Email")
                 CustomDateTextField(text: $birthday, placeholder: "Birthday")
                 if let image = viewModel.image {
-                    HStack() {
+                    ZStack() {
                         CircularImageView(image: image)
-                            .onTapGesture {
-                                viewModel.source = .library
-                                viewModel.showPhotoPicker()
-                            }
-                        Spacer()
+                        EditProfileButton(action: {
+                            viewModel.source = .library
+                            viewModel.showPhotoPicker()
+                        }, withoutRounding: true)
                     }
                 } else {
                     Image("add-attachment", bundle: .module)
@@ -79,7 +78,7 @@ struct EditProfileView: View {
             store.settings.removeLast()
         }, image: "arrow-left", color: Color(.dark25)))
         .alert(isPresented: $showAlert) {
-            Alert(title: Text("Success!"), 
+            Alert(title: Text("Success!"),
                   message: Text("User has been updated."),
                   primaryButton: .default(Text("Ok"), action: {
                 store.settings.removeLast()

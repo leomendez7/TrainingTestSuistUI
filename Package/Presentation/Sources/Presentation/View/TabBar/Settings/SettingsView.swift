@@ -28,11 +28,9 @@ struct SettingsView: View {
                     CircularImageView(image: image)
                     DataProfileView(email: $email, name: $name)
                     Spacer()
-                    Button(action: {
+                    EditProfileButton(action: {
                         store.settings.append("editProfile")
-                    }) {
-                        Image("edit-profile-button", bundle: .module)
-                    }
+                    }, withoutRounding: false, height: 40, width: 40, offsetX: 0.0, offsetY: 0.0)
                 }
                 VStack(spacing: 47) {
                     VStack(spacing: 20) {
@@ -59,10 +57,10 @@ struct SettingsView: View {
                     })
                     .sheet(isPresented: $isSheetPresented) {
                         ConfirmationView(isSheetPresented: isSheetPresented,
-                                             title: "Log out",
-                                             bodyText: "Are you sure you want to log out?",
-                                             activeAction: $isLogout)
-                            .presentationDetents([.fraction(0.25)])
+                                         title: "Log out",
+                                         bodyText: "Are you sure you want to log out?",
+                                         activeAction: $isLogout)
+                        .presentationDetents([.fraction(0.25)])
                     }
                 }
                 .padding(.top, 45)
@@ -83,15 +81,22 @@ struct SettingsView: View {
             .onAppear {
                 email = Default.user()?.email ?? ""
                 name = Default.user()?.name ?? ""
-                if let image = Default.user()?.imageProfile {
-                    self.image = UIImage.fromBase64(image) ?? UIImage()
-                } else {
-                    if let originalImage = UIImage(systemName: "person.circle.fill") {
-                        let purpleImage = originalImage.withTintColor(.purple).withRenderingMode(.alwaysOriginal)
-                        self.image = purpleImage
+                if let imageBase64 = Default.user()?.imageProfile {
+                    if !imageBase64.isEmpty {
+                        self.image = UIImage.fromBase64(imageBase64) ?? UIImage()
                     } else {
-                        self.image = UIImage()
+                        if let originalImage = UIImage(systemName: "person") {
+                            let coloredImage = originalImage
+                                .withTintColor(.clear)
+                                .withRenderingMode(.alwaysOriginal)
+                                .withTintColor(.purple)
+                            let swiftUIImage = Image(uiImage: coloredImage)
+                                .resizable()
+                                .frame(width: 80, height: 80)
+                            self.image = swiftUIImage as? UIImage ?? UIImage()
+                        }
                     }
+                    
                 }
             }
             .onChange(of: isLogout) { _ in
