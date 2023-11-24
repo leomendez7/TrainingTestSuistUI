@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeToolbarModifier: ViewModifier {
     
-    var image: String
+    var image = UIImage()
     @Binding var isSheetPresented: Bool
     @Binding var incomeSelected: Bool
     @Binding var expensesSelected: Bool
@@ -25,14 +25,7 @@ struct HomeToolbarModifier: ViewModifier {
         content
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Circle()
-                        .frame(width: 35, height: 35)
-                        .foregroundColor(.white)
-                        .overlay(
-                            Image(image, bundle: .module)
-                                .resizable()
-                                .frame(width: 37, height: 37)
-                        )
+                    CircularImageView(image: image, height: 37, width: 37)
                 }
                 ToolbarItem(placement: .principal) {
                     MonthSwitcherView(currentMonth: $currentMonth,
@@ -71,7 +64,7 @@ struct HomeToolbarModifier: ViewModifier {
 
 extension View {
     
-    func homeTransactionToolbar(image: String,
+    func homeTransactionToolbar(image: UIImage,
                                 isSheetPresented: Binding<Bool>,
                                 incomeSelected: Binding<Bool>,
                                 expensesSelected: Binding<Bool>,

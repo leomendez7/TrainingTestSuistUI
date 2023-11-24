@@ -37,13 +37,12 @@ struct TransactionOptionView: View {
                     }, image: image)
                 }
             } else {
-                Button(action:{
-                    viewModel.source = .library
-                    viewModel.showPhotoPicker()
-                }) {
-                    Image("add-attachment", bundle: .module)
-                }
-                .frame(maxWidth: .infinity)
+                Image("add-attachment", bundle: .module)
+                    .onTapGesture {
+                        viewModel.source = .library
+                        viewModel.showPhotoPicker()
+                    }
+                    .frame(maxWidth: .infinity)
             }
             HStack {
                 VStack(alignment: .leading, spacing: 4) {

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Domain
+import Shared
 
 struct SettingsView: View {
     
@@ -17,14 +18,14 @@ struct SettingsView: View {
     @State var securityName = String()
     @State var name = String()
     @State var email = String()
+    @State var image = UIImage()
     @State var isLogout: Bool = false
     
     var body: some View {
         NavigationStack(path: $store.settings) {
             VStack {
                 HStack(spacing: 19) {
-                    Image("avatar-2", bundle: .module)
-                        .frame(width: 80, height: 80)
+                    CircularImageView(image: image)
                     DataProfileView(email: $email, name: $name)
                     Spacer()
                     Button(action: {
@@ -82,6 +83,16 @@ struct SettingsView: View {
             .onAppear {
                 email = Default.user()?.email ?? ""
                 name = Default.user()?.name ?? ""
+                if let image = Default.user()?.imageProfile {
+                    self.image = UIImage.fromBase64(image) ?? UIImage()
+                } else {
+                    if let originalImage = UIImage(systemName: "person.circle.fill") {
+                        let purpleImage = originalImage.withTintColor(.purple).withRenderingMode(.alwaysOriginal)
+                        self.image = purpleImage
+                    } else {
+                        self.image = UIImage()
+                    }
+                }
             }
             .onChange(of: isLogout) { _ in
                 setDefault.session = false

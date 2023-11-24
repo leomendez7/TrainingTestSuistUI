@@ -24,7 +24,6 @@ public class NewTransactionViewModel: BaseViewModel<CreateTransactionUseCase>, O
     public init(useCase: CreateTransactionUseCase, store: Store) {
         self.store = store
         super.init(useCase: useCase)
-        self.subscribe()
     }
     
     func showPhotoPicker() {
@@ -59,14 +58,6 @@ public class NewTransactionViewModel: BaseViewModel<CreateTransactionUseCase>, O
         } catch {
             debugPrint(error.localizedDescription)
         }
-    }
-    
-    func subscribe() {
-//        $success.sink { response in
-//            if response {
-//                self.store.transactions.removeLast()
-//            }
-//        }.store(in: &cancellables)
     }
     
 }

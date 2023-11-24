@@ -62,8 +62,11 @@ struct NewTransactionView: View {
         })
         .overlay(
             CustomAlertView(isPresented: $showCustomAlert, action: {
-                store.transactions.removeLast()
+                
             })
+            .onTapGesture {
+                store.transactions.removeLast()
+            }
             .opacity(showCustomAlert ? 1 : 0)
         )
     }

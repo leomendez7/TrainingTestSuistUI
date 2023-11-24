@@ -14,7 +14,7 @@ public class HomeViewModel: BaseViewModel<FetchTransactionUseCase>, ObservableOb
     
     var seeAll: Bool = false
     var selectedMont: String = ""
-    var loading = true
+    @Published var loading = true
     @Published var transactions: [Trade] = []
     @Published var success: Bool = false
     @Published var images: [String] = []
@@ -39,7 +39,6 @@ public class HomeViewModel: BaseViewModel<FetchTransactionUseCase>, ObservableOb
     }
     
     func fetchTransactions() async {
-        loading = true
         do {
             var response = try await useCase.execute(requestValue: Default.user()?.email ?? "")
             response = response.reversed()

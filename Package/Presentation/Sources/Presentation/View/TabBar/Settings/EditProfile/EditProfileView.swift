@@ -26,10 +26,22 @@ struct EditProfileView: View {
                 CustomTextField(text: $name, placeholder: "Name")
                 CustomTextField(text: $email, placeholder: "Email")
                 CustomDateTextField(text: $birthday, placeholder: "Birthday")
-                Button(action:{
-                    
-                }) {
+                if let image = viewModel.image {
+                    HStack() {
+                        CircularImageView(image: image)
+                            .onTapGesture {
+                                viewModel.source = .library
+                                viewModel.showPhotoPicker()
+                            }
+                        Spacer()
+                    }
+                } else {
                     Image("add-attachment", bundle: .module)
+                        .onTapGesture {
+                            viewModel.source = .library
+                            viewModel.showPhotoPicker()
+                        }
+                        .frame(maxWidth: .infinity)
                 }
             }
             VStack() {
@@ -38,6 +50,11 @@ struct EditProfileView: View {
                 }, text: "Edit", color: Color(.violet100), foregroundColor: .white)
             }
             Spacer()
+                .sheet(isPresented: $viewModel.showPicker, content: {
+                    ImagePicker(sourceType: viewModel.source == .library
+                                ? .photoLibrary : .camera, selectedImage: $viewModel.image)
+                    .ignoresSafeArea()
+                })
         }
         .onReceive(viewModel.$success) { newValue in
             if newValue {
@@ -48,6 +65,9 @@ struct EditProfileView: View {
             email = Default.user()?.email ?? ""
             name = Default.user()?.name ?? ""
             birthday = Default.user()?.birthday ?? ""
+            if let image = Default.user()?.imageProfile {
+                viewModel.image = UIImage.fromBase64(image)
+            }
         }
         .padding(.horizontal, 16)
         .padding(.top, 64)
@@ -68,14 +88,11 @@ struct EditProfileView: View {
     }
     
     func updateUser() {
-        viewModel.user = Default.user() ?? User()
-        viewModel.user.name = name
-        viewModel.user.email = email
-        viewModel.user.birthday = birthday
         Task {
-            await viewModel.updateUser(user: viewModel.user)
+            await viewModel.updateUser(name: name, email: email, birthday: birthday)
         }
     }
+    
 }
 
 #Preview {

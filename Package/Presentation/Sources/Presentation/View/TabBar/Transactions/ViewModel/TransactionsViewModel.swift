@@ -12,7 +12,7 @@ public class TransactionsViewModel: BaseViewModel<FetchTransactionUseCase>, Obse
     
     var selectedMont: String = ""
     @Published var groupedTransactions: [Date: [Trade]] = [:]
-    @Published var success: Bool = false
+    @Published var loading = true
     @Published var currentMonth: Int = 0
     @Published var months: [String] = []
     var transactions: [Trade] = [] {
@@ -53,7 +53,6 @@ public class TransactionsViewModel: BaseViewModel<FetchTransactionUseCase>, Obse
             response = response.reversed()
             let sortTransaction =  response
             DispatchQueue.main.async {
-                self.success = false
                 self.transactions.removeAll()
                 var transactions = [Trade]()
                 sortTransaction.forEach { trade in
@@ -65,7 +64,7 @@ public class TransactionsViewModel: BaseViewModel<FetchTransactionUseCase>, Obse
                     }
                 }
                 self.transactions = transactions
-                self.success = true
+                self.loading = false
             }
         } catch {
             print(error.localizedDescription)

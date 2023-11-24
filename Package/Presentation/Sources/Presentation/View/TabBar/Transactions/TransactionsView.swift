@@ -34,20 +34,19 @@ struct TransactionsView: View {
             }
             .onAppear {
                 viewModel.generateMonths()
+                viewModel.loading = true
                 Task {
                     await viewModel.fetchTransactions()
                 }
             }
-            .onReceive(viewModel.$success) { newValue in
-                isLoading = !newValue
-            }
             .onChange(of: isChangeMonth) { _ in
+                viewModel.loading = true
                 Task {
                     await viewModel.fetchTransactions()
                 }
             }
             .overlay(
-                isLoading ?
+                viewModel.loading ?
                 ZStack {
                     Color.white.edgesIgnoringSafeArea(.all)
                     VStack {

@@ -25,7 +25,6 @@ struct CustomImageView: View {
                     .cornerRadius(8)
             )
         Button(action: {
-//            viewModel.image = nil
             action()
         }) {
             Image("close-2", bundle: .module)

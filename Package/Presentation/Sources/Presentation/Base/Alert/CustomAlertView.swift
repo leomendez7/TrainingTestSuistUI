@@ -22,12 +22,7 @@ struct CustomAlertView: View {
                     .foregroundColor(Color(.violet100))
                 Text("Transaction has been successfully added")
                     .textModifierStyle(size: 16, color: Color(.dark), weight: .regular)
-                CustomButton(action: {
-                    action()
-                    isPresented = false
-                }, text: "OK", color: Color(.violet100), foregroundColor: .white, width: 150)
             }
-            .frame(width: 320)
             .padding(16)
             .background(Color.white)
             .cornerRadius(12)

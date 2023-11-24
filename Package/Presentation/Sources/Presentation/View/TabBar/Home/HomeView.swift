@@ -18,6 +18,7 @@ struct HomeView: View {
     @State var isChangeMonth = false
     @State var seeAll = false
     @State var selectedTrade = Trade()
+    @State var image = UIImage()
     @State private var isSheetPresented = false
     @State private var isLoading = false
     
@@ -33,6 +34,17 @@ struct HomeView: View {
             .preferredColorScheme(.light)
             .onAppear {
                 viewModel.generateMonths()
+                viewModel.loading = true
+                if let image = Default.user()?.imageProfile {
+                    self.image = UIImage.fromBase64(image) ?? UIImage()
+                } else {
+                    if let originalImage = UIImage(systemName: "person.circle.fill") {
+                        let purpleImage = originalImage.withTintColor(.purple).withRenderingMode(.alwaysOriginal)
+                        self.image = purpleImage
+                    } else {
+                        self.image = UIImage()
+                    }
+                }
                 Task {
                     await viewModel.fetchTransactions()
                 }
@@ -52,18 +64,13 @@ struct HomeView: View {
                 }
             }
             .onChange(of: isChangeMonth) { _ in
+                viewModel.loading = true
                 Task {
                     await viewModel.fetchTransactions()
                 }
             }
-            .onReceive(viewModel.$success) { newValue in
-                isLoading = !newValue
-            }
-            .onChange(of: viewModel.loading) { newValue in
-                isLoading = newValue
-            }
             .overlay(
-                isLoading ?
+                viewModel.loading ?
                 ZStack {
                     Color.white.edgesIgnoringSafeArea(.all)
                     VStack {
@@ -86,7 +93,7 @@ struct HomeView: View {
                     EmptyView()
                 }
             })
-            .homeTransactionToolbar(image: "avatar-2",
+            .homeTransactionToolbar(image: image,
                                     isSheetPresented: $isSheetPresented,
                                     incomeSelected: $isIncomeSelected,
                                     expensesSelected: $isExpensesSelected,
