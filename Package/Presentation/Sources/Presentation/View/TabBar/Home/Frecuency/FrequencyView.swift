@@ -10,7 +10,7 @@ import SwiftUI
 struct FrequencyView: View {
     
     @State var index = 0
-    @State var selectedFrequency: String = "Today"
+    @State var selectedFrequency: String = ""
     @EnvironmentObject var viewModel: HomeViewModel
     
     var body: some View {
@@ -21,13 +21,20 @@ struct FrequencyView: View {
                     .padding(.horizontal, 16)
                 Spacer()
             }
-            ChartDayView()
+            ChartTransactionsView()
             SelectFrequencyView(selectedFrequency: $selectedFrequency)
                 .padding(.horizontal, 16)
         }
-        .onChange(of: selectedFrequency) { _ in
+        .onAppear {
+            selectedFrequency = viewModel.selectedFrequency
+        }
+        .onChange(of: selectedFrequency) { _ in                   
             viewModel.selectedFrequency = selectedFrequency
             viewModel.spendFrequency()
+        }
+        .onChange(of: viewModel.selectedMont) { _ in
+            viewModel.spendFrequency()
+            selectedFrequency = viewModel.selectedFrequency
         }
         .padding(.top, 31)
     }

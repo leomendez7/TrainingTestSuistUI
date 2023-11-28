@@ -40,7 +40,7 @@ struct NewTransactionView: View {
         .onTapGesture {
             hideKeyboard()
         }
-        .onAppear{
+        .onAppear {
             tittle = isIncome ? "Income" : "Expenses"
             backgroundColor = isIncome ? Color(.green100) : Color(.red100)
         }
@@ -61,9 +61,7 @@ struct NewTransactionView: View {
             }
         })
         .overlay(
-            CustomAlertView(isPresented: $showCustomAlert, action: {
-                
-            })
+            CustomAlertView(isPresented: $showCustomAlert, action: {})
             .onTapGesture {
                 store.transactions.removeLast()
             }

@@ -7,49 +7,33 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F9EE8DAA-87C2-4D4D-A3A8-DE87C9FA7FAF"
-            shouldBeEnabled = "Yes"
+            uuid = "E206E892-B8AE-415D-8EA9-9C832477DBE3"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Package/Presentation/Sources/Presentation/View/TabBar/Home/NewTransaction/Components/TransactionOptionView.swift"
+            filePath = "Package/Presentation/Sources/Presentation/View/TabBar/Home/Frecuency/SelectFrequencyView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
             landmarkName = "body"
             landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "F9EE8DAA-87C2-4D4D-A3A8-DE87C9FA7FAF - 8b32d995715da578"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #5 () -&gt; () in Presentation.TransactionOptionView.body.getter : some"
-                  moduleName = "TrainingTest"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/leonardo.mendez/Project/TrainingTestSwiftUI/Package/Presentation/Sources/Presentation/View/TabBar/Home/NewTransaction/Components/TransactionOptionView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "94"
-                  endingLineNumber = "94"
-                  offsetFromSymbolStart = "92">
-               </Location>
-               <Location
-                  uuid = "F9EE8DAA-87C2-4D4D-A3A8-DE87C9FA7FAF - 8b32d995715da5ba"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #5 () -&gt; () in Presentation.TransactionOptionView.body.getter : some"
-                  moduleName = "TrainingTest"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/leonardo.mendez/Project/TrainingTestSwiftUI/Package/Presentation/Sources/Presentation/View/TabBar/Home/NewTransaction/Components/TransactionOptionView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "96"
-                  endingLineNumber = "96"
-                  offsetFromSymbolStart = "80">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3115487A-B3C1-4F7E-A31B-F738482C0EED"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Package/Presentation/Sources/Presentation/View/TabBar/Home/ViewModel/HomeViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "generateSegments()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

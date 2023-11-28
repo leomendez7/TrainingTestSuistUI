@@ -14,8 +14,8 @@ public class HomeViewModel: BaseViewModel<FetchTransactionUseCase>, ObservableOb
     
     var seeAll: Bool = false
     var selectedMont: String = ""
-    var selectedFrequency: String = "Today"
     var allTransactions: [Trade] = []
+    var selectedFrequency: String = "Today"
     @Published var loading = true
     @Published var transactions: [Trade] = []
     @Published var frequencyTrades: [Trade] = []
@@ -52,10 +52,11 @@ public class HomeViewModel: BaseViewModel<FetchTransactionUseCase>, ObservableOb
         let selectedMonth = Calendar.current.component(.month, from: selectedMonthDate)
         if currentMonth == selectedMonth {
             self.segments = ["Today", "Week", "Month", "Year"]
-            selectedFrequency = "Today"
         } else {
             self.segments = ["Month", "Year"]
-            selectedFrequency = "Month"
+            if selectedFrequency != "Year" {
+                selectedFrequency = "Month"
+            }
         }
     }
     

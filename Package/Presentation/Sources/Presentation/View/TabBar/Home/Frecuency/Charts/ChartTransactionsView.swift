@@ -8,7 +8,7 @@
 import SwiftUI
 import Charts
 
-struct ChartDayView: View {
+struct ChartTransactionsView: View {
     
     @State var index = 0
     @EnvironmentObject var viewModel: HomeViewModel
@@ -49,6 +49,6 @@ struct ChartDayView: View {
 }
 
 #Preview {
-    ChartDayView()
+    ChartTransactionsView()
         .environmentObject(Constants.homeViewModel)
 }

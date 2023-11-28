@@ -55,7 +55,6 @@ struct MonthSwitcherView: View {
             Spacer()
         }
         .onChange(of: changeMonth) { _ in
-            print(selectedMonthIndex)
             selectedMont = months[selectedMonthIndex]
             isChangeMonth.toggle()
         }

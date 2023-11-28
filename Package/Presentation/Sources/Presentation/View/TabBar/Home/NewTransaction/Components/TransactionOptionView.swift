@@ -76,18 +76,14 @@ struct TransactionOptionView: View {
                     .ignoresSafeArea()
                 })
         }
-        .alert(isPresented: $showAlert) {
-            Alert(
-                title: Text(titleAlert),
-                message: Text(textAlert),
-                dismissButton: .default(Text("OK"))
-            )
-        }
         .onChange(of: viewModel.image) { _ in
             print("change image")
         }
-        .onChange(of: viewModel.success) { _ in
-            showCustomAlert.toggle()
+        .onChange(of: viewModel.success) { newValue in
+            if newValue {
+                showCustomAlert.toggle()
+                viewModel.success = false
+            }
         }
         .onAppear {
             viewModel.image = nil

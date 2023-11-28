@@ -34,6 +34,16 @@ public struct SelectFrequencyView: View {
                 )
             }
         }
+        .onAppear {
+            if let index = viewModel.segments.firstIndex(where: { $0 == selectedFrequency }) {
+                selectedTab = index
+            }
+        }
+        .onChange(of: viewModel.selectedMont) { _ in
+            if let index = viewModel.segments.firstIndex(where: { $0 == selectedFrequency }) {
+                selectedTab = index
+            }
+        }
         .frame(height: 34)
         .background(Color.white)
         .clipShape(RoundedRectangle(cornerRadius: 16))
