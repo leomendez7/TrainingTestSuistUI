@@ -20,6 +20,7 @@ public struct Trade: Identifiable, Codable {
     public var reminder: Bool = false
     public var createDate = Date()
     public var image: String = ""
+    public var balanceLast: Double = 0.0
     
     public init() { }
     
@@ -34,6 +35,7 @@ public struct Trade: Identifiable, Codable {
         case reminder
         case createDate
         case image
+        case balanceLast
     }
     
 }

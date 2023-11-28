@@ -30,8 +30,7 @@ struct BalanceComponentView: View {
                 ExpensesView(expense: expense)
             }
         }
-        .padding(.leading, 16)
-        .padding(.trailing, 16)
+        .padding(.horizontal, 16)
     }
 }
 

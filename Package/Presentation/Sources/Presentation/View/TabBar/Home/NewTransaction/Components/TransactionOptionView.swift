@@ -91,6 +91,8 @@ struct TransactionOptionView: View {
         }
         .onAppear {
             viewModel.image = nil
+//            viewModel.balance = Int(balance) ?? 0
+//            viewModel.generateRandomTransactionsForCurrentMonth()
         }
         .padding(.horizontal, 16)
         .padding(.top, 24)
@@ -107,7 +109,9 @@ struct TransactionOptionView: View {
                                               payment: selectedPayment,
                                               value: value,
                                               isIncome: isIncome,
-                                              image: image)
+                                              image: image, 
+                                              balance: balance, 
+                                              date: Date())
         }
     }
     

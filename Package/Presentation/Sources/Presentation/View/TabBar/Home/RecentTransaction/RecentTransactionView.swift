@@ -10,11 +10,11 @@ import Domain
 
 struct RecentTransactionView: View {
     
-    @EnvironmentObject var viewModel: HomeViewModel
-    @EnvironmentObject var store: Store
     @Binding var seeAll: Bool
     @Binding var selectedTrade: Trade
     @State var image = ""
+    @EnvironmentObject var viewModel: HomeViewModel
+    @EnvironmentObject var store: Store
     
     var body: some View {
         VStack {

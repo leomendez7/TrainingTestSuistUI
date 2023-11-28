@@ -85,18 +85,8 @@ struct SettingsView: View {
                     if !imageBase64.isEmpty {
                         self.image = UIImage.fromBase64(imageBase64) ?? UIImage()
                     } else {
-                        if let originalImage = UIImage(systemName: "person") {
-                            let coloredImage = originalImage
-                                .withTintColor(.clear)
-                                .withRenderingMode(.alwaysOriginal)
-                                .withTintColor(.purple)
-                            let swiftUIImage = Image(uiImage: coloredImage)
-                                .resizable()
-                                .frame(width: 80, height: 80)
-                            self.image = swiftUIImage as? UIImage ?? UIImage()
-                        }
+                       self.image = UIImage(named: "empty-user", in: .module, with: nil) ?? UIImage()
                     }
-                    
                 }
             }
             .onChange(of: isLogout) { _ in

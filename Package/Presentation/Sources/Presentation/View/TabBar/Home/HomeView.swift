@@ -34,15 +34,13 @@ struct HomeView: View {
             .preferredColorScheme(.light)
             .onAppear {
                 viewModel.generateMonths()
+                viewModel.generateSegments()
                 viewModel.loading = true
-                if let image = Default.user()?.imageProfile {
-                    self.image = UIImage.fromBase64(image) ?? UIImage()
-                } else {
-                    if let originalImage = UIImage(systemName: "person.circle.fill") {
-                        let purpleImage = originalImage.withTintColor(.purple).withRenderingMode(.alwaysOriginal)
-                        self.image = purpleImage
+                if let imageBase64 = Default.user()?.imageProfile {
+                    if !imageBase64.isEmpty {
+                        self.image = UIImage.fromBase64(imageBase64) ?? UIImage()
                     } else {
-                        self.image = UIImage()
+                       self.image = UIImage(named: "empty-user", in: .module, with: nil) ?? UIImage()
                     }
                 }
                 Task {
@@ -65,6 +63,7 @@ struct HomeView: View {
             }
             .onChange(of: isChangeMonth) { _ in
                 viewModel.loading = true
+                viewModel.generateSegments()
                 Task {
                     await viewModel.fetchTransactions()
                 }

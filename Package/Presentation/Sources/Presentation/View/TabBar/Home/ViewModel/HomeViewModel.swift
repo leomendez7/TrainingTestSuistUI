@@ -14,17 +14,20 @@ public class HomeViewModel: BaseViewModel<FetchTransactionUseCase>, ObservableOb
     
     var seeAll: Bool = false
     var selectedMont: String = ""
+    var selectedFrequency: String = "Today"
+    var allTransactions: [Trade] = []
     @Published var loading = true
     @Published var transactions: [Trade] = []
+    @Published var frequencyTrades: [Trade] = []
     @Published var success: Bool = false
     @Published var images: [String] = []
     @Published var colors: [Color] = []
     @Published var months: [String] = []
+    @Published var segments: [String] = []
     @Published var currentMonth: Int = 0
     @Published var incomeValue: String = ""
     @Published var expensesValue: String = ""
     @Published var balance: String = ""
-    
     
     func generateMonths() {
         let dateFormatter = DateFormatter()
@@ -38,9 +41,29 @@ public class HomeViewModel: BaseViewModel<FetchTransactionUseCase>, ObservableOb
         }
     }
     
+    func generateSegments() {
+        self.segments.removeAll()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM"
+        guard let selectedMonthDate = dateFormatter.date(from: self.selectedMont) else {
+            return
+        }
+        let currentMonth = Calendar.current.component(.month, from: Date())
+        let selectedMonth = Calendar.current.component(.month, from: selectedMonthDate)
+        if currentMonth == selectedMonth {
+            self.segments = ["Today", "Week", "Month", "Year"]
+            selectedFrequency = "Today"
+        } else {
+            self.segments = ["Month", "Year"]
+            selectedFrequency = "Month"
+        }
+    }
+    
     func fetchTransactions() async {
         do {
             var response = try await useCase.execute(requestValue: Default.user()?.email ?? "")
+            allTransactions.removeAll()
+            allTransactions = response
             response = response.reversed()
             let transactions = response
             DispatchQueue.main.async {
@@ -72,6 +95,7 @@ public class HomeViewModel: BaseViewModel<FetchTransactionUseCase>, ObservableOb
                 self.calculateValues(transactions: filterTransaction)
                 self.success = true
                 self.loading = false
+                self.spendFrequency()
             }
         } catch {
             print(error.localizedDescription)
@@ -108,6 +132,42 @@ public class HomeViewModel: BaseViewModel<FetchTransactionUseCase>, ObservableOb
         }
         let balanceDecimal = balance.truncatingRemainder(dividingBy: 1)
         self.balance = balanceDecimal == 0 ? "\(Int(balance))" : "\(balance)"
+    }
+    
+    func spendFrequency() {
+        frequencyTrades.removeAll()
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+        switch selectedFrequency {
+        case "Today":
+            frequencyTrades = allTransactions.filter { trade in
+                let tradeDate = Calendar.current.startOfDay(for: trade.createDate)
+                return tradeDate == today
+            }
+        case "Month":
+            guard let monthIndex = months.firstIndex(of: selectedMont) else { return }
+            let startDateComponents = DateComponents(year: calendar.component(.year, from: Date()), month: monthIndex + 1, day: 1)
+            guard let startDateOfMonth = calendar.date(from: startDateComponents) else { return }
+            guard let endDateOfMonth = calendar.date(byAdding: DateComponents(month: 1, day: -1), to: startDateOfMonth) else { return }
+            frequencyTrades = allTransactions.filter { trade in
+                let tradeDate = calendar.startOfDay(for: trade.createDate)
+                return tradeDate >= startDateOfMonth && tradeDate <= endDateOfMonth
+            }
+        case "Year":
+            guard let startDateOfYear = calendar.date(from: calendar.dateComponents([.year], from: today)) else { return }
+            guard let endDateOfYear = calendar.date(byAdding: DateComponents(year: 1, day: -1), to: startDateOfYear) else { return }
+            frequencyTrades = allTransactions.filter { trade in
+                let tradeDate = calendar.startOfDay(for: trade.createDate)
+                return tradeDate >= startDateOfYear && tradeDate <= endDateOfYear
+            }
+        default:
+            guard let startDateOfWeek = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: today)) else { return }
+            guard let endDateOfWeek = calendar.date(byAdding: .day, value: 6, to: startDateOfWeek) else { return }
+            frequencyTrades = allTransactions.filter { trade in
+                let tradeDate = calendar.startOfDay(for: trade.createDate)
+                return tradeDate >= startDateOfWeek && tradeDate <= endDateOfWeek
+            }
+        }
     }
     
 }

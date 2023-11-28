@@ -52,6 +52,7 @@
 		D1108C212AF01263008E6D97 /* Shared */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Shared; sourceTree = "<group>"; };
 		D1108C222AF012D5008E6D97 /* Presentation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Presentation; sourceTree = "<group>"; };
 		D1108C242AF0138E008E6D97 /* Domain */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Domain; sourceTree = "<group>"; };
+		D1F616A62B14FD070015ECCA /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = System/Library/Frameworks/Charts.framework; sourceTree = SDKROOT; };
 		ECD56D732AFAC91B00BEFAD8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -165,6 +166,7 @@
 		D19ED0F02AFD35CF004358FC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D1F616A62B14FD070015ECCA /* Charts.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -183,7 +185,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				D1108C362AF04531008E6D97 /* PBXTargetDependency */,
 				D1108C302AF044D4008E6D97 /* PBXTargetDependency */,
 				D1108C322AF044D4008E6D97 /* PBXTargetDependency */,
 				D1108C342AF044D4008E6D97 /* PBXTargetDependency */,
@@ -359,10 +360,6 @@
 		D1108C342AF044D4008E6D97 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			productRef = D1108C332AF044D4008E6D97 /* Shared */;
-		};
-		D1108C362AF04531008E6D97 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			productRef = D1108C352AF04531008E6D97 /* Data */;
 		};
 /* End PBXTargetDependency section */
 
@@ -694,10 +691,6 @@
 		D1108C332AF044D4008E6D97 /* Shared */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Shared;
-		};
-		D1108C352AF04531008E6D97 /* Data */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Data;
 		};
 		D19ED0F12AFD35CF004358FC /* Presentation */ = {
 			isa = XCSwiftPackageProductDependency;

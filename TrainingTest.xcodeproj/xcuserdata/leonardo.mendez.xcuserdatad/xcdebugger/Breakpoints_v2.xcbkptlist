@@ -7,17 +7,49 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "4256F9CC-D41A-4A64-ADB8-6014A4280EBB"
-            shouldBeEnabled = "No"
+            uuid = "F9EE8DAA-87C2-4D4D-A3A8-DE87C9FA7FAF"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Package/Presentation/Sources/Presentation/View/TabBar/Home/MonthSwitcher/MonthSwitcherView.swift"
+            filePath = "Package/Presentation/Sources/Presentation/View/TabBar/Home/NewTransaction/Components/TransactionOptionView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
             landmarkName = "body"
             landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "F9EE8DAA-87C2-4D4D-A3A8-DE87C9FA7FAF - 8b32d995715da578"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #5 () -&gt; () in Presentation.TransactionOptionView.body.getter : some"
+                  moduleName = "TrainingTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/leonardo.mendez/Project/TrainingTestSwiftUI/Package/Presentation/Sources/Presentation/View/TabBar/Home/NewTransaction/Components/TransactionOptionView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "94"
+                  endingLineNumber = "94"
+                  offsetFromSymbolStart = "92">
+               </Location>
+               <Location
+                  uuid = "F9EE8DAA-87C2-4D4D-A3A8-DE87C9FA7FAF - 8b32d995715da5ba"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #5 () -&gt; () in Presentation.TransactionOptionView.body.getter : some"
+                  moduleName = "TrainingTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/leonardo.mendez/Project/TrainingTestSwiftUI/Package/Presentation/Sources/Presentation/View/TabBar/Home/NewTransaction/Components/TransactionOptionView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "96"
+                  endingLineNumber = "96"
+                  offsetFromSymbolStart = "80">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
