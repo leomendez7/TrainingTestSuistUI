@@ -54,4 +54,5 @@ struct ConfirmationView: View {
                title: "Log out",
                bodyText: "Are you sure you want to log out?",
                activeAction: .constant(true))
+    .environmentObject(Store())
 }

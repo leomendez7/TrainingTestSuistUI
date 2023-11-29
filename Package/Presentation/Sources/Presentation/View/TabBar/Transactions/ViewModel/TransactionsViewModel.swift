@@ -10,6 +10,7 @@ import Domain
 
 public class TransactionsViewModel: BaseViewModel<FetchTransactionUseCase>, ObservableObject {
     
+    var store: Store
     var selectedMont: String = ""
     var activeFilter: Bool = false
     var activeSort: Bool = false
@@ -20,6 +21,7 @@ public class TransactionsViewModel: BaseViewModel<FetchTransactionUseCase>, Obse
     var isNewest: Bool = false
     var isOldest: Bool = false
     var filterCount: Int = 0
+    var selectedCategories: [String] = []
     @Published var groupedTransactions: [Date: [Trade]] = [:]
     @Published var loading = true
     @Published var currentMonth: Int = 0
@@ -28,6 +30,11 @@ public class TransactionsViewModel: BaseViewModel<FetchTransactionUseCase>, Obse
         didSet {
             updateGroupedTransactions()
         }
+    }
+    
+    public init(useCase: FetchTransactionUseCase, store: Store) {
+        self.store = store
+        super.init(useCase: useCase)
     }
     
     func updateGroupedTransactions() {
