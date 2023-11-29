@@ -1,5 +1,5 @@
 //
-//  SwiftUIView.swift
+//  CircularImageView.swift
 //
 //
 //  Created by Leonardo Mendez on 23/11/23.

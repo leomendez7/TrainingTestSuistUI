@@ -1,5 +1,5 @@
 //
-//  SwiftUIView.swift
+//  ChartTransactionsView.swift
 //  
 //
 //  Created by Leonardo Mendez on 27/11/23.

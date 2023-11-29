@@ -1,5 +1,5 @@
 //
-//  SwiftUIView.swift
+//  EditProfileButton.swift
 //  
 //
 //  Created by Leonardo Mendez on 24/11/23.
@@ -29,7 +29,6 @@ struct EditProfileButton: View {
                     .overlay(
                         Circle()
                             .stroke(Color.purple, lineWidth: 1)
-//                            .padding(2)
                     )
                 
             } else {

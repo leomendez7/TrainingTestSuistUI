@@ -7,15 +7,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E206E892-B8AE-415D-8EA9-9C832477DBE3"
+            uuid = "E700E477-5F85-4299-BF43-0C8F348E09EE"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Package/Presentation/Sources/Presentation/View/TabBar/Home/Frecuency/SelectFrequencyView.swift"
+            filePath = "Package/Presentation/Sources/Presentation/View/TabBar/Transactions/TransactionsView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -23,16 +23,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "3115487A-B3C1-4F7E-A31B-F738482C0EED"
+            uuid = "A9B3979F-4022-49A5-BF55-3EF187AE1F2D"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Package/Presentation/Sources/Presentation/View/TabBar/Home/ViewModel/HomeViewModel.swift"
+            filePath = "Package/Presentation/Sources/Presentation/Base/Modifier/TransactionToolbarModifier.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
-            landmarkName = "generateSegments()"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "body(content:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F61CAE55-70F4-44A8-9A27-0B3A96B04F3B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Package/Presentation/Sources/Presentation/View/TabBar/Transactions/ViewModel/TransactionsViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "updateGroupedTransactions()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

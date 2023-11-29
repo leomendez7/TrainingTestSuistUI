@@ -25,7 +25,7 @@ struct TransactionsView: View {
                     ForEach(viewModel.groupedTransactions.keys.sorted(by: >), id: \.self) { date in
                         if let dateTransactions = viewModel.groupedTransactions[date] {
                             TransactionSectionDayView(date: date,
-                                                      transactions: dateTransactions,
+                                                      transactions: .constant(dateTransactions),
                                                       selectedTrade: $selectedTrade,
                                                       viewModel: viewModel)
                         }
@@ -64,7 +64,7 @@ struct TransactionsView: View {
                                 currentMonth: $viewModel.currentMonth,
                                 selectedMont: $viewModel.selectedMont,
                                 changeMonth: $isChangeMonth)
-            .environmentObject(Constants.homeViewModel)
+            .environmentObject(viewModel)
             .navigationDestination(for: String.self, destination: { route in
                 switch route {
                 case "TransactionDetails":

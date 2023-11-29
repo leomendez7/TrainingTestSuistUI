@@ -11,7 +11,7 @@ import Domain
 struct TransactionSectionDayView: View {
     
     var date: Date
-    @State var transactions: [Trade]
+    @Binding var transactions: [Trade]
     @Binding var selectedTrade: Trade
     @EnvironmentObject var store: Store
     @StateObject var viewModel: TransactionsViewModel
@@ -52,7 +52,7 @@ struct TransactionSectionDayView: View {
 
 #Preview {
     TransactionSectionDayView(date: Date(), 
-                              transactions: [Trade](),
+                              transactions:.constant( [Trade]()),
                               selectedTrade: .constant(Trade()),
                               viewModel: Constants.transactionViewModel)
 }

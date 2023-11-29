@@ -15,6 +15,7 @@ struct TransactionToolbarModifier: ViewModifier {
     @Binding var currentMonth: Int
     @Binding var changeMonth: Bool
     @State var isChangeMonth = false
+    @State var totalFilter = 0
     
     func body(content: Content) -> some View {
         content
@@ -26,16 +27,28 @@ struct TransactionToolbarModifier: ViewModifier {
                                       isChangeMonth: $isChangeMonth)
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button(action: {
-                        isSheetPresented.toggle()
-                    }) {
-                        Image("filter", bundle: .module)
-                            .resizable()
-                            .frame(width: 35, height: 35)
+                    ZStack {
+                        Button(action: {
+                            isSheetPresented.toggle()
+                        }) {
+                            Image("filter", bundle: .module)
+                                .resizable()
+                                .frame(width: 35, height: 35)
+                        }
+                        if totalFilter > 0 {
+                            ZStack {
+                                Circle()
+                                    .frame(width: 24, height: 24)
+                                    .foregroundColor(Color(.violet100))
+                                Text("\(totalFilter)")
+                                    .textModifierStyle(size: 12, color: .white, weight: .regular)
+                            }
+                            .offset(x: 9, y: -8)
+                        }
                     }
                     .sheet(isPresented: $isSheetPresented) {
-                        EmptyView()
-                        .presentationDetents([.fraction(0.25)])
+                        TransactionFilterView(totalFilter: $totalFilter)
+                            .presentationDetents([.fraction(0.65)])
                     }
                 }
             })

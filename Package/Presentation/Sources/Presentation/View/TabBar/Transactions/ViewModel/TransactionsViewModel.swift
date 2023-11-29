@@ -11,6 +11,15 @@ import Domain
 public class TransactionsViewModel: BaseViewModel<FetchTransactionUseCase>, ObservableObject {
     
     var selectedMont: String = ""
+    var activeFilter: Bool = false
+    var activeSort: Bool = false
+    var isIncome: Bool = false
+    var isExpenses: Bool = false
+    var isHighest: Bool = false
+    var isLowest: Bool = false
+    var isNewest: Bool = false
+    var isOldest: Bool = false
+    var filterCount: Int = 0
     @Published var groupedTransactions: [Date: [Trade]] = [:]
     @Published var loading = true
     @Published var currentMonth: Int = 0
@@ -21,9 +30,34 @@ public class TransactionsViewModel: BaseViewModel<FetchTransactionUseCase>, Obse
         }
     }
     
-    private func updateGroupedTransactions() {
+    func updateGroupedTransactions() {
         var groupedDict: [Date: [Trade]] = [:]
-        for transaction in transactions {
+        var transactionSortFilter = [Trade]()
+        if activeSort {
+            transactionSortFilter = transactions.sorted { (trade1, trade2) in
+                let value1 = trade1.isIncome ? (Double(trade1.value) ?? 0) : -(Double(trade1.value) ?? 0)
+                let value2 = trade2.isIncome ? (Double(trade2.value) ?? 0) : -(Double(trade2.value) ?? 0)
+                if isHighest {
+                    return value1 > value2
+                } else if isLowest {
+                    return value1 < value2
+                } else if isNewest {
+                    return trade1.createDate > trade2.createDate
+                } else if isOldest {
+                    return trade1.createDate < trade2.createDate
+                } else {
+                    return false
+                }
+            }
+        } else {
+            transactionSortFilter = transactions
+        }
+        if activeFilter {
+            transactionSortFilter = transactionSortFilter.filter { trade in
+                return (isIncome && trade.isIncome) || (isExpenses && !trade.isIncome)
+            }
+        }
+        for transaction in transactionSortFilter {
             let key = Calendar.current.startOfDay(for: transaction.createDate)
             if var existingTransactions = groupedDict[key] {
                 existingTransactions.append(transaction)
@@ -51,7 +85,7 @@ public class TransactionsViewModel: BaseViewModel<FetchTransactionUseCase>, Obse
         do {
             var response = try await useCase.execute(requestValue: Default.user()?.email ?? "")
             response = response.reversed()
-            let sortTransaction =  response
+            let sortTransaction = response
             DispatchQueue.main.async {
                 self.transactions.removeAll()
                 var transactions = [Trade]()
