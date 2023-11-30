@@ -35,6 +35,7 @@ struct NewTransactionView: View {
                                       showCustomAlert: $showCustomAlert,
                                       viewModel: Constants.newTransactionViewModel)
                 .frame(height: (UIScreen.main.bounds.size.height * 0.60) + 15)
+                
             }.background(backgroundColor)
         }
         .onTapGesture {

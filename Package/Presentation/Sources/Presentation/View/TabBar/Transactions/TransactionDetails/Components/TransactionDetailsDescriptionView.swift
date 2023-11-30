@@ -12,6 +12,7 @@ struct TransactionDetailsDescriptionView: View {
     
     @Binding var description: String
     @Binding var image: String
+    @State private var isImageDetailViewPresented = false
     
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
@@ -41,6 +42,12 @@ struct TransactionDetailsDescriptionView: View {
                             .frame(height: 116)
                             .clipped()
                             .cornerRadius(8)
+                            .onTapGesture {
+                                isImageDetailViewPresented.toggle()
+                            }
+                            .sheet(isPresented: $isImageDetailViewPresented) {
+                                ImageDetailView(image: image)
+                            }
                     )
             }
             Spacer()

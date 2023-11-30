@@ -51,6 +51,7 @@ struct TransactionFilterView: View {
                     totalFilter = viewModel.filterCount
                     dismiss()
                 }, text: "Apply", color: Color(.violet100), foregroundColor: .white)
+                
             }
             .padding(.horizontal, 16)
             .onAppear {

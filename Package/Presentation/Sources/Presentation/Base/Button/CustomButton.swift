@@ -29,6 +29,7 @@ struct CustomButton: View {
         .foregroundColor(foregroundColor)
         .frame(width: width ?? 353, height: height ?? 56)
         .background(color, in: RoundedRectangle(cornerRadius: cornerRadius ?? 16, style: .continuous))
+        .padding(.bottom, 16)
     }
 }
 

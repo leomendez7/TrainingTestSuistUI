@@ -26,23 +26,38 @@ struct TransactionOptionView: View {
     @StateObject var viewModel: NewTransactionViewModel
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .center, spacing: 16) {
             CategorySelectorView(selectedCategory: $selectedCategory)
             CustomTextField(text: $description, placeholder: "Description")
             PayMethodSelectorView(selectedPayment: $selectedPayment)
             if let image = viewModel.image {
-                ZStack {
-                    CustomImageView(action: {
-                        viewModel.image = nil
-                    }, image: image)
+                HStack {
+                    ZStack {
+                        CustomImageView(action: {
+                            viewModel.image = nil
+                        }, image: image)
+                    }
+                    Spacer()
                 }
             } else {
                 Image("add-attachment", bundle: .module)
                     .onTapGesture {
-                        viewModel.source = .library
-                        viewModel.showPhotoPicker()
+                        viewModel.showActionSheet()
                     }
                     .frame(maxWidth: .infinity)
+                    .actionSheet(isPresented: $viewModel.isActionSheetPresented) {
+                        ActionSheet(title: Text("Choose Source"), buttons: [
+                            .default(Text("Photo Library")) {
+                                viewModel.source = .library
+                                viewModel.showPhotoPicker()
+                            },
+                            .default(Text("Camera")) {
+                                viewModel.source = .camera
+                                viewModel.showPhotoPicker()
+                            },
+                            .cancel()
+                        ])
+                    }
             }
             HStack {
                 VStack(alignment: .leading, spacing: 4) {

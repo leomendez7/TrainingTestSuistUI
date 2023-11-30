@@ -19,6 +19,7 @@ public class NewTransactionViewModel: BaseViewModel<CreateTransactionUseCase>, O
     @Published var image: UIImage?
     @Published var showPicker = false
     @Published var source: Picker.Source = .library
+    @Published var isActionSheetPresented = false
     private var store: Store
     private var cancellables: Set<AnyCancellable> = []
     
@@ -35,6 +36,10 @@ public class NewTransactionViewModel: BaseViewModel<CreateTransactionUseCase>, O
             }
         }
         showPicker = true
+    }
+    
+    func showActionSheet() {
+        isActionSheetPresented = true
     }
     
     func createTransaction(email: String,
