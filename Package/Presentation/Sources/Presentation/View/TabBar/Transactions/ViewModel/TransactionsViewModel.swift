@@ -14,6 +14,7 @@ public class TransactionsViewModel: BaseViewModel<FetchTransactionUseCase>, Obse
     var selectedMont: String = ""
     var activeFilter: Bool = false
     var activeSort: Bool = false
+    var activeCategory: Bool = false
     var isIncome: Bool = false
     var isExpenses: Bool = false
     var isHighest: Bool = false
@@ -21,6 +22,9 @@ public class TransactionsViewModel: BaseViewModel<FetchTransactionUseCase>, Obse
     var isNewest: Bool = false
     var isOldest: Bool = false
     var filterCount: Int = 0
+    var filters = 0
+    var sorts = 0
+    var categories = 0
     var selectedCategories: [String] = []
     @Published var groupedTransactions: [Date: [Trade]] = [:]
     @Published var loading = true
@@ -41,27 +45,18 @@ public class TransactionsViewModel: BaseViewModel<FetchTransactionUseCase>, Obse
         var groupedDict: [Date: [Trade]] = [:]
         var transactionSortFilter = [Trade]()
         if activeSort {
-            transactionSortFilter = transactions.sorted { (trade1, trade2) in
-                let value1 = trade1.isIncome ? (Double(trade1.value) ?? 0) : -(Double(trade1.value) ?? 0)
-                let value2 = trade2.isIncome ? (Double(trade2.value) ?? 0) : -(Double(trade2.value) ?? 0)
-                if isHighest {
-                    return value1 > value2
-                } else if isLowest {
-                    return value1 < value2
-                } else if isNewest {
-                    return trade1.createDate > trade2.createDate
-                } else if isOldest {
-                    return trade1.createDate < trade2.createDate
-                } else {
-                    return false
-                }
-            }
+            transactionSortFilter = sort()
         } else {
             transactionSortFilter = transactions
         }
         if activeFilter {
             transactionSortFilter = transactionSortFilter.filter { trade in
                 return (isIncome && trade.isIncome) || (isExpenses && !trade.isIncome)
+            }
+        }
+        if activeCategory {
+            transactionSortFilter = transactionSortFilter.filter { trade in
+                return selectedCategories.contains(trade.category)
             }
         }
         for transaction in transactionSortFilter {
@@ -74,6 +69,26 @@ public class TransactionsViewModel: BaseViewModel<FetchTransactionUseCase>, Obse
             }
         }
         groupedTransactions = groupedDict
+    }
+    
+    func sort() -> [Trade] {
+        var transactions = [Trade]()
+        transactions = self.transactions.sorted { (trade1, trade2) in
+            let value1 = trade1.isIncome ? (Double(trade1.value) ?? 0) : -(Double(trade1.value) ?? 0)
+            let value2 = trade2.isIncome ? (Double(trade2.value) ?? 0) : -(Double(trade2.value) ?? 0)
+            if isHighest {
+                return value1 > value2
+            } else if isLowest {
+                return value1 < value2
+            } else if isNewest {
+                return trade1.createDate > trade2.createDate
+            } else if isOldest {
+                return trade1.createDate < trade2.createDate
+            } else {
+                return false
+            }
+        }
+        return transactions
     }
     
     func generateMonths() {

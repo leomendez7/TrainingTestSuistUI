@@ -11,6 +11,7 @@ struct TransactionFilterView: View {
     
     @State var filter = 0
     @State var sort = 0
+    @State var category = 0
     @State var reset: Bool = false
     @State var filterApply: Bool = false
     @State var filterCount = 0
@@ -40,36 +41,45 @@ struct TransactionFilterView: View {
                 }
                 FilterByView(filterCount: $filter, reset: $reset)
                 SortByView(filterCount: $sort, reset: $reset)
-                CategoryByView()
+                CategoryByView(reset: $reset, viewModel: viewModel)
                 Spacer()
                 CustomButton(action: {
                     filterApply = true
                     Task {
                         await viewModel.fetchTransactions()
                     }
-                    totalFilter = filterCount
-                    viewModel.filterCount = filterCount
+                    totalFilter = viewModel.filterCount
                     dismiss()
                 }, text: "Apply", color: Color(.violet100), foregroundColor: .white)
             }
             .padding(.horizontal, 16)
             .onAppear {
-                filterCount = viewModel.filterCount
+                filter = viewModel.filters
+                sort = viewModel.sorts
+                category = viewModel.categories
             }
             .onChange(of: filter) { _ in
-                if filterCount < 2 && filter > 0 {
-                    filterCount += 1
+                if viewModel.filterCount < 3 && (filter > 0 && filter == 1) {
+                    viewModel.filterCount += 1
+                    viewModel.filters += 1
                 }
             }
             .onChange(of: sort) { _ in
-                if filterCount < 2 && sort > 0 {
-                    filterCount += 1
+                if viewModel.filterCount < 3 && (sort > 0 && sort == 1) {
+                    viewModel.filterCount += 1
+                    viewModel.sorts += 1
+                }
+            }
+            .onChange(of: category) { _ in
+                if viewModel.filterCount < 3 && (category > 0 && category == 1) {
+                    viewModel.filterCount += 1
+                    viewModel.categories += 1
                 }
             }
             .navigationDestination(for: String.self, destination: { route in
                 switch route {
                 case "SelectCategory":
-                    SelectCategoryView(viewModel: viewModel)
+                    SelectCategoryView(viewModel: viewModel, filterCount: $category)
                 default:
                     EmptyView()
                 }
@@ -80,11 +90,15 @@ struct TransactionFilterView: View {
     func filterReset() {
         filter = 0
         sort = 0
+        category = 0
         totalFilter = 0
-        filterCount = 0
         viewModel.filterCount = 0
+        viewModel.filters = 0
+        viewModel.sorts = 0
+        viewModel.categories = 0
         viewModel.activeFilter = false
         viewModel.activeSort = false
+        viewModel.activeCategory = false
         viewModel.isIncome = false
         viewModel.isExpenses = false
         viewModel.isHighest = false

@@ -39,3 +39,11 @@ public struct Trade: Identifiable, Codable {
     }
     
 }
+
+public enum CategoryName: String {
+    case shopping = "Shopping"
+    case subscription = "Subscription"
+    case food = "Food"
+    case salary = "Salary"
+    case transportation = "Transportation"
+}

@@ -9,7 +9,8 @@ import SwiftUI
 
 struct CategoryByView: View {
    
-    @State var categoriesSelected: Int = 0
+    @Binding var reset: Bool
+    @StateObject var viewModel: TransactionsViewModel
     @EnvironmentObject var store: Store
     
     var body: some View {
@@ -24,7 +25,7 @@ struct CategoryByView: View {
                     .textModifierStyle(size: 16, color: Color(.dark), weight: .regular)
                 Spacer()
                 HStack {
-                    Text("\(categoriesSelected) Selected")
+                    Text("\(viewModel.selectedCategories.count) Selected")
                         .textModifierStyle(size: 14, color: Color(.light20), weight: .regular)
                     Image("arrow-right", bundle: .module)
                 }
@@ -32,12 +33,15 @@ struct CategoryByView: View {
             .onTapGesture {
                 store.category.append("SelectCategory")
             }
+            .onChange(of: reset) { _ in
+                viewModel.selectedCategories.removeAll()
+            }
         }
     }
     
 }
 
 #Preview {
-    CategoryByView()
+    CategoryByView(reset: .constant(false), viewModel: Constants.transactionViewModel)
         .environmentObject(Store())
 }

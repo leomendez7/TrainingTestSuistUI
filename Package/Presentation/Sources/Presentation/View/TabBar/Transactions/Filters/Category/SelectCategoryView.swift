@@ -10,6 +10,7 @@ import SwiftUI
 struct SelectCategoryView: View {
     
     @StateObject var viewModel: TransactionsViewModel
+    @Binding var filterCount: Int
     @State var selectedShopping = false
     @State var selectedSubscription = false
     @State var selectedFood = false
@@ -45,6 +46,22 @@ struct SelectCategoryView: View {
                 }
             Spacer()
         }
+        .onAppear {
+            viewModel.selectedCategories.forEach { category in
+                switch category {
+                case "Shopping":
+                    selectedShopping = true
+                case "Subscription":
+                    selectedSubscription = true
+                case "Food":
+                    selectedFood = true
+                case "Salary":
+                    selectedSalary = true
+                default:
+                    selectedTransportation = true
+                }
+            }
+        }
         .padding( 16)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: BackNavigationButton(action: {
@@ -58,11 +75,14 @@ struct SelectCategoryView: View {
         } else {
             viewModel.selectedCategories.append(name)
         }
-        print(viewModel.selectedCategories)
+        let count = viewModel.selectedCategories.count
+        viewModel.activeCategory = count != 0
+        if filterCount == 0 { filterCount += 1 }
+        if filterCount == 1 && count == 0 { filterCount -= 1 }
     }
     
 }
 
 #Preview {
-    SelectCategoryView(viewModel: Constants.transactionViewModel)
+    SelectCategoryView(viewModel: Constants.transactionViewModel, filterCount: .constant(0))
 }
