@@ -43,7 +43,7 @@ public class NewTransactionViewModel: BaseViewModel<CreateTransactionUseCase>, O
     }
     
     func createTransaction(email: String,
-                           category: String,
+                           category: CategoryName,
                            description: String,
                            payment: String,
                            value: String,
@@ -85,7 +85,11 @@ public class NewTransactionViewModel: BaseViewModel<CreateTransactionUseCase>, O
         for day in 1...currentDay {
             let generateTradesPerDay = Int.random(in: 1...5)
             for _ in 1...generateTradesPerDay {
-                guard let randomCategory = ["Shopping", "Subscription", "Food", "Salary", "Transportation"].randomElement(),
+                guard let randomCategory = [CategoryName.shopping,
+                                            CategoryName.subscription,
+                                            CategoryName.food,
+                                            CategoryName.salary,
+                                            CategoryName.transportation].randomElement(),
                       let randomDescription = ["Groceries", "Clothes", "Movie", "Electricity"].randomElement(),
                       let randomPayment = ["Wallet", "PayPal", "Chase"].randomElement() else {
                     continue

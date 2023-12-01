@@ -25,7 +25,7 @@ public class TransactionsViewModel: BaseViewModel<FetchTransactionUseCase>, Obse
     var filters = 0
     var sorts = 0
     var categories = 0
-    var selectedCategories: [String] = []
+    var selectedCategories: [CategoryName] = []
     @Published var groupedTransactions: [Date: [Trade]] = [:]
     @Published var loading = true
     @Published var currentMonth: Int = 0

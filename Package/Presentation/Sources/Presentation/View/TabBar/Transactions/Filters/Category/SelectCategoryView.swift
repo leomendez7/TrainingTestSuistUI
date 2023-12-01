@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Domain
 
 struct SelectCategoryView: View {
     
@@ -22,42 +23,42 @@ struct SelectCategoryView: View {
             ChooseCategoryView(name: "Shopping", selected: $selectedShopping)
             .onTapGesture {
                 selectedShopping.toggle()
-                saveSelectedCategory(name: "Shopping")
+                saveSelectedCategory(name: .shopping)
             }
             ChooseCategoryView(name: "Subscription", selected: $selectedSubscription)
                 .onTapGesture {
                     selectedSubscription.toggle()
-                    saveSelectedCategory(name: "Subscription")
+                    saveSelectedCategory(name: .subscription)
                 }
             ChooseCategoryView(name: "Food", selected: $selectedFood)
                 .onTapGesture {
                     selectedFood.toggle()
-                    saveSelectedCategory(name: "Food")
+                    saveSelectedCategory(name: .food)
                 }
             ChooseCategoryView(name: "Salary", selected: $selectedSalary)
                 .onTapGesture {
                     selectedSalary.toggle()
-                    saveSelectedCategory(name: "Salary")
+                    saveSelectedCategory(name: .salary)
                 }
             ChooseCategoryView(name: "Transportation", selected: $selectedTransportation)
                 .onTapGesture {
                     selectedTransportation.toggle()
-                    saveSelectedCategory(name: "Transportation")
+                    saveSelectedCategory(name: .transportation)
                 }
             Spacer()
         }
         .onAppear {
             viewModel.selectedCategories.forEach { category in
                 switch category {
-                case "Shopping":
+                case .shopping:
                     selectedShopping = true
-                case "Subscription":
+                case .subscription:
                     selectedSubscription = true
-                case "Food":
+                case .food:
                     selectedFood = true
-                case "Salary":
+                case .salary:
                     selectedSalary = true
-                default:
+                case .transportation:
                     selectedTransportation = true
                 }
             }
@@ -69,7 +70,7 @@ struct SelectCategoryView: View {
         }, image: "arrow-left", color: Color(.dark25)))
     }
     
-    func saveSelectedCategory(name: String) {
+    func saveSelectedCategory(name: CategoryName) {
         if viewModel.selectedCategories.contains(name) {
             viewModel.selectedCategories.removeAll { $0 == name }
         } else {

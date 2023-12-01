@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
+import Domain
 
 struct TransactionDetailsTypeView: View {
     
     @Binding var isIncome: Bool
-    @Binding var category: String
+    @Binding var category: CategoryName
     @Binding var wallet: String
     @State private var typeString: String = ""
     
@@ -28,7 +29,7 @@ struct TransactionDetailsTypeView: View {
                 Text("Category")
                     .foregroundColor(Color(.light20))
                     .font(.system(size: 14))
-                Text(category)
+                Text(category.rawValue)
                     .font(.system(size: 16))
             }
             Spacer()
@@ -55,6 +56,6 @@ struct TransactionDetailsTypeView: View {
 
 #Preview {
     TransactionDetailsTypeView(isIncome: .constant(true),
-                               category: .constant(""),
+                               category: .constant(CategoryName.shopping),
                                wallet: .constant(""))
 }

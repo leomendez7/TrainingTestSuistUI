@@ -15,7 +15,7 @@ struct TransactionOptionView: View {
     var balance: String
     @State var isIncome: Bool
     @State var description = String()
-    @State var selectedCategory = "Shopping"
+    @State var selectedCategory: CategoryName = .shopping
     @State var selectedPayment = "Wallet"
     @State private var showAlert = false
     @State private var titleAlert: String = ""

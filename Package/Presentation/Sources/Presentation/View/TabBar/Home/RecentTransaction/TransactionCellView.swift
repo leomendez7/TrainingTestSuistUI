@@ -10,21 +10,46 @@ import Domain
 
 struct TransactionCellView: View {
     
-    @State private var image: String = ""
-    @State private var background: Color = .white
-    @Binding var trade: Trade
     @State private var hourText = String()
+    var trade: Trade
+    var tradeImage: String {
+        switch trade.category {
+        case .shopping:
+           return "shopping-bag"
+        case .subscription:
+            return "recurring-bill"
+        case .food:
+            return "restaurant"
+        case .salary:
+            return "salary"
+        case .transportation:
+            return "transportation"
+        }
+    }
+    var background: Color {
+        switch trade.category {
+        case .shopping:
+           return Color(.yellow20)
+        case .subscription:
+            return Color(.violet20)
+        case .food:
+            return Color(.red20)
+        case .salary:
+            return Color(.green20)
+        case .transportation:
+            return Color(.blue20)
+        }
+    }
     
     var body: some View {
         HStack(spacing: 10) {
-            if !image.isEmpty {
-            Image(image, bundle: .module)
+            Image(tradeImage, bundle: .module)
                 .padding(15)
                 .frame(width: 60, height: 60)
                 .background(background)
                 .cornerRadius(16)
                 VStack(alignment: .leading, spacing: 13) {
-                    Text(trade.category)
+                    Text(trade.category.rawValue)
                         .foregroundColor(Color(.dark25))
                         .font(.system(size: 14))
                     Text(trade.description)
@@ -33,7 +58,6 @@ struct TransactionCellView: View {
                         .fontWeight(.semibold)
                         .lineLimit(1)
                 }
-            }
             Spacer()
             VStack(alignment: .trailing, spacing: 13) {
                 if !trade.isIncome {
@@ -57,35 +81,15 @@ struct TransactionCellView: View {
         .padding(.horizontal, 16)
         .background(Color(.light80))
         .cornerRadius(24)
-        .onAppear {
-            configureImage()
+        .onChange(of: trade) { _ in
             let formatter = DateFormatter()
             formatter.dateFormat = "dd/MM/yy h:mm a"
             hourText = formatter.string(from: trade.createDate)
         }
     }
     
-    func configureImage() {
-        switch trade.category {
-        case "Shopping":
-            image = "shopping-bag"
-            background = Color(.yellow20)
-        case "Subscription":
-            image = "recurring-bill"
-            background = Color(.violet20)
-        case "Food":
-            image = "restaurant"
-            background = Color(.red20)
-        case "Salary":
-            image = "salary"
-            background = Color(.green20)
-        default:
-            image = "transportation"
-            background = Color(.blue20)
-        }
-    }
 }
 
 #Preview {
-    TransactionCellView(trade: .constant(Trade()))
+    TransactionCellView(trade: Trade())
 }

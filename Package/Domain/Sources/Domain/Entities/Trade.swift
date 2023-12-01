@@ -8,11 +8,11 @@
 import Foundation
 import UIKit
 
-public struct Trade: Identifiable, Codable {
+public struct Trade: Identifiable, Codable, Equatable {
     
     public var id = UUID().uuidString
     public var email: String = ""
-    public var category: String = ""
+    public var category: CategoryName = .shopping
     public var description: String = ""
     public var value: String = ""
     public var isIncome: Bool = false
@@ -38,9 +38,10 @@ public struct Trade: Identifiable, Codable {
         case balanceLast
     }
     
+    
 }
 
-public enum CategoryName: String {
+public enum CategoryName: String, Codable {
     case shopping = "Shopping"
     case subscription = "Subscription"
     case food = "Food"

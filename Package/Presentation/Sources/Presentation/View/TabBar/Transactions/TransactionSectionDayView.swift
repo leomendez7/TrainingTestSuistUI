@@ -25,7 +25,7 @@ struct TransactionSectionDayView: View {
                 .padding(.top, 31)
                 .padding(.horizontal, 8)
             ForEach(transactions.indices, id: \.self) { index in
-                TransactionCellView(trade: $transactions[index])
+                TransactionCellView(trade: transactions[index])
                     .onTapGesture {
                         selectedTrade = transactions[index]
                         store.transactions.append("TransactionDetails")
