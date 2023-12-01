@@ -33,28 +33,36 @@ extension Default {
         }
     }
     
-    public static func security() -> Security {
-        let defaults = UserDefaults.standard
-        guard let data = defaults.data(forKey: Default.Key.security.rawValue) else { return Security() }
-        do {
-            let decoder = JSONDecoder()
-            let model = try decoder.decode(Security.self, from: data)
-            return model
-        } catch {
-            print("Error decoding Security: \(error.localizedDescription)")
-            return Security()
-        }
-    }
+//    public static func security() -> Security {
+//        let defaults = UserDefaults.standard
+//        guard let data = defaults.data(forKey: Default.Key.security.rawValue) else { return Security() }
+//        do {
+//            let decoder = JSONDecoder()
+//            let model = try decoder.decode(Security.self, from: data)
+//            return model
+//        } catch {
+//            print("Error decoding Security: \(error.localizedDescription)")
+//            return Security()
+//        }
+//    }
     
+    public static var security: Security? { Security.current }
+     
     public static func save(security: Security) {
-        let defaults = UserDefaults.standard
-        do {
-            let encoder = JSONEncoder()
-            let data = try encoder.encode(security)
-            defaults.set(data, forKey: Default.Key.security.rawValue)
-        } catch {
-            print("Error encoding Security: \(error.localizedDescription)")
-        }
+        guard let encoded = try? JSONEncoder().encode(security) else { return }
+        UserDefaults.standard.set(encoded, forKey: Default.Key.security.rawValue)
     }
     
+}
+
+public extension Security {
+    
+    static var current: Security? {
+        let defaults = UserDefaults.standard
+        if let savedPerson = defaults.object(forKey: Default.Key.security.rawValue) as? Data {
+            let decoder = JSONDecoder()
+            return try? decoder.decode(Security.self, from: savedPerson)
+        }
+        return nil
+    }
 }

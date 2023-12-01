@@ -45,7 +45,7 @@ struct HomeToolbarModifier: ViewModifier {
                     .sheet(isPresented: $isSheetPresented) {
                         NewOptionTransactionView(isIncomeSelected: $isIncomeSelected,
                                                  isExpensesSelected: $isExpensesSelected)
-                        .presentationDetents([.fraction(0.25)])
+                        .presentationDetents([.fraction(0.30)])
                     }
                 }
             }

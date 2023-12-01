@@ -19,6 +19,7 @@ struct CustomButton: View {
     @State var cornerRadius: CGFloat?
     @State var fontSize: CGFloat?
     @State var fontWeight: Font.Weight?
+    @State var bottom: CGFloat?
     
     var body: some View {
         Button(text) {
@@ -29,7 +30,7 @@ struct CustomButton: View {
         .foregroundColor(foregroundColor)
         .frame(width: width ?? 353, height: height ?? 56)
         .background(color, in: RoundedRectangle(cornerRadius: cornerRadius ?? 16, style: .continuous))
-        .padding(.bottom, 16)
+        .padding(.bottom, bottom ?? 16)
     }
 }
 

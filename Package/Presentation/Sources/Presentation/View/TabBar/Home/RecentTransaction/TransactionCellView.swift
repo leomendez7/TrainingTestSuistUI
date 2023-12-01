@@ -60,7 +60,7 @@ struct TransactionCellView: View {
         .onAppear {
             configureImage()
             let formatter = DateFormatter()
-            formatter.dateFormat = "h:mm a"
+            formatter.dateFormat = "dd/MM/yy h:mm a"
             hourText = formatter.string(from: trade.createDate)
         }
     }

@@ -25,17 +25,17 @@ struct SecurityOptionsView: View {
             }
         }
         .onAppear {
-            if Default.security().name.isEmpty {
+            guard let security = Default.security else {
                 var security = Security()
-                security.name = "PIN"
+                security.name = "Neither"
                 isSecuritySelected = security
-            } else {
-                isSecuritySelected = Default.security()
+                return
             }
+            isSecuritySelected = security
         }
     }
 }
 
 #Preview {
-    SecurityOptionsView(optionName: "PIN", isSecuritySelected: .constant(Security()))
+    SecurityOptionsView(optionName: "Neither", isSecuritySelected: .constant(Security()))
 }

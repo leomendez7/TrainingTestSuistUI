@@ -46,6 +46,7 @@ public struct TabBarView: View {
         .accentColor(Color(.violet100))
         .navigationBarBackButtonHidden(true)
     }
+    
 }
 
 #Preview {

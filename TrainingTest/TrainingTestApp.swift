@@ -11,7 +11,7 @@ import Domain
 
 @main
 struct TrainingTestApp: App {
-   
+    
     @StateObject var setDefault = DefaultSession()
     
     var body: some Scene {
@@ -19,7 +19,18 @@ struct TrainingTestApp: App {
             let session = setDefault.session
             let onboarding = setDefault.onboarding
             if session && onboarding {
-                TabBarView()
+                if let security = Default.security {
+                    switch security.name {
+                    case "PIN":
+                        TabBarView()
+                    case "Biometric Authentication":
+                        AuthenticationErrorView()
+                    default:
+                        TabBarView()
+                    }
+                } else {
+                    TabBarView()
+                }
             } else if !session && !onboarding {
                 OnboardingView()
             } else {

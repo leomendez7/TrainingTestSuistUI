@@ -45,9 +45,12 @@ struct SettingsView: View {
                     }
                     .onAppear {
                         let abbreviation = Default.currency().abbreviation.isEmpty
-                        let securityName = Default.security().name.isEmpty
                         currencyName = abbreviation ? "USD" : Default.currency().abbreviation
-                        self.securityName = securityName ? "PIN" : Default.security().name
+                        guard let security = Default.security else {
+                            self.securityName = "Neither"
+                            return
+                        }
+                        self.securityName = security.name
                     }
                     Button(action: {
                         isSheetPresented.toggle()
