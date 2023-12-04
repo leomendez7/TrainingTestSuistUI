@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
+import Domain
 
 struct SettingsOptionsButton: View {
     
     @State var OptionName = String()
-    @Binding var name: String
+    var name: String
     
     var body: some View {
         HStack {
@@ -32,5 +33,5 @@ struct SettingsOptionsButton: View {
 }
 
 #Preview {
-    SettingsOptionsButton(OptionName: "Currency", name: .constant("USD"))
+    SettingsOptionsButton(OptionName: "Currency", name: "Neither")
 }

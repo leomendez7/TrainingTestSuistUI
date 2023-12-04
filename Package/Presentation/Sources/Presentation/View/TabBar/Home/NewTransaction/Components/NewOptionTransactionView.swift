@@ -31,6 +31,7 @@ struct NewOptionTransactionView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Image("close", bundle: .module)
                         .frame(width: 32, height: 32)
+                        .foregroundColor(.black)
                         .onTapGesture {
                             dismiss()
                         }

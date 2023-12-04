@@ -33,19 +33,6 @@ extension Default {
         }
     }
     
-//    public static func security() -> Security {
-//        let defaults = UserDefaults.standard
-//        guard let data = defaults.data(forKey: Default.Key.security.rawValue) else { return Security() }
-//        do {
-//            let decoder = JSONDecoder()
-//            let model = try decoder.decode(Security.self, from: data)
-//            return model
-//        } catch {
-//            print("Error decoding Security: \(error.localizedDescription)")
-//            return Security()
-//        }
-//    }
-    
     public static var security: Security? { Security.current }
      
     public static func save(security: Security) {

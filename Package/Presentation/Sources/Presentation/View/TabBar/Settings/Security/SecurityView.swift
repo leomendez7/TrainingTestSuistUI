@@ -16,7 +16,9 @@ struct SecurityView: View {
     @EnvironmentObject var store: Store
     @State var isSelectedSecurity = Security()
     @State var OldSecurity = Security()
+    @State private var isSheetPresented = false
     @State private var authenticationSuccess = false
+    @State private var cancelPin = false
     
     var body: some View {
         VStack(spacing: 24) {
@@ -26,7 +28,7 @@ struct SecurityView: View {
                 .onTapGesture {
                     OldSecurity = isSelectedSecurity
                     isSelectedSecurity = viewModel.securities[index]
-                    Default.save(security: viewModel.securities[index])
+                    
                 }
             }
             Spacer()
@@ -45,15 +47,21 @@ struct SecurityView: View {
         }
         .onChange(of: isSelectedSecurity.name) { newValue in
             switch newValue {
-            case "PIN":
-                print("pin")
-            case "Biometric Authentication":
+            case .pin:
+                isSheetPresented.toggle()
+            case .biometric:
                 authenticateWithFaceID()
-            case "Neither":
-                print("nothing")
-            default:
-                print("default")
+            case .neither:
+                Default.save(security: viewModel.securities[0])
             }
+        }
+        .onChange(of: cancelPin) { newValue in
+            if newValue {
+                store.settings.removeLast()
+            }
+        }
+        .fullScreenCover(isPresented: $isSheetPresented) {
+            PinView(isInitial: false, cancelPin: $cancelPin)
         }
     }
     
@@ -61,6 +69,7 @@ struct SecurityView: View {
         AuthenticationManager.shared.authenticateWithFaceID { success, error in
             if success {
                 authenticationSuccess = true
+                Default.save(security: viewModel.securities[2])
             } else {
                 if let error = error as? LAError {
                     print("Error: \(error.localizedDescription)")
@@ -73,8 +82,7 @@ struct SecurityView: View {
                         authenticateWithFaceID()
                     })
                     alertController.addAction(UIAlertAction(title: "Cancel", style: .destructive) { _ in
-                        isSelectedSecurity = OldSecurity
-                        Default.save(security: OldSecurity)
+                        store.settings.removeLast()
                     })
                     if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
                         if let rootViewController = windowScene.windows.first?.rootViewController {

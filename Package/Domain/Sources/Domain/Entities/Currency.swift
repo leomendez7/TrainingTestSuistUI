@@ -11,7 +11,7 @@ public struct Currency: Identifiable, Codable {
     
     public var id = UUID()
     public var name: String = ""
-    public var abbreviation: String = ""
+    public var abbreviation: AbbreviationCurrency = .usd
     
     public init() { }
     
@@ -22,7 +22,7 @@ public struct Currency: Identifiable, Codable {
     
 }
 
-public enum AbbreviationCurrency: String {
+public enum AbbreviationCurrency: String, Codable {
     case usd = "USD"
     case jpy = "JPY"
     case eur = "EUR"

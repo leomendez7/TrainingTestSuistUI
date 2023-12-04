@@ -21,11 +21,11 @@ struct TrainingTestApp: App {
             if session && onboarding {
                 if let security = Default.security {
                     switch security.name {
-                    case "PIN":
-                        TabBarView()
-                    case "Biometric Authentication":
+                    case .pin:
+                        PinView(isInitial: true, cancelPin: .constant(false))
+                    case .biometric:
                         AuthenticationErrorView()
-                    default:
+                    case .neither:
                         TabBarView()
                     }
                 } else {

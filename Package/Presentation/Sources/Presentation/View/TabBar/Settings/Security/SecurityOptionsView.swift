@@ -10,12 +10,12 @@ import Domain
 
 struct SecurityOptionsView: View {
     
-    @State var optionName: String
+    @State var optionName: SecurityName
     @Binding var isSecuritySelected: Security
     
     var body: some View {
         HStack {
-            Text(optionName)
+            Text(optionName.rawValue)
             Spacer()
             if isSecuritySelected.name == optionName {
                 Image(systemName: "checkmark.circle.fill")
@@ -27,7 +27,7 @@ struct SecurityOptionsView: View {
         .onAppear {
             guard let security = Default.security else {
                 var security = Security()
-                security.name = "Neither"
+                security.name = .neither
                 isSecuritySelected = security
                 return
             }
@@ -37,5 +37,5 @@ struct SecurityOptionsView: View {
 }
 
 #Preview {
-    SecurityOptionsView(optionName: "Neither", isSecuritySelected: .constant(Security()))
+    SecurityOptionsView(optionName: .neither, isSecuritySelected: .constant(Security()))
 }

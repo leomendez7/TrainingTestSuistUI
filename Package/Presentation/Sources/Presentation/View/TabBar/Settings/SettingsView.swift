@@ -14,8 +14,8 @@ struct SettingsView: View {
     @EnvironmentObject var store: Store
     @EnvironmentObject var setDefault: DefaultSession
     @State private var isSheetPresented = false
-    @State var currencyName = String()
-    @State var securityName = String()
+    @State var currencyName: AbbreviationCurrency = .usd
+    @State var securityName: SecurityName = .neither
     @State var name = String()
     @State var email = String()
     @State var image = UIImage()
@@ -34,20 +34,19 @@ struct SettingsView: View {
                 }
                 VStack(spacing: 47) {
                     VStack(spacing: 20) {
-                        SettingsOptionsButton(OptionName: "Currency", name: $currencyName)
+                        SettingsOptionsButton(OptionName: "Currency", name: currencyName.rawValue)
                             .onTapGesture {
                                 store.settings.append("currency")
                             }
-                        SettingsOptionsButton(OptionName: "Security", name: $securityName)
+                        SettingsOptionsButton(OptionName: "Security", name: securityName.rawValue)
                             .onTapGesture {
                                 store.settings.append("security")
                             }
                     }
                     .onAppear {
-                        let abbreviation = Default.currency().abbreviation.isEmpty
-                        currencyName = abbreviation ? "USD" : Default.currency().abbreviation
+                        currencyName = Default.currency().abbreviation
                         guard let security = Default.security else {
-                            self.securityName = "Neither"
+                            self.securityName = .neither
                             return
                         }
                         self.securityName = security.name
