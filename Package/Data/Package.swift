@@ -18,7 +18,7 @@ let package = Package(
         .package(path: "../Domain"),
         .package(path: "../Shared"),
         .package(url: "https://github.com/Alamofire/Alamofire.git", from: "5.6.2"),
-        //.package(url: "https://github.com/couchbase/couchbase-lite-ios.git", from: "3.0.0")
+        //.package(url: "https://github.com/koombea/couchbase-lite-wrapper-ios.git", from: "1.0.0")
     ],
     targets: [
         .target(

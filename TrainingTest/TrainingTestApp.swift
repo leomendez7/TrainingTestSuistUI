@@ -7,12 +7,38 @@
 
 import SwiftUI
 import Presentation
+import Domain
 
 @main
 struct TrainingTestApp: App {
+    
+    @StateObject var setDefault = DefaultSession()
+    
     var body: some Scene {
         WindowGroup {
-            SplashScreenView()
+            let session = setDefault.session
+            let onboarding = setDefault.onboarding
+            if session && onboarding {
+                if let security = Default.security {
+                    switch security.name {
+                    case .pin:
+                        PinView(isInitial: true, cancelPin: .constant(false))
+                    case .biometric:
+                        AuthenticationErrorView()
+                    case .neither:
+                        TabBarView()
+                    }
+                } else {
+                    TabBarView()
+                }
+            } else if !session && !onboarding {
+                OnboardingView()
+            } else {
+                LoginView(viewModel: Constants.loginViewModel)
+            }
         }
+        .environmentObject(Store.storeDefault)
+        .environmentObject(setDefault)
     }
+    
 }

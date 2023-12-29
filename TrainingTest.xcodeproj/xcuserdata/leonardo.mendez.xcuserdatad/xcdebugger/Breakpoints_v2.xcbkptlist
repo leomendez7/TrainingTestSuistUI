@@ -7,15 +7,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "32765810-809C-4C11-AB40-7CF5459D8368"
+            uuid = "D7D54333-7D8D-41FF-8B81-D968BFC45216"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TrainingTest/Presentation/Base/Selector/SelectorView.swift"
+            filePath = "Package/Presentation/Sources/Presentation/View/TabBar/Home/RecentTransaction/RecentTransactionView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>

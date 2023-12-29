@@ -1,0 +1,27 @@
+/* 
+  Localizable.strings
+  
+
+  Created by Leonardo Mendez on 14/11/23.
+  
+*/
+
+//CreateUser
+"CreateUser.alertTitleEmptyField" = "Alert!";
+"CreateUser.alertTextEmptyField" = "All fields must be filled.";
+
+//Email
+"Email.alertTitleValidateEmail" = "Error!";
+"Email.alertTextValidateEmail" = "This is not a email.";
+
+//Login
+"Login.alertTitleValidateUser" = "Error!";
+"Login.alertTextValidateUser" = "This user is not found.";
+
+//NewTransaction
+"NewTransaction.alertTitleNewTrade" = "Alert!";
+"NewTransaction.alertTextNewTrade" = "The value should not be 0.";
+
+//Edit
+"Edit.alertTitleUpdateUser" = "Success!";
+"Edit.alertTextUpdateUser" = "User has been updated.";
