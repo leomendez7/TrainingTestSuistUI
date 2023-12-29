@@ -42,6 +42,7 @@ struct FrequencyView: View {
 
 #Preview {
     FrequencyView()
+        .environmentObject(Constants.homeViewModel)
 }
 
 
