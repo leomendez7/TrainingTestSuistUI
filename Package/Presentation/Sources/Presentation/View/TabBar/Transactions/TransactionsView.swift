@@ -10,27 +10,69 @@ import Domain
 
 struct TransactionsView: View {
     
-    @StateObject var viewModel: TransactionsViewModel
+    @ObservedObject var viewModel: TransactionsViewModel
     @State private var isSheetPresented = false
+    @State var selectedTrade = Trade()
+    @State var transactions = [Trade]()
+    @State private var isLoading = false
+    @State var isChangeMonth = false
     @EnvironmentObject var store: Store
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $store.transactions) {
             ScrollView {
                 VStack(spacing: 16) {
                     ForEach(viewModel.groupedTransactions.keys.sorted(by: >), id: \.self) { date in
-                        TransactionSectionDayView(date: date, transactions: viewModel.groupedTransactions[date]!, viewModel: viewModel)
+                        if let dateTransactions = viewModel.groupedTransactions[date] {
+                            TransactionSectionDayView(date: date,
+                                                      transactions: .constant(dateTransactions),
+                                                      selectedTrade: $selectedTrade,
+                                                      viewModel: viewModel)
+                        }
                     }
                 }
             }
-            .transactionToolbar(isSheetPresented: $isSheetPresented)
-            .environmentObject(Constants.homeViewModel)
-        }
-        .padding(.horizontal, 16)
-        .onAppear {
-            Task {
-                await viewModel.fetchTransactions()
+            .onAppear {
+                viewModel.generateMonths()
+                viewModel.loading = true
+                Task {
+                    await viewModel.fetchTransactions()
+                }
             }
+            .onChange(of: isChangeMonth) { _ in
+                viewModel.loading = true
+                Task {
+                    await viewModel.fetchTransactions()
+                }
+            }
+            .overlay(
+                viewModel.loading ?
+                ZStack {
+                    Color.white.edgesIgnoringSafeArea(.all)
+                    VStack {
+                        Spacer()
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: Color(.violet100)))
+                            .padding(20)
+                        Spacer()
+                    }
+                }
+                : nil
+            )
+            .transactionToolbar(isSheetPresented: $isSheetPresented,
+                                months: $viewModel.months,
+                                currentMonth: $viewModel.currentMonth,
+                                selectedMont: $viewModel.selectedMont,
+                                changeMonth: $isChangeMonth)
+            .environmentObject(viewModel)
+            .navigationDestination(for: String.self, destination: { route in
+                switch route {
+                case "TransactionDetails":
+                    TransactionDetailsView(selectedTrade: $selectedTrade, viewModel: Constants.transactionDetailsViewModel)
+                default:
+                    EmptyView()
+                }
+            })
         }
     }
     

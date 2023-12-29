@@ -20,11 +20,11 @@ public class CurrencyViewModel: ObservableObject {
                                          "Euro (EUR)",
                                          "Colombia (COP)",
                                          "Use system preference"]
-        let abbreviations: [String] = ["USD",
-                                       "JPY",
-                                       "EUR",
-                                       "COP",
-                                       "Preference"]
+        let abbreviations: [AbbreviationCurrency] = [.usd,
+                                                     .jpy,
+                                                     .eur,
+                                                     .cop,
+                                                     .pre]
         currencies.removeAll()
         for index in 0...currenciesNames.count - 1 {
             var currency = Currency()

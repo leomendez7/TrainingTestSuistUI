@@ -17,6 +17,7 @@ public class Constants {
     static var homeViewModel = generateHomeModule()
     static var createUserViewModel =  generateCreateUserModule()
     static var transactionViewModel =  generateTransactionModule()
+    static var transactionDetailsViewModel = generateTransactionDetailsModule()
     
     private static func generateCreateUserModule() -> CreateUserViewModel {
         let repository = UserRepository(datasource: UserRepositoryDataSource())
@@ -56,8 +57,15 @@ public class Constants {
     private static func generateTransactionModule() -> TransactionsViewModel {
         let repository = TransactionRepository(datasource: TransactionRepositoryDataSource())
         let useCase = FetchTransactionUseCase(repository: repository)
-        let transactionViewModel = TransactionsViewModel(useCase: useCase)
+        let transactionViewModel = TransactionsViewModel(useCase: useCase, store: Store.storeDefault)
         return transactionViewModel
+    }
+    
+    private static func generateTransactionDetailsModule() -> TransactionDetailsViewModel {
+        let repository = TransactionRepository(datasource: TransactionRepositoryDataSource())
+        let useCase = RemoveTransactionUseCase(repository: repository)
+        let transactionDetailsViewModel = TransactionDetailsViewModel(useCase: useCase, store: Store.storeDefault)
+        return transactionDetailsViewModel
     }
     
 }

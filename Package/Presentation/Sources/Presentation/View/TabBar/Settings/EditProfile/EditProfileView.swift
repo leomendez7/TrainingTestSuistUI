@@ -19,16 +19,6 @@ struct EditProfileView: View {
     @State private var showAlert = false
     @StateObject var viewModel: EditProfileViewModel
     @State private var cancellables: Set<AnyCancellable> = []
-    var backButton : some View {
-        Button(action: {
-            store.settings.removeLast()
-        }) {
-            HStack {
-                Image("arrow-left", bundle: .module)
-                    .foregroundColor(Color(.dark25))
-            }
-        }
-    }
     
     var body: some View {
         VStack(spacing: 56) {
@@ -36,10 +26,21 @@ struct EditProfileView: View {
                 CustomTextField(text: $name, placeholder: "Name")
                 CustomTextField(text: $email, placeholder: "Email")
                 CustomDateTextField(text: $birthday, placeholder: "Birthday")
-                Button(action:{
-                    
-                }) {
+                if let image = viewModel.image {
+                    ZStack() {
+                        CircularImageView(image: image)
+                        EditProfileButton(action: {
+                            viewModel.source = .library
+                            viewModel.showPhotoPicker()
+                        }, withoutRounding: true)
+                    }
+                } else {
                     Image("add-attachment", bundle: .module)
+                        .onTapGesture {
+                            viewModel.source = .library
+                            viewModel.showPhotoPicker()
+                        }
+                        .frame(maxWidth: .infinity)
                 }
             }
             VStack() {
@@ -48,6 +49,11 @@ struct EditProfileView: View {
                 }, text: "Edit", color: Color(.violet100), foregroundColor: .white)
             }
             Spacer()
+                .sheet(isPresented: $viewModel.showPicker, content: {
+                    ImagePicker(sourceType: viewModel.source == .library
+                                ? .photoLibrary : .camera, selectedImage: $viewModel.image)
+                    .ignoresSafeArea()
+                })
         }
         .onReceive(viewModel.$success) { newValue in
             if newValue {
@@ -58,16 +64,21 @@ struct EditProfileView: View {
             email = Default.user()?.email ?? ""
             name = Default.user()?.name ?? ""
             birthday = Default.user()?.birthday ?? ""
+            if let image = Default.user()?.imageProfile {
+                viewModel.image = UIImage.fromBase64(image)
+            }
         }
         .padding(.horizontal, 16)
         .padding(.top, 64)
         .navigationTitle("Edit profile")
         .navigationBarTitleDisplayMode(.inline)
-        .navigationBarItems(leading: backButton)
         .navigationBarBackButtonHidden(true)
         .toolbar(.hidden, for: .tabBar)
+        .navigationBarItems(leading: BackNavigationButton(action: {
+            store.settings.removeLast()
+        }, image: "arrow-left", color: Color(.dark25)))
         .alert(isPresented: $showAlert) {
-            Alert(title: Text("Success!"), 
+            Alert(title: Text("Success!"),
                   message: Text("User has been updated."),
                   primaryButton: .default(Text("Ok"), action: {
                 store.settings.removeLast()
@@ -76,14 +87,11 @@ struct EditProfileView: View {
     }
     
     func updateUser() {
-        viewModel.user = Default.user() ?? User()
-        viewModel.user.name = name
-        viewModel.user.email = email
-        viewModel.user.birthday = birthday
         Task {
-            await viewModel.updateUser(user: viewModel.user)
+            await viewModel.updateUser(name: name, email: email, birthday: birthday)
         }
     }
+    
 }
 
 #Preview {

@@ -15,33 +15,31 @@ struct NewOptionTransactionView: View {
     @Binding var isExpensesSelected: Bool
     
     var body: some View {
-        VStack(spacing: 20) {
-            HStack {
-                Spacer()
-                Text("Create transaction")
-                    .font(.system(size: 18))
-                    .fontWeight(.bold)
-                Spacer()
-                VStack(alignment: .leading) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Image("close", bundle: .module)
-                            .frame(width: 32, height: 32)
-                    }
-                }
-            }
-            .padding(.horizontal, 16)
-            .padding(.top, 16)
+        NavigationStack() {
             VStack(spacing: 16) {
                 CustomButton(action: {
                     isIncomeSelected.toggle()
                     dismiss()
-                }, text: "Income", color: Color(.green100), foregroundColor: .white)
+                }, text: "Income", color: Color(.green100), foregroundColor: .white, bottom: 0)
                 CustomButton(action: {
                     isExpensesSelected.toggle()
                     dismiss()
-                }, text: "Expenses", color: Color(.red100), foregroundColor: .white)
+                }, text: "Expenses", color: Color(.red100), foregroundColor: .white, bottom: 0)
+                Spacer()
+            }
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Image("close", bundle: .module)
+                        .frame(width: 32, height: 32)
+                        .foregroundColor(.black)
+                        .onTapGesture {
+                            dismiss()
+                        }
+                }
+                ToolbarItem(placement: .principal) {
+                    Text("Create transaction")
+                        .textModifierStyle(size: 18, color: Color(.dark), weight: .bold)
+                }
             }
         }
         .background(Color.white)

@@ -15,8 +15,26 @@ public class EditProfileViewModel: BaseViewModel<UpdateUserUseCase>, ObservableO
     var user = User()
     @Published var success: Bool = false
     @Published var alert: Bool = false
+    @Published var image: UIImage?
+    @Published var showPicker = false
+    @Published var source: Picker.Source = .library
     
-    func updateUser(user: User) async {
+    func showPhotoPicker() {
+        if source == .camera {
+            if !Picker.checkPermissions() {
+                print("There is no camera on this device")
+                return
+            }
+        }
+        showPicker = true
+    }
+    
+    func updateUser(name: String, email: String, birthday: String) async {
+        user = Default.user() ?? User()
+        user.name = name
+        user.email = email
+        user.birthday = birthday
+        user.imageProfile = image?.toBase64() ?? ""
         do {
             let user = try await useCase.execute(requestValue: user)
             DispatchQueue.main.async {

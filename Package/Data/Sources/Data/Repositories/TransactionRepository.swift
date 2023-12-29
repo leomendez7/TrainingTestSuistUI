@@ -23,4 +23,9 @@ public class TransactionRepository: TransactionRepositoryProtocol {
     public func fetchTransaction(email: String) async throws -> [Trade] {
         return try await self.datasource.fetchTransactions(email: email)
     }
+    
+    public func removeTransaction(trade: Trade) async throws -> Bool {
+        return try await self.datasource.removeTransaction(trade: trade)
+    }
+    
 }

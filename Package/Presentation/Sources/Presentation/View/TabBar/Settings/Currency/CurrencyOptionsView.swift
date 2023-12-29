@@ -28,7 +28,7 @@ struct CurrencyOptionsView: View {
             if Default.currency().name.isEmpty {
                 var currency = Currency()
                 currency.name = "United States (USD)"
-                currency.abbreviation = "USD"
+                currency.abbreviation = .usd
                 isCurrencySelected = currency
             } else {
                 isCurrencySelected = Default.currency()

@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import Domain
 
 struct RecentTransactionView: View {
     
-    @EnvironmentObject var viewModel: HomeViewModel
     @Binding var seeAll: Bool
+    @Binding var selectedTrade: Trade
     @State var image = ""
+    @EnvironmentObject var viewModel: HomeViewModel
+    @EnvironmentObject var store: Store
     
     var body: some View {
         VStack {
@@ -35,6 +38,10 @@ struct RecentTransactionView: View {
             VStack(spacing: 8) {
                 ForEach(viewModel.transactions.indices, id: \.self) { index in
                     TransactionCellView(trade: viewModel.transactions[index])
+                        .onTapGesture {
+                            selectedTrade = viewModel.transactions[index]
+                            store.transactions.append("TransactionDetails")
+                        }
                 }
             }
         }
@@ -44,5 +51,7 @@ struct RecentTransactionView: View {
 }
 
 #Preview {
-    RecentTransactionView(seeAll: .constant(Bool()))
+    RecentTransactionView(seeAll: .constant(Bool()), selectedTrade: .constant(Trade()))
+        .environmentObject(Store())
+        .environmentObject(Constants.homeViewModel)
 }

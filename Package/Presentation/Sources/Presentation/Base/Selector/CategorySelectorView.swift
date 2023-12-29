@@ -6,12 +6,17 @@
 //
 
 import SwiftUI
+import Domain
 
 struct CategorySelectorView: View {
     
     @State private var selectedCategoryIndex = 0
-    @Binding var selectedCategory: String
-    let categories = ["Shopping", "Subscription", "Food", "Salary", "Transportation"]
+    @Binding var selectedCategory: CategoryName
+    let categories = [CategoryName.shopping,
+                      CategoryName.subscription,
+                      CategoryName.food,
+                      CategoryName.salary,
+                      CategoryName.transportation]
     
     var body: some View {
         Menu {
@@ -19,7 +24,7 @@ struct CategorySelectorView: View {
                 Button(action: {
                     selectedCategoryIndex = index
                 }) {
-                    Text(categories[index])
+                    Text(categories[index].rawValue)
                 }
             }
         } label: {
@@ -28,7 +33,7 @@ struct CategorySelectorView: View {
                     Circle()
                         .fill(Color(.green100))
                         .frame(width: 14, height: 14)
-                    Text(selectedCategory)
+                    Text(selectedCategory.rawValue)
                         .font(.system(size: 18))
                         .foregroundColor(Color(.dark))
                 }
@@ -59,5 +64,5 @@ struct CategorySelectorView: View {
 }
 
 #Preview {
-    CategorySelectorView(selectedCategory: .constant("Shopping"))
+    CategorySelectorView(selectedCategory: .constant(CategoryName.shopping))
 }

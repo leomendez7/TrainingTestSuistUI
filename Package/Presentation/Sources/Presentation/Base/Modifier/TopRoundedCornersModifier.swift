@@ -19,7 +19,6 @@ struct TopRoundedCornersModifier: ViewModifier {
                     Path { path in
                         let width = geometry.size.width
                         let height = geometry.size.height
-                        
                         path.move(to: CGPoint(x: 0, y: height))
                         path.addLine(to: CGPoint(x: 0, y: cornerRadius))
                         path.addQuadCurve(to: CGPoint(x: cornerRadius, y: 0), control: CGPoint.zero)

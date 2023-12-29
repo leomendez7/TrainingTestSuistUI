@@ -15,8 +15,9 @@ public class SecurityViewModel: ObservableObject {
     @Published var securities = [Security]()
     
     func generateSecurities() {
-        let securityNames: [String] = ["PIN",
-                                       "Biometric Authentication"]
+        let securityNames: [SecurityName] = [.neither,
+                                             .pin,
+                                             .biometric]
         securities.removeAll()
         for index in 0...securityNames.count - 1 {
             var security = Security()

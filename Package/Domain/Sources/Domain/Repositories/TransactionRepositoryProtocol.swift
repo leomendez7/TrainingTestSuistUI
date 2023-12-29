@@ -11,5 +11,6 @@ public protocol TransactionRepositoryProtocol {
     
     func fetchTransaction(email: String) async throws -> [Trade]
     func createTransaction(trade: Trade) async throws -> Bool
+    func removeTransaction(trade: Trade) async throws -> Bool
     
 }

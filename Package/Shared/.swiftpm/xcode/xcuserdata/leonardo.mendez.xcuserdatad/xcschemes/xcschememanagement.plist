@@ -7,14 +7,11 @@
 		<key>Shared-Package.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>7</integer>
+			<integer>0</integer>
 		</dict>
 		<key>Shared.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-<<<<<<< HEAD
-			<integer>4</integer>
-=======
 			<integer>7</integer>
 		</dict>
 		<key>SharedTests.xcscheme_^#shared#^_</key>
@@ -29,7 +26,6 @@
 		<dict>
 			<key>primary</key>
 			<true/>
->>>>>>> presentation
 		</dict>
 	</dict>
 </dict>

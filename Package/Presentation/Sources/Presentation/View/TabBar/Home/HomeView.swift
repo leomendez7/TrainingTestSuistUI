@@ -6,30 +6,47 @@
 //
 
 import SwiftUI
+import Domain
 
 struct HomeView: View {
     
-    @StateObject var viewModel: HomeViewModel
+    @ObservedObject var viewModel: HomeViewModel
     @EnvironmentObject var store: Store
     @State var isIncome = Bool()
-    @State private var isSheetPresented = false
     @State var isIncomeSelected = false
     @State var isExpensesSelected = false
+    @State var isChangeMonth = false
     @State var seeAll = false
-    @State var incomeValue = ""
-    @State var expensesValue = ""
-    @State var balance = ""
+    @State var selectedTrade = Trade()
+    @State var image = UIImage()
+    @State private var isSheetPresented = false
+    @State private var isLoading = false
     
     var body: some View {
         NavigationStack(path: $store.transactions) {
             VStack {
                 ScrollView {
-                    BalanceComponentView(balance: $balance, income: $incomeValue, expense: $expensesValue)
+                    BalanceComponentView(balance: viewModel.balance, income: viewModel.incomeValue, expense: viewModel.expensesValue)
                     FrequencyView()
-                    RecentTransactionView(seeAll: $seeAll)
+                    RecentTransactionView(seeAll: $seeAll, selectedTrade: $selectedTrade)
                 }
             }
             .preferredColorScheme(.light)
+            .onAppear {
+                viewModel.generateMonths()
+                viewModel.generateSegments()
+                viewModel.loading = true
+                if let imageBase64 = Default.user()?.imageProfile {
+                    if !imageBase64.isEmpty {
+                        self.image = UIImage.fromBase64(imageBase64) ?? UIImage()
+                    } else {
+                       self.image = UIImage(named: "empty-user", in: .module, with: nil) ?? UIImage()
+                    }
+                }
+                Task {
+                    await viewModel.fetchTransactions()
+                }
+            }
             .onChange(of: isIncomeSelected) { _ in
                 isIncome = true
                 store.transactions.append("NewTransaction")
@@ -44,29 +61,47 @@ struct HomeView: View {
                     await viewModel.fetchTransactions()
                 }
             }
-            .onAppear {
+            .onChange(of: isChangeMonth) { _ in
+                viewModel.loading = true
+                viewModel.generateSegments()
                 Task {
                     await viewModel.fetchTransactions()
                 }
             }
-            .onReceive(viewModel.$incomeValue) { newValue in
-                incomeValue = newValue
-            }
-            .onReceive(viewModel.$expensesValue) { newValue in
-                expensesValue = newValue
-            }
-            .onReceive(viewModel.$balance) { newValue in
-                balance = newValue
-            }
+            .overlay(
+                viewModel.loading ?
+                ZStack {
+                    Color.white.edgesIgnoringSafeArea(.all)
+                    VStack {
+                        Spacer()
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: Color(.violet100)))
+                            .padding(20)
+                        Spacer()
+                    }
+                }
+                : nil
+            )
             .navigationDestination(for: String.self, destination: { route in
                 switch route {
                 case "NewTransaction":
-                    NewTransactionView(isIncome: $isIncome, balance: balance)
+                    NewTransactionView(balance: viewModel.balance, isIncome: $isIncome)
+                case "TransactionDetails":
+                    TransactionDetailsView(selectedTrade: $selectedTrade, viewModel: Constants.transactionDetailsViewModel)
                 default:
                     EmptyView()
                 }
             })
-            .homeTransactionToolbar(image: "avatar-2", isSheetPresented: $isSheetPresented, incomeSelected: $isIncomeSelected, expensesSelected: $isExpensesSelected)
+            .homeTransactionToolbar(image: image,
+                                    isSheetPresented: $isSheetPresented,
+                                    incomeSelected: $isIncomeSelected,
+                                    expensesSelected: $isExpensesSelected,
+                                    months: $viewModel.months,
+                                    currentMonth: $viewModel.currentMonth,
+                                    selectedMont: $viewModel.selectedMont, 
+                                    changeMonth: $isChangeMonth)
+            .navigationTitle("")
+            .navigationBarTitleDisplayMode(.inline)
             .environmentObject(viewModel)
         }
         .toolbarColorScheme(.light, for: .navigationBar)

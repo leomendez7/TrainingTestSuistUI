@@ -5,12 +5,15 @@
 //  Created by Leonardo Mendez on 31/10/23.
 //
 
+
 import SwiftUI
 
 public struct TabBarView: View {
     
     @State private var selectedTab = 0
     @State private var isNewTransaction = false
+    @StateObject var homeViewModel = Constants.homeViewModel
+    @StateObject var transactionViewModel = Constants.transactionViewModel
     
     public init() {
         self.selectedTab = 0
@@ -19,13 +22,13 @@ public struct TabBarView: View {
     
     public var body: some View {
         TabView(selection: $selectedTab) {
-            HomeView(viewModel: Constants.homeViewModel)
+            HomeView(viewModel: homeViewModel)
                 .tabItem {
                     Image("home", bundle: .module)
                     Text("Home")
                 }
                 .tag(0)
-            TransactionsView(viewModel: Constants.transactionViewModel)
+            TransactionsView(viewModel: transactionViewModel)
                 .tabItem {
                     Image("transaction", bundle: .module)
                     Text("Transaction")
@@ -43,6 +46,7 @@ public struct TabBarView: View {
         .accentColor(Color(.violet100))
         .navigationBarBackButtonHidden(true)
     }
+    
 }
 
 #Preview {

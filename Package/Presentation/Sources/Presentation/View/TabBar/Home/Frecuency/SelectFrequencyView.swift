@@ -6,19 +6,22 @@
 //
 
 import SwiftUI
+import Domain
 
 public struct SelectFrequencyView: View {
     
     @State private var selectedTab = 0
-    private let segments = ["Today", "Week", "Month", "Year"]
+    @Binding var selectedFrequency: String
+    @EnvironmentObject var viewModel: HomeViewModel
     
     public var body: some View {
         HStack(spacing: 0) {
-            ForEach(0..<segments.count, id: \.self) { index in
+            ForEach(0..<viewModel.segments.count, id: \.self) { index in
                 Button(action: {
                     selectedTab = index
+                    self.selectedFrequency = viewModel.segments[index]
                 }) {
-                    Text(segments[index])
+                    Text(viewModel.segments[index])
                         .font(.system(size: 14))
                         .fontWeight(.semibold)
                         .frame(width: 90, height: 56)
@@ -29,6 +32,16 @@ public struct SelectFrequencyView: View {
                     RoundedRectangle(cornerRadius: 16)
                         .stroke(selectedTab == index ? Color(.yellow20) : .white, lineWidth: 1)
                 )
+            }
+        }
+        .onAppear {
+            if let index = viewModel.segments.firstIndex(where: { $0 == selectedFrequency }) {
+                selectedTab = index
+            }
+        }
+        .onChange(of: viewModel.selectedMont) { _ in
+            if let index = viewModel.segments.firstIndex(where: { $0 == selectedFrequency }) {
+                selectedTab = index
             }
         }
         .frame(height: 34)
@@ -42,7 +55,8 @@ public struct SelectFrequencyView: View {
 }
 
 #Preview {
-    SelectFrequencyView()
+    SelectFrequencyView(selectedFrequency: .constant(""))
+        .environmentObject(Constants.homeViewModel)
 }
 
 

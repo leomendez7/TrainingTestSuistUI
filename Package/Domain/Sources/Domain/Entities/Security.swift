@@ -10,12 +10,20 @@ import Foundation
 public struct Security: Identifiable, Codable {
     
     public var id = UUID()
-    public var name: String = ""
+    public var name: SecurityName = .neither
+    public var pin: String = ""
     
     public init() { }
     
     enum CodingKeys: String, CodingKey {
         case name
+        case pin
     }
     
+}
+
+public enum SecurityName: String, Codable {
+    case neither = "Neither"
+    case pin = "PIN"
+    case biometric = "Biometric Authentication"
 }
